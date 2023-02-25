@@ -1,0 +1,1235 @@
+#==========================================================
+#
+#
+#		ClashGenz Gens: Generator Setup
+#
+#
+#==========================================================
+
+
+
+
+
+command /ClashGenzGens-setup:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		set {WheatGenerator} to 1 hay bale named "<##ffec10>&lWheat Generator" with lore "&8Generator Level 1" and "" and "&7Spawns x1 Wheat every &e20s!" and "&7Has a base sell price of &a&n$10" and "" and "&bShift + Right-Click to upgrade!"
+		set {MelonGenerator} to 1 melon named "<##79dc6e>&lMelon Generator" with lore "&8Generator Level 2" and "" and "&7Spawns x1 Melon Slice every &e20s!" and "&7Has a base sell price of &a&n$20" and "" and "&bShift + Right-Click to upgrade!"
+
+		set {CoalOreGenerator} to 1 coal ore named "<##3c3b38>&lCoal Generator" with lore "&8Generator Level 3" and "" and "&7Spawns x1 Coal every &e20s!" and "&7Has a base sell price of &a&n$25" and "" and "&bShift + Right-Click to upgrade!"
+		set {CoalBlockGenerator} to 1 coal block named "<##3c3b38>&lCoal Block Generator" with lore "&8Generator Level 4" and "" and "&7Spawns x1 Coal Block every &e20s!" and "&7Has a base sell price of &a&n$50" and "" and "&bShift + Right-Click to upgrade!"
+		set {IronOreGenerator} to 1 iron ore named "<##bab8ab>&lIron Generator" with lore "&8Generator Level 5" and "" and "&7Spawns x1 Iron Ingot every &e20s!" and "&7Has a base sell price of &a&n$75" and "" and "&bShift + Right-Click to upgrade!"
+		set {IronBlockGenerator} to 1 iron block named "<##bab8ab>&lIron Block Generator" with lore "&8Generator Level 6" and "" and "&7Spawns x1 Iron Block every &e20s!" and "&7Has a base sell price of &a&n$100" and "" and "&bShift + Right-Click to upgrade!"
+		set {GoldOreGenerator} to 1 gold ore named "<##dcb940>&lGold Generator" with lore "&8Generator Level 7" and "" and "&7Spawns x1 Golden Ingot every &e20s!" and "&7Has a base sell price of &a&n$150" and "" and "&bShift + Right-Click to upgrade!"
+		set {GoldBlockGenerator} to 1 gold block named "<##dcb940>&lGold Block Generator" with lore "&8Generator Level 8" and "" and "&7Spawns x1 Gold Block every &e20s!" and "&7Has a base sell price of &a&n$200" and "" and "&bShift + Right-Click to upgrade!"
+		set {RedstoneGenerator} to 1 redstone ore named "<##da3131>&lRedstone Generator" with lore "&8Generator Level 9" and "" and "&7Spawns x1 Redstone every &e20s!" and "&7Has a base sell price of &a&n$300" and "" and "&bShift + Right-Click to upgrade!"
+		set {RedstoneBlockGenerator} to 1 redstone block named "<##da3131>&lRedstone Block Generator" with lore "&8Generator Level `0" and "" and "&7Spawns x1 Redstone Block every &e20s!" and "&7Has a base sell price of &a&n$400" and "" and "&bShift + Right-Click to upgrade!"
+		set {LapisGenerator} to 1 lapis ore named "<##3b52c9>&lLapis Generator" with lore "&8Generator Level 11" and "" and "&7Spawns x1 Lapis every &e20s!" and "&7Has a base sell price of &a&n$500" and "" and "&bShift + Right-Click to upgrade!"
+		set {LapisBlockGenerator} to 1 lapis block named "<##3b52c9>&lLapis Block Generator" with lore "&8Generator Level 12" and "" and "&7Spawns x1 Lapis Block every &e20s!" and "&7Has a base sell price of &a&n$600" and "" and "&bShift + Right-Click to upgrade!"
+		set {DiamondGenerator} to 1 diamond ore named "<##27bfd6>&lDiamond Generator" with lore "&8Generator Level 13" and "" and "&7Spawns x1 Diamond every &e20s!" and "&7Has a base sell price of &a&n$700" and "" and "&bShift + Right-Click to upgrade!"
+		set {DiamondBlockGenerator} to 1 diamond block named "<##27bfd6>&lDiamond Block Generator" with lore "&8Generator Level 14" and "" and "&7Spawns x1 Diamond Block every &e20s!" and "&7Has a base sell price of &a&n$800" and "" and "&bShift + Right-Click to upgrade!"
+		set {EmeraldGenerator} to 1 emerald ore named "<##49bc57>&lEmerald Generator" with lore "&8Generator Level 15" and "" and "&7Spawns x1 Emerald every &e20s!" and "&7Has a base sell price of &a&n$900" and "" and "&bShift + Right-Click to upgrade!"
+		set {EmeraldBlockGenerator} to 1 emerald block named "<##49bc57>&lEmerald Block Generator" with lore "&8Generator Level 16" and "" and "&7Spawns x1 Emerald Block every &e20s!" and "&7Has a base sell price of &a&n$1,000" and "" and "&bShift + Right-Click to upgrade!"
+
+		set {NetherrackGenerator} to 1 netherrack named "<##9d0c0c>&lNetherrack Generator" with lore "&8Generator Level 17" and "" and "&7Spawns x1 Netherrack every &e20s!" and "&7Has a base sell price of &a&n$2,000" and "" and "&bShift + Right-Click to upgrade!"
+		set {NetherQuartzGenerator} to 1 nether quartz ore named "<##ca8f8f>&lNether Quartz Generator" with lore "&8Generator Level 18" and "" and "&7Spawns x1 Quartz every &e20s!" and "&7Has a base sell price of &a&n$2,500" and "" and "&bShift + Right-Click to upgrade!"
+		set {NetherGoldGenerator} to 1 nether gold ore named "<##9c8622>&lNether Gold Generator" with lore "&8Generator Level 19" and "" and "&7Spawns x1 Nether Nugget every &e20s!" and "&7Has a base sell price of &a&n$3,000" and "" and "&bShift + Right-Click to upgrade!"
+		set {NetherBrickGenerator} to 1 nether brick named "<##6f0909>&lNether Brick Generator" with lore "&8Generator Level 20" and "" and "&7Spawns x1 Nether Brick every &e20s!" and "&7Has a base sell price of &a&n$3,500" and "" and "&bShift + Right-Click to upgrade!"
+		set {NetherWartGenerator} to 1 nether wart block named "<##e52727>&lNether Wart Generator" with lore "&8Generator Level 21" and "" and "&7Spawns x1 Nether Wart every &e20s!" and "&7Has a base sell price of &a&n$4,000" and "" and "&bShift + Right-Click to upgrade!"
+
+		set {ObsidianGenerator} to 1 obsidian named "<##461f8d>&lObsidian Generator" with lore "&8Generator Level 22" and "" and "&7Spawns x1 Obsidian every &e20s!" and "&7Has a base sell price of &a&n$4,500" and "" and "&bShift + Right-Click to upgrade!"
+		set {CryingObsidianGenerator} to 1 crying obsidian named "<##632cc6>&lCrying Obsidian Generator" with lore "&8Generator Level 23" and "" and "&7Spawns x1 Crying Obsidian every &e20s!" and "&7Has a base sell price of &a&n$5,000" and "" and "&bShift + Right-Click to upgrade!"
+		set {ObsidianRoseGenerator} to 1 respawn anchor named "<##7648fb>&lObsidian Rose Generator" with lore "&8Generator Level 24" and "" and "&7Spawns x1 Obsidian Rose every &e20s!" and "&7Has a base sell price of &a&n$5,500" and "" and "&bShift + Right-Click to upgrade!"
+
+		set {BudgetNetheriteGenerator} to 1 ancient debris named "<##674f4f>&lBudget Netherite Generator" with lore "&6Generator Level 25" and "" and "&7Spawns x1 Budget Netherite every &e20s!" and "&7Has a base sell price of &a&n$7,500" and "" and "&bShift + Right-Click to upgrade!"
+		set {NetheriteGenerator} to 1 netherite block named "<##674f4f>&lNetherite Generator" with lore "&6Generator Level 26" and "" and "&7Spawns x1 Netherite Ingot every &e20s!" and "&7Has a base sell price of &a&n$10,000" and "" and "&bShift + Right-Click to upgrade!"
+
+		set {HoneyGenerator} to 1 honeycomb block named "&6&lHoney Generator" with lore "&eEquivalent Generator Level 19" and "" and "&7Spawns x1 Honey Comb every &e20s!" and "&7Has a base sell price of &a&n$3,000" and "" and "&bGenerator Cannot be upgraded!"
+
+
+		set {WheatGenerator_DROP} to 1 wheat named "<##ffec10>&lWheat &a&n(/sell for money)" with lore "&8Generator Drop Level 1" and "" and "&7Use &a/sell &7to sell this for &a&n$10" and "" and "&e&lGENERATOR DROP!"
+		set {MelonGenerator_DROP} to 1 melon slice named "<##79dc6e>&lMelon Slice &a&n(/sell for money)" with lore "&8Generator Drop Level 2" and "" and "&7Use &a/sell &7to sell this for &a&n$20" and "" and "&e&lGENERATOR DROP!"
+		
+		set {CoalGenerator_DROP} to 1 coal named "<##3c3b38>&lCoal" with lore "&8Generator Drop Level 3" and "" and "&7Use &a/sell &7to sell this for &a&n$25" and "" and "&e&lGENERATOR DROP!"
+		set {CoalBlockGenerator_DROP} to {CoalBlockSkull} named "<##3c3b38>&lCoal Block" with lore "&8Generator Drop Level 4" and "" and "&7Use &a/sell &7to sell this for &a&n$50" and "" and "&e&lGENERATOR DROP!"
+		set {IronIngotGenerator_DROP} to 1 iron ingot named "<##bab8ab>&lIron Ingot" with lore "&8Generator Drop Level 5" and "" and "&7Use &a/sell &7to sell this for &a&n$75" and "" and "&e&lGENERATOR DROP!"
+		set {IronBlockGenerator_DROP} to {IronBlockSkull} named "<##bab8ab>&lIron Block" with lore "&8Generator Drop Level 6" and "" and "&7Use &a/sell &7to sell this for &a&n$100" and "" and "&e&lGENERATOR DROP!"
+		set {GoldIngotGenerator_DROP} to 1 golden ingot named "<##dcb940>&lGolden Ingot" with lore "&8Generator Drop Level 7" and "" and "&7Use &a/sell &7to sell this for &a&n$150" and "" and "&e&lGENERATOR DROP!"
+		set {GoldBlockGenerator_DROP} to {GoldBlockSkull} named "<##dcb940>&lGold Block" with lore "&8Generator Drop Level 8" and "" and "&7Use &a/sell &7to sell this for &a&n$200" and "" and "&e&lGENERATOR DROP!"
+		set {RedstoneGenerator_DROP} to 1 redstone named "<##da3131>&lRedstone" with lore "&8Generator Drop Level 9" and "" and "&7Use &a/sell &7to sell this for &a&n$300" and "" and "&e&lGENERATOR DROP!"
+		set {RedstoneBlockGenerator_DROP} to {RedstoneBlockSkull} named "<##da3131>&lRedstone Block" with lore "&8Generator Drop Level 10" and "" and "&7Use &a/sell &7to sell this for &a&n$400" and "" and "&e&lGENERATOR DROP!"
+		set {LapisGenerator_DROP} to 1 lapis lazuli named "<##3b52c9>&lLapis" with lore "&8Generator Drop Level 11" and "" and "&7Use &a/sell &7to sell this for &a&n$500" and "" and "&e&lGENERATOR DROP!"
+		set {LapisBlockGenerator_DROP} to {LapisBlockSkull} named "<##3b52c9>&lLapis Block" with lore "&8Generator Drop Level 12" and "" and "&7Use &a/sell &7to sell this for &a&n$600" and "" and "&e&lGENERATOR DROP!"
+		set {DiamondGenerator_DROP} to 1 diamond named "<##27bfd6>&lDiamond" with lore "&8Generator Drop Level 13" and "" and "&7Use &a/sell &7to sell this for &a&n$700" and "" and "&e&lGENERATOR DROP!"
+		set {DiamondBlockGenerator_DROP} to {DiamondBlockSkull} named "<##27bfd6>&lDiamond Block" with lore "&8Generator Drop Level 14" and "" and "&7Use &a/sell &7to sell this for &a&n$800" and "" and "&e&lGENERATOR DROP!"
+		set {EmeraldGenerator_DROP} to 1 emerald named "<##49bc57>&lEmerald" with lore "&8Generator Drop Level 15" and "" and "&7Use &a/sell &7to sell this for &a&n$900" and "" and "&e&lGENERATOR DROP!"
+		set {EmeraldBlockGenerator_DROP} to {EmeraldBlockSkull} named "<##49bc57>&lEmerald Block" with lore "&8Generator Drop Level 16" and "" and "&7Use &a/sell &7to sell this for &a&n$1,000" and "" and "&e&lGENERATOR DROP!"
+
+		set {NetherrackGenerator_DROP} to {NetherrackBlockSkull} named "<##9d0c0c>&lNetherrack" with lore "&8Generator Drop Level 17" and "" and "&7Use &a/sell &7to sell this for &a&n$2,000" and "" and "&e&lGENERATOR DROP!"
+		set {NetherQuartzGenerator_DROP} to 1 nether quartz named "<##ca8f8f>&lQuartz" with lore "&8Generator Drop Level 18" and "" and "&7Use &a/sell &7to sell this for &a&n$2,500" and "" and "&e&lGENERATOR DROP!"
+		set {NetherGoldGenerator_DROP} to 1 golden nugget named "<##9c8622>&lNether Gold" with lore "&8Generator Drop Level 19" and "" and "&7Use &a/sell &7to sell this for &a&n$3,000" and "" and "&e&lGENERATOR DROP!"
+		set {NetherBrickGenerator_DROP} to 1 nether brick items named "<##6f0909>&lNether Brick" with lore "&8Generator Drop Level 20" and "" and "&7Use &a/sell &7to sell this for &a&n$3,500" and "" and "&e&lGENERATOR DROP!"
+		set {NetherWartGenerator_DROP} to 1 nether wart named "<##e52727>&lNether Wart" with lore "&8Generator Drop Level 21" and "" and "&7Use &a/sell &7to sell this for &a&n$4,000" and "" and "&e&lGENERATOR DROP!"
+
+		set {ObsidianGenerator_DROP} to {ObsidianSkull} named "<##461f8d>&lObsidian" with lore "&8Generator Drop Level 22" and "" and "&7Use &a/sell &7to sell this for &a&n$4,500" and "" and "&e&lGENERATOR DROP!"
+		set {CryingObsidianGenerator_DROP} to {CryingObsidianSkull} named "<##632cc6>&lCrying Obsidian" with lore "&8Generator Drop Level 23" and "" and "&7Use &a/sell &7to sell this for &a&n$5,000" and "" and "&e&lGENERATOR DROP!"
+		set {ObsidianRoseGenerator_DROP} to 1 wither rose named "<##7648fb>&lObsidian Rose" with lore "&8Generator Drop Level 24" and "" and "&7Use &a/sell &7to sell this for &a&n$5,500" and "" and "&e&lGENERATOR DROP!"
+
+		set {BudgetNetheriteGenerator_DROP} to 1 netherite scrap named "<##674f4f>&lBudget Netherite" with lore "&6Generator Drop Level 25" and "" and "&7Use &a/sell &7to sell this for &a&n$7,500" and "" and "&e&lGENERATOR DROP!"
+		set {NetheriteGenerator_DROP} to 1 netherite ingot named "<##674f4f>&lNetherite Ingot" with lore "&6Generator Drop Level 26" and "" and "&7Use &a/sell &7to sell this for &a&n$9,500" and "" and "&e&lGENERATOR DROP!"
+
+		set {HoneyGenerator_DROP} to 1 honeycomb named "&6&lHoney Comb" with lore "&eEquivalent Generator Drop Level 19" and "" and "&7Use &a/sell &7to sell this for &a&n$3,000" and "" and "&e&lGENERATOR DROP!"
+
+
+
+
+
+command /givegens:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		give player {WheatGenerator}
+		give player {MelonGenerator}
+
+		give player {CoalOreGenerator}
+		give player {CoalBlockGenerator}
+		give player {IronOreGenerator}
+		give player {IronBlockGenerator}
+		give player {GoldOreGenerator}
+		give player {GoldBlockGenerator}
+		give player {RedstoneGenerator}
+		give player {RedstoneBlockGenerator}
+		give player {LapisGenerator}
+		give player {LapisBlockGenerator}
+		give player {DiamondGenerator}
+		give player {DiamondBlockGenerator}
+		give player {EmeraldGenerator}
+		give player {EmeraldBlockGenerator}
+
+		give player {NetherrackGenerator}
+		give player {NetherQuartzGenerator}
+		give player {NetherGoldGenerator}
+		give player {NetherBrickGenerator}
+		give player {NetherWartGenerator}
+
+		give player {ObsidianGenerator}
+		give player {CryingObsidianGenerator}
+		give player {ObsidianRoseGenerator}
+
+		give player {BudgetNetheriteGenerator}
+		give player {NetheriteGenerator}
+
+		give player {HoneyGenerator}
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Gens: Placing & Breaking Of Generators:
+#
+#
+#==========================================================
+
+
+
+
+
+on place of player head or player wall skull:
+	if player's gamemode is creative:
+		stop
+
+	cancel event
+	stop
+
+
+
+
+
+on break:
+	if event-block is hay bale, melon, coal ore, coal block, iron ore, iron block, gold ore, gold block, redstone ore, redstone block, lapis ore, lapis block, diamond ore, diamond block, emerald ore, emerald block, netherrack, nether quartz ore, nether gold ore, nether bricks, nether wart block, obsidian, crying obsidian, respawn anchor, ancient debris, netherite block or honeycomb block:
+		if player's gamemode is not creative:
+			cancel event
+			stop
+
+
+
+
+
+on place:
+	if difference between {RecentlyPlacedGenerator::%UUID of player%} and now is less than 5 ticks:
+		play sound "block.note_block.bass" with pitch 1 to player
+		send "&c&lERROR: &7Cooldown on placing generators..."
+		cancel event
+		stop
+
+	if event-block is hay bale, melon, coal ore, coal block, iron ore, iron block, gold ore, gold block, redstone ore, redstone block, lapis ore, lapis block, diamond ore, diamond block, emerald ore, emerald block, netherrack, nether quartz ore, nether gold ore, nether bricks, nether wart block, obsidian, crying obsidian, respawn anchor, ancient debris, netherite block or honeycomb block:
+		if name of player's tool does not contain "Generator":
+			play sound "block.note_block.bass" with pitch 1 to player
+			send "&c&lERROR: &7You cannot place normal generator blocks!"
+			cancel event
+			stop
+
+
+		if size of {PlacedGenerators::%UUID of player%::*} is greater than {GeneratorLimit::%UUID of player%} - 1:
+			play sound "block.note_block.bass" with pitch 1 to player
+			send "&c&lERROR: &7You already hit your gen limit of &e%{GeneratorLimit::%UUID of player%}%&7."
+			send "&e- &7Get more slots with quests, crates, ranks or using 1 alt account!"
+			cancel event
+			stop
+
+
+
+		if name of player's tool contains "<##ffec10>&lWheat Generator":
+			wait 1 tick
+			if block at event-block is hay bale:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##ffec10>Wheat Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##79dc6e>&lMelon Generator":
+			wait 1 tick
+			if block at event-block is melon:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##79dc6e>Melon Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##3c3b38>&lCoal Generator":
+			wait 1 tick
+			if block at event-block is coal ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##3c3b38>Coal Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##3c3b38>&lCoal Block Generator":
+			wait 1 tick
+			if block at event-block is coal block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##3c3b38>Coal Block Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##bab8ab>&lIron Generator":
+			wait 1 tick
+			if block at event-block is iron ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##bab8ab>Iron Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##bab8ab>&lIron Block Generator":
+			wait 1 tick
+			if block at event-block is iron block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##bab8ab>Iron Block Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##dcb940>&lGold Generator":
+			wait 1 tick
+			if block at event-block is gold ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##dcb940>Gold Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##dcb940>&lGold Block Generator":
+			wait 1 tick
+			if block at event-block is gold block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##dcb940>Gold Block Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##da3131>&lRedstone Generator":
+			wait 1 tick
+			if block at event-block is redstone ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##da3131>Redstone Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##da3131>&lRedstone Block Generator":
+			wait 1 tick
+			if block at event-block is redstone block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##da3131>Redstone Block Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##3b52c9>&lLapis Generator":
+			wait 1 tick
+			if block at event-block is lapis ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##3b52c9>Lapis Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##3b52c9>&lLapis Block Generator":
+			wait 1 tick
+			if block at event-block is lapis block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##3b52c9>Lapis Block Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##27bfd6>&lDiamond Generator":
+			wait 1 tick
+			if block at event-block is diamond ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##27bfd6>Diamond Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##27bfd6>&lDiamond Block Generator":
+			wait 1 tick
+			if block at event-block is diamond block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##27bfd6>Diamond Block Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##49bc57>&lEmerald Generator":
+			wait 1 tick
+			if block at event-block is emerald ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##49bc57>Emerald Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##49bc57>&lEmerald Block Generator":
+			wait 1 tick
+			if block at event-block is emerald block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##49bc57>Emerald Block Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##9d0c0c>&lNetherrack Generator":
+			wait 1 tick
+			if block at event-block is netherrack:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##9d0c0c>Netherrack Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##ca8f8f>&lNether Quartz Generator":
+			wait 1 tick
+			if block at event-block is nether quartz ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##ca8f8f>Nether Quartz Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##9c8622>&lNether Gold Generator":
+			wait 1 tick
+			if block at event-block is nether gold ore:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##9c8622>Nether Gold Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##6f0909>&lNether Brick Generator":
+			wait 1 tick
+			if block at event-block is nether brick:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##6f0909>Nether Brick Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##e52727>&lNether Wart Generator":
+			wait 1 tick
+			if block at event-block is nether wart block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##e52727>Nether Wart Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##461f8d>&lObsidian Generator":
+			wait 1 tick
+			if block at event-block is obsidian:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##461f8d>Obsidian Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##632cc6>&lCrying Obsidian Generator":
+			wait 1 tick
+			if block at event-block is crying obsidian:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##632cc6>Crying Obsidian Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##7648fb>&lObsidian Rose Generator":
+			wait 1 tick
+			if block at event-block is respawn anchor:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##7648fb>Obsidian Rose Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##674f4f>&lBudget Netherite Generator":
+			wait 1 tick
+			if block at event-block is ancient debris:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##674f4f>Budget Netherite Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "<##674f4f>&lNetherite Generator":
+			wait 1 tick
+			if block at event-block is netherite block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your <##674f4f>Netherite Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+		if name of player's tool contains "&6&lHoney Generator":
+			wait 1 tick
+			if block at event-block is honeycomb block:
+				set {RecentlyPlacedGenerator::%UUID of player%} to now
+				send "&a&lSUCCESS: &7You have placed your &6Honey Generator"
+
+				play sound "block.note_block.pling" with pitch 2.0 to player
+				add event-block to {PlacedGenerators::%UUID of player%::*}
+				stop
+
+
+
+
+
+on block damage:
+	if {PlacedGenerators::%UUID of player%::*} does not contain event-block:
+		stop
+
+	if difference between {RecentlyPlacedGenerator::%UUID of player%} and now is less than 5 ticks:
+		play sound "block.note_block.bass" with pitch 1 to player
+		send "&c&lERROR: &7Cooldown on picking up generators..."
+		cancel event
+		stop
+
+	if player doesn't have enough space for 1 of barrier:
+		play sound "block.note_block.bass" with pitch 1 to player
+		send "&c&lERROR: &7You do not have space in your inventory to pick up generators!"
+		stop
+
+
+	if event-block is hay bale:
+		send "&a&lSUCCESS: &7You have picked up your <##ffec10>Wheat Generator"
+		give player {WheatGenerator}
+
+	if event-block is melon:
+		send "&a&lSUCCESS: &7You have picked up your <##79dc6e>Melon Generator"
+		give player {MelonGenerator}
+
+
+	if event-block is coal ore:
+		send "&a&lSUCCESS: &7You have picked up your <##3c3b38>Coal Generator"
+		give player {CoalOreGenerator}
+
+	if event-block is coal block:
+		send "&a&lSUCCESS: &7You have picked up your <##3c3b38>Coal Block Generator"
+		give player {CoalBlockGenerator}
+
+	if event-block is iron ore:
+		send "&a&lSUCCESS: &7You have picked up your <##bab8ab>Iron Generator"
+		give player {IronOreGenerator}
+
+	if event-block is iron block:
+		send "&a&lSUCCESS: &7You have picked up your <##bab8ab>Iron Block Generator"
+		give player {IronBlockGenerator}
+
+	if event-block is gold ore:
+		send "&a&lSUCCESS: &7You have picked up your <##dcb940>Gold Generator"
+		give player {GoldOreGenerator}
+
+	if event-block is gold block:
+		send "&a&lSUCCESS: &7You have picked up your <##dcb940>Gold Block Generator"
+		give player {GoldBlockGenerator}
+
+	if event-block is redstone ore:
+		send "&a&lSUCCESS: &7You have picked up your <##da3131>Redstone Generator"
+		give player {RedstoneGenerator}
+
+	if event-block is redstone block:
+		send "&a&lSUCCESS: &7You have picked up your <##da3131>Redstone Block Generator"
+		give player {RedstoneBlockGenerator}
+
+	if event-block is lapis ore:
+		send "&a&lSUCCESS: &7You have picked up your <##3b52c9>Lapis Generator"
+		give player {LapisGenerator}
+
+	if event-block is lapis block:
+		send "&a&lSUCCESS: &7You have picked up your <##3b52c9>Lapis Block Generator"
+		give player {LapisBlockGenerator}
+
+	if event-block is diamond ore:
+		send "&a&lSUCCESS: &7You have picked up your <##27bfd6>Diamond Generator"
+		give player {DiamondGenerator}
+
+	if event-block is diamond block:
+		send "&a&lSUCCESS: &7You have picked up your <##27bfd6>Diamond Block Generator"
+		give player {DiamondBlockGenerator}
+
+	if event-block is emerald ore:
+		send "&a&lSUCCESS: &7You have picked up your <##49bc57>Emerald Generator"
+		give player {EmeraldGenerator}
+
+	if event-block is emerald block:
+		send "&a&lSUCCESS: &7You have picked up your <##49bc57>Emerald Block Generator"
+		give player {EmeraldBlockGenerator}
+
+
+	if event-block is netherrack:
+		send "&a&lSUCCESS: &7You have picked up your <##9d0c0c>Netherrack Generator"
+		give player {NetherrackGenerator}
+
+	if event-block is nether quartz ore:
+		send "&a&lSUCCESS: &7You have picked up your <##ca8f8f>Nether Quartz Generator"
+		give player {NetherQuartzGenerator}
+
+	if event-block is nether gold ore:
+		send "&a&lSUCCESS: &7You have picked up your <##9c8622>Nether Gold Generator"
+		give player {NetherGoldGenerator}
+
+	if event-block is nether brick:
+		send "&a&lSUCCESS: &7You have picked up your <##6f0909>Nether Brick Generator"
+		give player {NetherBrickGenerator}
+
+	if event-block is nether wart block:
+		send "&a&lSUCCESS: &7You have picked up your <##e52727>Nether Wart Generator"
+		give player {NetherWartGenerator}
+
+	if event-block is obsidian:
+		send "&a&lSUCCESS: &7You have picked up your <##461f8d>Obsidian Generator"
+		give player {ObsidianGenerator}
+
+	if event-block is crying obsidian:
+		send "&a&lSUCCESS: &7You have picked up your <##632cc6>Crying Obsidian Generator"
+		give player {CryingObsidianGenerator}
+
+	if event-block is respawn anchor:
+		send "&a&lSUCCESS: &7You have picked up your <##7648fb>Obsidian Rose Generator"
+		give player {ObsidianRoseGenerator}
+
+	if event-block is ancient debris:
+		send "&a&lSUCCESS: &7You have picked up your <##674f4f>Budget Netherite Generator"
+		give player {BudgetNetheriteGenerator}
+
+	if event-block is netherite block:
+		send "&a&lSUCCESS: &7You have picked up your <##674f4f>Netherite Generator"
+		give player {NetheriteGenerator}
+
+	if event-block is honeycomb block:
+		send "&a&lSUCCESS: &7You have picked up your &6Honey Generator"
+		give player {HoneyGenerator}
+
+
+
+	play sound "entity.item.pickup" with pitch 1 to player
+	play sound "item.armor.equip_gold" with pitch 1 to player
+	set event-block to air
+	draw 20 of poof at event-block with extra 0.3
+	remove event-block from {PlacedGenerators::%UUID of player%::*}
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Gens: Generator Drops:
+#
+#
+#==========================================================
+
+
+
+
+
+every 20 seconds:
+	loop all players:
+		set {FlightCheckSev::%UUID of loop-player%} to 0
+		if loop-player's Boots is leather Boots named "&bXP Boots":
+			remove 25 from {RequiredXP::%UUID of loop-player%}
+		if loop-player's Leggings is leather Leggings named "&bXP Leggings":
+			remove 25 from {RequiredXP::%UUID of loop-player%}
+		if loop-player's Chestplate is leather Chestplate named "&bXP Chestplate":
+			remove 25 from {RequiredXP::%UUID of loop-player%}
+
+		loop {PlacedGenerators::%UUID of loop-player%::*}:
+			if block at loop-value-2 is not hay bale, melon, coal ore, coal block, iron ore, iron block, gold ore, gold block, redstone ore, redstone block, lapis ore, lapis block, diamond ore, diamond block, emerald ore, emerald block, netherrack, nether quartz ore, nether gold ore, nether bricks, nether wart block, obsidian, crying obsidian, respawn anchor, ancient debris, netherite block or honeycomb block:
+				remove loop-value-2 from {PlacedGenerators::%UUID of loop-player%::*}
+
+			if block at loop-value-2 is hay bale:
+				drop 1 of {WheatGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is melon:
+				drop 1 of {MelonGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is coal ore:
+				drop 1 of {CoalGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is coal block:
+				drop 1 of {CoalBlockGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is iron ore:
+				drop 1 of {IronIngotGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is iron block:
+				drop 1 of {IronBlockGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is gold ore:
+				drop 1 of {GoldIngotGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is gold block:
+				drop 1 of {GoldBlockGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is redstone ore:
+				drop 1 of {RedstoneGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is redstone block:
+				drop 1 of {RedstoneBlockGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is lapis ore:
+				drop 1 of {LapisGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is lapis block:
+				drop 1 of {LapisBlockGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is diamond ore:
+				drop 1 of {DiamondGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is diamond block:
+				drop 1 of {DiamondBlockGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is emerald ore:
+				drop 1 of {EmeraldGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is emerald block:
+				drop 1 of {EmeraldBlockGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+
+			if block at loop-value-2 is netherrack:
+				drop 1 of {NetherrackGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is nether quartz ore:
+				drop 1 of {NetherQuartzGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is nether gold ore:
+				drop 1 of {NetherGoldGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is nether brick:
+				drop 1 of {NetherBrickGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is nether wart block:
+				drop 1 of {NetherWartGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+
+			if block at loop-value-2 is obsidian:
+				drop 1 of {ObsidianGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is crying obsidian:
+				drop 1 of {CryingObsidianGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is respawn anchor:
+				drop 1 of {ObsidianRoseGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+
+			if block at loop-value-2 is ancient debris:
+				drop 1 of {BudgetNetheriteGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+			if block at loop-value-2 is netherite block:
+				drop 1 of {NetheriteGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+
+			if block at loop-value-2 is honeycomb block:
+				drop 1 of {HoneyGenerator_DROP} at location 1 meter above loop-value-2 without velocity
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Gens: Upgrading Of Generators:
+#
+#
+#==========================================================
+
+
+
+
+
+on rightclick:
+	if event-block is respawn anchor:
+		cancel event
+
+	if player is sneaking:
+		if {PlacedGenerators::%UUID of player%::*} contains event-block:
+
+
+			if event-block is hay bale:
+				if {balance::%UUID of player%} is less than 50:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($50)"
+					stop
+				remove 50 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 5 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$5 &7back due to DIAMOND rank!"
+					
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to melon block
+				stop
+
+
+			if event-block is melon block:
+				if {balance::%UUID of player%} is less than 100:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($100)"
+					stop
+				remove 100 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 10 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$10 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to coal ore
+				stop
+
+
+			if event-block is coal ore:
+				if {balance::%UUID of player%} is less than 100:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($100)"
+					stop
+				remove 100 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 10 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$10 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to coal block
+				stop
+
+
+			if event-block is coal block:
+				if {balance::%UUID of player%} is less than 100:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($100)"
+					stop
+				remove 100 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 10 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$10 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to iron ore
+				stop
+
+
+			if event-block is iron ore:
+				if {balance::%UUID of player%} is less than 100:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($100)"
+					stop
+				remove 100 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 10 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$10 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to iron block
+				stop
+
+
+			if event-block is iron block:
+				if {balance::%UUID of player%} is less than 250:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($250)"
+					stop
+				remove 250 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 25 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$25 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to gold ore
+				stop
+
+
+			if event-block is gold ore:
+				if {balance::%UUID of player%} is less than 250:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($250)"
+					stop
+				remove 250 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 25 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$25 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to gold block
+				stop
+
+
+			if event-block is gold block:
+				if {balance::%UUID of player%} is less than 4000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($4,000)"
+					stop
+				remove 4000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 400 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$400 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to redstone ore
+				stop
+
+
+			if event-block is redstone ore:
+				if {balance::%UUID of player%} is less than 5000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($5,000)"
+					stop
+				remove 5000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 500 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$500 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to redstone block
+				stop
+
+
+			if event-block is redstone block:
+				if {balance::%UUID of player%} is less than 15000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($15,000)"
+					stop
+				remove 15000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 1500 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$1,500 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to lapis ore
+				stop
+
+
+			if event-block is lapis ore:
+				if {balance::%UUID of player%} is less than 25000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($25,000)"
+					stop
+				remove 25000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 2500 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$2,500 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to lapis block
+				stop
+
+
+			if event-block is lapis block:
+				if {balance::%UUID of player%} is less than 50000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($50,000)"
+					stop
+				remove 50000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 5000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$5,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to diamond ore
+				stop
+
+
+			if event-block is diamond ore:
+				if {balance::%UUID of player%} is less than 150000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($150,000)"
+					stop
+				remove 150000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 15000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$15,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to diamond block
+				stop
+
+
+			if event-block is diamond block:
+				if {balance::%UUID of player%} is less than 250000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($250,000)"
+					stop
+				remove 250000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 25000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$25,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to emerald ore
+				stop
+
+
+			if event-block is emerald ore:
+				if {balance::%UUID of player%} is less than 500000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($500,000)"
+					stop
+				remove 500000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 50000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$50,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to emerald block
+				stop
+
+
+			if event-block is emerald block:
+				if {balance::%UUID of player%} is less than 1500000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($1,500,000)"
+					stop
+				remove 1500000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 150000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$150,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to netherrack block
+				stop
+
+
+			if event-block is netherrack block:
+				if {balance::%UUID of player%} is less than 2500000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($2,500,000)"
+					stop
+				remove 2500000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 250000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$250,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to nether quartz ore
+				stop
+
+
+			if event-block is nether quartz ore:
+				if {balance::%UUID of player%} is less than 5000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($5,000,000)"
+					stop
+				remove 5000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 500000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$500,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to nether gold ore
+				stop
+
+
+			if event-block is nether gold ore:
+				if {balance::%UUID of player%} is less than 15000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($15,000,000)"
+					stop
+				remove 15000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 1500000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$1,500,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to nether brick
+				stop
+
+
+			if event-block is nether brick:
+				if {balance::%UUID of player%} is less than 25000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($25,000,000)"
+					stop
+				remove 25000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 2500000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$2,500,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to nether wart block
+				stop
+
+
+			if event-block is nether wart block:
+				if {balance::%UUID of player%} is less than 50000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($50,000,000)"
+					stop
+				remove 50000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 5000000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$5,000,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to obsidian
+				stop
+
+
+			if event-block is obsidian:
+				if {balance::%UUID of player%} is less than 50000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($50,000,000)"
+					stop
+				remove 50000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 5000000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$5,000,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to crying obsidian
+				stop
+
+
+			if event-block is crying obsidian:
+				if {balance::%UUID of player%} is less than 50000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($50,000,000)"
+					stop
+				remove 50000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 5000000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$5,000,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to respawn anchor
+				stop
+
+
+			if event-block is crying obsidian:
+				if {balance::%UUID of player%} is less than 50000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($50,000,000)"
+					stop
+				remove 50000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 5000000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$5,000,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to respawn anchor
+				stop
+
+
+			if event-block is ancient debris:
+				if {balance::%UUID of player%} is less than 200000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lGENERATOR: &7You cannot afford this upgrade &a&o($200,000,000)"
+					stop
+				remove 200000000 from {balance::%UUID of player%}
+				if player has permission "rank.diamond":
+					add 20000000 to {balance::%UUID of player%}
+					send "<##84fff8>&lCASH BACK: &7You received &a$20,000,000 &7back due to DIAMOND rank!"
+
+				play sound "entity.firework_rocket.blast" with pitch 1 to player
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.firework_rocket.twinkle" with pitch 1.5 to player
+
+				draw 1 flash at event-block with offset vector(0, 0, 0) with extra 0
+				draw 30 of item particle using event-block at event-block with extra 0.3
+				set block at event-block to netherite block
+				stop

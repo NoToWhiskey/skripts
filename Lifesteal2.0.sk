@@ -1,0 +1,74 @@
+options:
+  HeartCap: 20
+  ReviveAmount: 8
+
+on join:
+  {SkLifesteal::reviveHearts::%player's uuid%} is set
+  set player's max health attribute to {SkLifesteal::reviveHearts::%player's uuid%}
+  send "&cYou have been revived with %player's max health attribute / 2% hearts!"
+  delete {SkLifesteal::reviveHearts::%player's uuid%}
+
+on death of player:
+  attacker is a player
+  attacker is not victim
+  if victim's max health attribute <= 2:
+    set {_r} to "&cYou have no more hearts! Eliminated by &4%attacker%"
+    ban victim due to {_r}
+    wait 1 tick
+    kick victim due to {_r}
+    set {_elim} to true
+  else:
+    remove 2 from max health attribute of victim
+    send "&cYou lost a heart to &4%attacker%&c!" to victim
+  if attacker's max health attribute >= {@HeartCap} * 2:
+    send "&cYou didn't gain a heart from killing &4%victim%&c because you are at the heart cap!" to attacker
+  else:
+    add 2 to max health attribute of attacker
+    if {_elim} is true:
+      send "&cYou eliminated &4%victim%&c!" to attacker
+    else:
+      send "&cYou stole a heart from &4%victim%&c!" to attacker
+
+on right click:
+  set {_nbt} to nbt compound of event-item
+  byte tag "tag;heart" of {_nbt} is 1
+  if event-entity is not player:
+    event-entity is set
+    stop
+  if player's max health attribute >= {@HeartCap} * 2:
+    send "&cYou are at the heart limit!"
+  else:
+    add 2 to player's max health attribute
+    if player's tool is event-item:
+      remove 1 from item amount of player's tool
+    else if player's offhand tool is event-item:
+      remove 1 from item amount of player's offhand tool
+    send "&cYou are now on &4%player's max health attribute / 2%&c hearts!"
+
+command /withdraw [<n:number=1>]:
+  trigger:
+    set {_n} to 1 if {_n} < 1
+    loop {_n} times:
+      if player's max health attribute <= 2:
+        send "&cYou can't withdraw any more hearts!"
+        stop
+      set {_heart} to red dye of unbreaking 1 named "&cHeart" with all flags hidden
+      set {_nbt} to nbt compound of {_heart}
+      set tag "tag;unstackable" of {_nbt} to random uuid
+      set byte tag "tag;heart" of {_nbt} to 1
+      set {_i} to item from nbt {_nbt}
+      if player doesn't have space for {_i}:
+        send "&cYou don't have space to withdraw more hearts!"
+        stop
+      remove 2 from player's max health attribute
+      give player {_i}
+
+command /lsrevive <offline player> [<number={@ReviveAmount}>]:
+  permission: sklifesteal.revive
+  trigger:
+    if arg-1 is not banned:
+      send "&4%arg-1%&c is not banned."
+      stop
+    unban arg-1
+    set {SkLifesteal::reviveHearts::%arg-1's uuid%} to arg-2 * 2
+    send "&4%arg-1%&c has been revived with %arg-2% hearts!"

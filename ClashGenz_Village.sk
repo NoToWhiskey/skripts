@@ -1,0 +1,2300 @@
+#==========================================================
+#
+#
+#		ClashGenz Village: Moving Villagers:
+#
+#
+#==========================================================
+#set {VillagePathLocations::1} to "%player's x-coord% %player's y-coord% %player's z-coord%"
+
+
+
+
+
+every 15 seconds:
+	execute console command "/npc sel 20"
+	execute console command "/npc pathto %random element out of {VillagePathLocations::*}%"
+	set {_NpcSelected} to 22
+
+	wait 3 seconds
+
+	loop 4 times:
+		execute console command "/npc sel %{_NpcSelected}%"
+		execute console command "/npc pathto %random element out of {VillagePathLocations::*}%"
+
+		add 1 to {_NpcSelected}
+		wait 3 seconds
+
+
+
+
+
+on citizen right click:
+	if display name of {SpawnedPet::%UUID of player%} contains "Villager":
+		if npc is 20:
+			if difference between {VillageTaskCooldown-Louie::%UUID of player%} and now is less than 1 day:
+				set {_VillagerTaskWaited::%UUID of player%} to difference between {VillageTaskCooldown-Louie::%UUID of player%} and now
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER LOUIE: &7There is a &e%difference between 1 day and {_VillagerTaskWaited::%UUID of player%}% &7cooldown on this task!" to player
+				stop
+
+			if {VillageTaskCooldown-Louie::%UUID of player%} is "Started":
+				if player has 8 of glowing hay bale named "<##f2ff86>&lHAY BALE":
+					remove 8 of glowing hay bale named "<##f2ff86>&lHAY BALE" from player's inventory
+					set {VillageTaskCooldown-Louie::%UUID of player%} to now
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER LOUIE: &7Perfect, I can now trade this in for a cake with jean:" to player
+					send "&7[&3Villager Task Completed: ""Louies Wheat""&7]"
+					send "&7[&a+$250,000&7]"
+					send "&7[&b+25,000 XP&7]"
+
+					add 250000 to {balance::%UUID of player%}
+					remove 25000 from {RequiredXP::%UUID of player%}
+					stop
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER LOUIE: &7If you bring me &ex8 Hay Bales &7i'll give you a reward!" to player
+				stop
+
+
+			set {VillageTaskCooldown-Louie::%UUID of player%} to "Started"
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER LOUIE: &7Hello there... Bob sadly doesn't like me..." to player
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER LOUIE: &7He wont let me in the farms anymore..." to player
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER LOUIE: &7If you bring me &ex8 Hay Bales &7i'll give you a reward!" to player
+			send "&7[&3Villager Task Started: ""Louies Wheat""&7]"
+			stop
+
+
+
+		if npc is 22:
+			if difference between {VillageTaskCooldown-Michael::%UUID of player%} and now is less than 1 day:
+				set {_VillagerTaskWaited::%UUID of player%} to difference between {VillageTaskCooldown-Michael::%UUID of player%} and now
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER MICHAEL: &7There is a &e%difference between 1 day and {_VillagerTaskWaited::%UUID of player%}% &7cooldown on this task!" to player
+				stop
+
+			if {VillageTaskCooldown-Michael::%UUID of player%} is "Started":
+				if name of player's tool contains "Fish Sculpture":
+					set player's tool to air
+					set {VillageTaskCooldown-Michael::%UUID of player%} to now
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER MICHAEL: &7Oh goody, Ima go take this to jake now!" to player
+					send "&7[&3Villager Task Completed: ""Michaels Sculpture""&7]"
+					send "&7[&a+$250,000&7]"
+					send "&7[&b+25,000 XP&7]"
+
+					add 250000 to {balance::%UUID of player%}
+					remove 25000 from {RequiredXP::%UUID of player%}
+					stop
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER MICHAEL: &7Bring me back any fishing sculpture for a reward!" to player
+				stop
+
+
+			set {VillageTaskCooldown-Michael::%UUID of player%} to "Started"
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER MICHAEL: &7Hey there, I wanna get some stuff from the clouds" to player
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER MICHAEL: &7Only issue is, Jake won't let me up there without a fishing sculpture..." to player
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER MICHAEL: &7Bring me back any fishing sculpture for a reward!" to player
+			send "&7[&3Villager Task Started: ""Michaels Sculpture""&7]"
+			stop
+
+
+
+		if npc is 23:
+			if difference between {VillageTaskCooldown-Kevin::%UUID of player%} and now is less than 1 day:
+				set {_VillagerTaskWaited::%UUID of player%} to difference between {VillageTaskCooldown-Kevin::%UUID of player%} and now
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER KEVIN: &7There is a &e%difference between 1 day and {_VillagerTaskWaited::%UUID of player%}% &7cooldown on this task!" to player
+				stop
+
+			if {VillageTaskCooldown-Kevin::%UUID of player%} is "Started":
+				if player has 1 poppy named "&cLost Golem Poppy":
+					remove 1 poppy named "&cLost Golem Poppy" from player's inventory
+					set {VillageTaskCooldown-Kevin::%UUID of player%} to now
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER KEVIN: &7THANKS!!!! Here is your reward:" to player
+					send "&7[&3Villager Task Completed: ""Kevin's Poppy Obsession""&7]"
+					send "&7[&a+$250,000&7]"
+					send "&7[&b+25,000 XP&7]"
+
+					add 250000 to {balance::%UUID of player%}
+					remove 25000 from {RequiredXP::%UUID of player%}
+					stop
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER KEVIN: &7I need a &cLost Golem Poppy &7in order for a reward!" to player
+				stop
+
+
+			set {VillageTaskCooldown-Kevin::%UUID of player%} to "Started"
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER KEVIN: &7I really need a &cLost Golem Poppy..." to player
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER KEVIN: &7No real reason why, but can you get one for me?" to player
+			send "&7[&3Villager Task Started: ""Kevin's Poppy Obsession""&7]"
+			stop
+
+
+
+		if npc is 24:
+			if difference between {VillageTaskCooldown-Nathan::%UUID of player%} and now is less than 1 day:
+				set {_VillagerTaskWaited::%UUID of player%} to difference between {VillageTaskCooldown-Nathan::%UUID of player%} and now
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER NATHAN: &7There is a &e%difference between 1 day and {_VillagerTaskWaited::%UUID of player%}% &7cooldown on this task!" to player
+				stop
+
+			if {VillageTaskCooldown-Nathan::%UUID of player%} is "Started":
+				if player has 3 chicken named "<##d4c972>Raw Chicken":
+					remove 3 chicken named "<##d4c972>Raw Chicken" from player's inventory
+					set {VillageTaskCooldown-Nathan::%UUID of player%} to now
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER NATHAN: &7Thanks for the chicken, here is your reward:" to player
+					send "&7[&3Villager Task Completed: ""Nathan wants his chicken""&7]"
+					send "&7[&a+$250,000&7]"
+					send "&7[&b+25,000 XP&7]"
+
+					add 250000 to {balance::%UUID of player%}
+					remove 25000 from {RequiredXP::%UUID of player%}
+					stop
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER NATHAN: &7Bring me back x3 chickens and i'll give you a reward" to player
+				stop
+
+
+			set {VillageTaskCooldown-Nathan::%UUID of player%} to "Started"
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER NATHAN: &7I love chicken... I love nandos!" to player
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER NATHAN: &7Bring me back x3 chickens and i'll give you a reward" to player
+			send "&7[&3Villager Task Started: ""Nathan wants his chicken""&7]"
+			stop
+
+
+
+		if npc is 25:
+			if difference between {VillageTaskCooldown-Brandon::%UUID of player%} and now is less than 1 day:
+				set {_VillagerTaskWaited::%UUID of player%} to difference between {VillageTaskCooldown-Brandon::%UUID of player%} and now
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER BRANDON: &7There is a &e%difference between 1 day and {_VillagerTaskWaited::%UUID of player%}% &7cooldown on this task!" to player
+				stop
+
+			if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part6":
+				if {VillageTaskCooldown-Brandon::%UUID of player%} is not "Started" or "Claim Prize":
+					set {VillageTaskCooldown-Brandon::%UUID of player%} to "Started"
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER BRANDON: &7Oh... Hey there.. How are you?" to player
+
+					wait 2 seconds
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER BRANDON: &7Bad??? hmm.. what can I do for you?" to player
+
+					wait 3 seconds
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER BRANDON: &7Ahh... &cBernard &7sent you to get a &6Targeters Bow&7.." to player
+
+					wait 3 seconds
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER BRANDON: &7Yeah.. I can help you out with that..." to player
+
+					wait 3 seconds
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER BRANDON: &7Take this bow and go to the archery range, Hit all 10 shots and you'll get the bow!" to player
+					send "&7[&3Villager Task Started: ""Target Practice""&7]"
+					give player 1 of unbreakable bow with nbt "{HideFlags:63}"
+
+			if {VillageTaskCooldown-Brandon::%UUID of player%} is not "Started" or "Claim Prize":
+				if {QuestStatus-CaveExplorer::%UUID of player%} is "Completed":
+					set {VillageTaskCooldown-Brandon::%UUID of player%} to "Started"
+					wait 3 seconds
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&3&lVILLAGER BRANDON: &7Take this bow and go to the archery range, Hit all 10 shots and you'll receive a reward!" to player
+					send "&7[&3Villager Task Started: ""Target Practice""&7]"
+					give player 1 of unbreakable bow with nbt "{HideFlags:63}"
+					stop
+
+			if {VillageTaskCooldown-Brandon::%UUID of player%} is "Claim Prize":
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER BRANDON: &7Congrats on completing the task, as promised, here is your reward:" to player
+				send "&7[&3Villager Task Completed: ""Target Practice""&7]"
+				send "&7[&a+$250,000&7]"
+				send "&7[&b+25,000 XP&7]"
+
+				if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part6":
+					send "&7[&6+1 Targeters Bow&7]"
+					give player 1 of unbreakable bow named "&6Targeters Bow" with lore "&8Villager Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &c&oBernard &8at /warp cave" with nbt "{HideFlags:63}"
+
+				set {VillageTaskCooldown-Brandon::%UUID of player%} to now
+				add 250000 to {balance::%UUID of player%}
+				remove 25000 from {RequiredXP::%UUID of player%}
+
+
+
+		if npc is 26:
+			if difference between {VillageTaskCooldown-Mark::%UUID of player%} and now is less than 1 day:
+				set {_VillagerTaskWaited::%UUID of player%} to difference between {VillageTaskCooldown-Mark::%UUID of player%} and now
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER MARK: &7There is a &e%difference between 1 day and {_VillagerTaskWaited::%UUID of player%}% &7cooldown on this task!" to player
+				stop
+
+			if {VillageTaskCooldown-Mark::%UUID of player%} is "Completed":
+				set {VillageTaskCooldown-Mark::%UUID of player%} to now
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER MARK: &7THANKS!!!! Here is your reward:" to player
+				send "&7[&3Villager Task Completed: ""Feed Mark's Dog""&7]"
+				send "&7[&a+$250,000&7]"
+				send "&7[&b+25,000 XP&7]"
+
+				add 250000 to {balance::%UUID of player%}
+				remove 25000 from {RequiredXP::%UUID of player%}
+				stop
+
+			if {VillageTaskCooldown-Mark::%UUID of player%} is "Started":
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER MARK: &7Feed my Dog!" to player
+				stop
+
+
+			set {VillageTaskCooldown-Mark::%UUID of player%} to "Started"
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER MARK: &7Oh No! My dog hasn't been fed in days.." to player
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER MARK: &7Take this steak and feed him for a reward!" to player
+			send "&7[&3Villager Task Started: ""Feed Mark's Dog""&7]"
+			give player 1 steak named "&cFeed Mark's Dog"
+			stop
+
+		if npc is 61:
+			if {VillageTaskCooldown-Mark::%UUID of player%} is "Started":
+				if player's tool is steak named "&cFeed Mark's Dog":
+					remove 1 steak named "&cFeed Mark's Dog" from player's inventory
+					set {VillageTaskCooldown-Mark::%UUID of player%} to "Completed"
+					send "&3&lTASK: &7You've fed &cMark's Dog&7, return to mark for a reward"
+					stop
+		stop
+
+
+
+	if npc is 20:
+		set {_VillagerConversation} to a random element out of "Hello there %player%" and "Today is a beautiful day"
+
+		play sound "entity.villager.yes" with pitch 1 to player
+		send "&3&lVILLAGER LOUIE: &7%{_VillagerConversation}%" to player
+
+	if npc is 22:
+		set {_VillagerConversation} to a random element out of "Hello there %player%" and "Today is a beautiful day"
+
+		play sound "entity.villager.yes" with pitch 1 to player
+		send "&3&lVILLAGER MICHAEL: &7%{_VillagerConversation}%" to player
+
+	if npc is 23:
+		set {_VillagerConversation} to a random element out of "Hello there %player%" and "Today is a beautiful day"
+
+		play sound "entity.villager.yes" with pitch 1 to player
+		send "&3&lVILLAGER KEVIN: &7%{_VillagerConversation}%" to player
+
+	if npc is 24:
+		set {_VillagerConversation} to a random element out of "Hello there %player%" and "Today is a beautiful day"
+
+		play sound "entity.villager.yes" with pitch 1 to player
+		send "&3&lVILLAGER NATHAN: &7%{_VillagerConversation}%" to player
+
+	if npc is 25:
+		set {_VillagerConversation} to a random element out of "Hello there %player%" and "Today is a beautiful day"
+
+		play sound "entity.villager.yes" with pitch 1 to player
+		send "&3&lVILLAGER BRANDON: &7%{_VillagerConversation}%" to player
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part6":
+			send "&3&l- &7You MUST enable your Villager Pet to start my task!"
+
+	if npc is 26:
+		set {_VillagerConversation} to a random element out of "Hello there %player%" and "Today is a beautiful day"
+
+		play sound "entity.villager.yes" with pitch 1 to player
+		send "&3&lVILLAGER MARK: &7%{_VillagerConversation}%" to player
+
+
+
+
+
+on projectile hit:
+	if projectile is a arrow:
+		kill projectile
+
+
+		if {VillageTaskCooldown-Brandon::%UUID of shooter%} is not "Started":
+			stop
+
+
+		if event-block is archery target block:
+			if block below shooter is green wool:
+
+				loop {TargetPracticeBlocks::*}:
+					if block at loop-value is event-block:
+						if {TargetPracticeHit-%loop-value%::%UUID of shooter%} is not set:
+							set {TargetPracticeHit-%loop-value%::%UUID of shooter%} to true
+							send "&a&lTARGET PRACTICE: &7Hit the target &a(+$500)" to shooter
+							add 500 to {balance::%UUID of shooter%}
+
+							loop {TargetPracticeBlocks::*}:
+								if {TargetPracticeHit-%loop-value-2%::%UUID of shooter%} is not true:
+									stop
+
+							send "&a&lTARGET PRACTICE: &7You've hit ALL targets, Well done!" to shooter
+							set {VillageTaskCooldown-Brandon::%UUID of shooter%} to "Claim Prize"
+							loop {TargetPracticeBlocks::*}:
+								delete {TargetPracticeHit-%loop-value-2%::%UUID of shooter%}
+						else:
+							send "&a&lTARGET PRACTICE: &7You've already hit this target!" to shooter
+							stop
+
+			else:
+				play sound "block.note_block.bass" with pitch 2 to shooter
+				send "&a&lTARGET PRACTICE: &7You must stand on the &2Green Wool &7:(" to shooter
+				stop
+
+
+
+
+
+on rightclick on sign:
+	if line 1 of event-block is "&a[FREE ARROWS]":
+		if line 2 of event-block is "Click on this":
+			if line 3 of event-block is "sign to receive":
+				if line 4 of event-block is "free arrows!":
+					send "&a&lFREE ARROWS: &7You have received &ax1 Arrow"
+					give player 1 leaping tipped arrow named "&aTarget Practice Arrow" with nbt "{HideFlags:63}"
+					play sound "entity.item.pickup" with pitch 2 to player
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Village: Casino:
+#
+#
+#==========================================================
+on drop:
+	if distance between player and {casinocenter} is less than 15:
+		cancel event
+
+
+#====================
+# Basket Arrow:
+#====================
+
+
+
+on npc right click:
+	if npc is 49:
+		if {balance::%UUID of player%} is less than 1000:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&e&lLEBRON: &7You cannot afford to have a go!"
+			stop
+
+		if player has 15 spectral arrows named "&eBasket Arrows":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&e&lLEBROrN: &7You can only have &e15 arrows &7at once!"
+			stop
+
+		remove 1000 from {balance::%UUID of player%}
+
+		play sound "entity.player.levelup" with pitch 2 to player
+		send "&e&lLEBRON: &7Here are &e3 arrows&7, try hit the target!"
+
+		if player does not have 1 bow:
+			give player 1 of unbreakable bow named "&eBasket Bow" with lore "&8Casino Item" and "" and "&7Use this paired with" and "&7basket arrows to hit" and "&7a target to win &acash!" and "" and "&8&oUse at /warp casino" with nbt "{HideFlags:63}"
+		give player 3 spectral arrows named "&eBasket Arrows" with lore "&8Casino Item" and "" and "&7Hit the target" and "&7for a &acash &7reward" and "" and "&8&oUse at /warp casino"
+		stop
+
+
+
+
+
+on projectile hit:
+	if projectile is an spectral arrow:
+		kill projectile
+		if shooter does not have 1 spectral arrows named "&eBasket Arrows":
+			if shooter has 1 of unbreakable bow named "&eBasket Bow":
+				remove 1 of unbreakable bow named "&eBasket Bow" from shooter's inventory
+
+		if distance between {casinocenter} and shooter is greater than 15:
+			stop
+
+		if event-block is yellow terracotta:
+			if block below shooter is red wool:
+				loop all players in radius 15 of {casinocenter}:
+					play sound "block.note_block.pling" with pitch 1 to shooter
+					send "<##e7b061>&lBASKET ARROW: &b%shooter% &7Hit the target, &a(+$7,500)" to loop-player
+				add 7500 to {balance::%UUID of shooter%}
+				add 1 to {BasketArrowHighScore::%UUID of shooter%}
+				if {BasketArrowHighScore::%UUID of shooter%} = 3:
+					send "<##e7b061>&l- &6&lBONUS &a+$5,000 &7&o(3 streak)" to shooter
+					add 5000 to {balance::%UUID of shooter%}
+					if {QuestStatus-CasinoRush::%UUID of shooter%} is "Started":
+						set {Quest-CasinoRush-BasketArrow::%UUID of shooter%} to true
+			else:
+				play sound "block.note_block.bass" with pitch 2 to shooter
+				send "&e&lLEBRON: &7You must stand on the &cRed Wool &7:(" to shooter
+				stop
+		else:
+			set {BasketArrowHighScore::%UUID of shooter%} to 0
+
+
+
+
+
+on shoot:
+	if shooter's tool is a bow:
+		if shooter has 18 spectral arrows named "&eBasket Arrows":
+			play sound "block.note_block.bass" with pitch 2 to shooter
+			send "&e&lLEBRON: &7You can only have &e15 arrows &7at once!" to shooter
+			cancel event
+			stop
+
+
+
+#====================
+# Rock Clutching:
+#====================
+
+
+
+on quit:
+	if player has 1 glowstone named "&dRock Clutching Block":
+		remove all glowstone named "&dRock Clutching Block" from player's inventory
+	if {RockClutchingPlayer} is player:
+		delete {RockClutchingPlayer}
+
+
+
+
+
+on npc right click:
+	if npc is 50:
+		if {balance::%UUID of player%} is less than 10000:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&d&lROCK CLUTCHING: &7You cannot afford to have a go!"
+			stop
+
+		if {RockClutchingPlayer} is set:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&d&lROCK CLUTCHING: &7Someone is already rock clutching!"
+			stop
+
+		if player's tool is not air:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&d&lROCK CLUTCHING: &7You must be holding NOTHING to have a go!"
+			stop
+
+		set {RockClutchingPlayer} to player
+
+		remove 10000 from {balance::%UUID of player%}
+		set {RockClimbingBlockNumber::%UUID of player%} to 0
+
+		play sound "entity.player.levelup" with pitch 2 to player
+		send "&d&lROCK CLUTCHING: &7You have purchased x1 attempt!"
+
+		give player 1 glowstone named "&dRock Clutching Block" with lore "&8Casino Item" and "" and "&7This block can only be" and "&7placed on &dPink Terracotta" and "" and "&8&oUse at /warp casino"
+		teleport player to {insiderockclimbing}
+
+		loop 20 times:
+			if player's flight mode is true:
+				set player's flight mode to false
+			if {RockClutchingPlayer} is player:
+				wait 10 ticks
+			else:
+				stop
+		send "&d&lROCK CLUTCHING: &cFailed, Took too long!"
+		delete {RockClutchingPlayer}
+		teleport player to {outsiderockclimbing}
+		remove all glowstone named "&dRock Clutching Block" from player's inventory
+
+
+
+
+
+on place of glowstone:
+	if distance between {casinocenter} and shooter is greater than 15:
+		stop
+	
+	if player's tool is glowstone named "&dRock Clutching Block":
+		if block 1 meter below player is not glowstone:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&d&lROCK CLUTCHING: &cFailed!"
+			delete {RockClutchingPlayer}
+			cancel event
+			teleport player to {outsiderockclimbing}
+			remove all glowstone named "&dRock Clutching Block" from player's inventory
+			stop
+
+		if block north of event-block is pink terracotta:
+			cancel event
+			add 1 to {RockClimbingBlockNumber::%UUID of player%}
+
+			if block north of event-block is {RockClimbingPinkTerracotta::%{RockClimbingBlockNumber::%UUID of player%}%}:
+				set {RockClimbingTimeCheck::%UUID of player%} to now
+				play sound "block.note_block.pling" with pitch 2 to player
+				play sound "block.note_block.bit" with pitch 1 to player
+
+				if {RockClimbingBlockNumber::%UUID of player%} = 1, 2 or 3:
+					add 2500 to {balance::%UUID of player%}
+					send "&d&lROCK CLUTCHING: &a+$2,500" to player
+				if {RockClimbingBlockNumber::%UUID of player%} = 4, 5 or 6:
+					add 5000 to {balance::%UUID of player%}
+					send "&d&lROCK CLUTCHING: &e+$5,000" to player
+				if {RockClimbingBlockNumber::%UUID of player%} = 7, 8 or 9:
+					add 10000 to {balance::%UUID of player%}
+					send "&d&lROCK CLUTCHING: &c+$10,000" to player
+				if {RockClimbingBlockNumber::%UUID of player%} = 10 or 11:
+					add 20000 to {balance::%UUID of player%}
+					send "&d&lROCK CLUTCHING: &5+$20,000" to player
+
+				if {RockClimbingBlockNumber::%UUID of player%} = 11:
+					play sound "block.note_block.pling" with pitch 1 to player
+					loop all players in radius 15 of {casinocenter}:
+						send "&d&lROCK CLUTCHING: &b%player% &7Reached The Top, &a(+$100,000)" to loop-player
+						add 7500 to {balance::%UUID of player%}
+					if {QuestStatus-CasinoRush::%UUID of player%} is "Started":
+						set {Quest-CasinoRush-RockClutching::%UUID of player%} to true
+					send "&d&l- &7Reaching The Top: &a+$7,500 BONUS" to player
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&d&lROCK CLUTCHING: &cFailed!"
+				delete {RockClutchingPlayer}
+				teleport player to {outsiderockclimbing}
+				remove all glowstone named "&dRock Clutching Block" from player's inventory
+				stop
+		else:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&d&lROCK CLUTCHING: &cFailed!"
+			delete {RockClutchingPlayer}
+			teleport player to {outsiderockclimbing}
+			remove all glowstone named "&dRock Clutching Block" from player's inventory
+			stop
+
+
+
+#====================
+# Flower Gamble:
+#====================
+
+
+
+on npc right click:
+	if npc is 52:
+		set metadata tag "FlowerGamble" of player to chest inventory with 6 rows named "&8Flower Gamble Menu"
+		set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "FlowerGamble" of player to black stained glass pane named "&7"
+
+		set slot 20 of metadata tag "FlowerGamble" of player to 1 golden nugget named "&aGamble $1,000" with lore "&8Flower Gamble Game" and "" and "&7Gamble &a$1,000 &7for the chance" and "&7to win UP TO &ax6 &7cash back" and "" and "&e> Click To Gamble <"
+		set slot 22 of metadata tag "FlowerGamble" of player to 1 golden ingot named "&aGamble $10,000" with lore "&8Flower Gamble Game" and "" and "&7Gamble &a$10,000 &7for the chance" and "&7to win UP TO &ax6 &7cash back" and "" and "&e> Click To Gamble <"
+		set slot 24 of metadata tag "FlowerGamble" of player to 1 gold block named "&aGamble $100,000" with lore "&8Flower Gamble Game" and "" and "&7Gamble &a$100,000 &7for the chance" and "&7to win UP TO &ax6 &7cash back" and "" and "&e> Click To Gamble <"
+
+		set slot 49 of metadata tag "FlowerGamble" of player to barrier named "&cExit Menu"
+		open (metadata tag "FlowerGamble" of player) to player
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "FlowerGamble" of player):
+		cancel event
+		
+		if difference between {FlowerGambleCooldown::%UUID of player%} and now is less than 2 seconds:
+			stop
+
+
+		if index of event-slot is 20:
+			if {balance::%UUID of player%} is less than 1000:
+				send "&d&lFLOWER GAMBLE: &cYou cannot afford this gamble!"
+				stop
+
+			remove 1000 from {balance::%UUID of player%}
+			close player's inventory
+			set {FlowerGambleCooldown::%UUID of player%} to now
+			loop {FlowerGambleLocations::*}:
+				set {_FlowerGambleCheck::%UUID of player%} to a random integer between 1 and 100
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 1 and 80:
+					play sound "entity.zombie.attack_wooden_door" with pitch 2 to player
+					send "&d&lFLOWER GAMBLE: &2Tall Grass &7(+$0)"
+					make player see block at loop-value as tall grass
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 81 and 95:
+					play sound "entity.experience_orb.pickup" with pitch 1 to player
+					send "&d&lFLOWER GAMBLE: &eYellow Flower &a(+$1,500)"
+					add 1500 to {balance::%UUID of player%}
+					make player see block at loop-value as dandelion
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 96 and 100:
+					play sound "entity.experience_orb.pickup" with pitch 1 to player
+					send "&d&lFLOWER GAMBLE: &cPoppy &a(+$2,000)"
+					add 2000 to {balance::%UUID of player%}
+					make player see block at loop-value as poppy
+				wait 10 ticks
+
+			loop {FlowerGambleLocations::*}:
+				make player see block at loop-value as flower pot
+				wait 2 ticks
+			stop
+
+
+		if index of event-slot is 22:
+			if {balance::%UUID of player%} is less than 10000:
+				send "&d&lFLOWER GAMBLE: &cYou cannot afford this gamble!"
+				stop
+
+			remove 10000 from {balance::%UUID of player%}
+			close player's inventory
+			set {FlowerGambleCooldown::%UUID of player%} to now
+			loop {FlowerGambleLocations::*}:
+				set {_FlowerGambleCheck::%UUID of player%} to a random integer between 1 and 100
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 1 and 80:
+					play sound "entity.zombie.attack_wooden_door" with pitch 2 to player
+					send "&d&lFLOWER GAMBLE: &2Tall Grass &7(+$0)"
+					make player see block at loop-value as tall grass
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 81 and 95:
+					play sound "entity.experience_orb.pickup" with pitch 1 to player
+					send "&d&lFLOWER GAMBLE: &eYellow Flower &a(+$15,000)"
+					add 15000 to {balance::%UUID of player%}
+					make player see block at loop-value as dandelion
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 96 and 100:
+					play sound "entity.experience_orb.pickup" with pitch 1 to player
+					send "&d&lFLOWER GAMBLE: &cPoppy &a(+$20,000)"
+					add 20000 to {balance::%UUID of player%}
+					make player see block at loop-value as poppy
+				wait 10 ticks
+
+			loop {FlowerGambleLocations::*}:
+				make player see block at loop-value as flower pot
+				wait 2 ticks
+			stop
+
+
+		if index of event-slot is 24:
+			if {balance::%UUID of player%} is less than 100000:
+				send "&d&lFLOWER GAMBLE: &cYou cannot afford this gamble!"
+				stop
+
+			remove 100000 from {balance::%UUID of player%}
+			close player's inventory
+			set {FlowerGambleCooldown::%UUID of player%} to now
+			loop {FlowerGambleLocations::*}:
+				set {_FlowerGambleCheck::%UUID of player%} to a random integer between 1 and 100
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 1 and 80:
+					play sound "entity.zombie.attack_wooden_door" with pitch 2 to player
+					send "&d&lFLOWER GAMBLE: &2Tall Grass &7(+$0)"
+					make player see block at loop-value as tall grass
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 81 and 95:
+					play sound "entity.experience_orb.pickup" with pitch 1 to player
+					send "&d&lFLOWER GAMBLE: &eYellow Flower &a(+$150,000)"
+					add 150000 to {balance::%UUID of player%}
+					make player see block at loop-value as dandelion
+
+				if {_FlowerGambleCheck::%UUID of player%} is between 96 and 100:
+					play sound "entity.experience_orb.pickup" with pitch 1 to player
+					send "&d&lFLOWER GAMBLE: &cPoppy &a(+$200,000)"
+					add 200000 to {balance::%UUID of player%}
+					make player see block at loop-value as poppy
+				wait 10 ticks
+
+			loop {FlowerGambleLocations::*}:
+				make player see block at loop-value as flower pot
+				wait 2 ticks
+			stop
+
+
+
+#====================
+# Wack A Creeper:
+#====================
+
+
+
+on npc right click:
+	if npc is 47:
+		if {balance::%UUID of player%} is less than 25000:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&2&lWACK A CREEPER: &7You cannot afford to have a go!"
+			stop
+
+		if {WackACreeper_Running} is true:
+			play sound "entity.creeper.hurt" with pitch 1 to player
+			send "&2&lCREEPER: &7Someone is already playing my game currently!" to player
+
+
+		if {WackACreeper_Running} is not set:
+			remove 25000 from {balance::%UUID of player%}
+
+			set {WackACreeper_Running} to true
+			set {WackACreeper_Contestant} to player
+			set {WackACreeper_TotalSkulls} to 0
+
+			play sound "entity.generic.explode" with pitch 2 to player
+			play sound "entity.chicken.egg" with pitch 1 to player
+
+			send "" to player
+			send "&2&lCREEPER: &7This game is now going to start!" to player
+			send "&2&l- &7Max Prize Pool: &a$100,000"
+			teleport player to {WackACreeper_Location}
+
+			wait 1 second
+
+			loop {WackACreeper_CreeperSkulls::*}:
+				set block at loop-value to creeper head
+				play sound "block.note_block.hat" with pitch 1 to player
+				wait 4 ticks
+
+			wait 5 ticks
+
+			play sound "block.note_block.hat" with pitch 1 to player
+			loop {WackACreeper_CreeperSkulls::*}:
+				set block at loop-value to air
+
+			wait 5 ticks
+
+			play sound "block.note_block.hat" with pitch 1 to player
+			loop {WackACreeper_CreeperSkulls::*}:
+				set block at loop-value to creeper head
+
+			wait 5 ticks
+
+			play sound "block.note_block.hat" with pitch 1 to player
+			loop {WackACreeper_CreeperSkulls::*}:
+				set block at loop-value to air
+
+			wait 10 ticks
+
+			play sound "block.note_block.pling" with pitch 1 to player
+			play sound "block.note_block.bit" with pitch 1 to player
+			wait 2 ticks
+			play sound "block.note_block.pling" with pitch 0.7 to player
+			play sound "block.note_block.bit" with pitch 0.7 to player
+			play sound "entity.creeper.hurt" with pitch 1 to player
+
+			send player title "" with subtitle "&2Round 1: &a$1,000 per skull!" for 3 seconds
+			send "" to player
+			send "&2&lCREEPER: &aGame Started!" to player
+			send "&2&l- &7Round 1: &a$1,000 Per Skull!" to player
+			set {WackACreeper_Level} to 1
+
+			wait 3 seconds
+
+			loop 10 times:
+				set {_WackACreeper_SetSkull} to a random element out of {WackACreeper_CreeperSkulls::*}
+
+				play sound "entity.chicken.egg" with pitch 1 to player
+				set block at {_WackACreeper_SetSkull} to creeper head
+				wait 1.5 seconds
+				set block at {_WackACreeper_SetSkull} to air
+
+
+
+			wait 1 second
+			play sound "block.note_block.pling" with pitch 1 to player
+			play sound "block.note_block.bit" with pitch 1 to player
+			wait 2 ticks
+			play sound "block.note_block.pling" with pitch 0.7 to player
+			play sound "block.note_block.bit" with pitch 0.7 to player
+			play sound "entity.creeper.hurt" with pitch 1 to player
+
+			send player title "" with subtitle "&2Round 2: &a$2,000 per skull!" for 3 seconds
+			send "&2&lCREEPER: &7Round 2: &a$2,000 Per Skull!" to player
+			set {WackACreeper_Level} to 2
+
+			wait 3 seconds
+
+			loop 10 times:
+				set {_WackACreeper_SetSkull} to a random element out of {WackACreeper_CreeperSkulls::*}
+
+				play sound "entity.chicken.egg" with pitch 1 to player
+				set block at {_WackACreeper_SetSkull} to creeper head
+				wait 1.25 second
+				set block at {_WackACreeper_SetSkull} to air
+
+
+
+			wait 1 second
+			play sound "block.note_block.pling" with pitch 1 to player
+			play sound "block.note_block.bit" with pitch 1 to player
+			wait 2 ticks
+			play sound "block.note_block.pling" with pitch 0.7 to player
+			play sound "block.note_block.bit" with pitch 0.7 to player
+			play sound "entity.creeper.hurt" with pitch 1 to player
+
+			send player title "" with subtitle "&2Round 3: &a$4,000 per skull!" for 3 seconds
+			send "&2&lCREEPER: &7Round 3: &a$4,000 Per Skull!" to player
+			set {WackACreeper_Level} to 3
+
+			wait 3 seconds
+
+			loop 10 times:
+				set {_WackACreeper_SetSkull} to a random element out of {WackACreeper_CreeperSkulls::*}
+
+				play sound "entity.chicken.egg" with pitch 1 to player
+				set block at {_WackACreeper_SetSkull} to creeper head
+				wait 1 second
+				set block at {_WackACreeper_SetSkull} to air
+
+			wait 1 second
+			teleport player to {OutsideWackACreeper}
+			send "" to player
+			send "&2&lCREEPER: &7The game has ended, view stats below:" to player
+			send "&2&l- &7You got &e%{WackACreeper_TotalSkulls}% &7Punches, &a+$%regex({WackACreeper_TotalSkulls} * 1000)% Bonus!" to player
+			add {WackACreeper_TotalSkulls} * 1000 to {balance::%UUID of player%}
+
+
+			if {QuestStatus-CasinoRush::%UUID of player%} is "Started":
+				if {WackACreeper_TotalSkulls} = 30:
+					set {Quest-CasinoRush-WackACreeper::%UUID of player%} to true
+			if {Quest-TheClouds-ReturnCreeperSkull::%UUID of player%} is false:
+				if {WackACreeper_TotalSkulls} = 30:
+					send "&2&l- &2&o+1 Creeper Head &f(CLOUD QUEST ITEM)"
+					give player creeper head named "&2Creeper Skull"
+
+			delete {WackACreeper_Level}
+			delete {WackACreeper_Running}
+			delete {WackACreeper_TotalSkulls}
+			stop
+
+
+
+
+
+on left click on creeper skull:
+	if {WackACreeper_Contestant} is player:
+		if {WackACreeper_Level} = 1:
+			add 1 to {WackACreeper_TotalSkulls}
+			play sound "block.note_block.pling" with pitch 2 to player
+			send "&2&lPUNCH: &a+$1,000" to player
+			add 1000 to {balance::%UUID of player%}
+			set event-block to air
+
+		if {WackACreeper_Level} = 2:
+			add 1 to {WackACreeper_TotalSkulls}
+			play sound "block.note_block.pling" with pitch 2 to player
+			send "&2&lPUNCH: &a+$2,000" to player
+			add 2000 to {balance::%UUID of player%}
+			set event-block to air
+
+		if {WackACreeper_Level} = 3:
+			add 1 to {WackACreeper_TotalSkulls}
+			play sound "block.note_block.pling" with pitch 2 to player
+			send "&2&lPUNCH: &a+$4,000" to player
+			add 4000 to {balance::%UUID of player%}
+			set event-block to air
+
+
+
+
+
+function playsoundeffectjerryquest(p:player):
+	play sound "block.note_block.didgeridoo" with pitch 0.8 to {_p}
+	play sound "block.note_block.bass" with pitch 0.8 to {_p}
+
+	wait 2 ticks
+
+	play sound "block.note_block.didgeridoo" with pitch 1.5 to {_p}
+	play sound "block.note_block.iron_xylophone" with pitch 1.2 to {_p}
+	play sound "block.note_block.bass" with pitch 1.2 to {_p}
+
+	wait 2 ticks
+
+	play sound "block.note_block.didgeridoo" with pitch 0.8 to {_p}
+	play sound "block.note_block.bass" with pitch 0.8 to {_p}
+
+
+#====================
+# Mega Lottery:
+#====================
+
+
+
+on npc right click:
+	if npc is 48:
+		if {MegaLotteryRunning} is false:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lMEGA LOTTERY: &7The lottery isn't currently running!"
+			stop
+
+
+		if {balance::%UUID of player%} is less than 25000:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lMEGA LOTTERY: &7You cannot afford to purchase an entry!"
+			stop
+
+		if {MegaLotteryEntries::%UUID of player%} >= 100:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lMEGA LOTTERY: &7You've reached the entry limit!"
+			stop
+
+		remove 25000 from {Balance::%UUID of player%}
+		add 25000 to {MegaLotteryPrizePool}
+
+		add 1 to {MegaLotteryEntries::%UUID of player%}
+		add player to {MegaLotteryPlayers::*}
+
+		play sound "entity.player.levelup" with pitch 2 to player
+		send "&6&lMEGA LOTTERY: &7+1 Entry &o(Your Entries: %{MegaLotteryEntries::%UUID of player%}%)"
+
+		execute console command "/holograms setline mainlottery 4 &7Current Prize Pool: &a%regex({MegaLotteryPrizePool})%"
+		stop
+
+
+
+
+
+command /runlottery [<text>]:
+	trigger:
+		if sender is not console:
+			if player is not "MasterClashers":
+				send "&cYou do not have permission to use this command!"
+				stop
+
+		if arg-1 is "pick winner":
+			set {MegaLotteryRunning} to false
+			set {_MegaLotteryWinner} to a random element out of {MegaLotteryPlayers::*}
+
+			play sound "block.note_block.didgeridoo" with pitch 1.5 to all players
+			play sound "block.note_block.pling" with pitch 1.5 to all players
+			
+			wait 2 ticks
+
+			play sound "block.note_block.didgeridoo" with pitch 2 to all players
+			play sound "block.note_block.pling" with pitch 2 to all players
+
+			broadcast ""
+			broadcast "&6&lMEGA LOTTERY: &7The winner is &b%{_MegaLotteryWinner}%"
+			broadcast "&6&l- &7They Won: &a%regex({MegaLotteryPrizePool})%"
+			broadcast "&6&l- &7&oNext lottery starts in 3m (/warp casino)"
+
+			set {_MegaLotteryWinner} to UUID of {_MegaLotteryWinner}
+			add {MegaLotteryPrizePool} to {balance::%{_MegaLotteryWinner}%}
+
+			execute console command "/holograms setline mainlottery 2 &cEntries Currently Closed"
+			execute console command "/holograms setline mainlottery 4 &7Last Winner: &b%{_MegaLotteryWinner} parsed as a player%"
+			execute console command "/holograms setline mainlottery 5 &7They Won: &a%regex({MegaLotteryPrizePool})%"
+
+			delete {MegaLotteryPlayers::*}
+			delete {MegaLotteryEntries::*}
+
+			wait 3 minutes
+
+			execute console command "/runlottery start"
+			stop
+
+
+
+		if arg-1 is "start":
+			set {MegaLotteryPrizePool} to 1000000
+			set {MegaLotteryCountdown} to 60
+			set {MegaLotteryRunning} to true
+
+			execute console command "/holograms setline mainlottery 2 &7(Click To Enter &2$25,000&7)"
+			execute console command "/holograms setline mainlottery 4 &7Current Prize Pool: &a%regex({MegaLotteryPrizePool})%"
+			execute console command "/holograms setline mainlottery 5 &7Winner Picked In: &e%{MegaLotteryCountdown}%m"
+
+			play sound "block.note_block.didgeridoo" with pitch 1 to all players
+			play sound "block.note_block.pling" with pitch 0.1 to all players
+			play sound "block.note_block.pling" with pitch 2 to all players
+
+			broadcast ""
+			broadcast "&6&lMEGA LOTTERY: &7New lottery starting &o(/warp casino)!"
+			broadcast "&6&l- &7Starting prize pool: &a$1,000,000"
+
+			loop 60 times:
+				wait 1 minute
+				remove 1 from {MegaLotteryCountdown}
+				execute console command "/holograms setline mainlottery 5 &7Winner Picked In: &e%{MegaLotteryCountdown}%m"
+
+				if loop-value = 30:
+					execute console command "/runtax"
+
+				if loop-value = 45:
+					loop all players:
+						if {TheCasinoHeist-Status::%UUID of loop-player%} is not set:
+							if {CasinoHeistEnabled::%UUID of loop-player%} is true:
+								callsoundheist(loop-player)
+								wait 3 seconds
+
+				if loop-value = 15:
+					execute console command "allowheists"
+
+			execute console command "/runlottery pick winner"
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Village: Dark Auction:
+#
+#
+#==========================================================
+
+
+
+
+
+command /darkauction [<text>]:
+	trigger:
+		if sender is not console:
+			if player is not "MasterClashers":
+				send "&cYou do not have permission to run this command!"
+				stop
+
+
+
+		if arg-1 is "open":
+			broadcast ""
+			broadcast "          &5&lDARK AUCTION OPENED!"
+			broadcast "&7&oPurchase SUPER rare items you can't get elsewhere"
+			broadcast "               &f/warp auction"
+			broadcast ""
+			set block at {DarkAuctionDoor} to open iron door
+
+			wait 15 seconds
+
+			execute console command "/darkauction %random element out of "Item - VI Scare Sword" and "Item - x2.0 Sell Wand" and "Item - 100,000 XP"%"
+			wait 70 seconds
+			execute console command "/darkauction %random element out of "Item - Cow Pet" and "Item - Guardian Pet" and "Item - Bird Pet"%"
+			wait 70 seconds
+			execute console command "/darkauction %random element out of "Item - Generator Slot" and "Item - Mystery Crate" and "Item - Budget Netherite Generator" and "Item - Netherite Generator"%"
+			stop
+
+
+
+		if arg-1 is "close":
+			play sound "entity.player.burp" to all players
+			set block at {DarkAuctionDoor} to iron door
+			broadcast ""
+			broadcast "     &c&lDARK AUCTION CLOSED!"
+			broadcast ""
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player is a citizen:
+					send "fuck you lol" to loop-player
+				else:
+					teleport loop-player to {location-darkauction}
+			stop
+
+
+
+		if arg-1 is "Item - VI Scare Sword":
+			set {DarkAuction-Item} to "Level VI Scare Sword"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 25000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6Level VI Scare Sword" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to golden sword
+			execute console command "holograms setline darkauctiondisplay 1 &6Level VI Scare Sword"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			give {DarkAuction-Bidder} {ScareSwords-Sword_Level.6}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6Level VI Scare Sword" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - x2.0 Sell Wand":
+			set {DarkAuction-Item} to "x2.0 Sell Wand"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 25000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6x2.0 Sell Wand" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to blaze rod
+			execute console command "holograms setline darkauctiondisplay 1 &6x2.0 Sell Wand"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			give {DarkAuction-Bidder} 1 blaze rod named "<##ffd013>Sell Wand &6&l(x2.0)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax2.0 &7normal value!" and "" and "&8&oUse at /warp plot"
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6x2.0 Sell Wand" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - 100,000 XP":
+			set {DarkAuction-Item} to "100,000 XP"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 25000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6100,000 XP" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to blue dye
+			execute console command "holograms setline darkauctiondisplay 1 &6100,000 XP"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			remove 100000 from {RequiredXP::%UUID of {DarkAuction-Bidder}%}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6100,000 XP" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - Cow Pet":
+			set {DarkAuction-Item} to "Cow Pet"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 250000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6Cow Pet" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to {CowSkull}
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to air
+			execute console command "holograms setline darkauctiondisplay 1 &6Cow Pet"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to air
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			give {DarkAuction-Bidder} {CowPet}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6Cow Pet" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - Guardian Pet":
+			set {DarkAuction-Item} to "Guardian Pet"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 250000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6Guardian Pet" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to {GuardianSkull}
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to air
+			execute console command "holograms setline darkauctiondisplay 1 &6Guardian Pet"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to air
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			give {DarkAuction-Bidder} {GuardianPet}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6Guardian Pet" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - Bird Pet":
+			set {DarkAuction-Item} to "Bird Pet"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 250000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6Bird Pet" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to {BirdSkull}
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to air
+			execute console command "holograms setline darkauctiondisplay 1 &6Bird Pet"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to air
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			give {DarkAuction-Bidder} {BirdPet}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6Bird Pet" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - Mystery Crate":
+			set {DarkAuction-Item} to "Mystery Crate"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 2500000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6+3 Mystery Crate" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to ender chest
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to air
+			execute console command "holograms setline darkauctiondisplay 1 &6+3 Mystery Crate"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to air
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			add 3 to {MysteryCrates::%UUID of {DarkAuction-Bidder}%}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6+3 Mystery Crate" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - Generator Slot":
+			set {DarkAuction-Item} to "Generator Slot"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 2500000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6+1 Generator Slot" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to archery target block
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to air
+			execute console command "holograms setline darkauctiondisplay 1 &6+1 Generator Slot"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to air
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			add 1 to {GeneratorLimit::%UUID of {DarkAuction-Bidder}%}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6+1 Generator Slot" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - Budget Netherite Generator":
+			set {DarkAuction-Item} to "Budget Netherite Generator"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 2500000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6Budget Netherite Generator" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to ancient debris
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to air
+			execute console command "holograms setline darkauctiondisplay 1 &6Budget Netherite Generator"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to air
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			give {DarkAuction-Bidder} {BudgetNetheriteGenerator}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6Budget Netherite Generator" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+		if arg-1 is "Item - Netherite Generator":
+			set {DarkAuction-Item} to "Netherite Generator"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 2500000
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				play sound "block.note_block.pling" with pitch 0.1 to loop-player
+				play sound "block.note_block.didgeridoo" with pitch 1.5 to loop-player
+				send "&5&lDARK AUCTION: &7The next item is a &6Netherite Generator" to loop-player
+				send "&5&l- &7Starting bid is at &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to netherite block
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to air
+			execute console command "holograms setline darkauctiondisplay 1 &6Netherite Generator"
+			execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+			execute console command "holograms setline darkauctiondisplay 5 &d&o(Click To Bid)"
+
+			loop 60 times:
+				execute console command "holograms setline darkauctiondisplay 4 &7Bid Ends In: &e%61 - loop-number%s"
+				wait 1 second
+
+			loop all armor stands in radius 3 of {DarkAuctionDisplay}:
+				if boots of loop-value is leather boots named "DarkAuctionBlock":
+					set helmet of loop-value to air
+				if boots of loop-value is leather boots named "DarkAuctionItem":
+					set helmet of loop-value to barrier
+			execute console command "holograms setline darkauctiondisplay 1 {empty}"
+			execute console command "holograms setline darkauctiondisplay 2 {empty}"
+			execute console command "holograms setline darkauctiondisplay 4 {empty}"
+			execute console command "holograms setline darkauctiondisplay 5 {empty}"
+
+			play sound "entity.chicken.egg" with pitch 1 to {DarkAuction-Bidder}
+			play sound "block.note_block.banjo" with pitch 0.1 to {DarkAuction-Bidder}
+			play sound "block.note_block.pling" with pitch 2 to {DarkAuction-Bidder}
+			give {DarkAuction-Bidder} {NetheriteGenerator}
+
+			loop all players in radius 15 of {DarkAuctionHouse}:
+				if loop-player's inventory = (metadata tag "ClashGenzBiddingMenu" of loop-player):
+					close loop-player's inventory
+				send "&5&lDARK AUCTION: &b%{DarkAuction-Bidder}% &7won the bid for &6Netherite Generator" to loop-player
+				send "&5&l- &7Bid ended at: &a$%regex({DarkAuction-BidPrice})%" to loop-player
+
+			set {DarkAuction-Item} to "NONE"
+			set {DarkAuction-Bidder} to "NONE"
+			set {DarkAuction-BidPrice} to 0
+			stop
+
+
+
+
+
+on rightclick on armor stand:
+	cancel event
+
+	if boots of clicked entity is leather boots named "DarkAuctionDisplay":
+		if {DarkAuction-Item} is "NONE":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&5&lDARK AUCTION: &cThere is no item to bid on currently!" to player
+			stop
+
+		play sound "ui.button.click" with pitch 2 to player
+		play sound "block.note_block.pling" with pitch 2 to player
+		openclashgenzbiddingmenu(player)
+		stop
+
+
+
+
+
+function openclashgenzbiddingmenu(p:player):
+	set metadata tag "ClashGenzBiddingMenu" of {_p} to chest inventory with 6 rows named "&8Top Bidder: %{DarkAuction-Bidder}%"
+
+	set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 black stained glass pane named "&7"
+	set slot 10, 11, 12, 19, 21, 28, 29 and 30 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 orange stained glass pane named "&7"
+
+
+	if {DarkAuction-Item} is "Level VI Scare Sword":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to {ScareSwords-Sword_Level.6}
+	if {DarkAuction-Item} is "x2.0 Sell Wand":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 blaze rod named "<##ffd013>Sell Wand &6&l(x2.0)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax2.0 &7normal value!" and "" and "&8&oUse at /warp plot"
+	if {DarkAuction-Item} is "100,000 xp":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 blue dye named "&b100,000 XP"
+	if {DarkAuction-Item} is "Cow Pet":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to {CowPet}
+	if {DarkAuction-Item} is "Guardian Pet":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to {GuardianPet}
+	if {DarkAuction-Item} is "Bird Pet":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to {BirdPet}
+	if {DarkAuction-Item} is "Mystery Crate":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to 3 ender chest named "&d+3 Mystery Crates"
+	if {DarkAuction-Item} is "Generator Slot":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 archery target block named "&6+1 Generator Slot"
+	if {DarkAuction-Item} is "Budget Netherite Generator":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 ancient debris named "<##674f4f>&lBudget Netherite Generator" with lore "&6Generator Level 25" and "" and "&7Spawns x1 Budget Netherite every &e20s!" and "&7Has a base sell price of &a&n$7,500" and "" and "&bShift + Right-Click to upgrade!"
+	if {DarkAuction-Item} is "Netherite Generator":
+		set slot 20 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 ancient debris named "<##674f4f>&lNetherite Generator" with lore "&6Generator Level 26" and "" and "&7Spawns x1 Budget Netherite every &e20s!" and "&7Has a base sell price of &a&n$9,000" and "" and "&bShift + Right-Click to upgrade!"
+
+
+	set slot 23 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 golden nugget named "&aBid: $%regex({DarkAuction-BidPrice} + 100000)% &2&o(+$100,000)" with lore "&eClick to place bid!"
+	set slot 24 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 golden ingot named "&aBid: $%regex({DarkAuction-BidPrice} + 1000000)% &2&o(+$1,000,000)" with lore "&eClick to place bid!"
+	set slot 25 of metadata tag "ClashGenzBiddingMenu" of {_p} to 1 gold block named "&aBid: $%regex({DarkAuction-BidPrice} + 2000000)% &2&o(+$2,000,000)" with lore "&eClick to place bid!"
+
+	set slot 49 of metadata tag "ClashGenzBiddingMenu" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "ClashGenzBiddingMenu" of {_p}) to {_p}
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzBiddingMenu" of player):
+		cancel event
+
+		if {DarkAuction-Item} is "NONE":
+			close player's inventory
+			stop
+
+		if index of event-slot is 23:
+			if {DarkAuction-Bidder} is player:
+				if {balance::%UUID of player%} >= 100000:
+					play sound "entity.player.levelup" with pitch 2 to player
+					play sound "entity.experience_orb.pickup" with pitch 0.1 to player
+
+					remove 100000 from {balance::%UUID of player%}
+					add 100000 to {DarkAuction-BidPrice}
+
+					openclashgenzbiddingmenu(player)
+					loop all players in radius 15 of {DarkAuctionHouse}:
+						send "&5&lDARK AUCTION: &b%player% &7bid &a$%regex({DarkAuction-BidPrice})% &7on the item!" to loop-player
+						if name of loop-player's inventory contains "Top Bidder:":
+							openclashgenzbiddingmenu(loop-player)
+					execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+					stop
+				else:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lDARK AUCTION: &7You cannot afford to bid on this!"
+					stop
+
+
+			if {balance::%UUID of player%} >= {DarkAuction-BidPrice} + 100000:
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.experience_orb.pickup" with pitch 0.1 to player
+
+				set {DarkAuction-Bidder} to UUID of {DarkAuction-Bidder}
+				add {DarkAuction-BidPrice} to {balance::%{DarkAuction-Bidder}%}
+
+				remove {DarkAuction-BidPrice} + 100000 from {balance::%UUID of player%}
+				set {DarkAuction-Bidder} to player
+				add 100000 to {DarkAuction-BidPrice}
+
+				openclashgenzbiddingmenu(player)
+				loop all players in radius 15 of {DarkAuctionHouse}:
+					send "&5&lDARK AUCTION: &b%player% &7bid &a$%regex({DarkAuction-BidPrice})% &7on the item!" to loop-player
+					if name of loop-player's inventory contains "Top Bidder:":
+						openclashgenzbiddingmenu(loop-player)
+				execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+				stop
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&5&lDARK AUCTION: &7You cannot afford to bid on this!"
+				stop
+			stop
+
+
+
+		if index of event-slot is 24:
+			if {DarkAuction-Bidder} is player:
+				if {balance::%UUID of player%} >= 1000000:
+					play sound "entity.player.levelup" with pitch 2 to player
+					play sound "entity.experience_orb.pickup" with pitch 0.1 to player
+
+					remove 1000000 from {balance::%UUID of player%}
+					add 1000000 to {DarkAuction-BidPrice}
+
+					openclashgenzbiddingmenu(player)
+					loop all players in radius 15 of {DarkAuctionHouse}:
+						send "&5&lDARK AUCTION: &b%player% &7bid &a%regex({DarkAuction-BidPrice})% &7on the item!" to loop-player
+						if name of loop-player's inventory contains "Top Bidder:":
+							openclashgenzbiddingmenu(loop-player)
+					execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+					stop
+				else:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lDARK AUCTION: &7You cannot afford to bid on this!"
+					stop
+
+
+			if {balance::%UUID of player%} >= {DarkAuction-BidPrice} + 1000000:
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.experience_orb.pickup" with pitch 0.1 to player
+
+				set {DarkAuction-Bidder} to UUID of {DarkAuction-Bidder}
+				add {DarkAuction-BidPrice} to {balance::%{DarkAuction-Bidder}%}
+
+				remove {DarkAuction-BidPrice} + 1000000 from {balance::%UUID of player%}
+				set {DarkAuction-Bidder} to player
+				add 1000000 to {DarkAuction-BidPrice}
+
+				openclashgenzbiddingmenu(player)
+				loop all players in radius 15 of {DarkAuctionHouse}:
+					send "&5&lDARK AUCTION: &b%player% &7bid &a%regex({DarkAuction-BidPrice})% &7on the item!" to loop-player
+					if name of loop-player's inventory contains "Top Bidder:":
+						openclashgenzbiddingmenu(loop-player)
+				execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+				stop
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&5&lDARK AUCTION: &7You cannot afford to bid on this!"
+				stop
+			stop
+
+
+
+		if index of event-slot is 25:
+			if {DarkAuction-Bidder} is player:
+				if {balance::%UUID of player%} >= 2000000:
+					play sound "entity.player.levelup" with pitch 2 to player
+					play sound "entity.experience_orb.pickup" with pitch 0.1 to player
+
+					remove 2000000 from {balance::%UUID of player%}
+					add 2000000 to {DarkAuction-BidPrice}
+
+					openclashgenzbiddingmenu(player)
+					loop all players in radius 15 of {DarkAuctionHouse}:
+						send "&5&lDARK AUCTION: &b%player% &7bid &a%regex({DarkAuction-BidPrice})% &7on the item!" to loop-player
+						if name of loop-player's inventory contains "Top Bidder:":
+							openclashgenzbiddingmenu(loop-player)
+					execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+					stop
+				else:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lDARK AUCTION: &7You cannot afford to bid on this!"
+					stop
+
+
+			if {balance::%UUID of player%} >= {DarkAuction-BidPrice} + 2000000:
+				play sound "entity.player.levelup" with pitch 2 to player
+				play sound "entity.experience_orb.pickup" with pitch 0.1 to player
+
+				set {DarkAuction-Bidder} to UUID of {DarkAuction-Bidder}
+				add {DarkAuction-BidPrice} to {balance::%{DarkAuction-Bidder}%}
+
+				remove {DarkAuction-BidPrice} + 2000000 from {balance::%UUID of player%}
+				set {DarkAuction-Bidder} to player
+				add 2000000 to {DarkAuction-BidPrice}
+
+				openclashgenzbiddingmenu(player)
+				loop all players in radius 15 of {DarkAuctionHouse}:
+					send "&5&lDARK AUCTION: &b%player% &7bid &a%regex({DarkAuction-BidPrice})% &7on the item!" to loop-player
+					if name of loop-player's inventory contains "Top Bidder:":
+						openclashgenzbiddingmenu(loop-player)
+				execute console command "holograms setline darkauctiondisplay 2 &7Bid For: &a$%regex({DarkAuction-BidPrice})%"
+				stop
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&5&lDARK AUCTION: &7You cannot afford to bid on this!"
+				stop
+			stop
+
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on npc right click:
+	if npc is 51:
+		play sound "entity.villager.yes" with pitch 1 to player
+		send "&6&lGIZAM: &7To bid on an item, Go to the display area!"
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Village: John The Dealer:
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 38:
+		if {SpeakToSiriusTimer::%UUID of player%} is greater than 0:
+			if {TheCasinoHeist-Status::%UUID of player%} is not set:
+				set {TheCasinoHeist-Status::%UUID of player%} to "Started-part1"
+				set {SpeakToSiriusTimer::%UUID of player%} to 0
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&5&lJOHN: &dHey there %player%, I have a job for you"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&5&lJOHN: &dYou know how those dirty casinos are ALWAYS making money?"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&5&lJOHN: &dWell, they have to store their cash somewhere..."
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&5&lJOHN: &dAnd well, that's the vaults beneath the casino!!"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&5&lJOHN: &dWe're going to rob them for everything they've got..."
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&5&lJOHN: &dGo speak to &2Shady Tom &din the village if you're down!"
+				send "<##b4ab71>[Heist Started: ""Casino Cash Grab""]"
+
+
+				set {SpeakToSiriusTimer::%UUID of player%} to 30
+				loop 15 times:
+					if {SpeakToSiriusTimer::%UUID of player%} is less than 1:
+						delete line 14 of player's scoreboard
+						delete line 13 of player's scoreboard
+						delete line 12 of player's scoreboard
+						stop
+					play sound "block.note_block.hat" with pitch 0.5 to player
+					set line 14 of player's scoreboard to "&f"
+					set line 13 of player's scoreboard to "&2SPEAK TO TOM"
+					if {SpeakToSiriusTimer::%UUID of player%} is less than 10:
+						set line 12 of player's scoreboard to "&fRemaining: &600:0%{SpeakToSiriusTimer::%UUID of player%}%"
+					else:
+						set line 12 of player's scoreboard to "&fRemaining: &600:%{SpeakToSiriusTimer::%UUID of player%}%"
+
+					wait 15 ticks
+
+					remove 1 from {SpeakToSiriusTimer::%UUID of player%}
+					if {SpeakToSiriusTimer::%UUID of player%} is less than 1:
+						delete line 14 of player's scoreboard
+						delete line 13 of player's scoreboard
+						delete line 12 of player's scoreboard
+						stop
+					play sound "block.note_block.hat" with pitch 0.6 to player
+					set line 14 of player's scoreboard to "&f"
+					set line 13 of player's scoreboard to "&2SPEAK TO TOM"
+					if {SpeakToSiriusTimer::%UUID of player%} is less than 10:
+						set line 12 of player's scoreboard to "&fRemaining: &600:0%{SpeakToSiriusTimer::%UUID of player%}%"
+					else:
+						set line 12 of player's scoreboard to "&fRemaining: &600:%{SpeakToSiriusTimer::%UUID of player%}%"
+					wait 15 ticks
+					remove 1 from {SpeakToSiriusTimer::%UUID of player%}
+
+				play sound "entity.player.burp" with pitch 1 to player
+				send "&6✆ &5&lJOHN: &fYou've spooked tom by taking too long, let's try another day!"
+				delete {SpeakToSiriusTimer::%UUID of player%}
+				delete {TheCasinoHeist-Status::%UUID of player%}
+				delete line 14 of player's scoreboard
+				delete line 13 of player's scoreboard
+				delete line 12 of player's scoreboard
+				stop
+
+		play sound "ui.button.click"
+
+		set metadata tag "JohnsDailyDeals" of player to chest inventory with 6 rows named "&8John's Daily Deals"
+		set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "JohnsDailyDeals" of player to black stained glass pane named "&7"
+
+		if {JohnsDeal-1::%UUID of player%} is not set:
+			set slot 20 of metadata tag "JohnsDailyDeals" of player to 1 netherrack named "&cNetherrack Generator" with lore "&8Johns basic deal!" and "" and "&7Sells For: &a$2,000" and "" and "&7Level Required: &65" and "&7Purchase Cost: &a$100,000" and "" and "&d> Click To Buy <"
+		else:
+			set slot 20 of metadata tag "JohnsDailyDeals" of player to 1 red dye named "&cAlready Purchased" with lore "&8Johns basic deal!" and "" and "&7New deals EVERY 24 hours!"
+
+		if {JohnsDeal-2::%UUID of player%} is not set:
+			set slot 22 of metadata tag "JohnsDailyDeals" of player to 1 blue dye named "&b50,000 XP" with lore "&8Johns advanced deal!" and "" and "&7Level Required: &610" and "&7Purchase Cost: &a$100,000" and "" and "&d> Click To Buy <"
+		else:
+			set slot 22 of metadata tag "JohnsDailyDeals" of player to 2 red dye named "&cAlready Purchased" with lore "&8Johns advanced deal!" and "" and "&7New deals EVERY 24 hours!"
+
+		if {JohnsDeal-3::%UUID of player%} is not set:
+#			set slot 24 of metadata tag "JohnsDailyDeals" of player to 2 ender chest named "&d+2 Mystery Crates" with lore "&8Johns best deal!" and "" and "&7Level Required: &615" and "&7Purchase Cost: &a$2,000,000" and "" and "&d> Click To Buy <"
+#			set slot 24 of metadata tag "JohnsDailyDeals" of player to 1 archery target block named "&6+1 Generator Slot" with lore "&8Johns best deal!" and "" and "&7Level Required: &615" and "&7Purchase Cost: &a$2,500,000" and "" and "&d> Click To Buy <"
+			set slot 24 of metadata tag "JohnsDailyDeals" of player to 1 blaze rod named "&6x1.5 Sell Wand" with lore "&8Johns best deal!" and "" and "&7Use a sellwand to sell ALL items" and "&7inside chests for &6x1.5 Value!" and "" and "&7Level Required: &615" and "&7Purchase Cost: &a$2,000,000" and "" and "&d> Click To Buy <"
+		else:
+			set slot 24 of metadata tag "JohnsDailyDeals" of player to 3 red dye named "&cAlready Purchased" with lore "&8Johns best deal!" and "" and "&7New deals EVERY 24 hours!"
+
+		set slot 49 of metadata tag "JohnsDailyDeals" of player to barrier named "&cExit Menu"
+		open (metadata tag "JohnsDailyDeals" of player) to player
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "JohnsDailyDeals" of player):
+		cancel event
+
+
+		if index of event-slot is 20:
+			if {JohnsDeal-1::%UUID of player%} is not set:
+				if {Level::%UUID of player%} is less than 5:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lJOHN: &7You must be level &6&l5 &7to buy this!"
+					stop
+				if {Balance::%UUID of player%} is less than 100000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lJOHN: &7You cannot afford to purchase this!"
+					stop
+
+				set {JohnsDeal-1::%UUID of player%} to "BOUGHT"
+				remove 100000 from {Balance::%UUID of player%}
+				play sound "entity.player.levelup" with pitch 2 to player
+
+				send "&5&lJOHN: &7You have purchased &cNetherrack Generator"
+				give player {netherrackgenerator}
+				close player's inventory
+				stop
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&5&lJOHN: &7You have already bought this item!"
+				stop
+
+
+		if index of event-slot is 22:
+			if {JohnsDeal-2::%UUID of player%} is not set:
+				if {Level::%UUID of player%} is less than 10:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lJOHN: &7You must be level &6&l10 &7to buy this!"
+					stop
+
+				if {Balance::%UUID of player%} is less than 100000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lJOHN: &7You cannot afford to purchase this!"
+					stop
+
+				set {JohnsDeal-2::%UUID of player%} to "BOUGHT"
+				remove 100000 from {balance::%UUID of player%}
+				play sound "entity.player.levelup" with pitch 2 to player
+
+				send "&5&lJOHN: &7You have purchased &b50,000 XP"
+				remove 50000 from {RequiredXP::%UUID of player%}
+				close player's inventory
+				stop
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&5&lJOHN: &7You have already bought this item!"
+				stop
+
+
+		if index of event-slot is 24:
+			if {JohnsDeal-3::%UUID of player%} is not set:
+				if {Level::%UUID of player%} is less than 15:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lJOHN: &7You must be level &6&l15 &7to buy this!"
+					stop
+				if {Balance::%UUID of player%} is less than 2000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&5&lJOHN: &7You cannot afford to purchase this!"
+					stop
+
+				set {JohnsDeal-3::%UUID of player%} to "BOUGHT"
+				remove 2000000 from {Balance::%UUID of player%}
+				play sound "entity.player.levelup" with pitch 2 to player
+
+				send "&5&lJOHN: &7You have purchased &6x1.5 Sell Wand"
+				give player 1 blaze rod named "<##ffd013>Sell Wand &6&l(x1.5)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax1.5 &7normal value!" and "" and "&8&oUse at /warp plot"
+				close player's inventory
+				stop
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&5&lJOHN: &7You have already bought this item!"
+				stop
+
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Village: Jean Pauls Bakery:
+#
+#
+#==========================================================
+
+
+
+
+
+function canceljeanpaulquest(p:player, text: text):
+	if {BonusQuestStatus_LostCakes::%UUID of {_p}%} is "Completed":
+		stop
+
+	set {BonusQuestStatus_LostCakes::%UUID of {_p}%} to "Not Started"
+	teleport {_p} to {location-spawn}
+	wait 1 tick
+	teleport {_p} to {location-bakery}
+	play sound "entity.player.burp" to {_p}
+	send "&6&lJEAN PAUL: &7%{_text}% &c(Quest Failed)" to {_p}
+	send "&7TIP - Memorise all cake locations" to {_p}
+	delete line 14 of {_p}'s scoreboard
+	delete line 13 of {_p}'s scoreboard
+	delete line 12 of {_p}'s scoreboard
+	loop 6 times:
+		delete {FoundHiddenCake::%loop-number%::%UUID of {_p}%}
+
+
+
+
+
+on npc right click:
+	if npc is 56:
+		if {BonusQuestStatus_LostCakes::%UUID of player%} is "Not Started":
+			set {BonusQuestStatus_LostCakes::%UUID of player%} to "Talking"
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&6&lJEAN PAUL: &7Bonjour, I am the baker of le village!"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&6&lJEAN PAUL: &7I keep making beautiful cakes just for me to lose them!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&6&lJEAN PAUL: &7I heard they're hidden around the village..."
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&6&lJEAN PAUL: &7If you return all cakes to me, I'll give you a reward!"
+
+			wait 1 second
+
+			set {BonusQuestStatus_LostCakes::%UUID of player%} to "Started"
+			add 1 to {StartedBonusQuests_JeanPaul}
+			teleport player to {cakequeststartloc}
+			send player title "&7" with subtitle "&dFind all 6 Cakes!" for 2 seconds
+			send "&6&lJEAN PAUL: &7You have &e45s &7to find all &d6 Cakes"
+			set {FoundCakesNumber::%UUID of player%} to 0
+			loop 6 times:
+				delete {FoundHiddenCake::%loop-number%::%UUID of player%}
+
+			set {CakeCollectionTimer-S::%UUID of player%} to 45
+			loop 45 times:
+				play sound "block.note_block.hat" with pitch 1.5
+				remove 1 from {CakeCollectionTimer-S::%UUID of player%}
+				if player's flight mode is true:
+					canceljeanpaulquest(player, "You can fly?")
+					stop
+				if player is not online:
+					canceljeanpaulquest(player, "Left Server!")
+					stop
+				if player's tool is a hoe:
+					canceljeanpaulquest(player, "You can't use hoes...")
+					stop
+
+				if {CakeCollectionTimer-S::%UUID of player%} = -6:
+					set {CakeCollectionTimer-S::%UUID of player%} to 8
+					loop 8 times:
+						if player's flight mode is true:
+							canceljeanpaulquest(player, "You can fly?")
+							stop
+						if player is not online:
+							canceljeanpaulquest(player, "Left Server!")
+							stop
+						if player's tool is a hoe:
+							canceljeanpaulquest(player, "You can't use hoes...")
+							stop
+						if {BonusQuestStatus_LostCakes::%UUID of player%} is "Completed":
+							delete line 14 of player's scoreboard
+							delete line 13 of player's scoreboard
+							delete line 12 of player's scoreboard
+							stop
+						play sound "block.note_block.hat" with pitch 1.5
+						remove 1 from {CakeCollectionTimer-S::%UUID of player%}
+						play sound "block.note_block.cow_bell" with pitch 2 to player
+						set line 14 of player's scoreboard to "&f"
+						set line 13 of player's scoreboard to "&dRETURN CAKES:"
+						set line 12 of player's scoreboard to "&fRemaining: &600:0%{CakeCollectionTimer-S::%UUID of player%}%"
+						wait 20 ticks
+
+					canceljeanpaulquest(player, "hmm, I don't need cakes anymore.")
+					stop
+
+				if {CakeCollectionTimer-S::%UUID of player%} is less than 10:
+					play sound "entity.experience_orb.pickup" with pitch 2 to player
+					set line 14 of player's scoreboard to "&f"
+					set line 13 of player's scoreboard to "&dFIND JEAN'S CAKES:"
+					set line 12 of player's scoreboard to "&fRemaining: &600:0%{CakeCollectionTimer-S::%UUID of player%}%"
+				else:
+					set line 14 of player's scoreboard to "&f"
+					set line 13 of player's scoreboard to "&dFIND JEAN'S CAKES:"
+					set line 12 of player's scoreboard to "&fRemaining: &600:%{CakeCollectionTimer-S::%UUID of player%}%"
+				wait 20 ticks
+
+			canceljeanpaulquest(player, "hmm, I don't need cakes anymore.")
+			stop
+
+
+
+		if {BonusQuestStatus_LostCakes::%UUID of player%} is "Started":
+			if {FoundHiddenCake::1::%UUID of player%} is true:
+				if {FoundHiddenCake::2::%UUID of player%} is true:
+					if {FoundHiddenCake::3::%UUID of player%} is true:
+						if {FoundHiddenCake::4::%UUID of player%} is true:
+							if {FoundHiddenCake::5::%UUID of player%} is true:
+								if {FoundHiddenCake::6::%UUID of player%} is true:
+									set {BonusQuestStatus_LostCakes::%UUID of player%} to "Completed"
+									play sound "entity.villager.yes" with pitch 1 to player
+									send "&6&lJEAN PAUL: &7Merci, I appreciate you running this errand for me"
+
+									wait 3 seconds
+
+									play sound "ui.toast.challenge_complete" with pitch 1 to player
+									play sound "entity.villager.yes" with pitch 1 to player
+									send "&6&lJEAN PAUL: &7As promised, Here's le reward!"
+									send "&6&l- &a+$2,500,000 &7| &b+$25,000"
+									send "&6&l- &d+1 Mystery Crate"
+									send "&6&l- &6+1 Generator Slot"
+									send "&6&l- &d+Bakers Menu"
+
+									add 2500000 to {balance::%UUID of player%}
+									remove 25000 from {RequiredXP::%UUID of player%}
+									add 1 to {GeneratorLimit::%UUID of player%}
+									add 1 to {MysteryCrates::%UUID of player%}
+									stop
+
+
+
+		if {BonusQuestStatus_LostCakes::%UUID of player%} is "Completed":
+			play sound "ui.button.click" with pitch 2 to player
+			set metadata tag "BakersShopGUI" of player to chest inventory with 6 rows named "&8Jean Paul The Baker"
+			set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "BakersShopGUI" of player to black stained glass pane named "&7"
+
+			set slot 22 of metadata tag "BakersShopGUI" of player to 1 hay bale named "&aSell Hay Bales" with lore "&8Sells for a higher value" and "" and "&7Sells For: &a$20,000" and "&7&o$10,000 higher than market!" and "" and "&a> Click To Sell <"
+
+			set slot 49 of metadata tag "BakersShopGUI" of player to barrier named "&cExit Menu"
+			open (metadata tag "BakersShopGUI" of player) to player
+			stop
+
+
+
+
+
+on rightclick on cake:
+	cancel event
+	if {BonusQuestStatus_LostCakes::%UUID of player%} is "Started":
+		loop 6 times:
+			if event-block is {BakersCakes::%loop-number%}:
+				if {FoundHiddenCake::%loop-number%::%UUID of player%} is not set:
+					add 1 to {FoundCakesNumber::%UUID of player%}
+					set {FoundHiddenCake::%loop-number%::%UUID of player%} to true
+					
+					play sound "entity.ender_dragon.flap" with pitch 2 to player
+					play sound "entity.item.pickup" with pitch 1.5 to player
+					play sound "entity.generic.eat" with pitch 1 to player
+					send "&d&lCAKE FOUND: &7You have found a &dCake &e[%{FoundCakesNumber::%UUID of player%}%/6]"
+
+					if {FoundCakesNumber::%UUID of player%} = 7:
+						stop
+					if {FoundHiddenCake::1::%UUID of player%} is true:
+						if {FoundHiddenCake::2::%UUID of player%} is true:
+							if {FoundHiddenCake::3::%UUID of player%} is true:
+								if {FoundHiddenCake::4::%UUID of player%} is true:
+									if {FoundHiddenCake::5::%UUID of player%} is true:
+										if {FoundHiddenCake::6::%UUID of player%} is true:
+											set {FoundCakesNumber::%UUID of player%} to 7
+											play sound "entity.player.levelup" with pitch 2 to player
+											send player title "&7" with subtitle "&dSpeak to Jean Paul!" for 2 seconds
+											send "&6&lJEAN PAUL: &7Ces't amazing! Bring them back quickly &e(8s)"
+											set {CakeCollectionTimer-S::%UUID of player%} to -5
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "BakersShopGUI" of player):
+		cancel event
+		if index of event-slot is 22:
+			set {_Sell-ItemAmount::%UUID of player%} to amount of glowing hay bale named "<##f2ff86>&lHAY BALE" in player's inventory
+			remove all hay bale named "<##f2ff86>&lHAY BALE" from player's inventory
+			if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+				play sound "entity.player.levelup" with pitch 2 to player
+				send "&6&lJEAN PAUL: &7Thanks for the &e%{_Sell-ItemAmount::%UUID of player%}% Hay Bales &a&o+%regex({_Sell-ItemAmount::%UUID of player%} * 20000)%"
+				add {_Sell-ItemAmount::%UUID of player%} * 20000 to {balance::%UUID of player%}
+
+			if {_Sell-ItemAmount::%UUID of player%} = 0:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&6&lJEAN PAUL: &7You do not have any hay bales to sell!"
+				stop
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop

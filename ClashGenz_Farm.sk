@@ -1,0 +1,1660 @@
+#==========================================================
+#
+#
+#		ClashGenz Farm: Farmer Bob:
+#
+#
+#==========================================================
+
+
+
+
+
+command /clashgenzgens-farminghoes:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		set {FarmingHoe-WoodenHoe_Level.1} to 1 of unbreakable wooden hoe named "<##724728>Wooden Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.2" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-WoodenHoe_Level.2} to 1 of unbreakable wooden hoe named "<##724728>Wooden Hoe &8(&6II&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.4" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-WoodenHoe_Level.3} to 1 of unbreakable wooden hoe named "<##724728>Wooden Hoe &8(&6III&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.6" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+
+		set {FarmingHoe-StoneHoe_Level.1} to 1 of unbreakable stone hoe named "<##9f9f9b>Stone Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.7" and "&7Double Drop Chance: &e10%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-StoneHoe_Level.2} to 1 of unbreakable stone hoe named "<##9f9f9b>Stone Hoe &8(&6II&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.8" and "&7Double Drop Chance: &e20%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-StoneHoe_Level.3} to 1 of unbreakable stone hoe named "<##9f9f9b>Stone Hoe &8(&6III&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.9" and "&7Double Drop Chance: &e30%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+
+		set {FarmingHoe-IronHoe_Level.1} to 1 of unbreakable iron hoe named "<##d8d8d8>Iron Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.0" and "&7Double Drop Chance: &e35%%" and "&7Speed: &fx1.2" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-IronHoe_Level.2} to 1 of unbreakable iron hoe named "<##d8d8d8>Iron Hoe &8(&6II&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.1" and "&7Double Drop Chance: &e40%%" and "&7Speed: &fx1.4" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-IronHoe_Level.3} to 1 of unbreakable iron hoe named "<##d8d8d8>Iron Hoe &8(&6III&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.2" and "&7Double Drop Chance: &e45%%" and "&7Speed: &fx1.6" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+
+		set {FarmingHoe-GoldHoe_Level.1} to 1 of unbreakable gold hoe named "<##e3ad39>Gold Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.3" and "&7Double Drop Chance: &e50%%" and "&7Speed: &fx1.7" and "&7Special Buff Chance: &d0.5%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-GoldHoe_Level.2} to 1 of unbreakable gold hoe named "<##e3ad39>Gold Hoe &8(&6II&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.4" and "&7Double Drop Chance: &e55%%" and "&7Speed: &fx1.8" and "&7Special Buff Chance: &d1%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-GoldHoe_Level.3} to 1 of unbreakable gold hoe named "<##e3ad39>Gold Hoe &8(&6III&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.5" and "&7Double Drop Chance: &e60%%" and "&7Speed: &fx1.9" and "&7Special Buff Chance: &d1.5%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+
+		set {FarmingHoe-DiamondHoe_Level.1} to 1 of unbreakable diamond hoe named "<##28b5ca>Diamond Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.6" and "&7Double Drop Chance: &e65%%" and "&7Speed: &fx2.0" and "&7Special Buff Chance: &d1.75%%" and "&7Special Drop Chance: &62%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-DiamondHoe_Level.2} to 1 of unbreakable diamond hoe named "<##28b5ca>Diamond Hoe &8(&6II&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.7" and "&7Double Drop Chance: &e70%%" and "&7Speed: &fx2.1" and "&7Special Buff Chance: &d2%%" and "&7Special Drop Chance: &64%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {FarmingHoe-DiamondHoe_Level.3} to 1 of unbreakable diamond hoe named "<##28b5ca>Diamond Hoe &8(&6III&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.8" and "&7Double Drop Chance: &e75%%" and "&7Speed: &fx2.2" and "&7Special Buff Chance: &d2.25%%" and "&7Special Drop Chance: &66%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+
+		set {FarmingHoe-NetheriteHoe} to 1 of unbreakable netherite hoe named "<##4c4e5d>Netherite Super Hoe" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx3" and "&7&lTriple Drop Chance: &e&l100%%" and "&7Speed: &fx2.5" and "&7Special Buff Chance: &d3%%" and "&7Special Drop Chance: &610%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+
+#		set {FarmingHoe-AllHoes::*} to {FarmingHoe-WoodenHoe_Level.1}, {FarmingHoe-WoodenHoe_Level.2}, {FarmingHoe-StoneHoe_Level.1}, {FarmingHoe-StoneHoe_Level.2}, {FarmingHoe-StoneHoe_Level.3}, {FarmingHoe-IronHoe_Level.1}, {FarmingHoe-IronHoe_Level.2}, {FarmingHoe-IronHoe_Level.3}, {FarmingHoe-GoldHoe_Level.1}, {FarmingHoe-GoldHoe_Level.2}, {FarmingHoe-GoldHoe_Level.3}, {FarmingHoe-DiamondHoe_Level.1}, {FarmingHoe-DiamondHoe_Level.2}, {FarmingHoe-DiamondHoe_Level.3} and {FarmingHoe-NetheriteHoe}
+
+
+
+
+
+on citizen right click:
+	if npc is 27:
+		if {UnlockedHoeLevel::%UUID of player%} is not set:
+			set {UnlockedHoeLevel::%UUID of player%} to 1
+
+			play sound "entity.villager.ambient" with pitch 1 to player
+			send "&e&lFARMER BOB: &7Welcome to my farm!"
+
+			wait 2 seconds
+
+			play sound "entity.villager.ambient" with pitch 1 to player
+			send "&e&lFARMER BOB: &7Here, you can farm for wheat and other materials for money..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&e&lFARMER BOB: &7But first you'll need to buy a hoe from me!"
+			wait 10 ticks
+			add 250 to {balance::%UUID of player%}
+			send "&7[&a+$250&7]"
+
+			set {UnlockFarmerBobShop::%UUID of player%} to true
+			stop
+
+
+
+		if {UnlockFarmerBobShop::%UUID of player%} is true:
+			play sound "ui.button.click" with pitch 2 to player
+			set metadata tag "FarmerBobShop" of player to chest inventory with 6 rows named "&8Farmer Bob's Shop"
+			set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "FarmerBobShop" of player to black stained glass pane named "&7"
+
+
+
+			set slot 20 of metadata tag "FarmerBobShop" of player to wooden hoe named "<##724728>Wooden Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.2" and "" and "&a&nPurchase For: $250" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+
+			if {UnlockedHoeLevel::%UUID of player%} is less than 2:
+				set slot 21 of metadata tag "FarmerBobShop" of player to red glass pane named "&cNot Unlocked Yet!" with lore "&7To unlock this &8Stone Hoe &7you must" and "&7first upgrade to a level III wooden hoe!"
+			else:
+				set slot 21 of metadata tag "FarmerBobShop" of player to stone hoe named "<##9f9f9b>Stone Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx1.7" and "&7Double Drop Chance: &e10%%" and "" and "&aPurchase For:" and "&7- &a$25,000" and "&7- <##724728>Wooden Hoe &8(&6III&8)" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+
+			if {UnlockedHoeLevel::%UUID of player%} is less than 3:
+				set slot 22 of metadata tag "FarmerBobShop" of player to red glass pane named "&cNot Unlocked Yet!" with lore "&7To unlock this &8Iron Hoe &7you must" and "&7first upgrade to a level III stone hoe!"
+			else:
+				set slot 22 of metadata tag "FarmerBobShop" of player to iron hoe named "<##d8d8d8>Iron Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.0" and "&7Double Drop Chance: &e35%%" and "&7Speed: &fx1.2" and "" and "&aPurchase For:" and "&7- &a$250,000" and "&7- <##9f9f9b>Stone Hoe &8(&6III&8)" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+
+			if {UnlockedHoeLevel::%UUID of player%} is less than 4:
+				set slot 23 of metadata tag "FarmerBobShop" of player to red glass pane named "&cNot Unlocked Yet!" with lore "&7To unlock this &8Gold Hoe &7you must" and "&7first upgrade to a level III iron hoe!"
+			else:
+				set slot 23 of metadata tag "FarmerBobShop" of player to gold hoe named "<##e3ad39>Gold Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.3" and "&7Double Drop Chance: &e50%%" and "&7Speed: &fx1.6" and "&7Special Buff Chance: &d0.5%%" and "" and "&aPurchase For:" and "&7- &a$2,500,000" and "&7- <##d8d8d8>Iron Hoe &8(&6III&8)" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+
+			if {UnlockedHoeLevel::%UUID of player%} is less than 5:
+				set slot 24 of metadata tag "FarmerBobShop" of player to red glass pane named "&cNot Unlocked Yet!" with lore "&7To unlock this &8Diamond Hoe &7you must" and "&7first upgrade to a level III gold hoe!"
+			else:
+				set slot 24 of metadata tag "FarmerBobShop" of player to diamond hoe named "<##28b5ca>Diamond Hoe &8(&6I&8)" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx2.6" and "&7Double Drop Chance: &e65%%" and "&7Speed: &fx2.0" and "&7Special Buff Chance: &d1.75%%" and "&7Special Drop Chance: &62%%" and "" and "&aPurchase For:" and "&7- &a$25,000,000" and "&7- <##e3ad39>Gold Hoe &8(&6III&8)" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+
+			set slot 49 of metadata tag "FarmerBobShop" of player to barrier named "&cExit Menu"
+			open (metadata tag "FarmerBobShop" of player) to player
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "FarmerBobShop" of player):
+		cancel event
+
+		if index of event-slot is 20:
+			if {balance::%UUID of player%} is less than 250:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+				stop
+
+			remove 250 from {balance::%UUID of player%}
+			give player {FarmingHoe-WoodenHoe_Level.1}
+
+			play sound "entity.player.levelup" with pitch 2 to player
+			send "&e&lFARMER BOB: &7You have purchased a <##724728>Wooden Hoe!"
+			stop
+
+
+		if index of event-slot is 21:
+			if event-slot is red glass pane named "&cNot Unlocked Yet!":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have not yet unlocked this hoe!"
+				stop
+
+			else:
+				if {balance::%UUID of player%} is less than 25000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+				if player does not have {FarmingHoe-WoodenHoe_Level.3}:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+
+				remove 25000 from {balance::%UUID of player%}
+				remove {FarmingHoe-WoodenHoe_Level.3} from player's inventory
+				give player {FarmingHoe-StoneHoe_Level.1}
+
+				play sound "entity.player.levelup" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have purchased a <##9f9f9b>Stone Hoe!"
+				stop
+
+
+		if index of event-slot is 22:
+			if event-slot is red glass pane named "&cNot Unlocked Yet!":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have not yet unlocked this hoe!"
+				stop
+
+			else:
+				if {balance::%UUID of player%} is less than 250000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+				if player does not have {FarmingHoe-StoneHoe_Level.3}:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+
+				remove 250000 from {balance::%UUID of player%}
+				remove {FarmingHoe-StoneHoe_Level.3} from player's inventory
+				give player {FarmingHoe-IronHoe_Level.1}
+
+				play sound "entity.player.levelup" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have purchased a <##d8d8d8>Iron Hoe!"
+				stop
+
+
+		if index of event-slot is 23:
+			if event-slot is red glass pane named "&cNot Unlocked Yet!":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have not yet unlocked this hoe!"
+				stop
+
+			else:
+				if {balance::%UUID of player%} is less than 2500000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+				if player does not have {FarmingHoe-IronHoe_Level.3}:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+
+				remove 2500000 from {balance::%UUID of player%}
+				remove {FarmingHoe-IronHoe_Level.3} from player's inventory
+				give player {FarmingHoe-GoldHoe_Level.1}
+
+				play sound "entity.player.levelup" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have purchased a <##e3ad39>Gold Hoe!"
+				stop
+
+
+		if index of event-slot is 24:
+			if event-slot is red glass pane named "&cNot Unlocked Yet!":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have not yet unlocked this hoe!"
+				stop
+
+			else:
+				if {balance::%UUID of player%} is less than 25000000:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+				if player does not have {FarmingHoe-GoldHoe_Level.3}:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lFARMER BOB: &7You cannot afford this hoe!"
+					stop
+
+				remove 25000000 from {balance::%UUID of player%}
+				remove {FarmingHoe-GoldHoe_Level.3} from player's inventory
+				give player {FarmingHoe-DiamondHoe_Level.1}
+
+				play sound "entity.player.levelup" with pitch 2 to player
+				send "&e&lFARMER BOB: &7You have purchased a <##28b5ca>Diamond Hoe!"
+				stop
+
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Farm: Upgrading Hoe:
+#
+#
+#==========================================================
+
+
+
+
+
+on rightclick on anvil:
+	if block 2 meters below event-block is white glazed terracotta:
+		cancel event
+
+		play sound "ui.button.click" with pitch 2 to player
+		set metadata tag "ClashGenzUpgradeYourHoe" of player to chest inventory with 4 rows named "&8Upgrade YOUR Hoe!"
+
+		set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 and 26 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 black stained glass pane named "&7"
+
+
+		set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 healing tipped arrow named "&c>>>" with nbt "{HideFlags:63}"
+		set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to gray dye named "&cUpgraded Hoe" with lore "&7Place a hoe in the free slot to upgrade" and "&7it in order to have better perks!"
+
+		set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to red glass pane named "&cPlace a hoe in the free slot to upgrade it!"
+		set slot 31 of metadata tag "ClashGenzUpgradeYourHoe" of player to barrier named "&cClose Anvil Menu!"
+
+		open (metadata tag "ClashGenzUpgradeYourHoe" of player) to player
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzUpgradeYourHoe" of player):
+
+		if index of event-slot is 11:
+			wait a tick
+			play sound "entity.chicken.egg" with pitch 2 to player
+
+			if event-slot is {FarmingHoe-WoodenHoe_Level.1}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-WoodenHoe_Level.2}
+				if {balance::%UUID of player%} is less than 2500:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $2,500"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $2,500"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {FarmingHoe-WoodenHoe_Level.2}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-WoodenHoe_Level.3}
+				if {balance::%UUID of player%} is less than 5000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $5,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $5,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+
+			if event-slot is {FarmingHoe-StoneHoe_Level.1}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-StoneHoe_Level.2}
+				if {balance::%UUID of player%} is less than 50000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $50,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $50,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {FarmingHoe-StoneHoe_Level.2}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-StoneHoe_Level.3}
+				if {balance::%UUID of player%} is less than 100000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $100,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $100,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+
+			if event-slot is {FarmingHoe-IronHoe_Level.1}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-IronHoe_Level.2}
+				if {balance::%UUID of player%} is less than 1000000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $1,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $1,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {FarmingHoe-IronHoe_Level.2}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-IronHoe_Level.3}
+				if {balance::%UUID of player%} is less than 2000000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $2,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $2,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+
+			if event-slot is {FarmingHoe-GoldHoe_Level.1}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-GoldHoe_Level.2}
+				if {balance::%UUID of player%} is less than 10000000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $10,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $10,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {FarmingHoe-GoldHoe_Level.2}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-GoldHoe_Level.3}
+				if {balance::%UUID of player%} is less than 20000000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $20,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $20,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+
+			if event-slot is {FarmingHoe-DiamondHoe_Level.1}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-DiamondHoe_Level.2}
+				if {balance::%UUID of player%} is less than 50000000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $50,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $50,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {FarmingHoe-DiamondHoe_Level.2}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {FarmingHoe-DiamondHoe_Level.3}
+				if {balance::%UUID of player%} is less than 100000000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $100,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $100,000,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+
+			if event-slot is {ScareSwords-Sword_Level.1}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {ScareSwords-Sword_Level.2}
+				if {balance::%UUID of player%} is less than 20000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $20,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $20,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {ScareSwords-Sword_Level.2}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {ScareSwords-Sword_Level.3}
+				if {balance::%UUID of player%} is less than 40000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $40,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $40,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {ScareSwords-Sword_Level.3}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {ScareSwords-Sword_Level.4}
+				if {balance::%UUID of player%} is less than 80000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $80,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $80,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+			if event-slot is {ScareSwords-Sword_Level.4}:
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to {ScareSwords-Sword_Level.5}
+				if {balance::%UUID of player%} is less than 160000:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 red dye named "&c&l> Cannot Afford Upgrade <" with lore "&a&nCost: $160,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to green glass pane named "&aUpgradable (can't afford)!"
+				else:
+					set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 lime dye named "&6&l> Click To Upgrade <" with lore "&a&nCost: $160,000"
+					set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to lime glass pane named "&aUpgradable!"
+				stop
+
+
+
+			set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to gray dye named "&cUpgraded Hoe" with lore "&7Place a hoe in the free slot to upgrade" and "&7it in order to have better perks!"
+			set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 healing tipped arrow named "&c>>>" with nbt "{HideFlags:63}"
+			set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to red glass pane named "&cPlace a hoe in the free slot to upgrade it!"
+			stop
+
+
+
+		cancel event
+
+
+
+		if index of event-slot is 13:
+			if event-slot is healing tipped arrow:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&c&lANVIL: &7Place a hoe in the free slot to upgrade it!"
+				stop
+
+			if event-slot is lime dye named "&6&l> Click To Upgrade <":
+
+				if line 1 of lore of event-slot is "&a&nCost: $2,500":
+					remove 2500 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $5,000":
+					if {UnlockedHoeLevel::%UUID of player%} is less than 2:
+						set {UnlockedHoeLevel::%UUID of player%} to 2
+					send "&6&lMAXED HOE: &7This hoe is fully maxed out, Purchase a better one from bob!"
+					remove 5000 from {balance::%UUID of player%}
+
+				if line 1 of lore of event-slot is "&a&nCost: $50,000":
+					remove 50000 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $100,000":
+					if {UnlockedHoeLevel::%UUID of player%} is less than 3:
+						set {UnlockedHoeLevel::%UUID of player%} to 3
+					send "&6&lMAXED HOE: &7This hoe is fully maxed out, Purchase a better one from bob!"
+					remove 100000 from {balance::%UUID of player%}
+
+				if line 1 of lore of event-slot is "&a&nCost: $1,000,000":
+					remove 1000000 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $2,000,000":
+					if {UnlockedHoeLevel::%UUID of player%} is less than 4:
+						set {UnlockedHoeLevel::%UUID of player%} to 4
+					send "&6&lMAXED HOE: &7This hoe is fully maxed out, Purchase a better one from bob!"
+					remove 2000000 from {balance::%UUID of player%}
+
+				if line 1 of lore of event-slot is "&a&nCost: $10,000,000":
+					remove 10000000 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $20,000,000":
+					if {UnlockedHoeLevel::%UUID of player%} is less than 5:
+						set {UnlockedHoeLevel::%UUID of player%} to 5
+					send "&6&lMAXED HOE: &7This hoe is fully maxed out, Purchase a better one from bob!"
+					remove 20000000 from {balance::%UUID of player%}
+
+				if line 1 of lore of event-slot is "&a&nCost: $50,000,000":
+					remove 50000000 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $100,000,000":
+					remove 100000000 from {balance::%UUID of player%}
+
+				if line 1 of lore of event-slot is "&a&nCost: $20,000":
+					remove 20000 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $40,000":
+					remove 40000 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $80,000":
+					remove 80000 from {balance::%UUID of player%}
+				if line 1 of lore of event-slot is "&a&nCost: $160,000":
+					remove 160000 from {balance::%UUID of player%}
+
+
+				give player slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player
+
+				set slot 11 of metadata tag "ClashGenzUpgradeYourHoe" of player to air
+				set slot 13 of metadata tag "ClashGenzUpgradeYourHoe" of player to 1 healing tipped arrow named "&c>>>" with nbt "{HideFlags:63}"
+				set slot 15 of metadata tag "ClashGenzUpgradeYourHoe" of player to gray dye named "&cUpgraded Hoe" with lore "&7Place a hoe in the free slot to upgrade" and "&7it in order to have better perks!"
+				set slot 27, 28, 29, 30, 32, 33, 34, 35 and 36 of metadata tag "ClashGenzUpgradeYourHoe" of player to red glass pane named "&cPlace a hoe in the free slot to upgrade it!"
+
+				play sound "block.anvil.use" with pitch 2 to player
+				send "&a&lANVIL: &7You have upgraded your tool!"
+
+			if event-slot is red dye named "&c&l> Cannot Afford Upgrade <":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&c&lANVIL: &7You cannot afford to upgrade this tool!"
+				stop
+
+
+		if index of event-slot is 31:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on inventory close:
+	if name of player's inventory is "&8Upgrade YOUR Hoe!":
+		if slot 11 of metadata tag "ClashGenzUpgradeYourHoe" of player is not air:
+			play sound "entity.chicken.egg" with pitch 2 to player
+			give player slot 11 of metadata tag "ClashGenzUpgradeYourHoe" of player
+			set slot 11 of metadata tag "ClashGenzUpgradeYourHoe" of player to air
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Farm: Farming Stuff:
+#
+#
+#==========================================================
+
+
+
+
+
+on break:
+	if "%event-block%" contains "ripe":
+		if player's tool does not contain {FarmingHoe-WoodenHoe_Level.1}, {FarmingHoe-WoodenHoe_Level.2}, {FarmingHoe-WoodenHoe_Level.3}, {FarmingHoe-StoneHoe_Level.1}, {FarmingHoe-StoneHoe_Level.2}, {FarmingHoe-StoneHoe_Level.3}, {FarmingHoe-IronHoe_Level.1}, {FarmingHoe-IronHoe_Level.2}, {FarmingHoe-IronHoe_Level.3}, {FarmingHoe-GoldHoe_Level.1}, {FarmingHoe-GoldHoe_Level.2}, {FarmingHoe-GoldHoe_Level.3}, {FarmingHoe-DiamondHoe_Level.1}, {FarmingHoe-DiamondHoe_Level.2}, {FarmingHoe-DiamondHoe_Level.3} or {FarmingHoe-NetheriteHoe}:
+			set player's action bar to "&c&l&nERROR:&f &e&nYou must be holding a hoe to farm!"
+			cancel event
+			stop
+
+		clear drops
+
+		if event-block = ripe wheat plant:
+			set {_FarmingPlaySound::%UUID of player%} to a random number between 1.6 and 2
+			play sound "entity.experience_orb.pickup" with pitch {_FarmingPlaySound::%UUID of player%} to player
+
+			fullinventorycheck(player)
+			set {_FarmingXPGained::%UUID of player%} to 5
+			give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+
+			if {ActiveEvent} is "farm - x5 drops":
+				give player 4 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+			
+			if player's boots is leather Boots named "&6Farmers Boots":
+				if player's Leggings is leather Leggings named "&6Farmers Leggings":
+					if player's Chestplate is leather Chestplate named "&6Farmers Chestplate":
+						give player 3 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+						add 3 to {_FarmingXPGained::%UUID of player%}
+
+
+			if {ActiveEvent} is "farm - cash hunt":
+				chance of 1%:
+					play sound "block.note_block.bit" with pitch 2
+					send "&6&lCASH HUNT: &7You received &6$10,000"
+					add 10000 to {balance::%UUID of player%}
+					add 10000 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+				chance of 5%:
+					play sound "block.note_block.bit" with pitch 1
+					send "&6&lCASH HUNT: &7You received &e$5,000"
+					add 5000 to {balance::%UUID of player%}
+					add 5000 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+				chance of 10%:
+					play sound "block.note_block.bit" with pitch 0.5
+					send "&6&lCASH HUNT: &7You received &a$2,500"
+					add 2500 to {balance::%UUID of player%}
+					add 2500 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.2
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.4
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.6
+
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.7
+				chance of 10%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.8
+				chance of 20%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.9
+				chance of 30%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+
+			if player's tool is {FarmingHoe-IronHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.0
+				chance of 35%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+			if player's tool is {FarmingHoe-IronHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.1
+				chance of 40%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+			if player's tool is {FarmingHoe-IronHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.2
+				chance of 45%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.3
+				chance of 50%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+				chance of 0.5%:
+					runspecialfarmingbuff(player)
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.4
+				chance of 55%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+				chance of 1%:
+					runspecialfarmingbuff(player)
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.5
+				chance of 60%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+				chance of 1.5%:
+					runspecialfarmingbuff(player)
+
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.6
+				chance of 65%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+				chance of 1.75%:
+					runspecialfarmingbuff(player)
+				chance of 2%:
+					give player 1 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.7
+				chance of 70%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+				chance of 2%:
+					runspecialfarmingbuff(player)
+				chance of 4%:
+					give player 1 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.8
+				chance of 75%:
+					give player 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+				chance of 2.25%:
+					runspecialfarmingbuff(player)
+				chance of 6%:
+					give player 1 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+
+
+			if player's tool is {FarmingHoe-NetheriteHoe}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 3
+				give player 2 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+				chance of 3%:
+					runspecialfarmingbuff(player)
+				chance of 10%:
+					give player 1 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$2,500"
+
+
+			if {ActiveEvent} is "farm - storm":
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 4
+			
+			if {SpawnedPet::%UUID of player%} is alive:
+				if display name of {SpawnedPet::%UUID of player%} contains "Cow":
+					set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2
+			if {SpawnedPet::%UUID of player%} is alive:
+				if display name of {SpawnedPet::%UUID of player%} contains "Tiger":
+					set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 3
+
+
+			remove {_FarmingXPGained::%UUID of player%} from {RequiredXP::%UUID of player%}
+			set player's action bar to "&b&n+%{_FarmingXPGained::%UUID of player%}% XP Gained"
+			set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+			stop
+
+
+	else:
+		if event-block is wheat:
+			cancel event
+			stop
+
+
+
+
+
+on break:
+	if "%event-block%" contains "ripe":
+		if player's tool does not contain {FarmingHoe-WoodenHoe_Level.1}, {FarmingHoe-WoodenHoe_Level.2}, {FarmingHoe-WoodenHoe_Level.3}, {FarmingHoe-StoneHoe_Level.1}, {FarmingHoe-StoneHoe_Level.2}, {FarmingHoe-StoneHoe_Level.3}, {FarmingHoe-IronHoe_Level.1}, {FarmingHoe-IronHoe_Level.2}, {FarmingHoe-IronHoe_Level.3}, {FarmingHoe-GoldHoe_Level.1}, {FarmingHoe-GoldHoe_Level.2}, {FarmingHoe-GoldHoe_Level.3}, {FarmingHoe-DiamondHoe_Level.1}, {FarmingHoe-DiamondHoe_Level.2}, {FarmingHoe-DiamondHoe_Level.3} or {FarmingHoe-NetheriteHoe}:
+			set player's action bar to "&c&l&nERROR:&f &e&nYou must be holding a hoe to farm!"
+			cancel event
+			stop
+
+		clear drops
+
+		if event-block = ripe potato plant:
+			set {_FarmingPlaySound::%UUID of player%} to a random number between 1.6 and 2
+			play sound "entity.experience_orb.pickup" with pitch {_FarmingPlaySound::%UUID of player%} to player
+
+			fullinventorycheck(player)
+			set {_FarmingXPGained::%UUID of player%} to 10
+			give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+
+			if {ActiveEvent} is "farm - x5 drops":
+				give player 4 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+			if player's boots is leather Boots named "&6Farmers Boots":
+				if player's Leggings is leather Leggings named "&6Farmers Leggings":
+					if player's Chestplate is leather Chestplate named "&6Farmers Chestplate":
+						give player 3 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+						add 3 to {_FarmingXPGained::%UUID of player%}
+
+
+			if {ActiveEvent} is "farm - cash hunt":
+				chance of 1%:
+					play sound "block.note_block.bit" with pitch 2
+					send "&6&lCASH HUNT: &7You received &6$10,000"
+					add 10000 to {balance::%UUID of player%}
+					add 10000 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+				chance of 5%:
+					play sound "block.note_block.bit" with pitch 1
+					send "&6&lCASH HUNT: &7You received &e$5,000"
+					add 5000 to {balance::%UUID of player%}
+					add 5000 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+				chance of 10%:
+					play sound "block.note_block.bit" with pitch 0.5
+					send "&6&lCASH HUNT: &7You received &a$2,500"
+					add 2500 to {balance::%UUID of player%}
+					add 2500 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.2
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.4
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.6
+
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.7
+				chance of 10%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.8
+				chance of 20%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.9
+				chance of 30%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+
+			if player's tool is {FarmingHoe-IronHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.0
+				chance of 35%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+			if player's tool is {FarmingHoe-IronHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.1
+				chance of 40%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+			if player's tool is {FarmingHoe-IronHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.2
+				chance of 45%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.3
+				chance of 50%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+				chance of 0.5%:
+					runspecialfarmingbuff_potato(player)
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.4
+				chance of 55%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+				chance of 1%:
+					runspecialfarmingbuff_potato(player)
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.5
+				chance of 60%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+				chance of 1.5%:
+					runspecialfarmingbuff_potato(player)
+
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.6
+				chance of 65%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+				chance of 1.75%:
+					runspecialfarmingbuff_potato(player)
+				chance of 2%:
+					give player 1 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.7
+				chance of 70%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+				chance of 2%:
+					runspecialfarmingbuff_potato(player)
+				chance of 4%:
+					give player 1 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.8
+				chance of 75%:
+					give player 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+				chance of 2.25%:
+					runspecialfarmingbuff_potato(player)
+				chance of 6%:
+					give player 1 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+
+
+			if player's tool is {FarmingHoe-NetheriteHoe}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 3
+				give player 2 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+				chance of 3%:
+					runspecialfarmingbuff_potato(player)
+				chance of 10%:
+					give player 1 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$3,500"
+
+
+			if {ActiveEvent} is "farm - storm":
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 4
+			if {ActiveEvent} is "cave - xp boost":
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 5
+
+			if {SpawnedPet::%UUID of player%} is alive:
+				if display name of {SpawnedPet::%UUID of player%} contains "Cow":
+					set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2
+			if {SpawnedPet::%UUID of player%} is alive:
+				if display name of {SpawnedPet::%UUID of player%} contains "Tiger":
+					set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 3
+			if player's Boots is leather Boots named "&4Cave Boots":
+				if player's Leggings is leather Leggings named "&4Cave Leggings":
+					if player's Chestplate is leather Chestplate named "&4Cave Chestplate":
+						set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.5
+
+
+			remove {_FarmingXPGained::%UUID of player%} from {RequiredXP::%UUID of player%}
+			set player's action bar to "&b&n+%{_FarmingXPGained::%UUID of player%}% XP Gained"
+			set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+			stop
+
+
+	else:
+		if event-block is wheat:
+			cancel event
+			stop
+
+
+
+
+
+on break:
+	if "%event-block%" contains "ripe":
+		if player's tool does not contain {FarmingHoe-WoodenHoe_Level.1}, {FarmingHoe-WoodenHoe_Level.2}, {FarmingHoe-WoodenHoe_Level.3}, {FarmingHoe-StoneHoe_Level.1}, {FarmingHoe-StoneHoe_Level.2}, {FarmingHoe-StoneHoe_Level.3}, {FarmingHoe-IronHoe_Level.1}, {FarmingHoe-IronHoe_Level.2}, {FarmingHoe-IronHoe_Level.3}, {FarmingHoe-GoldHoe_Level.1}, {FarmingHoe-GoldHoe_Level.2}, {FarmingHoe-GoldHoe_Level.3}, {FarmingHoe-DiamondHoe_Level.1}, {FarmingHoe-DiamondHoe_Level.2}, {FarmingHoe-DiamondHoe_Level.3} or {FarmingHoe-NetheriteHoe}:
+			set player's action bar to "&c&l&nERROR:&f &e&nYou must be holding a hoe to farm!"
+			cancel event
+			stop
+
+		clear drops
+
+		if event-block = ripe carrot plant:
+			set {_FarmingPlaySound::%UUID of player%} to a random number between 1.6 and 2
+			play sound "entity.experience_orb.pickup" with pitch {_FarmingPlaySound::%UUID of player%} to player
+
+			fullinventorycheck(player)
+			set {_FarmingXPGained::%UUID of player%} to 15
+			give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+
+			if {ActiveEvent} is "farm - x5 drops":
+				give player 4 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+			if player's boots is leather Boots named "&6Farmers Boots":
+				if player's Leggings is leather Leggings named "&6Farmers Leggings":
+					if player's Chestplate is leather Chestplate named "&6Farmers Chestplate":
+						add 3 to {_FarmingXPGained::%UUID of player%}
+						give player 3 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+
+			if {ActiveEvent} is "farm - cash hunt":
+				chance of 1%:
+					play sound "block.note_block.bit" with pitch 2
+					send "&6&lCASH HUNT: &7You received &6$10,000"
+					add 10000 to {balance::%UUID of player%}
+					add 10000 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+				chance of 5%:
+					play sound "block.note_block.bit" with pitch 1
+					send "&6&lCASH HUNT: &7You received &e$5,000"
+					add 5000 to {balance::%UUID of player%}
+					add 5000 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+				chance of 10%:
+					play sound "block.note_block.bit" with pitch 0.5
+					send "&6&lCASH HUNT: &7You received &a$2,500"
+					add 2500 to {balance::%UUID of player%}
+					add 2500 to {CashHuntEvent-TotalGained::%UUID of player%}
+
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.2
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.4
+
+			if player's tool is {FarmingHoe-WoodenHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.6
+
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.7
+				chance of 10%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.8
+				chance of 20%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+			if player's tool is {FarmingHoe-StoneHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 1.9
+				chance of 30%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+
+			if player's tool is {FarmingHoe-IronHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.0
+				chance of 35%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+			if player's tool is {FarmingHoe-IronHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.1
+				chance of 40%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+			if player's tool is {FarmingHoe-IronHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.2
+				chance of 45%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.3
+				chance of 50%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+				chance of 0.5%:
+					runspecialfarmingbuff_carrot(player)
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.4
+				chance of 55%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+				chance of 1%:
+					runspecialfarmingbuff_carrot(player)
+
+			if player's tool is {FarmingHoe-GoldHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.5
+				chance of 60%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+				chance of 1.5%:
+					runspecialfarmingbuff_carrot(player)
+
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.1}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.6
+				chance of 65%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+				chance of 1.75%:
+					runspecialfarmingbuff_carrot(player)
+				chance of 2%:
+					give player 1 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.2}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.7
+				chance of 70%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+				chance of 2%:
+					runspecialfarmingbuff_carrot(player)
+				chance of 4%:
+					give player 1 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+
+			if player's tool is {FarmingHoe-DiamondHoe_Level.3}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2.8
+				chance of 75%:
+					give player 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+				chance of 2.25%:
+					runspecialfarmingbuff_carrot(player)
+				chance of 6%:
+					give player 1 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+
+
+			if player's tool is {FarmingHoe-NetheriteHoe}:
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 3
+				give player 2 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+				chance of 3%:
+					runspecialfarmingbuff_carrot(player)
+				chance of 10%:
+					give player 1 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+					if {ActiveEvent} is "farm - x5 drops":
+						give player 4 golden carrot named "<##f4d34f>&lGOLDEN CARROT" with lore "&8Farming Item" and "" and "&7Use this item to upgrade" and "&7items and unlock pets" and "" and "&7Sell Value: &a$4,500"
+
+
+			if {ActiveEvent} is "farm - storm":
+				set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 4
+
+			if {SpawnedPet::%UUID of player%} is alive:
+				if display name of {SpawnedPet::%UUID of player%} contains "Cow":
+					set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 2
+			if {SpawnedPet::%UUID of player%} is alive:
+				if display name of {SpawnedPet::%UUID of player%} contains "Tiger":
+					set {_FarmingXPGained::%UUID of player%} to {_FarmingXPGained::%UUID of player%} * 3
+
+
+			remove {_FarmingXPGained::%UUID of player%} from {RequiredXP::%UUID of player%}
+			set player's action bar to "&b&n+%{_FarmingXPGained::%UUID of player%}% XP Gained"
+			set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+			stop
+
+
+	else:
+		if event-block is wheat:
+			cancel event
+			stop
+
+
+
+
+
+on break:
+	if "%event-block%" contains "ripe":
+		if player's tool does not contain {FarmingHoe-WoodenHoe_Level.1}, {FarmingHoe-WoodenHoe_Level.2}, {FarmingHoe-WoodenHoe_Level.3}, {FarmingHoe-StoneHoe_Level.1}, {FarmingHoe-StoneHoe_Level.2}, {FarmingHoe-StoneHoe_Level.3}, {FarmingHoe-IronHoe_Level.1}, {FarmingHoe-IronHoe_Level.2}, {FarmingHoe-IronHoe_Level.3}, {FarmingHoe-GoldHoe_Level.1}, {FarmingHoe-GoldHoe_Level.2}, {FarmingHoe-GoldHoe_Level.3}, {FarmingHoe-DiamondHoe_Level.1}, {FarmingHoe-DiamondHoe_Level.2}, {FarmingHoe-DiamondHoe_Level.3} or {FarmingHoe-NetheriteHoe}:
+			set player's action bar to "&c&l&nERROR:&f &e&nYou must be holding a hoe to farm!"
+			cancel event
+			stop
+
+		clear drops
+
+		if event-block = ripe beetroot plant:
+			set {_FarmingPlaySound::%UUID of player%} to a random number between 1.6 and 2
+			play sound "entity.experience_orb.pickup" with pitch {_FarmingPlaySound::%UUID of player%} to player
+
+			fullinventorycheck(player)
+			set {_FarmingXPGained::%UUID of player%} to 100
+			give player 1 beetroot named "<##f30f5a>&lBEETROOT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$500"
+
+			remove {_FarmingXPGained::%UUID of player%} from {RequiredXP::%UUID of player%}
+			set player's action bar to "&b&n+%{_FarmingXPGained::%UUID of player%}% XP Gained"
+			set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+			stop
+
+	else:
+		if event-block is beetroot:
+			cancel event
+			stop
+
+
+
+
+
+
+on rightclick on crafting table:
+	if block below event-block is cyan glazed terracotta:
+		cancel event
+
+		if player has 320 wheat named "<##f2ff86>&lWHEAT":
+			play sound "block.note_block.pling" with pitch 2 to player
+			play sound "block.anvil.use" with pitch 2 to player
+
+			send "&a&lCRAFTING TABLE: &7You crafted <##f2ff86>x1 Hay Bale"
+			remove 320 wheat named "<##f2ff86>&lWHEAT" from player's inventory
+			give player 1 of glowing hay bale named "<##f2ff86>&lHAY BALE" with lore "&8Farming Item" and "" and "&7Sell Value: &a$10,000"
+			stop
+
+		else:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&c&lCRAFTING TABLE: &7You need <##f2ff86>x320 Wheat &7to craft a hay bale!"
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Farm: Special Buffs:
+#
+#
+#==========================================================
+
+
+
+
+
+#
+#   Wheat Section
+#
+
+
+
+function runspecialfarmingbuff(p:player):
+	set {_RandomSpecialFarmingBuff} to a random integer between 1 and 3
+
+	if {_RandomSpecialFarmingBuff} = 1:
+		send "&6&lSPECIAL BUFF: &cExplosion Activated!" to {_p}
+		set {_ExplosionZone-SpecialBuff} to {_p}'s location 
+		spawn 1 primed tnt at location 3 meters above {_p}
+		add "{Fuse:30}" to nbt of last spawned primed tnt
+
+		wait 30 ticks
+		
+		play sound "entity.generic.explode" with pitch 2 to {_p}
+		draw 1 explosion at {_ExplosionZone-SpecialBuff} with offset vector(0, 0, 0) with extra 0
+		loop all blocks in radius 8 of {_ExplosionZone-SpecialBuff}:
+			if block at loop-block is ripe wheat plant:
+				remove 15 from {RequiredXP::%UUID of {_p}%}
+				draw 1 poof at loop-block with offset vector(0, 0, 0) with extra 0.1
+				set block at loop-block to air
+				give {_p} 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+
+
+
+	if {_RandomSpecialFarmingBuff} = 2:
+		send "&6&lSPECIAL BUFF: &aCrop Re-Growth!" to {_p}
+
+		set {_RespawnZone-SpecialBuff} to {_p}'s location
+
+		play sound "entity.generic.explode" with pitch 2 to {_p}
+		draw 1 explosion at {_p} with offset vector(0, 0, 0) with extra 0
+		
+		set {_test} to 0
+		loop 8 times:
+			play sound "block.fire.extinguish" with pitch 1 to {_p}
+			add 1 to {_test}
+			loop all blocks in radius {_test} of {_RespawnZone-SpecialBuff}:
+				if block at loop-block is farmland:
+					if block above loop-block is air:
+						draw 2 glow at location 1 meter above loop-block with offset vector(0, 0, 0) with extra 0.25
+						set block at location 1 meter above loop-block to stage 8 wheat plant
+			wait 3 ticks
+
+
+
+	if {_RandomSpecialFarmingBuff} = 3:
+		send "&6&lSPECIAL BUFF: &6Flame Walk!" to {_p}
+		
+		execute console command "/effect give %{_p}% speed 3 1"
+		loop 12 times:
+			play sound "entity.blaze.shoot" with pitch 1.5 to {_p}
+			play sound "entity.firework_rocket.twinkle" with pitch 2 to {_p}
+			loop all blocks in radius 3 of {_p}:
+				if block at loop-block is ripe wheat plant:
+					remove 15 from {RequiredXP::%UUID of {_p}%}
+					draw 1 of dust using dustOption(orange, 2) at loop-block
+					set block at loop-block to air
+					give {_p} 1 wheat named "<##f2ff86>&lWHEAT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$25"
+			wait 5 ticks
+
+
+
+
+
+#
+#   Carrots Section
+#
+
+
+
+
+
+function runspecialfarmingbuff_carrot(p:player):
+	set {_RandomSpecialFarmingBuff} to a random integer between 1 and 3
+
+	if {_RandomSpecialFarmingBuff} = 1:
+		send "&6&lSPECIAL BUFF: &cExplosion Activated!" to {_p}
+		set {_ExplosionZone-SpecialBuff} to {_p}'s location 
+		spawn 1 primed tnt at location 3 meters above {_p}
+		add "{Fuse:30}" to nbt of last spawned primed tnt
+
+		wait 30 ticks
+		
+		play sound "entity.generic.explode" with pitch 2 to {_p}
+		draw 1 explosion at {_ExplosionZone-SpecialBuff} with offset vector(0, 0, 0) with extra 0
+		loop all blocks in radius 8 of {_ExplosionZone-SpecialBuff}:
+			if block at loop-block is ripe carrot plant:
+				remove 30 from {RequiredXP::%UUID of {_p}%}
+				draw 1 poof at loop-block with offset vector(0, 0, 0) with extra 0.1
+				set block at loop-block to air
+				give {_p} 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+
+
+
+	if {_RandomSpecialFarmingBuff} = 2:
+		send "&6&lSPECIAL BUFF: &aCrop Re-Growth!" to {_p}
+
+		set {_RespawnZone-SpecialBuff} to {_p}'s location
+
+		play sound "entity.generic.explode" with pitch 2 to {_p}
+		draw 1 explosion at {_p} with offset vector(0, 0, 0) with extra 0
+		
+		set {_test} to 0
+		loop 8 times:
+			play sound "block.fire.extinguish" with pitch 1 to {_p}
+			add 1 to {_test}
+			loop all blocks in radius {_test} of {_RespawnZone-SpecialBuff}:
+				if block at loop-block is farmland:
+					if block above loop-block is air:
+						draw 2 glow at location 1 meter above loop-block with offset vector(0, 0, 0) with extra 0.25
+						set block at location 1 meter above loop-block to stage 8 carrot plant
+			wait 3 ticks
+
+
+
+	if {_RandomSpecialFarmingBuff} = 3:
+		send "&6&lSPECIAL BUFF: &6Flame Walk!" to {_p}
+		
+		execute console command "/effect give %{_p}% speed 3 1"
+		loop 12 times:
+			play sound "entity.blaze.shoot" with pitch 1.5 to {_p}
+			play sound "entity.firework_rocket.twinkle" with pitch 2 to {_p}
+			loop all blocks in radius 3 of {_p}:
+				if block at loop-block is ripe carrot plant:
+					remove 30 from {RequiredXP::%UUID of {_p}%}
+					draw 1 of dust using dustOption(orange, 2) at loop-block
+					set block at loop-block to air
+					give {_p} 1 carrot named "<##e86525>&lCARROT" with lore "&8Farming Item" and "" and "&7Sell Value: &a$75"
+			wait 5 ticks
+
+
+
+
+#
+#   Potato Section
+#
+
+
+
+
+
+function runspecialfarmingbuff_potato(p:player):
+	set {_RandomSpecialFarmingBuff} to a random integer between 1 and 3
+
+	if {_RandomSpecialFarmingBuff} = 1:
+		send "&6&lSPECIAL BUFF: &cExplosion Activated!" to {_p}
+		set {_ExplosionZone-SpecialBuff} to {_p}'s location 
+		spawn 1 primed tnt at location 3 meters above {_p}
+		add "{Fuse:30}" to nbt of last spawned primed tnt
+
+		wait 30 ticks
+		
+		play sound "entity.generic.explode" with pitch 2 to {_p}
+		draw 1 explosion at {_ExplosionZone-SpecialBuff} with offset vector(0, 0, 0) with extra 0
+		loop all blocks in radius 8 of {_ExplosionZone-SpecialBuff}:
+			if block at loop-block is ripe potato plant:
+				remove 45 from {RequiredXP::%UUID of {_p}%}
+				draw 1 poof at loop-block with offset vector(0, 0, 0) with extra 0.1
+				set block at loop-block to air
+				give {_p} 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+
+
+
+	if {_RandomSpecialFarmingBuff} = 2:
+		send "&6&lSPECIAL BUFF: &aCrop Re-Growth!" to {_p}
+
+		set {_RespawnZone-SpecialBuff} to {_p}'s location
+
+		play sound "entity.generic.explode" with pitch 2 to {_p}
+		draw 1 explosion at {_p} with offset vector(0, 0, 0) with extra 0
+		
+		set {_test} to 0
+		loop 8 times:
+			play sound "block.fire.extinguish" with pitch 1 to {_p}
+			add 1 to {_test}
+			loop all blocks in radius {_test} of {_RespawnZone-SpecialBuff}:
+				if block at loop-block is farmland:
+					if block above loop-block is air:
+						draw 2 glow at location 1 meter above loop-block with offset vector(0, 0, 0) with extra 0.25
+						set block at location 1 meter above loop-block to stage 8 potato plant
+			wait 3 ticks
+
+
+
+	if {_RandomSpecialFarmingBuff} = 3:
+		send "&6&lSPECIAL BUFF: &6Flame Walk!" to {_p}
+		
+		execute console command "/effect give %{_p}% speed 3 1"
+		loop 12 times:
+			play sound "entity.blaze.shoot" with pitch 1.5 to {_p}
+			play sound "entity.firework_rocket.twinkle" with pitch 2 to {_p}
+			loop all blocks in radius 3 of {_p}:
+				if block at loop-block is ripe potato plant:
+					remove 45 from {RequiredXP::%UUID of {_p}%}
+					draw 1 of dust using dustOption(orange, 2) at loop-block
+					set block at loop-block to air
+					give {_p} 1 potato named "<##ca8326>&lPOTATO" with lore "&8Farming Item" and "" and "&7Sell Value: &a$50"
+			wait 5 ticks
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Farm: Farm Skull Animation:
+#
+#
+#==========================================================
+
+
+
+
+
+command /WheatFarmingRespawn [<number>]:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		if arg-1 is 1, 2 or 3:
+			spawn 1 armor stand at player's location with nbt "{NoGravity:1b,Invulnerable:1,Invisible:1}"
+			set helmet of last spawned armor stand to player's tool
+
+			set {WheatFarmingRespawn-ArmourStand-%arg-1%} to last spawned armor stand
+
+			while {WheatFarmingRespawn-ArmourStand-%arg-1%} is alive:
+				set {_LoopNumber} to -180
+				loop 45 times:
+					add 8 to {_LoopNumber}
+					set {WheatFarmingRespawn-RotatingArmourStand-%arg-1%} to location 0.01 meter below {WheatFarmingRespawn-ArmourStand-%arg-1%}
+					set yaw of {WheatFarmingRespawn-RotatingArmourStand-%arg-1%} to {_LoopNumber}
+					teleport {WheatFarmingRespawn-ArmourStand-%arg-1%} to {WheatFarmingRespawn-RotatingArmourStand-%arg-1%}
+					
+					draw 1 firework at location 1 meter above {WheatFarmingRespawn-ArmourStand-%arg-1%} with offset vector(0, 0, 0) with extra 0.1
+					wait 1 tick
+
+				set {_LoopNumber} to -180
+				loop 45 times:
+					add 8 to {_LoopNumber}
+					set {WheatFarmingRespawn-RotatingArmourStand-%arg-1%} to location 0.01 meter above {WheatFarmingRespawn-ArmourStand-%arg-1%}
+					set yaw of {WheatFarmingRespawn-RotatingArmourStand-%arg-1%} to {_LoopNumber}
+					teleport {WheatFarmingRespawn-ArmourStand-%arg-1%} to {WheatFarmingRespawn-RotatingArmourStand-%arg-1%}
+
+					draw 1 firework at location 1 meter above {WheatFarmingRespawn-ArmourStand-%arg-1%} with offset vector(0, 0, 0) with extra 0.1
+					wait 1 tick
+		else:
+			send "&c&lUSAGE: &f/wheatfarmingrespawn <1/2/3>"
+
+
+
+
+
+function respawnwheat(n:number):
+	set {_ChosenRespawnWheat} to a random element out of {WheatLocations-%{_n}%::*}
+
+	if block at {_ChosenRespawnWheat} is not air:
+		loop {WheatLocations-%{_n}%::*}:
+			if block at loop-value is air:
+				set {_ChosenRespawnWheat} to loop-value
+				exit loop
+
+	if block at {_ChosenRespawnWheat} is air:
+
+		set {_WheatDistance} to distance between {_ChosenRespawnWheat} and {WheatFarmingRespawn-ArmourStand-%{_n}%}
+		set {_WheatDistance} to {_WheatDistance} * 2
+		
+		set {_WheatParticle} to vector from {_ChosenRespawnWheat} to location 1 meter above {WheatFarmingRespawn-ArmourStand-%{_n}%}
+
+		set {_WheatRespawnParticleLoc} to location of {_ChosenRespawnWheat}
+		set yaw of {_WheatRespawnParticleLoc} to yaw of {_WheatParticle}
+		set pitch of {_WheatRespawnParticleLoc} to pitch of {_WheatParticle}
+
+		if {ActiveEvent} is "farm - corrupted":
+			loop {_WheatDistance} times:
+				draw 1 of dust using dustOption(purple, 2) at {_WheatRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				draw 1 of crit at {_WheatRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				set {_WheatRespawnParticleLoc} to location 0.5 meter in front of {_WheatRespawnParticleLoc}
+
+			set block at {_ChosenRespawnWheat} to stage 4 beetroot plant
+		else:
+			loop {_WheatDistance} times:
+				draw 1 end rod at {_WheatRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				set {_WheatRespawnParticleLoc} to location 0.5 meter in front of {_WheatRespawnParticleLoc}
+
+			set block at {_ChosenRespawnWheat} to stage 8 wheat plant
+
+
+
+
+
+command /PotatoFarmingRespawn [<number>]:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		if arg-1 is 1, 2 or 3:
+			spawn 1 armor stand at player's location with nbt "{NoGravity:1b,Invulnerable:1,Invisible:1}"
+			set helmet of last spawned armor stand to player's tool
+
+			set {PotatoFarmingRespawn-ArmourStand-%arg-1%} to last spawned armor stand
+
+			while {PotatoFarmingRespawn-ArmourStand-%arg-1%} is alive:
+				set {_LoopNumber} to -180
+				loop 45 times:
+					add 8 to {_LoopNumber}
+					set {PotatoFarmingRespawn-RotatingArmourStand-%arg-1%} to location 0.01 meter below {PotatoFarmingRespawn-ArmourStand-%arg-1%}
+					set yaw of {PotatoFarmingRespawn-RotatingArmourStand-%arg-1%} to {_LoopNumber}
+					teleport {PotatoFarmingRespawn-ArmourStand-%arg-1%} to {PotatoFarmingRespawn-RotatingArmourStand-%arg-1%}
+					
+					draw 1 firework at location 1 meter above {PotatoFarmingRespawn-ArmourStand-%arg-1%} with offset vector(0, 0, 0) with extra 0.1
+					wait 1 tick
+
+				set {_LoopNumber} to -180
+				loop 45 times:
+					add 8 to {_LoopNumber}
+					set {PotatoFarmingRespawn-RotatingArmourStand-%arg-1%} to location 0.01 meter above {PotatoFarmingRespawn-ArmourStand-%arg-1%}
+					set yaw of {PotatoFarmingRespawn-RotatingArmourStand-%arg-1%} to {_LoopNumber}
+					teleport {PotatoFarmingRespawn-ArmourStand-%arg-1%} to {PotatoFarmingRespawn-RotatingArmourStand-%arg-1%}
+
+					draw 1 firework at location 1 meter above {PotatoFarmingRespawn-ArmourStand-%arg-1%} with offset vector(0, 0, 0) with extra 0.1
+					wait 1 tick
+		else:
+			send "&c&lUSAGE: &f/potatofarmingrespawn <1/2/3>"
+
+
+
+
+
+function respawnpotato(n:number):
+	set {_ChosenRespawnPotato} to a random element out of {PotatoLocations-%{_n}%::*}
+
+	if block at {_ChosenRespawnPotato} is not air:
+		loop {PotatoLocations-%{_n}%::*}:
+			if block at loop-value is air:
+				set {_ChosenRespawnPotato} to loop-value
+				exit loop
+
+	if block at {_ChosenRespawnPotato} is air:
+
+		set {_PotatoDistance} to distance between {_ChosenRespawnPotato} and {PotatoFarmingRespawn-ArmourStand-%{_n}%}
+		set {_PotatoDistance} to {_PotatoDistance} * 2
+		
+		set {_WheatParticle} to vector from {_ChosenRespawnPotato} to location 1 meter above {PotatoFarmingRespawn-ArmourStand-%{_n}%}
+
+		set {_PotatoRespawnParticleLoc} to location of {_ChosenRespawnPotato}
+		set yaw of {_PotatoRespawnParticleLoc} to yaw of {_WheatParticle}
+		set pitch of {_PotatoRespawnParticleLoc} to pitch of {_WheatParticle}
+
+		if {ActiveEvent} is "farm - corrupted":
+			loop {_PotatoDistance} times:
+				draw 1 of dust using dustOption(purple, 2) at {_PotatoRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				draw 1 of crit at {_PotatoRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				set {_PotatoRespawnParticleLoc} to location 0.5 meter in front of {_PotatoRespawnParticleLoc}
+
+			set block at {_ChosenRespawnPotato} to stage 4 beetroot plant
+		else:
+			loop {_PotatoDistance} times:
+				draw 1 end rod at {_PotatoRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				set {_PotatoRespawnParticleLoc} to location 0.5 meter in front of {_PotatoRespawnParticleLoc}
+
+			set block at {_ChosenRespawnPotato} to stage 8 potato plant
+
+
+
+
+
+command /CarrotFarmingRespawn [<number>]:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		if arg-1 is 1, 2 or 3:
+			spawn 1 armor stand at player's location with nbt "{NoGravity:1b,Invulnerable:1,Invisible:1}"
+			set helmet of last spawned armor stand to player's tool
+
+			set {CarrotFarmingRespawn-ArmourStand-%arg-1%} to last spawned armor stand
+
+			while {CarrotFarmingRespawn-ArmourStand-%arg-1%} is alive:
+				set {_LoopNumber} to -180
+				loop 45 times:
+					add 8 to {_LoopNumber}
+					set {CarrotFarmingRespawn-RotatingArmourStand-%arg-1%} to location 0.01 meter below {CarrotFarmingRespawn-ArmourStand-%arg-1%}
+					set yaw of {CarrotFarmingRespawn-RotatingArmourStand-%arg-1%} to {_LoopNumber}
+					teleport {CarrotFarmingRespawn-ArmourStand-%arg-1%} to {CarrotFarmingRespawn-RotatingArmourStand-%arg-1%}
+					
+					draw 1 firework at location 1 meter above {CarrotFarmingRespawn-ArmourStand-%arg-1%} with offset vector(0, 0, 0) with extra 0.1
+					wait 1 tick
+
+				set {_LoopNumber} to -180
+				loop 45 times:
+					add 8 to {_LoopNumber}
+					set {CarrotFarmingRespawn-RotatingArmourStand-%arg-1%} to location 0.01 meter above {CarrotFarmingRespawn-ArmourStand-%arg-1%}
+					set yaw of {CarrotFarmingRespawn-RotatingArmourStand-%arg-1%} to {_LoopNumber}
+					teleport {CarrotFarmingRespawn-ArmourStand-%arg-1%} to {CarrotFarmingRespawn-RotatingArmourStand-%arg-1%}
+
+					draw 1 firework at location 1 meter above {CarrotFarmingRespawn-ArmourStand-%arg-1%} with offset vector(0, 0, 0) with extra 0.1
+					wait 1 tick
+		else:
+			send "&c&lUSAGE: &f/Carrotfarmingrespawn <1/2/3>"
+
+
+
+
+
+function respawncarrots(n:number):
+	set {_ChosenRespawnCarrot} to a random element out of {CarrotLocations-%{_n}%::*}
+
+	if block at {_ChosenRespawnCarrot} is not air:
+		loop {CarrotLocations-%{_n}%::*}:
+			if block at loop-value is air:
+				set {_ChosenRespawnCarrot} to loop-value
+				exit loop
+
+	if block at {_ChosenRespawnCarrot} is air:
+
+		set {_CarrotDistance} to distance between {_ChosenRespawnCarrot} and {CarrotFarmingRespawn-ArmourStand-%{_n}%}
+		set {_CarrotDistance} to {_CarrotDistance} * 2
+		
+		set {_WheatParticle} to vector from {_ChosenRespawnCarrot} to location 1 meter above {CarrotFarmingRespawn-ArmourStand-%{_n}%}
+
+		set {_CarrotRespawnParticleLoc} to location of {_ChosenRespawnCarrot}
+		set yaw of {_CarrotRespawnParticleLoc} to yaw of {_WheatParticle}
+		set pitch of {_CarrotRespawnParticleLoc} to pitch of {_WheatParticle}
+
+		if {ActiveEvent} is "farm - corrupted":
+			loop {_CarrotDistance} times:
+				draw 1 of dust using dustOption(purple, 2) at {_CarrotRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				draw 1 of crit at {_CarrotRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				set {_CarrotRespawnParticleLoc} to location 0.5 meter in front of {_CarrotRespawnParticleLoc}
+
+			set block at {_ChosenRespawnCarrot} to stage 4 beetroot plant
+		else:
+			loop {_CarrotDistance} times:
+				draw 1 end rod at {_CarrotRespawnParticleLoc} with offset vector(0, 0, 0) with extra 0
+				set {_CarrotRespawnParticleLoc} to location 0.5 meter in front of {_CarrotRespawnParticleLoc}
+
+			set block at {_ChosenRespawnCarrot} to stage 8 Carrot plant
+
+
+
+
+
+command /runclashgenzfarm:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		send "&a&lFARM ENABLED: &7Farm is now working!"
+		set {disablefarm} to true
+		while {disablefarm} is true:
+			wait 10 ticks
+			loop 4 times:
+				respawnwheat(1)
+				respawnwheat(2)
+				respawnwheat(3)
+
+				respawnpotato(1)
+
+				respawncarrots(1)
+				respawncarrots(2)
+
+
+			if {ActiveEvent} is "farm - rain":
+				loop 3 times:
+					wait 2 ticks
+					respawnwheat(1)
+					respawnwheat(2)
+					respawnwheat(3)
+
+					respawnpotato(1)
+
+					respawncarrots(1)
+					respawncarrots(2)
+
+
+
+
+
+#command /test:
+#	trigger:
+#		loop all blocks in radius 4 of player:
+#			if loop-block is carrot plant:
+#				add location of loop-block to {CarrotLocations-2::*}
+#				set block at loop-block to air
+
+
+

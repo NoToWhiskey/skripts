@@ -1,0 +1,194 @@
+options:
+    prefix: &2(Boosters)&7
+    borders: &e&m          &a&m            &2&m            &a&m            &e&m          &r
+
+command /boosters [<string>] [<offline player>] [<string>] [<number>]:
+    trigger:
+        if arg-1 is not set:
+            send "{@borders}" to sender
+            send "&2Boosters Help" to sender
+            send "&e " to sender
+            send "&2/boosters view &8-> &eView the active boosters." to sender
+            send "&e " to sender
+            send "&a(( ADMIN COMMANDS ))" to sender
+            send "&2/boosters createglobal player time multiplier &8-> &eCreates a global booster." to sender
+            send "&2/boosters createLocal player time multiplier &8-> &eCreates a local booster." to sender
+            send "&2/boosters stopglobal &8-> &eStops the current global booster." to sender
+            send "&2/boosters stoplocal player &8-> &eStops the current local booster for player." to sender
+            send "&2/boosters giveglobal player time multiplier" to sender
+            send "&2/boosters givelocal player time multiplier" to sender
+            send "{@borders}" to sender
+        if arg-1 = "view":
+            open chest inventory with 3 rows named "&2Boosters" to player
+            Inventory_FillInventory(player, 27)
+            format gui slot 12 of player with barrier named "&a(( GET A GLOBAL BOOSTER @ /BUY ))"
+            format gui slot 14 of player with barrier named "&a(( GET A LOCAL BOOSTER @ /BUY))"
+            if {boosters::globalbooster::*} is set:
+                format gui slot 12 of player with skull of ({boosters::globalbooster::person} parsed as an offline player) named "&2Global Booster" with lore " " and "&aBooster Amount: &2x%{boosters::globalbooster::amount}%" and "&aBooster Duration: &2%{boosters::globalbooster::time} / 60% &2minutes"
+            if {boosters::localbooster::%uuid of player%::*} is set:
+                format gui slot 14 of player with skull of ({boosters::localbooster::%uuid of player%::name} parsed as an offline player) named "&2Local Booster" with lore " " and "&aBooster Amount: &2x%{boosters::localbooster::%uuid of player%::amount}%" and "&aBooster Duration: &2%{boosters::localbooster::%uuid of player%::time} / 60% &2minutes"
+        if arg-1 = "createGlobal":
+            if sender is not console:
+                if sender does not have permission "boosters.admin":
+                    send "{@prefix} You don't have permission for this command." to sender
+                    stop
+            if arg-2 or arg-3 or arg-4 is not set:
+                send "{@prefix} &aUsage: &e/boosters createGlobal (player) (time) (multiplier)" to sender
+                stop
+            if {boosters::globalbooster::*} is set:
+                send "{@prefix} There's already a ongoing global booster." to sender
+                stop
+            String_ReturnTime(arg-3) != false
+            set {boosters::globalbooster::person} to name of arg-2
+            set {boosters::globalbooster::time} to String_ReturnTime(arg-3)
+            set {boosters::globalbooster::remainingtime} to {boosters::globalbooster::time}
+            set {boosters::globalbooster::amount} to arg-4
+            send "{@borders}" to all players
+            send "&2&lGLOBAL BOOSTER ALERT" to all players
+            send "&e " to all players
+            send "&a(( GET YOUR OWN BOOSTER @ /BUY ))" to all players
+            send "&eActivated By: &2%{boosters::globalbooster::person}%" to all players
+            send "&eBooster Amount: &2x%{boosters::globalbooster::amount}%" to all players
+            send "&eBooster Duration: &2%{boosters::globalbooster::time} / 60% &2minutes" to all players
+            send "{@borders}" to all players
+            Staff_AlertStaff("&2%sender% &astarted a global booster")
+            stop
+        if arg-1 = "createLocal":
+            if sender is not console:
+                if sender does not have permission "boosters.admin":
+                    send "{@prefix} You don't have permission for this command." to sender
+                    stop
+            if arg-2 or arg-3 or arg-4 is not set:
+                send "{@prefix} &aUsage: &e/boosters createLocal (player) (time) (multiplier)" to sender
+                stop
+            if {boosters::localbooster::%uuid of arg-2%::*} is set:
+                send "{@prefix} There's already a ongoing local booster for &2%arg-2%." to sender
+                stop
+            String_ReturnTime(arg-3) != false
+            set {boosters::localbooster::%uuid of arg-2%::name} to name of arg-2
+            set {boosters::localbooster::%uuid of arg-2%::time} to String_ReturnTime(arg-3)
+            set {boosters::localbooster::%uuid of arg-2%::amount} to arg-4
+            send "{@borders}" to all players
+            send "&2&lLOCAL BOOSTER ALERT" to all players
+            send "&e " to all players
+            send "&a(( GET YOUR OWN BOOSTER @ /BUY OR /GEMSHOP ))" to all players
+            send "&eActivated For: &2%{boosters::localbooster::%uuid of arg-2%::name}%" to all players
+            send "&eBooster Amount: &2x%{boosters::localbooster::%uuid of arg-2%::amount}%" to all players
+            send "&eBooster Duration: &2%{boosters::localbooster::%uuid of arg-2%::time} / 60% &2minutes" to all players
+            send "{@borders}" to all players
+            Staff_AlertStaff("&2%sender% &astarted a local booster for &2%arg-2%")
+            stop
+        if arg-1 = "stopGlobal":
+            if {boosters::globalbooster::*} is not set:
+                send "{@prefix} There isn't a active booster." to sender
+                stop
+            send "{@borders}" to all players
+            send "&2&lGLOBAL BOOSTER ALERT" to all players
+            send "&e " to all players
+            send "&a(( BOOSTER ENDED GET ANOTHER ONE @ /BUY ))" to all players
+            send "&eActivated by: &2%{boosters::globalbooster::person}%" to all players
+            send "&eStopped by: &2%sender%" to all players
+            send "{@borders}" to all players
+            delete {boosters::globalbooster::*}
+            send "{@prefix} You stopped the global boosted." to sender
+            Staff_AlertStaff("&2%sender% &astopped the global booster")
+            stop
+        if arg-1 = "stopLocal":
+            if arg-2 is not set:
+                send "{@prefix} &aUsage: &e/boosters (player)" to sender
+                stop
+            if {boosters::localbooster::%uuid of arg-2%::*} is not set:
+                send "{@prefix} This player doesn't have a active booster." to sender
+                stop
+            send "{@borders}" to all players
+            send "&2&lLOCAL BOOSTER ALERT" to all players
+            send "&e " to all players
+            send "&a(( BOOSTER ENDED GET ANOTHER ONE @ /BUY ))" to all players
+            send "&eActivated For: &2%{boosters::localbooster::%uuid of arg-2%::name}%" to all players
+            send "&eStopped by: &2%sender%" to all players
+            send "{@borders}" to all players
+            delete {boosters::localbooster::%uuid of arg-2%::*}
+            send "{@prefix} You stopped the local booster for &2%arg-2%." to sender
+            Staff_AlertStaff("&2%sender% &astopped the local booster for &2%arg-2%")
+            stop
+        if arg-1 = "giveGlobal":
+            if sender is not console:
+                if sender does not have permission "boosters.admin":
+                    send "{@prefix} You don't have permission for this command." to sender
+                    stop
+            if arg-2 or arg-3 or arg-4 is not set:
+                send "{@prefix} &aUsage: &e/boosters giveGlobal (player) (time) (multiplier)" to sender
+                stop
+            String_ReturnTime({_time::3}) != false
+            if arg-2 is online:
+                send "{@prefix} You gave &2%arg-2% &ea Local Booster." to sender
+                add 1 of glowing paper named "&2Global Booster" with lore " " and "&aBooster Amount: &2%arg-4%" and "&aBooster Time: &2%arg-3%" to inventory of arg-2
+                Staff_AlertStaff("&2%sender% &agave &2%arg-2% &aa Global Booster.")
+                stop
+            add "Global Booster | %arg-3% | %arg-4%" to {boosters::vouchertogive::%uuid of arg-2%::*}
+            send "{@prefix} You gave &2%arg-2% &ea Global Booster." to sender
+            Staff_AlertStaff("&2%sender% &agave &2%arg-2% &aa Global Booster.")
+            stop
+        if arg-1 = "giveLocal":
+            if sender is not console:
+                if sender does not have permission "boosters.admin":
+                    send "{@prefix} You don't have permission for this command." to sender
+                    stop
+            if arg-2 or arg-3 or arg-4 is not set:
+                send "{@prefix} &aUsage: &e/boosters giveGlobal (player) (time) (multiplier)" to sender
+                stop
+            String_ReturnTime({_time::3}) != false
+            if arg-2 is online:
+                send "{@prefix} You gave &2%arg-2% &ea Local Booster." to sender
+                add 1 of glowing paper named "&2Local Booster" with lore " " and "&aBooster Amount: &2%arg-4%" and "&aBooster Time: &2%arg-3%" to inventory of arg-2
+                Staff_AlertStaff("&2%sender% &agave &2%arg-2% &aa Local Booster.")
+                stop
+            add "Local Booster | %arg-3% | %arg-4%" to {boosters::vouchertogive::%uuid of arg-2%::*}
+            send "{@prefix} You gave &2%arg-2% &ea Local Booster." to sender
+            Staff_AlertStaff("&2%sender% &agave &2%arg-2% &aa Local Booster.")
+            stop
+
+on right click with paper:
+    set {_type} to uncoloured name of player's held item
+    set {_time::*} to uncoloured line 3 of the lore of the player's held item split at ": "
+    set {_amount::*} to uncoloured line 2 of the lore of the player's held item split at ": "
+    if {_type} = "Local Booster":
+        {boosters::localbooster::%uuid of player%::*} is not set
+        String_ReturnTime({_time::2}) != false
+        execute console command "/boosters createLocal %player% %{_time::2}% %{_amount::2}%"
+        remove 1 of player's tool from inventory of player
+    if {_type} = "Global Booster":
+        {boosters::globalbooster::*} is not set
+        String_ReturnTime({_time::2}) != false
+        execute console command "/boosters createGlobal %player% %{_time::2}% %{_amount::2}%"
+        remove 1 of player's tool from inventory of player
+
+on join:
+    {boosters::vouchertogive::%uuid of player%::*} is set
+    loop {boosters::vouchertogive::%uuid of player%::*}:
+        set {_data::*} to loop-value split at " | "
+        add 1 of glowing paper named "&2%{_data::1}%" with lore " " and "&aBooster Amount: &2%{_data::2}%" and "&aBooster Time: &2%{_data::3}%" to inventory of player
+        delete {boosters::vouchertogive::%uuid of player%::%loop-index%}
+
+every 1 second:
+    if {boosters::globalbooster::*} is set:
+        remove 1 from {boosters::globalbooster::time}
+        if {boosters::globalbooster::time} <= 0:
+            send "{@borders}" to all players
+            send "&2&lGLOBAL BOOSTER ALERT" to all players
+            send "&e " to all players
+            send "&a(( BOOSTER ENDED GET ANOTHER ONE @ /BUY ))" to all players  
+            send "&eActivated by: &2%{boosters::globalbooster::person}%" to all players
+            send "{@borders}" to all players
+            delete {boosters::globalbooster::*}
+    loop all players:
+        if {boosters::localbooster::%uuid of loop-player%::*} is set:
+            remove 1 from {boosters::localbooster::%uuid of loop-player%::time}
+            if {boosters::localbooster::%uuid of loop-player%::time} <= 0:
+                send "{@borders}" to all players
+                send "&2&lLOCAL BOOSTER ALERT" to all players
+                send "&e " to all players
+                send "&a(( BOOSTER ENDED GET ANOTHER ONE @ /BUY OR /GEMSHOP ))" to all players
+                send "&eActivated For: &2%{boosters::localbooster::%uuid of loop-player%::name}%" to all players
+                send "{@borders}" to all players
+                delete {boosters::localbooster::%uuid of loop-player%::*}

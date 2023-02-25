@@ -1,0 +1,429 @@
+options:
+    serverip: AbyssGN.minehut.gg
+    discordlink: https://discord.gg/bDWXHeCWnW
+    storelink: https://AbyssGN.tebex.io
+    prefix: &5&lAbyss &8¬&7
+    messageborders: &8&m                                                  &r
+
+every 600 seconds:
+    execute console command "/chat broadcast &dDid you know AbyssGN has a &5/discord? &dGo join it! We host giveaways and announce important stuff"
+    wait 150 seconds
+    execute console command "/chat broadcast &dHave trouble starting? Do /guide list!"
+    wait 150 seconds
+    execute console command "/chat broadcast &dYou know that we have mining? /warp mine && /guide tokens"
+    wait 150 seconds
+    execute console command "/chat broadcast &dEnjoy the server? Consider donating!"
+
+
+on respawn:
+    teleport player to location at {spawn}
+
+command /store:
+    trigger:
+        send "{@prefix} &d&7{@storelink}"
+
+command /buy:
+    trigger:
+        send "{@prefix} &d&7{@storelink}"
+
+on join:
+    execute player command "/spawn"
+    if {joinedplayers::*} does not contain uuid of player:
+        set join message to "&5NEW JOIN &7- &d%player% &7(%size of {joinedplayers::*} + 1%)"
+        add uuid of player to {joinedplayers::*}
+        set {chatcolor::%uuid of player%} to "&7"
+        set {shop::boosters::%uuid of player%} to 1
+        set {tokens::players::tcount::%uuid of player%} to 0
+        send "{@messageborders}" to player
+        send "&dWelcome to &5&lAbyss, &5%name of player%" to player
+        send "&dYou are the ##%size of {joinedplayers::*}% &djoin" to player
+        send "&d" to player
+        send "&dDiscord: &5{@discordlink}" to player
+        send "&dStore: &5{@storelink}" to player
+        send "&dServer IP: &5{@serverip}" to player
+        send "" to player
+        send "&7&o(( If you have a donator rank, Be sure to do /reclaim ))" to player
+        send "&7&o(( Refered by a player? Do /refer theirname ))" to player
+        send "&7&o(( Start your adventures with /start & /guide ))" to player
+        send "{@messageborders}" to player
+        wait 1 second
+    else if {joinedplayers::*} contains uuid of player:
+        if {chatcolor::%uuid of player%} isn't set:
+            set {chatcolor::%uuid of player%} to "&7"
+        send "{@messageborders}" to player
+        send "&dWelcome back to &5&lAbyss, &5%name of player%" to player
+        send "&r" to player
+        send "&dDiscord: &5{@discordlink}" to player
+        send "&dStore: &5{@storelink}" to player
+        send "&dServer IP: &5{@serverip}" to player
+        send "{@messageborders}" to player
+        if {tag::%uuid of player%} isn't set:
+            set {tag::%uuid of player%} to ""
+        if player has permission "staff.ya":
+            set join message to "&5STAFF JOIN &7- &d%player%"
+            stop
+        if player has permission "donator.ya":
+            set join message to "&5DONATOR JOIN &7- &d%player%"
+            stop
+        set join message to ""
+
+on join:
+    wait 1 tick
+    execute player command "/spawn"
+
+on quit:
+    if player has permission "staff.ya":
+        set quit message to "&5STAFF LEAVE &7- &d%player%"
+        stop
+    if player has permission "donator.ya":
+        set quit message to "&5DONATOR LEAVE &7- &d%player%"
+        stop
+    set quit message to ""
+    if {refer::%uuid of player%} is not set:
+        set {refer::%uuid of player%} to true
+
+command /refer [<player>]:
+    trigger:
+        if {refer::%uuid of player%} is set:
+            PlaySound(player, "ENTITY_VILLAGER_NO")
+            send action bar "{@prefix} You can't do this anymore" to player
+            stop
+        if {refer::%uuid of player%} is not set:
+            set {refer::%uuid of player%} to true
+            PlaySound(player, "ENTITY_VILLAGER_YES")
+            PlaySound(arg-1, "ENTITY_VILLAGER_YES")
+            set {_rand} to a random integer between 1 and 10
+            if {_rand} = 1 or 2 or 3 or 4:
+                send action bar "{@prefix} &5%arg-1% &drecieved &5$10,000 &dfor referring you to our server!" to player
+                send action bar "{@prefix} &5%name of player% &dhas been referred by you, enjoy your &5$10,000!" to arg-1
+                add 10000 to balance of arg-1
+                stop
+            if {_rand} = 5 or 6 or 7 or 8:
+                send action bar "{@prefix} &5%arg-1% &drecieved &5$25,000 &dfor referring you to our server!" to player
+                send action bar "{@prefix} &5%name of player% &dhas been referred by you, enjoy your &5$25,000!" to arg-1
+                add 25000 to balance of arg-1
+                stop
+            if {_rand} = 9:
+                send action bar "{@prefix} &5%arg-1% &drecieved &5+0.03 &dmultiplier for referring you to our server!" to player
+                send action bar "{@prefix} &5%name of player% &dhas been referred by you, enjoy your &5+0.025 &dmultiplier!" to arg-1
+                execute console command "multiplier %arg-1% 0.03"
+                stop
+            if {_rand} = 10:
+                send action bar "{@prefix} &5%arg-1% &drecieved &51+ &dgen slot for referring you to our server!" to player
+                send action bar "{@prefix} &5%name of player% &dhas been referred by you, enjoy your &5+1 &dgen slot!" to arg-1
+                execute console command "gensadmin add %arg-1% 1"
+                stop
+
+command /resetreclaim [<player>]:
+    trigger:
+        delete {reclaimed::%uuid of arg-1%}
+
+command /rules:
+    trigger:
+        send "&r" to player
+        send "{@messageborders}" to player
+        send "&5&lRULES" to player
+        send "&r" to player
+        send "&7##1 &5No Hacking" to player
+        send "&7##2 &5No Glitching / Exploiting" to player
+        send "&7##3 &5No Stealing" to player
+        send "&7##4 &5No Macros" to player
+        send "&7##5 &5No Autoclicker / Auto Miner" to player
+        send "&7##6 &5No Boosting, You can give a friend a bit of money to start out" to player
+        send "&7##7 &5No Excessive Chat Spam" to player
+        send "&7##8 &5No Scamming AT ALL" to player
+        send "&7##9 &5Cursing is allowed but not directly to other people / no racism" to player
+        send "&7##10 &5Only 1 alt &5&lPER &5IP" to player
+        send "{@messageborders}" to player
+        
+command /stats [<offline player>]:
+    trigger:
+        if arg-1 is not set:
+            send action bar "{@prefix} Please supply a player as your second argument" to player
+            stop
+        send "" to player
+        send "{@messageborders}" to player
+        send "&5&lSTATS OF %arg-1%" to player
+        send "" to player
+        send "&dGens: &5%{gens::user_data::%uuid of arg-1%::gens_placed} ? ""NOT ONLINE""%&5/%{gens::user_data::%uuid of arg-1%::gen_slots} ? ""NOT ONLINE""%" to player
+        send "&dMultiplier: &5x%{shop::boosters::%uuid of arg-1%}%" to player
+        send "&dTokens: &5%{tokens::players::tcount::%uuid of arg-1%}%" to player
+        send "&dBalance: &5%balance of arg-1%"
+        send "{@messageborders}" to player
+
+command /updatedonos [<number>]:
+    permission: op
+    trigger:
+        add arg-1 to {donations}
+
+command /payouts:
+    trigger:
+        send "&r" to player
+        send "{@messageborders}" to player
+        send "&5&lPAYOUTS" to player
+        send "&r" to player
+        send "&dBaltop 1: &5$15 PayPal" to player
+        send "&dBaltop 2: &5$10 PayPal" to player
+        send "&dBaltop 3: &5$10 Store Credit" to player
+        send " " to player
+        send "&dTokens Top 1: &5$15 PayPal" to player
+        send "&dTokens Top 2: &5$10 PayPal" to player
+        send "&dTokens Top 3: &5$10 Store Credit" to player
+        send "&r" to player
+        send "&7&oWe will only do PayPal Payouts if the $100 dono goal is met!" to player
+        send "{@messageborders}" to player
+
+command /guide [<string>]:
+    trigger:
+        if arg-1 is not set:
+            send "&7" to player
+            send "{@messageborders}" to player
+            send "&5&lGUIDE LIST" to player
+            send "&r" to player
+            send "&d/guide tokens" to player
+            send "&d/guide refer" to player
+            send "&d/guide gens" to player
+            send "{@messageborders}" to player
+            stop
+        if arg-1 = "tokens":
+            send "&7" to player
+            send "{@messageborders}" to player
+            send "&5&lGUIDE: TOKENS" to player
+            send "&r" to player
+            send "&dWhat are tokens?" to player
+            send "&7&o Tokens is a currency used for multiplier and gen slots!" to player
+            send "&dHow can I get tokens?" to player
+            send "&7&o Go to /warp mine and start mining gold ores," to player
+            send "&7&o The gold ore regenerates every &5&o60 seconds! &5&o/tokens shop" to player
+            send "&dOMG MY TOKENS AREN'T SHOWING UP SCAM!!!!    " to player
+            send "&7&o No it is not, It is given to your inventory, You can claim it" to player
+            send "&7&o by right clicking when you hold the tokens." to player
+            send "&dHow can I claim tokens faster?" to player
+            send "&7&o Donators get to claim tokens in stacks, &5&o/buy!" to player
+            send "{@messageborders}" to player
+        if arg-1 = "refer":
+            send "&7" to player
+            send "{@messageborders}" to player
+            send "&5&lGUIDE: REFER" to player
+            send "&r" to player
+            send "&dHow do I refer people?" to player
+            send "&7&o When the person joins the server for the first time," to player
+            send "&7&o Tell them to execute the command &5&o/refer yourname!" to player
+            send "&dWhat do I get from referring people?" to player
+            send "&5&o 40%% chance: &7&o$10,000" to player
+            send "&5&o 40%% chance: &7&o$25,000" to player
+            send "&5&o 10%% chance: &7&o+0.03 multiplier" to player
+            send "&5&o 10%% chance: &7&o+1 gen slot" to player
+            send "&r" to player
+            send "&7&oThe command for tokens related stuff is &5/tokens help" to player
+            send "{@messageborders}" to player
+        if arg-1 = "gens":
+            send "&7" to player
+            send "{@messageborders}" to player
+            send "&5&lGUIDE: GENS" to player
+            send "&r" to player
+            send "&dHow do I buy more gens?" to player
+            send "&5&o /shop &7&o=> generator" to player
+            send "&dHow do I upgrade my gen?" to player
+            send "&5&o shift + left click on them" to player
+            send "&dHow do I pickup my gens?" to player
+            send "&5&o Mine them" to player
+            send "&dHow much does this and that sell for?" to player
+            send "&5&o /gens list &7&oshows a list of all the gens, their drop, their drop's sell price, and their upgrade!" to player
+            send "&r" to player
+            send "&7&oThe command for gens related stuff is &5/gens help" to player
+            send "{@messageborders}" to player
+
+command /start:
+    trigger:
+        if {hasplayed::%uuid of player%} is not set:
+            execute player command "plot auto"
+            execute player command "kit default"
+            execute console command "gens give %player% coal_ore 1"
+            set {hasplayed::%uuid of player%} to true
+            
+
+command /discord:
+    trigger:
+        send "&r" to player
+        send "{@messageborders}" to player
+        send "&5{@discordlink}" to player
+        send "{@messageborders}" to player
+
+command /spawn [<string>]:
+    trigger:
+        if arg-1 isn't set:
+            if {spawn} is set:
+                PlaySound(player, "ENTITY_VILLAGER_YES")
+                send action bar "{@prefix} Welcome to spawn!" to player
+                teleport player to location at {spawn}
+            if {spawn} is not set:
+                send action bar "{@prefix} The spawnpoint isn't set!" to player
+                PlaySound(player, "ENTITY_VILLAGER_NO")
+        if arg-1 = "set":
+            if player has permission "spawn.set":
+                set {spawn} to location of player
+                PlaySound(player, "ENTITY_VILLAGER_YES")
+                send action bar "{@prefix} You set the spawn point to your current location!" to player
+
+function ChatColor(plr: player, perm: string, color: string):
+    if {_plr} has permission "chatcolor.%{_perm}%":
+        set {_uuid} to uuid of {_plr}
+        close inventory of {_plr}
+        set {chatcolor::%{_uuid}%} to "%{_color}%"
+        PlaySound({_plr}, "ENTITY_VILLAGER_YES")
+        send action bar "{@prefix} You set your chat color to %{_color}%this" to {_plr}
+    if {_plr} does not have permission "chatcolor.%{_perm}%":
+        close inventory of {_plr}
+        PlaySound({_plr}, "ENTITY_VILLAGER_NO")
+        send action bar "{@prefix} You don't have this donator feature..." to {_plr}
+
+command /chatcolor:
+    aliases: /cc
+    trigger:
+        if player has permission "chatcolor.use":
+            open chest inventory with 4 rows named "&5Chat Color" to player
+            loop 36 times:
+                format gui slot (loop-number - 1) of player with pink stained glass pane named " "
+            format gui slot 10 of player with name tag named "&7GRAY" to run function ChatColor(player, "gray", "&7")
+            format gui slot 11 of player with name tag named "&fWHITE" to run function ChatColor(player, "white", "&f")
+            format gui slot 12 of player with name tag named "&eYELLOW" to run function ChatColor(player, "yellow", "&e")
+            format gui slot 13 of player with name tag named "&cRED" to run function ChatColor(player, "red", "&c")
+            format gui slot 14 of player with name tag named "&6GOLD" to run function ChatColor(player, "gold", "&6")
+            format gui slot 15 of player with name tag named "&aGREEN" to run function ChatColor(player, "green", "&a")
+            format gui slot 15 of player with name tag named "&bAQUA" to run function ChatColor(player, "aqua", "&b")
+            format gui slot 16 of player with name tag named "&3DARK AQUA" to run function ChatColor(player, "daqua", "&3")
+            format gui slot 21 of player with name tag named "&dPINK" to run function ChatColor(player, "pink", "&d")
+            format gui slot 22 of player with name tag named "&9PURPLE" to run function ChatColor(player, "purple", "&9")
+            format gui slot 23 of player with name tag named "&5MAGENTA" to run function ChatColor(player, "magenta", "&5")
+        if player does not have permission "chatcolor.use":
+            PlaySound(player, "ENTITY_VILLAGER_NO")
+            send action bar "{@prefix} You don't have this donator feature... &7/buy" to player
+
+on chat:
+    if message starts with "@ ":
+        if player has permission "staff.ya":
+            cancel event
+            set {_msg} to message
+            replace "@ " in {_msg} with ""
+            send "&5&l[SC] &d%player's prefix%&d%name of player%&f: &f%{_msg}%" to all players where [input has permission "staff.ya"]
+
+function Reclaim(plr: player, gs: integer, mp: number, sw: integer):
+    set {_uuid} to uuid of {_plr}
+    PlaySound({_plr}, "ENTITY_VILLAGER_YES")
+    send action bar "{@prefix} You have reclaimed your perks for this season" to {_plr}
+    add {_gs} to {gens::user_data::%{_uuid}%::gen_slots}
+    execute console command "multiplier %{_plr}% %{_mp}%"
+    execute console command "sellwandsadmin %{_plr}% %{_sw}%"
+    execute console command "chat broadcast &5%{_plr}% &dhas reclaimed their perks from their rank! &7/buy"
+
+command /reclaim:
+    trigger:
+        if player does not have permission "reclaim.use":
+            PlaySound(player, "ENTITY_VILLAGER_NO")
+            send action bar "{@prefix} You don't have something to reclaim..." to player
+            stop
+        if {reclaimed::%uuid of player%} is set:
+            PlaySound(player, "ENTITY_VILLAGER_NO")
+            send action bar "{@prefix} You already reclaimed your perks for this season..." to player
+            stop
+        if {reclaimed::%uuid of player%} is not set:
+            set {reclaimed::%uuid of player%} to true
+            if player has permission "reclaim.opal":
+                Reclaim(player, 25, 3, 7)
+                stop
+            if player has permission "reclaim.jade":
+                Reclaim(player, 20, 2.5, 6)
+                stop
+            if player has permission "reclaim.ruby":
+                Reclaim(player, 15, 2, 5)
+                stop
+            if player has permission "reclaim.topaz":
+                Reclaim(player, 10, 1.75, 4)
+                stop
+            if player has permission "reclaim.amber":
+                Reclaim(player, 5, 1.5, 3)
+                stop
+
+command /ping [<player>]:
+    trigger:
+        if arg-1 is not set:
+            PlaySound(player, "ENTITY_VILLAGER_NO")
+            send action bar "{@prefix} Please supply a player as your 2nd argument" to player
+        if arg-1 is set:
+            send action bar "{@prefix} &5%arg-1%'s &dping is &5%ping of arg-1%" to player
+
+command /chat [<string>] [<string>]:
+    permission: chat.control
+    trigger:
+        if arg-1 is not set:
+            send action bar "{@prefix} Do &5/chat help" to player
+            stop
+        if arg-1 = "help":
+            send "&7" to player
+            send "{@messageborders}" to player
+            send "&5CHAT HELP MENU" to player
+            send "&7" to player
+            send "&5/chat mute reason &7- &dMutes / Unmutes the chat" to player
+            send "&5/chat clear reason &7- &dClears the chat" to player
+            send "{@messageborders}" to player
+        if arg-1 = "mute":
+            if {chatmuted} is not set:
+                set {chatmuted} to false
+            if arg-2 is set:
+                if {chatmuted} = true:
+                    broadcast ""
+                    broadcast "&5%player% &dhas unmuted the chat! Reason: &5%arg-2%"
+                    broadcast ""
+                    set {chatmuted} to false
+                    stop
+                if {chatmuted} = false:
+                    broadcast ""
+                    broadcast "&5%player% &dhas muted the chat! Reason: &5%arg-2%"
+                    broadcast ""
+                    set {chatmuted} to true
+                    stop
+            if arg-2 is not set:
+                if {chatmuted} = true:
+                    broadcast ""
+                    broadcast "&5%player% &dhas unmuted the chat! Reason: &7None provided :/"
+                    broadcast ""
+                    set {chatmuted} to false
+                    stop
+                if {chatmuted} = false:
+                    broadcast ""
+                    broadcast "&5%player% &dhas muted the chat! Reason: &7None provided :/"
+                    broadcast ""
+                    set {chatmuted} to true
+                    stop
+        if arg-1 = "clear":
+            if arg-2 is set:
+                loop 1000 times:
+                    broadcast ""
+                broadcast "&5%player% &dhas cleared the chat! Reason: &5%arg-2%"
+            if arg-2 is not set:
+                loop 1000 times:
+                    broadcast ""
+                broadcast "&5%player% &dhas cleared the chat! Reason: &7None provided :/"
+        if arg-1 = "broadcast":
+            loop all players:
+                PlaySound(loop-player, "ENTITY_VILLAGER_YES")
+                send "{@prefix} %coloured arg-2%" to loop-player
+
+every second:
+    if {voterestart::*} is set:
+        remove 1 from {voterestart::timer}
+        if {voterestart::timer} < 0:
+            delete {voterestart::*}
+            broadcast "{@prefix} The voterestart has been cancelled..."
+
+on chat:
+    set chat format to "%player's prefix%%player's displayname%&f: %coloured {chatcolor::%uuid of player%} ? ""&7""%%message%"
+    if {chatmuted} = true:
+        if player does not have permission "chat.bypassmute":
+            cancel event
+            PlaySound(player, "ENTITY_VILLAGER_NO")
+            send action bar "{@prefix} Chat is currently muted..." to player
+
+on anvil rename:
+    cancel event

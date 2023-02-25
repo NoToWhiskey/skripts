@@ -1,0 +1,21 @@
+on join:
+    while player is online:
+        toggle scoreboard of player on
+        Scoreboard(player)
+        set title of player's scoreboard to "&5&lAbyssGN &8| &dSeason 1"
+        wait 20 ticks
+
+function Scoreboard(plr: player):
+    set {_uuid} to uuid of {_plr}
+    set {_upper} to "%{_plr}%" in uppercase
+    set line 15 of {_plr}'s scoreboard to " "
+    set line 14 of {_plr}'s scoreboard to "&5&l%{_upper}%"
+    set line 13 of {_plr}'s scoreboard to " &d| &fBalance: &d%balance of {_plr}%"
+    set line 12 of {_plr}'s scoreboard to " &d| &fGens: &d%{gens::user_data::%{_uuid}%::gens_placed}%/%{gens::user_data::%{_uuid}%::gen_slots}%"
+    set line 11 of {_plr}'s scoreboard to " &d| &fMultiplier: &d%{shop::boosters::%{_uuid}%}%"
+    set line 10 of {_plr}'s scoreboard to " &d| &fTokens: &d%{tokens::players::tcount::%{_uuid}%}%"
+    set line 9 of {_plr}'s scoreboard to " "
+    set line 8 of {_plr}'s scoreboard to "&5&lSERVER"
+    set line 7 of {_plr}'s scoreboard to " &d| &fJoins: &d%size of {joinedplayers::*}%"
+    set line 6 of {_plr}'s scoreboard to " &d| &fDono Goal: &d%{donations}%/100"
+    set line 5 of {_plr}'s scoreboard to " &d| &fTPS: &d%tps from the last 1 minute%"

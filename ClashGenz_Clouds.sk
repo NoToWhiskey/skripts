@@ -1,0 +1,2178 @@
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Clothes Store:
+#
+#
+#==========================================================
+
+
+
+
+
+on rightclick on armor stand:
+	if display name of clicked entity is "&6&l$ BUY CLOTHES $":
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part9":
+			buyclothes_robberysuit(player)
+			stop
+
+		if {QuestStatus-TheClouds::%UUID of player%} is not "Not Started":
+			buyclothes_hotelworksuit(player)
+			stop
+
+
+
+
+
+function buyclothes_robberysuit(p:player):
+	play sound "block.note_block.bit" with pitch 2 to {_p}
+	play sound "block.note_block.didgeridoo" with pitch 2 to {_p}
+
+	set metadata tag "BuyClothes_RobberySuit" of {_p} to chest inventory with 6 rows named "&8Robbery Suit"
+	set slot 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of metadata tag "BuyClothes_RobberySuit" of {_p} to black stained glass pane named "&7"
+
+	set slot 3, 4, 5, 12, 14, 21, 23, 30, 32, 39, 40 and 41 of metadata tag "BuyClothes_RobberySuit" of {_p} to lime stained glass pane named "&aCLICK TO PURCHASE!"
+
+	set slot 13 of metadata tag "BuyClothes_RobberySuit" of {_p} to 1 leather chestplate named "&2Robbery Chestplate" with lore "&8Cloud Item!" and "" and "&7Want to rob the casino?" and "&7Don't get caught with this suit!" and "" and "&aPurchase Set For:" and "&7- &a$2,500,000" and "&7- &6x64 Golden Carrots" and "&7- &ex64 Hay Bales" and "&7- &7x128 Cave Dust" with nbt "{HideFlags:127,display:{color:2045728}}"
+	set slot 22 of metadata tag "BuyClothes_RobberySuit" of {_p} to 1 leather leggings named "&2Robbery Leggings" with lore "&8Cloud Item!" and "" and "&7Want to rob the casino?" and "&7Don't get caught with this suit!" and "" and "&aPurchase Set For:" and "&7- &a$2,500,000" and "&7- &6x64 Golden Carrots" and "&7- &ex64 Hay Bales" and "&7- &7x128 Cave Dust" with nbt "{HideFlags:127,display:{color:739085}}"
+	set slot 31 of metadata tag "BuyClothes_RobberySuit" of {_p} to 1 leather boots named "&2Robbery Boots" with lore "&8Cloud Item!" and "" and "&7Want to rob the casino?" and "&7Don't get caught with this suit!" and "" and "&aPurchase Set For:" and "&7- &a$2,500,000" and "&7- &6x64 Golden Carrots" and "&7- &ex64 Hay Bales" and "&7- &7x128 Cave Dust" with nbt "{HideFlags:127,display:{color:739085}}"
+
+
+	set slot 19 of metadata tag "BuyClothes_RobberySuit" of {_p} to 1 healing tipped arrow named "&cCan't Switch"
+	set slot 25 of metadata tag "BuyClothes_RobberySuit" of {_p} to 1 healing tipped arrow named "&cCan't Switch"
+
+	set slot 49 of metadata tag "BuyClothes_RobberySuit" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "BuyClothes_RobberySuit" of {_p}) to {_p}
+	stop
+
+
+
+function buyclothes_hotelworksuit(p:player):
+	play sound "block.note_block.bit" with pitch 2 to {_p}
+	play sound "block.note_block.didgeridoo" with pitch 2 to {_p}
+
+	set metadata tag "BuyClothes_HotelSuit" of {_p} to chest inventory with 6 rows named "&8Hotel Worksuit"
+	set slot 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of metadata tag "BuyClothes_HotelSuit" of {_p} to black stained glass pane named "&7"
+
+	set slot 3, 4, 5, 12, 14, 21, 23, 30, 32, 39, 40 and 41 of metadata tag "BuyClothes_HotelSuit" of {_p} to lime stained glass pane named "&aCLICK TO PURCHASE!"
+
+	set slot 13 of metadata tag "BuyClothes_HotelSuit" of {_p} to 1 leather chestplate named "&cHotel Chestplate" with lore "&8Cloud Item!" and "" and "&7Armour allows you to work" and "&7for the hotel manager" and "" and "&aPurchase Set For:" and "&7- &a$1,000,000" and "&7- &6x32 Golden Carrots" with nbt "{HideFlags:127,display:{color:11546150}}"
+	set slot 22 of metadata tag "BuyClothes_HotelSuit" of {_p} to 1 leather leggings named "&cHotel Leggings" with lore "&8Cloud Item!" and "" and "&7Armour allows you to work" and "&7for the hotel manager" and "" and "&aPurchase Set For:" and "&7- &a$1,000,000" and "&7- &6x32 Golden Carrots" with nbt "{HideFlags:127,display:{color:1908001}}"
+	set slot 31 of metadata tag "BuyClothes_HotelSuit" of {_p} to 1 leather boots named "&cHotel Boots" with lore "&8Cloud Item!" and "" and "&7Armour allows you to work" and "&7for the hotel manager" and "" and "&aPurchase Set For:" and "&7- &a$1,000,000" and "&7- &6x32 Golden Carrots" with nbt "{HideFlags:127,display:{color:1908001}}"
+
+
+	set slot 19 of metadata tag "BuyClothes_HotelSuit" of {_p} to 1 arrow named "&a<<<<<"
+	set slot 25 of metadata tag "BuyClothes_HotelSuit" of {_p} to 1 arrow named "&a>>>>>"
+
+	set slot 49 of metadata tag "BuyClothes_HotelSuit" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "BuyClothes_HotelSuit" of {_p}) to {_p}
+	stop
+
+
+
+function buyclothes_xpsuit(p:player):
+	play sound "block.note_block.bit" with pitch 2 to {_p}
+	play sound "block.note_block.didgeridoo" with pitch 2 to {_p}
+
+	set metadata tag "BuyClothes_XPSuit" of {_p} to chest inventory with 6 rows named "&8XP Suit"
+	set slot 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of metadata tag "BuyClothes_XPSuit" of {_p} to black stained glass pane named "&7"
+
+	set slot 3, 4, 5, 12, 14, 21, 23, 30, 32, 39, 40 and 41 of metadata tag "BuyClothes_XPSuit" of {_p} to lime stained glass pane named "&aCLICK TO PURCHASE!"
+
+	set slot 13 of metadata tag "BuyClothes_XPSuit" of {_p} to 1 leather chestplate named "&bPassive XP Chestplate" with lore "&8Cloud Item!" and "" and "&7Receive &b25 &7experience every" and "&e20 seconds &7per armour piece" and "" and "&aPurchase Set For:" and "&7- &a$5,000,000" and "&7- &6x64 Golden Carrots" and "&7- &7x64 Dust" with nbt "{HideFlags:127,display:{color:3301327}}"
+	set slot 22 of metadata tag "BuyClothes_XPSuit" of {_p} to 1 leather leggings named "&bPassive XP Leggings" with lore "&8Cloud Item!" and "" and "&7Receive &b25 &7experience every" and "&e20 seconds &7per armour piece" and "" and "&aPurchase Set For:" and "&7- &a$5,000,000" and "&7- &6x64 Golden Carrots" and "&7- &7x64 Dust" with nbt "{HideFlags:127,display:{color:3315947}}"
+	set slot 31 of metadata tag "BuyClothes_XPSuit" of {_p} to 1 leather boots named "&bPassive XP Boots" with lore "&8Cloud Item!" and "" and "&7Receive &b25 &7experience every" and "&e20 seconds &7per armour piece" and "" and "&aPurchase Set For:" and "&7- &a$5,000,000" and "&7- &6x64 Golden Carrots" and "&7- &7x64 Dust" with nbt "{HideFlags:127,display:{color:3315947}}"
+
+
+	set slot 19 of metadata tag "BuyClothes_XPSuit" of {_p} to 1 arrow named "&a<<<<<"
+	set slot 25 of metadata tag "BuyClothes_XPSuit" of {_p} to 1 arrow named "&a>>>>>"
+
+	set slot 49 of metadata tag "BuyClothes_XPSuit" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "BuyClothes_XPSuit" of {_p}) to {_p}
+	stop
+
+
+
+function buyclothes_cavesuit(p:player):
+	play sound "block.note_block.bit" with pitch 2 to {_p}
+	play sound "block.note_block.didgeridoo" with pitch 2 to {_p}
+
+	set metadata tag "BuyClothes_CaveSuit" of {_p} to chest inventory with 6 rows named "&8Cave Suit"
+	set slot 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of metadata tag "BuyClothes_CaveSuit" of {_p} to black stained glass pane named "&7"
+
+	set slot 3, 4, 5, 12, 14, 21, 23, 30, 32, 39, 40 and 41 of metadata tag "BuyClothes_CaveSuit" of {_p} to lime stained glass pane named "&aCLICK TO PURCHASE!"
+
+	set slot 13 of metadata tag "BuyClothes_CaveSuit" of {_p} to 1 leather chestplate named "&4Cave Chestplate" with lore "&8Cloud Item!" and "" and "&7Receive &bx1.5 XP &7for clearing up" and "&7the caves along with &bx1.5xp" and "&7for farming potatoes" and "" and "&aPurchase Set For:" and "&7- &a$10,000,000" and "&7- &cx32 Lost Golem Poppys" and "&7- &6x64 Magic Dust" and "&7- &4x128 Cave Dirt" with nbt "{HideFlags:127,display:{color:6782599}}"
+	set slot 22 of metadata tag "BuyClothes_CaveSuit" of {_p} to 1 leather leggings named "&4Cave Leggings" with lore "&8Cloud Item!" and "" and "&7Receive &bx1.5 XP &7for clearing up" and "&7the caves along with &bx1.5xp" and "&7for farming potatoes" and "" and "&aPurchase Set For:" and "&7- &a$10,000,000" and "&7- &cx32 Lost Golem Poppys" and "&7- &6x64 Magic Dust" and "&7- &4x128 Cave Dirt" with nbt "{HideFlags:127,display:{color:6328197}}"
+	set slot 31 of metadata tag "BuyClothes_CaveSuit" of {_p} to 1 leather boots named "&4Cave Boots" with lore "&8Cloud Item!" and "" and "&7Receive &bx1.5 XP &7for clearing up" and "&7the caves along with &bx1.5xp" and "&7for farming potatoes" and "" and "&aPurchase Set For:" and "&7- &a$10,000,000" and "&7- &cx32 Lost Golem Poppys" and "&7- &6x64 Magic Dust" and "&7- &4x128 Cave Dirt" with nbt "{HideFlags:127,display:{color:6328197}}"
+
+
+	set slot 19 of metadata tag "BuyClothes_CaveSuit" of {_p} to 1 arrow named "&a<<<<<"
+	set slot 25 of metadata tag "BuyClothes_CaveSuit" of {_p} to 1 arrow named "&a>>>>>"
+
+	set slot 49 of metadata tag "BuyClothes_CaveSuit" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "BuyClothes_CaveSuit" of {_p}) to {_p}
+	stop
+
+
+
+function buyclothes_farmerssuit(p:player):
+	play sound "block.note_block.bit" with pitch 2 to {_p}
+	play sound "block.note_block.didgeridoo" with pitch 2 to {_p}
+
+	set metadata tag "BuyClothes_FarmersSuit" of {_p} to chest inventory with 6 rows named "&8Farmers Suit"
+	set slot 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of metadata tag "BuyClothes_FarmersSuit" of {_p} to black stained glass pane named "&7"
+
+	set slot 3, 4, 5, 12, 14, 21, 23, 30, 32, 39, 40 and 41 of metadata tag "BuyClothes_FarmersSuit" of {_p} to lime stained glass pane named "&aCLICK TO PURCHASE!"
+
+	set slot 13 of metadata tag "BuyClothes_FarmersSuit" of {_p} to 1 leather chestplate named "&6Farmers Chestplate" with lore "&8Cloud Item!" and "" and "&7Receive &e+3 &7drops & &b+3 &7XP" and "&7on wheat, carrots & potatoes" and "" and "&aPurchase Set For:" and "&7- &a$25,000,000" and "&7- &6x64 Golden Carrots" and "&7- <##feb8ff>x64 Super Wheat" and "&7- <##84a537>x64 Poisonous Potatoes" with nbt "{HideFlags:127,display:{color:15379456}}"
+	set slot 22 of metadata tag "BuyClothes_FarmersSuit" of {_p} to 1 leather leggings named "&6Farmers Leggings" with lore "&8Cloud Item!" and "" and "&7Receive &e+3 &7drops & &b+3 &7XP" and "&7on wheat, carrots & potatoes" and "" and "&aPurchase Set For:" and "&7- &a$25,000,000" and "&7- &6x64 Golden Carrots" and "&7- <##feb8ff>x64 Super Wheat" and "&7- <##84a537>x64 Poisonous Potatoes" with nbt "{HideFlags:127,display:{color:15781938}}"
+	set slot 31 of metadata tag "BuyClothes_FarmersSuit" of {_p} to 1 leather boots named "&6Farmers Boots" with lore "&8Cloud Item!" and "" and "&7Receive &e+3 &7drops & &b+3 &7XP" and "&7on wheat, carrots & potatoes" and "" and "&aPurchase Set For:" and "&7- &a$25,000,000" and "&7- &6x64 Golden Carrots" and "&7- <##feb8ff>x64 Super Wheat" and "&7- <##84a537>x64 Poisonous Potatoes" with nbt "{HideFlags:127,display:{color:15781938}}"
+
+
+	set slot 19 of metadata tag "BuyClothes_FarmersSuit" of {_p} to 1 arrow named "&a<<<<<"
+	set slot 25 of metadata tag "BuyClothes_FarmersSuit" of {_p} to 1 arrow named "&a>>>>>"
+
+	set slot 49 of metadata tag "BuyClothes_FarmersSuit" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "BuyClothes_FarmersSuit" of {_p}) to {_p}
+	stop
+
+
+
+function buyclothes_fishingsuit(p:player):
+	play sound "block.note_block.bit" with pitch 2 to {_p}
+	play sound "block.note_block.didgeridoo" with pitch 2 to {_p}
+
+	set metadata tag "BuyClothes_FishingSuit" of {_p} to chest inventory with 6 rows named "&8Fishing Suit"
+	set slot 0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of metadata tag "BuyClothes_FishingSuit" of {_p} to black stained glass pane named "&7"
+
+	set slot 3, 4, 5, 12, 14, 21, 23, 30, 32, 39, 40 and 41 of metadata tag "BuyClothes_FishingSuit" of {_p} to lime stained glass pane named "&aCLICK TO PURCHASE!"
+
+	set slot 13 of metadata tag "BuyClothes_FishingSuit" of {_p} to 1 leather chestplate named "&bFishing Chestplate" with lore "&8Cloud Item!" and "" and "&7No longer receive &a&lCOMMON &7catches" and "&7and decreased chance for &e&lRARE" and "" and "&aPurchase Set For:" and "&7- &a$50,000,000" and "&7- &bFishing Rod &6(X)" and "&7- <##cc7332>&lANCIENT FISH SCULPTURE" with nbt "{HideFlags:127,display:{color:19455}}"
+	set slot 22 of metadata tag "BuyClothes_FishingSuit" of {_p} to 1 leather leggings named "&bFishing Leggings" with lore "&8Cloud Item!" and "" and "&7No longer receive &a&lCOMMON &7catches" and "&7and decreased chance for &e&lRARE" and "" and "&aPurchase Set For:" and "&7- &a$50,000,000" and "&7- &bFishing Rod &6(X)" and "&7- <##cc7332>&lANCIENT FISH SCULPTURE" with nbt "{HideFlags:127,display:{color:1282303}}"
+	set slot 31 of metadata tag "BuyClothes_FishingSuit" of {_p} to 1 leather boots named "&bFishing Boots" with lore "&8Cloud Item!" and "" and "&7No longer receive &a&lCOMMON &7catches" and "&7and decreased chance for &e&lRARE" and "" and "&aPurchase Set For:" and "&7- &a$50,000,000" and "&7- &bFishing Rod &6(X)" and "&7- <##cc7332>&lANCIENT FISH SCULPTURE" with nbt "{HideFlags:127,display:{color:1282303}}"
+
+
+	set slot 19 of metadata tag "BuyClothes_FishingSuit" of {_p} to 1 arrow named "&a<<<<<"
+	set slot 25 of metadata tag "BuyClothes_FishingSuit" of {_p} to 1 arrow named "&a>>>>>"
+
+	set slot 49 of metadata tag "BuyClothes_FishingSuit" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "BuyClothes_FishingSuit" of {_p}) to {_p}
+	stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "BuyClothes_RobberySuit" of player):
+		cancel event
+
+		if index of event-slot is 3, 4, 5, 12, 13, 14, 21, 22, 23, 30, 31, 32, 39, 40 or 41:
+			if player doesn't have enough space for 192 barriers:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&6&lCLOTHES: &7You do not have enough space in your inventory!"
+				stop
+
+			if {balance::%UUID of player%} >= 2500000:
+				if player has 64 golden carrot named "<##f4d34f>&lGOLDEN CARROT":
+					if player has 64 of glowing hay bale named "<##f2ff86>&lHAY BALE":
+						if player has 128 light gray dye named "&7Cave Dust":
+							remove 2500000 from {balance::%UUID of player%}
+							remove 64 golden carrot named "<##f4d34f>&lGOLDEN CARROT" from player's inventory
+							remove 64 of glowing hay bale named "<##f2ff86>&lHAY BALE" from player's inventory
+							remove 128 light gray dye named "&7Cave Dust" from player's inventory
+
+							set {TheCasinoHeist-Status::%UUID of player%} to "Started-part10"
+							close player's inventory
+							play sound "entity.player.levelup" with pitch 2 to player
+							send "&6&lCLOTHES: &7You Purchased - &2Robbery Suit"
+
+							give player 1 leather Boots named "&2Robbery Boots" with lore "&8Cloud Item!" and "" and "&7Want to rob the casino?" and "&7Don't get caught with this suit!" with nbt "{HideFlags:127,display:{color:739085}}"
+							give player 1 leather Leggings named "&2Robbery Leggings" with lore "&8Cloud Item!" and "" and "&7Want to rob the casino?" and "&7Don't get caught with this suit!" with nbt "{HideFlags:127,display:{color:739085}}"
+							give player 1 leather Chestplate named "&2Robbery Chestplate" with lore "&8Cloud Item!" and "" and "&7Want to rob the casino?" and "&7Don't get caught with this suit!" with nbt "{HideFlags:127,display:{color:2045728}}"
+
+							wait 10 ticks
+
+							play sound "block.note_block.bit" with pitch 0.1
+							play sound "block.note_block.pling" with pitch 0.1
+							send ""
+							send "<##b4ab71>&lHEIST: &dBring the armour to &2Tom &dto complete setup!"
+							stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lCLOTHES: &7You cannot afford this worksuit!"
+			stop
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "BuyClothes_HotelSuit" of player):
+		cancel event
+
+		if index of event-slot is 3, 4, 5, 12, 13, 14, 21, 22, 23, 30, 31, 32, 39, 40 or 41:
+			if player doesn't have enough space for 192 barriers:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&6&lCLOTHES: &7You do not have enough space in your inventory!"
+				stop
+
+			if {balance::%UUID of player%} >= 1000000:
+				if player has 32 golden carrot named "<##f4d34f>&lGOLDEN CARROT":
+					remove 1000000 from {balance::%UUID of player%}
+					remove 32 golden carrot named "<##f4d34f>&lGOLDEN CARROT" from player's inventory
+
+					close player's inventory
+					play sound "entity.player.levelup" with pitch 2 to player
+					send "&6&lCLOTHES: &7You Purchased - &cHotel Suit"
+
+					give player 1 leather Boots named "&cHotel Boots" with lore "&8Cloud Item!" and "" and "&7Armour allows you to work" and "&7for the hotel manager." with nbt "{HideFlags:127,display:{color:1908001}}"
+					give player 1 leather Leggings named "&cHotel Leggings" with lore "&8Cloud Item!" and "" and "&7Armour allows you to work" and "&7for the hotel manager." with nbt "{HideFlags:127,display:{color:1908001}}"
+					give player 1 leather Chestplate named "&cHotel Chestplate" with lore "&8Cloud Item!" and "" and "&7Armour allows you to work" and "&7for the hotel manager." with nbt "{HideFlags:127,display:{color:11546150}}"
+					stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lCLOTHES: &7You cannot afford this worksuit!"
+			stop
+
+		if index of event-slot is 19:
+			buyclothes_fishingsuit(player)
+			stop
+
+		if index of event-slot is 25:
+			buyclothes_xpsuit(player)
+			stop
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "BuyClothes_XPSuit" of player):
+		cancel event
+
+		if index of event-slot is 3, 4, 5, 12, 13, 14, 21, 22, 23, 30, 31, 32, 39, 40 or 41:
+			if player doesn't have enough space for 192 barriers:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&6&lCLOTHES: &7You do not have enough space in your inventory!"
+				stop
+
+			if {balance::%UUID of player%} >= 5000000:
+				if player has 64 golden carrot named "<##f4d34f>&lGOLDEN CARROT":
+					if player has 64 light gray dye named "&7Cave Dust":
+						remove 5000000 from {balance::%UUID of player%}
+						remove 64 golden carrot named "<##f4d34f>&lGOLDEN CARROT" from player's inventory
+						remove 64 light gray dye named "&7Cave Dust" from player's inventory
+
+						close player's inventory
+						play sound "entity.player.levelup" with pitch 2 to player
+						send "&6&lCLOTHES: &7You Purchased - &bXP Suit"
+
+						give player 1 leather Boots named "&bXP Boots" with lore "&8Cloud Item!" and "" and "&7Receive &b25xp &7every &e20" and "&7seconds per armour piece" with nbt "{HideFlags:127,display:{color:3315947}}"
+						give player 1 leather Leggings named "&bXP Leggings" with lore "&8Cloud Item!" and "" and "&7Receive &b25xp &7every &e20" and "&7seconds per armour piece" with nbt "{HideFlags:127,display:{color:3315947}}"
+						give player 1 leather Chestplate named "&bXP Chestplate" with lore "&8Cloud Item!" and "" and "&7Receive &b25xp &7every &e20" and "&7seconds per armour piece" with nbt "{HideFlags:127,display:{color:3301327}}"
+						stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lCLOTHES: &7You cannot afford this worksuit!"
+			stop
+
+		if index of event-slot is 19:
+			buyclothes_hotelworksuit(player)
+			stop
+
+		if index of event-slot is 25:
+			buyclothes_cavesuit(player)
+			stop
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "BuyClothes_CaveSuit" of player):
+		cancel event
+
+		if index of event-slot is 3, 4, 5, 12, 13, 14, 21, 22, 23, 30, 31, 32, 39, 40 or 41:
+			if player doesn't have enough space for 192 barriers:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&6&lCLOTHES: &7You do not have enough space in your inventory!"
+				stop
+
+			if {balance::%UUID of player%} >= 10000000:
+				if player has 32 poppy named "&cLost Golem Poppy":
+					if player has 64 glowstone dust named "&6Magic Cave Dust":
+						if player has 128 brown dye named "<##7d5227>Cave Dirt":
+							remove 10000000 from {balance::%UUID of player%}
+							remove 32 poppy named "&cLost Golem Poppy" from player's inventory
+							remove 64 glowstone dust named "&6Magic Cave Dust" from player's inventory
+							remove 128 brown dye named "<##7d5227>Cave Dirt" from player's inventory
+
+							close player's inventory
+							play sound "entity.player.levelup" with pitch 2 to player
+							send "&6&lCLOTHES: &7You Purchased - &4Cave Suit"
+							
+							give player 1 leather Boots named "&4Cave Boots" with lore "&8Cloud Item!" and "" and "&7Receive &bXP &7for clearing up" and "&7the caves along with &bx1.5xp" and "&7for farming potatoes." with nbt "{HideFlags:127,display:{color:1908001}}"
+							give player 1 leather Leggings named "&4Cave Leggings" with lore "&8Cloud Item!" and "" and "&7Receive &bXP &7for clearing up" and "&7the caves along with &bx1.5xp" and "&7for farming potatoes." with nbt "{HideFlags:127,display:{color:1908001}}"
+							give player 1 leather Chestplate named "&4Cave Chestplate" with lore "&8Cloud Item!" and "" and "&7Receive &bXP &7for clearing up" and "&7the caves along with &bx1.5xp" and "&7for farming potatoes." with nbt "{HideFlags:127,display:{color:11546150}}"
+							stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lCLOTHES: &7You cannot afford this worksuit!"
+			stop
+
+		if index of event-slot is 19:
+			buyclothes_xpsuit(player)
+			stop
+
+		if index of event-slot is 25:
+			buyclothes_farmerssuit(player)
+			stop
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "BuyClothes_FarmersSuit" of player):
+		cancel event
+
+		if index of event-slot is 3, 4, 5, 12, 13, 14, 21, 22, 23, 30, 31, 32, 39, 40 or 41:
+			if player doesn't have enough space for 192 barriers:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&6&lCLOTHES: &7You do not have enough space in your inventory!"
+				stop
+
+			if {balance::%UUID of player%} >= 25000000:
+				if player has 64 golden carrot named "<##f4d34f>&lGOLDEN CARROT":
+					if player has 64 of glowing wheat named "<##feb8ff>&lSUPER WHEAT":
+						if player has 64 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO":
+							remove 25000000 from {balance::%UUID of player%}
+							remove 64 golden carrot named "<##f4d34f>&lGOLDEN CARROT" from player's inventory
+							remove 64 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" from player's inventory
+							remove 64 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" from player's inventory
+
+							close player's inventory
+							play sound "entity.player.levelup" with pitch 2 to player
+							send "&6&lCLOTHES: &7You Purchased - &6Farmers Suit"
+
+							give player 1 leather Boots named "&6Farmers Boots" with lore "&8Cloud Item!" and "" and "&7Receive &e+3 &7drops &7& &b+3 &7XP" and "&7on wheat, carrots & potatoes!" with nbt "{HideFlags:127,display:{color:15781938}}"
+							give player 1 leather Leggings named "&6Farmers Leggings" with lore "&8Cloud Item!" and "" and "&7Receive &e+3 &7drops &7& &b+3 &7XP" and "&7on wheat, carrots & potatoes!" with nbt "{HideFlags:127,display:{color:15781938}}"
+							give player 1 leather Chestplate named "&6Farmers Chestplate" with lore "&8Cloud Item!" and "" and "&7Receive &e+3 &7drops &7& &b+3 &7XP" and "&7on wheat, carrots & potatoes!" with nbt "{HideFlags:127,display:{color:15379456}}"
+							stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lCLOTHES: &7You cannot afford this worksuit!"
+			stop
+
+		if index of event-slot is 19:
+			buyclothes_cavesuit(player)
+			stop
+
+		if index of event-slot is 25:
+			buyclothes_fishingsuit(player)
+			stop
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "BuyClothes_FishingSuit" of player):
+		cancel event
+		if index of event-slot is 3, 4, 5, 12, 13, 14, 21, 22, 23, 30, 31, 32, 39, 40 or 41:
+			if player doesn't have enough space for 192 barriers:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&6&lCLOTHES: &7You do not have enough space in your inventory!"
+				stop
+
+			if {balance::%UUID of player%} >= 50000000:
+				if player has 1 fishing rod of lure 2 named "&bFishing Rod &6(X)":
+					if player has 1 leather horse armour named "<##cc7332>Ancient Fish Sculpture":
+						remove 50000000 from {balance::%UUID of player%}
+						remove 1 fishing rod of lure 2 named "&bFishing Rod &6(X)" from player's inventory
+						remove 1 leather horse armour named "<##cc7332>Ancient Fish Sculpture" from player's inventory
+
+						close player's inventory
+						play sound "entity.player.levelup" with pitch 2 to player
+						send "&6&lCLOTHES: &7You Purchased - &bFishing Suit"
+						
+						give player 1 leather Boots named "&bFishing Boots" with lore "&8Cloud Item!" and "" and "&7No long receive &a&lCOMMON &7catches" and "&7and decreased chance for &e&lRARE" with nbt "{HideFlags:127,display:{color:1282303}}"
+						give player 1 leather Leggings named "&bFishing Leggings" with lore "&8Cloud Item!" and "" and "&7No long receive &a&lCOMMON &7catches" and "&7and decreased chance for &e&lRARE" with nbt "{HideFlags:127,display:{color:1282303}}"
+						give player 1 leather Chestplate named "&bFishing Chestplate" with lore "&8Cloud Item!" and "" and "&7No long receive &a&lCOMMON &7catches" and "&7and decreased chance for &e&lRARE" with nbt "{HideFlags:127,display:{color:19455}}"
+						stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&6&lCLOTHES: &7You cannot afford this worksuit!"
+			stop
+
+		if index of event-slot is 19:
+			buyclothes_farmerssuit(player)
+			stop
+
+		if index of event-slot is 25:
+			buyclothes_hotelworksuit(player)
+			stop
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: x8 Packages:
+#
+#
+#==========================================================
+
+
+
+
+
+function cancelcloudpackagemission(p:player, text: text):
+	if {QuestStatus-TheClouds::%UUID of {_p}%} is "Started-part6":
+		stop
+	play sound "entity.player.burp" to {_p}
+	send "&c&lMISSION FAILED: &7%{_text}%" to {_p}
+	send {_p} title "" with subtitle "&cMission Failed!" for 2 seconds
+	delete line 14 of {_p}'s scoreboard
+	delete line 13 of {_p}'s scoreboard
+	delete line 12 of {_p}'s scoreboard
+	remove all chest named "&6Box Of Farming Items" from {_p}'s inventory
+	loop 8 times:
+		delete {ClaimedHiddenCloudPackage::%loop-number%::%UUID of {_p}%}
+	set {QuestStatus-TheClouds::%UUID of {_p}%} to "Started-part3"
+
+
+
+
+
+on rightclick on player head:
+	if {QuestStatus-TheClouds::%UUID of player%} is "Started-part4":
+		loop 8 times:
+			if event-block is {CloudHiddenPackages::%loop-number%}:
+
+				if {ClaimedHiddenCloudPackage::%loop-number%::%UUID of player%} is not set:
+					set {ClaimedHiddenCloudPackage::%loop-number%::%UUID of player%} to true
+					
+					play sound "entity.ender_dragon.flap" with pitch 2 to player
+					play sound "entity.zombie.break_wooden_door" with pitch 2 to player
+					give player 1 chest named "&6Box Of Farming Items" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &c&oHotel Manager!"
+					send "&a&lPACKAGE RETRIEVED: &7You have found a &6Box Of Farming Items!"
+
+
+				if {ClaimedHiddenCloudPackage::1::%UUID of player%} is true:
+					if {ClaimedHiddenCloudPackage::2::%UUID of player%} is true:
+						if {ClaimedHiddenCloudPackage::3::%UUID of player%} is true:
+							if {ClaimedHiddenCloudPackage::4::%UUID of player%} is true:
+								if {ClaimedHiddenCloudPackage::5::%UUID of player%} is true:
+									if {ClaimedHiddenCloudPackage::6::%UUID of player%} is true:
+										if {ClaimedHiddenCloudPackage::7::%UUID of player%} is true:
+											if {ClaimedHiddenCloudPackage::8::%UUID of player%} is true:
+												set {QuestStatus-TheClouds::%UUID of player%} to "Started-part5"
+												play sound "entity.player.levelup" with pitch 2 to player
+												send player title "&d" with subtitle "&6Bring &bPackages &6to the &cHotel Manager" for 2 seconds
+												send "&c&lQUEST: &7You've found all items, Bring them back within &e15s!"
+												set {PackageCollectionTimer-S::%UUID of player%} to -5
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Sirius the Banker:
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 54:
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part1", "Started-part2", "Started-part3", "Started-part4" or "Started-part5":
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lSIRIUS: &7Hmm, I don't speak to people I don't know..."
+			stop
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part6":
+			set {QuestStatus-TheClouds::%UUID of player%} to "Started-part7"
+			set {Quest-TheClouds-ReturnHayBales::%UUID of player%} to false
+			set {Quest-TheClouds-ReturnFishingSculpture::%UUID of player%} to false
+			set {Quest-TheClouds-ReturnLostGolemPoppys::%UUID of player%} to false
+			set {Quest-TheClouds-ReturnCreeperSkull::%UUID of player%} to false
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lSIRIUS: &7hmm, who are you?"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lSIRIUS: &cThe Hotel Manager &7sent you... I don't believe it.."
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lSIRIUS: &7hmm, well if you want to open up a bank up here clear of taxes then you need to do something for me.."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lSIRIUS: &7I need the following items:"
+			send "&2&l- &ex64 Hay Bales"
+			send "&2&l- &bFishing Sculpture"
+			send "&2&l- &cx32 Lost Golem Poppys"
+			send "&2&l- &2Creeper skull from wack-a-creeper"
+			stop
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part7":
+			if player's tool is 64 of glowing hay bale named "<##f2ff86>&lHAY BALE":
+				if {Quest-TheClouds-ReturnHayBales::%UUID of player%} is false:
+					remove 64 of glowing hay bale named "<##f2ff86>&lHAY BALE" from player's inventory
+					set {Quest-TheClouds-ReturnHayBales::%UUID of player%} to true
+					play sound "block.note_block.pling" with pitch 2 to player
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&2&lSIRIUS: &7Thanks for the &ex64 Hay Bales"
+					stop
+
+			if name of player's tool contains "Fish Sculpture":
+				if {Quest-TheClouds-ReturnFishingSculpture::%UUID of player%} is false:
+					set player's tool to air
+					set {Quest-TheClouds-ReturnFishingSculpture::%UUID of player%} to true
+					play sound "block.note_block.pling" with pitch 2 to player
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&2&lSIRIUS: &7Thanks for the &bFishing Sculpture"
+					stop
+
+			if player has 32 poppy named "&cLost Golem Poppy":
+				if {Quest-TheClouds-ReturnLostGolemPoppys::%UUID of player%} is false:
+					remove 32 poppy named "&cLost Golem Poppy" from player's inventory
+					set {Quest-TheClouds-ReturnLostGolemPoppys::%UUID of player%} to true
+					play sound "block.note_block.pling" with pitch 2 to player
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&2&lSIRIUS: &7Thanks for the &cx32 Lost Golem Poppys"
+					stop
+
+			if player has 1 creeper head named "&2Creeper Skull":
+				if {Quest-TheClouds-ReturnCreeperSkull::%UUID of player%} is false:
+					remove 1 creeper head named "&2Creeper Skull" from player's inventory
+					set {Quest-TheClouds-ReturnCreeperSkull::%UUID of player%} to true
+					play sound "block.note_block.pling" with pitch 2 to player
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&2&lSIRIUS: &7Thanks for the &2Creeper Head"
+					stop
+
+			if {Quest-TheClouds-ReturnHayBales::%UUID of player%} is true:
+				if {Quest-TheClouds-ReturnFishingSculpture::%UUID of player%} is true:
+					if {Quest-TheClouds-ReturnLostGolemPoppys::%UUID of player%} is true:
+						if {Quest-TheClouds-ReturnCreeperSkull::%UUID of player%} is true:
+							set {QuestStatus-TheClouds::%UUID of player%} to "Completed"
+							set {NextQuest::%UUID of player%} to "NONE"
+							set {ActiveQuest::%UUID of player%} to "NONE"
+							if {ShadyBankerBalance::%UUID of player%} is not set:
+								set {ShadyBankerBalance::%UUID of player%} to 0
+
+							play sound "entity.villager.yes" with pitch 1 to player
+							send "&2&lSIRIUS: &7Yes, I finally have all I need to set up something special"
+
+							wait 3 seconds
+							play sound "entity.villager.yes" with pitch 1 to player
+							send "&2&lSIRIUS: &7Anyways, As promised here is your reward:"
+
+							wait 10 ticks
+
+							play sound "ui.toast.challenge_complete" with pitch 1 to player
+							send "&7[Quest Book Updated: Completed ""The Clouds""]"
+							send "&7[&a+$25,000,000&7]"
+							send "&7[&b+250,000 XP&7]"
+							send "&7[&d+5 Mystery Crate &7| &6+5 Gen Slot&7]"
+							send "&7[&fUnlocked ALL Cloud NPC's&7]"
+
+							add 25000000 to {balance::%UUID of player%}
+							remove 250000 from {RequiredXP::%UUID of player%}
+							add 5 to {MysteryCrates::%UUID of player%}
+							add 5 to {GeneratorLimit::%UUID of player%}
+							stop
+
+
+			play sound "ui.button.click" with pitch 2 to player
+			set metadata tag "TheCloudsProgress" of player to chest inventory with 1 row named "&8YOUR Quest Progress."
+
+
+			if {Quest-TheClouds-ReturnHayBales::%UUID of player%} is false:
+				set slot 0 of metadata tag "TheCloudsProgress" of player to 64 hay bales named "&cReturn x64 Hay Bales" with lore "" and "&7You can find hay bales at" and "&7/warp farm where you craft them" and "" and "&cINCOMPLETED!"
+			else:
+				set slot 0 of metadata tag "TheCloudsProgress" of player to 64 hay bales named "&aReturn x64 Hay Bales" with lore "" and "&7You can find hay bales at" and "&7/warp farm where you craft them" and "" and "&aCOMPLETED!"
+
+			if {Quest-TheClouds-ReturnFishingSculpture::%UUID of player%} is false:
+				set slot 1 of metadata tag "TheCloudsProgress" of player to 1 diamond horse armor named "&cReturn 1 of ANY Fish Sculpture" with lore "" and "&7You can fish sculptures at" and "&7/warp fishing, (low chance to catch)" and "" and "&cINCOMPLETED!"
+			else:
+				set slot 1 of metadata tag "TheCloudsProgress" of player to 1 diamond horse armor named "&aReturn 1 of ANY Fish Sculpture" with lore "" and "&7You can fish sculptures at" and "&7/warp fishing, (low chance to catch)" and "" and "&aCOMPLETED!"
+
+			if {Quest-TheClouds-ReturnLostGolemPoppys::%UUID of player%} is false:
+				set slot 2 of metadata tag "TheCloudsProgress" of player to 32 poppy named "&cReturn x32 Lost Golem Poppys" with lore "" and "&7You can find golem poppys at" and "&7/warp caves, and use a mop on dirt" and "" and "&cINCOMPLETED!"
+			else:
+				set slot 2 of metadata tag "TheCloudsProgress" of player to 32 poppy named "&aReturn x32 Lost Golem Poppys" with lore "" and "&7You can find golem poppys at" and "&7/warp caves, and use a mop on dirt" and "" and "&aCOMPLETED!"
+
+			if {Quest-TheClouds-ReturnCreeperSkull::%UUID of player%} is false:
+				set slot 3 of metadata tag "TheCloudsProgress" of player to 1 creeper head named "&cReturn x1 Creeper Skull" with lore "" and "&7Complete a PERFECT wack-a-creeper" and "&7game and receive a &2Creeper Skull" and "" and "&cINCOMPLETED!"
+			else:
+				set slot 3 of metadata tag "TheCloudsProgress" of player to 1 creeper head named "&aReturn x1 Creeper Skull" with lore "" and "&7Complete a PERFECT wack-a-creeper" and "&7game and receive a &2Creeper Skull" and "" and "&aCOMPLETED!"
+
+
+			open (metadata tag "TheCloudsProgress" of player) to player
+			stop
+
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Completed":
+			opensiriusbank(player)
+
+
+
+
+
+function opensiriusbank(p:player):
+	send "&cBank Disabled!" to {_p}
+	stop
+	play sound "ui.button.click" with pitch 2 to {_p}
+	set metadata tag "ShadyBankerSirius" of {_p} to chest inventory with 6 row named "&8Shady Banker's Menu"
+	set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ShadyBankerSirius" of {_p} to black stained glass pane named "&7"
+
+	set slot 20 of metadata tag "ShadyBankerSirius" of {_p} to 1 emerald named "&aDeposit $10,000,000" with lore "&8&oTax Haven bank account" and "" and "&7Want to store your money safely without" and "&7having to worry about taxes?" and "&7Want to access your money" and "&7whenever, wherever?" and "" and "&7Your Balance: &a$%regex({ShadyBankerBalance::%UUID of {_p}%})%" and "" and "&a> Click To Deposit Money <"
+	set slot 21 of metadata tag "ShadyBankerSirius" of {_p} to 1 emerald block named "&aDeposit $100,000,000" with lore "&8&oTax Haven bank account" and "" and "&7Want to store your money safely without" and "&7having to worry about taxes?" and "&7Want to access your money" and "&7whenever, wherever?" and "" and "&7Your Balance: &a$%regex({ShadyBankerBalance::%UUID of {_p}%})%" and "" and "&a> Click To Deposit Money <"
+
+	set slot 24 of metadata tag "ShadyBankerSirius" of {_p} to minecart with chest named "&aWithdraw $100,000,000" with lore "&8&oTax Haven bank account" and "" and "&7As part of sirius helping you" and "&7hide your wealth from the taxman" and "" and "&7Your Balance: &a$%regex({ShadyBankerBalance::%UUID of {_p}%})%" and "" and "&a> Click To Withdraw Money <"
+
+	set slot 49 of metadata tag "ShadyBankerSirius" of {_p} to barrier named "&cExit Menu"
+	open (metadata tag "ShadyBankerSirius" of {_p}) to {_p}
+	stop
+
+
+
+
+
+command /bank:
+	trigger:
+		if {QuestStatus-TheClouds::%UUID of player%} is "Completed":
+			opensiriusbank(player)
+			stop
+		
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "&f&lCLOUD BANK: &7You must speak to &2&lSIRIUS &7to enable this command!"
+		stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "TheCloudsProgress" of player):
+		cancel event
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ShadyBankerSirius" of player):
+		cancel event
+	
+		if index of event-slot is 20:
+			if {balance::%UUID of player%} >= 10000000:
+				play sound "block.note_block.flute" with pitch 2
+				play sound "block.note_block.harp" with pitch 2
+				play sound "block.note_block.basedrum" with pitch 2
+				send "&2&lDEPOSIT: &a+$10,000,000" to player
+
+				remove 10000000 from {balance::%UUID of player%}
+				add 10000000 to {ShadyBankerBalance::%UUID of player%}
+
+				opensiriusbank(player)
+				stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&2&lSIRIUS: &7You can't deposit what you don't have!"
+			stop
+
+
+		if index of event-slot is 21:
+			if {balance::%UUID of player%} >= 100000000:
+				play sound "block.note_block.flute" with pitch 2
+				play sound "block.note_block.harp" with pitch 2
+				play sound "block.note_block.basedrum" with pitch 2
+				send "&2&lDEPOSIT: &a+$100,000,000" to player
+
+				remove 100000000 from {balance::%UUID of player%}
+				add 100000000 to {ShadyBankerBalance::%UUID of player%}
+
+				opensiriusbank(player)
+				stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&2&lSIRIUS: &7You can't deposit what you don't have!"
+			stop
+
+
+
+		if index of event-slot is 24:
+			if {ShadyBankerBalance::%UUID of player%} >= 100000000:
+				play sound "block.note_block.flute" with pitch 2
+				play sound "block.note_block.harp" with pitch 2
+				play sound "block.note_block.basedrum" with pitch 2
+				send "&2&lWITHDRAWL: &a+$100,000,000)" to player
+
+				remove 100000000 from {ShadyBankerBalance::%UUID of player%}
+				add 100000000 to {balance::%UUID of player%}
+
+				opensiriusbank(player)
+				stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&2&lSIRIUS: &7You can't withdraw this amount of money!"
+			stop
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Fishing Rod Expert:
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 57:
+		if {QuestStatus-TheClouds::%UUID of player%} is "Completed":
+			play sound "ui.button.click" with pitch 2 to player
+
+			set metadata tag "FishingRodExpert" of player to chest inventory with 6 rows named "&8Fishing Rod Expert"
+			set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "FishingRodExpert" of player to black stained glass pane named "&7"
+
+			set slot 22 of metadata tag "FishingRodExpert" of player to 1 fishing rod named "&bFishing Rod &6(XXVI)" with lore "&8Fishing Item (lvl.26)" and "" and "&7XP Multiplier: &bx3.8" and "&7Double Value Chance: &a100%%" and "&7Better Catches &d50%%" and "&7Lottery Chance: &66.5%%" and "&9Lure V (Quicker Catches)" and "" and "&aPurchase For:" and "&7- &a$100,000,000" and "&7- &bFishing Rod &6(XXV)" and "&7- <##cc7332>ANCIENT FISH SCULPTURE" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+			set slot 49 of metadata tag "FishingRodExpert" of player to barrier named "&cExit Menu"
+			open (metadata tag "FishingRodExpert" of player) to player
+			stop
+
+		else:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&9&lROD EXPERT: &7Complete &f""The Clouds"" &7Quest to unlock a &6Level 26 Rod!"
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "FishingRodExpert" of player):
+		cancel event
+
+		if index of event-slot is 22:
+			if {balance::%UUID of player%} is greater than 100000000:
+				if player has fishing rod of lure 5 named "&bFishing Rod &6(XXV)":
+					if player has leather horse armour named "<##cc7332>Ancient Fish Sculpture":
+						remove 100000000 from {balance::%UUID of player%}
+						remove 1 fishing rod of lure 5 named "&bFishing Rod &6(XXV)" from player's inventory
+						remove 1 leather horse armour named "<##cc7332>Ancient Fish Sculpture" from player's inventory
+
+						give player {FishingRod_Level.26}
+						play sound "entity.player.levelup" with pitch 2 to player
+						send "&9&lROD EXPERT: &aSuccessfully upgraded rod to &bFishing Rod &6(XXVI)"
+						stop
+			
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&9&lROD EXPERT: &7You cannot afford this upgrade (get all items required)"
+			stop
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist - Call:
+#
+#
+#==========================================================
+
+
+
+
+
+function callsoundheist(p:player):
+	delete {TheCasinoHeist-Status::%UUID of {_p}%}
+	send "&6✆ Incoming Call..." to {_p}
+	loop 4 times:
+		play sound "block.note_block.pling" with pitch 2 to {_p}
+		wait 2 tick
+
+	wait 5 ticks
+
+	send "&6✆✆ Incoming Call..." to {_p}
+	loop 4 times:
+		play sound "block.note_block.pling" with pitch 2 to {_p}
+		wait 2 tick
+
+	wait 5 ticks
+
+	send "&6✆✆✆ Incoming Call..." to {_p}
+	loop 4 times:
+		play sound "block.note_block.pling" with pitch 2 to {_p}
+		wait 2 tick
+
+	set {e} to 2
+	loop 15 times:
+		play sound "block.note_block.bit" with pitch {e} to {_p}
+		play sound "block.note_block.didgeridoo" with pitch {e} to {_p}
+		remove 0.1 from {e}
+		wait 2 ticks
+
+	play sound "block.note_block.banjo" with pitch 0.1 to {_p}
+	play sound "block.note_block.bass" with pitch 1 to {_p}
+	send "" to {_p}
+	send "&6✆ &5&lJOHN: &fCome speak to me, I have a job opportunity &e(30s)" to {_p}
+	set action bar of {_p} to "&6✆ &5&lJOHN: &fCome speak to me, I have a job opportunity &e(30s)"
+	send {_p} title "&5&lJOHN:" with subtitle "&fCome speak to me, I have a job opportunity" for 8 seconds
+
+	set {SpeakToSiriusTimer::%UUID of {_p}%} to 30
+	loop 15 times:
+		if {SpeakToSiriusTimer::%UUID of {_p}%} is less than 1:
+			delete line 14 of {_p}'s scoreboard
+			delete line 13 of {_p}'s scoreboard
+			delete line 12 of {_p}'s scoreboard
+			stop
+		play sound "block.note_block.hat" with pitch 0.5 to {_p}
+		set line 14 of {_p}'s scoreboard to "&f"
+		set line 13 of {_p}'s scoreboard to "&5SPEAK TO JOHN"
+		if {SpeakToSiriusTimer::%UUID of {_p}%} is less than 10:
+			set line 12 of {_p}'s scoreboard to "&fRemaining: &600:0%{SpeakToSiriusTimer::%UUID of {_p}%}%"
+		else:
+			set line 12 of {_p}'s scoreboard to "&fRemaining: &600:%{SpeakToSiriusTimer::%UUID of {_p}%}%"
+
+		wait 20 ticks
+
+		remove 1 from {SpeakToSiriusTimer::%UUID of {_p}%}
+		if {SpeakToSiriusTimer::%UUID of {_p}%} is less than 1:
+			delete line 14 of {_p}'s scoreboard
+			delete line 13 of {_p}'s scoreboard
+			delete line 12 of {_p}'s scoreboard
+			stop
+		play sound "block.note_block.hat" with pitch 0.6 to {_p}
+		set line 14 of {_p}'s scoreboard to "&f"
+		set line 13 of {_p}'s scoreboard to "&5SPEAK TO JOHN"
+		if {SpeakToSiriusTimer::%UUID of {_p}%} is less than 10:
+			set line 12 of {_p}'s scoreboard to "&fRemaining: &600:0%{SpeakToSiriusTimer::%UUID of {_p}%}%"
+		else:
+			set line 12 of {_p}'s scoreboard to "&fRemaining: &600:%{SpeakToSiriusTimer::%UUID of {_p}%}%"
+		wait 20 ticks
+		remove 1 from {SpeakToSiriusTimer::%UUID of {_p}%}
+
+	play sound "entity.player.burp" with pitch 1 to {_p}
+	send "&6✆ &5&lJOHN: &fhmm, Nevermind... maybe another day!" to {_p}
+	delete {SpeakToSiriusTimer::%UUID of {_p}%}
+	delete line 14 of {_p}'s scoreboard
+	delete line 13 of {_p}'s scoreboard
+	delete line 12 of {_p}'s scoreboard
+	stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist - Tom:
+#
+#
+#==========================================================
+
+
+
+
+
+command /allowheists:
+	trigger:
+		if sender is not console:
+			if player is not "MasterClashers":
+				stop
+		loop all players:
+			if {TheCasinoHeist-Status::%UUID of loop-player%} is "Started-part18":
+				set {TheCasinoHeist-Status::%UUID of loop-player%} to "Started-part19"
+
+				send "&6✆ Incoming Call..." to loop-player
+				loop 4 times:
+					play sound "block.note_block.pling" with pitch 2 to loop-player
+					wait 2 tick
+
+				wait 5 ticks
+
+				send "&6✆✆ Incoming Call..." to loop-player
+				loop 4 times:
+					play sound "block.note_block.pling" with pitch 2 to loop-player
+					wait 2 tick
+
+				wait 5 ticks
+
+				send "&6✆✆✆ Incoming Call..." to loop-player
+				loop 4 times:
+					play sound "block.note_block.pling" with pitch 2 to loop-player
+					wait 2 tick
+
+				set {e} to 2
+				loop 15 times:
+					play sound "block.note_block.bit" with pitch {e} to loop-player
+					play sound "block.note_block.didgeridoo" with pitch {e} to loop-player
+					remove 0.1 from {e}
+					wait 2 ticks
+
+				play sound "block.note_block.banjo" with pitch 0.1 to loop-player
+				play sound "block.note_block.bass" with pitch 1 to loop-player
+
+				send "&6✆ &2&lTOM: &fQuick, lets do this heist... &e(60s)" to loop-player
+				wait 1 minutes
+				if {TheCasinoHeist-Status::%UUID of loop-player%} is "Started-part19":
+					set {TheCasinoHeist-Status::%UUID of loop-player%} to "Started-part18"
+				wait 4 minutes
+
+
+
+
+
+on npc right click:
+	if npc is 62:
+		if {TheCasinoHeist-Status::%UUID of player%} is "Completed":
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lTOM: &dYou haven't told anyone.... right?"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part18":
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lTOM: &dI'll contact you when i'm ready to do the heist!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part19":
+			startheist(player)
+			stop
+
+		if {SpeakToSiriusTimer::%UUID of player%} is greater than 0:
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part1":
+				set {TheCasinoHeist-Status::%UUID of player%} to "Started-part2"
+				set {SpeakToSiriusTimer::%UUID of player%} to 0
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&2&lTOM: &dahh yes, you must be %player%"
+
+				wait 2 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&2&lTOM: &dBefore we can get started with this ""situation"" we need to set some things up"
+
+				wait 2 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&2&lTOM: &dQuick get in here..."
+
+				wait 10 ticks
+
+				teleport player to {location-shadytom}
+				wait 1 tick
+				play sound "entity.enderman.teleport" with pitch 1 to player
+				send "<##b4ab71>[Heist Status: ""Complete Your Setups""]"
+				stop
+
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part10":
+			if player has leather Boots named "&2Robbery Boots":
+				if player has leather Leggings named "&2Robbery Leggings":
+					if player has leather Chestplate named "&2Robbery Chestplate":
+						set {TheCasinoHeist-Status::%UUID of player%} to "Started-part11"
+						
+						remove leather Boots named "&2Robbery Boots" from player's inventory
+						remove leather Leggings named "&2Robbery Leggings" from player's inventory
+						remove leather Chestplate named "&2Robbery Chestplate" from player's inventory
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&2&lTOM: &dPerfect, I'll keep this suit safe until we need it"
+
+						wait 10 ticks
+
+						play sound "entity.experience_orb.pickup" with pitch 1
+						play sound "block.note_block.banjo" with pitch 0.1
+						play sound "item.trident.thunder" with pitch 2
+						send player title "&6SETUP COMPLETED!" with subtitle "&7Speak to &2Tom &7whenever you can" for 3 seconds
+						stop
+
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part2" or "Started-part5" or "Started-part8" or "Started-part9" or "Started-part11" or "Started-part15":
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&2&lTOM: &dpsstt.. quick.. get in here..."
+
+			teleport player to {location-shadytom}
+			wait 1 tick
+			play sound "entity.enderman.teleport" with pitch 1 to player
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part5":
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part8":
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part9":
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 2 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as red wool
+				make player see block 2 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as red wool
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part11":
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 2 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block 2 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part15":
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block at {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block 1 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 2 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block 2 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+				make player see block 3 meter north of {TheCasinoHeistBlock_CasinoInfo::1} as lime wool
+				make player see block 3 meter north of {TheCasinoHeistBlock_CasinoInfo::2} as lime wool
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist Setup: CASINO INFO:
+#
+#
+#==========================================================
+
+
+
+
+
+on right click on sign:
+	if line 2 of clicked block is "&lCasino Info":
+		if {TheCasinoHeist-Status::%UUID of player%} is not set:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&cYou must be invited to the heist to start set ups!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part2":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part3"
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "<##b4ab71>&lHEIST: &dGo to the library and speak to the librarian..."
+			send "<##b4ab71>[Heist Setup: ""Casino Info""]"
+			teleport player to {location-outsideshadytom}
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part3":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "<##b4ab71>&lHEIST: &dGo to the librarian in the library!"
+			stop
+
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "<##b4ab71>&lHEIST: &7You must complete setup's in order!"
+
+
+
+
+
+on npc right click:
+	if npc is 60:
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part3":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part4"
+			set {CasinoSetup-FoundInfo::%UUID of player%} to 0
+			set {CasinoSetup-FoundBookshelf-1::%UUID of player%} to false
+			set {CasinoSetup-FoundBookshelf-2::%UUID of player%} to false
+			set {CasinoSetup-FoundBookshelf-3::%UUID of player%} to false
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&6&lLIBRARIAN: &7Hey there... What are you looking for?"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&6&lLIBRARIAN: &7Casino information?? I'd go ahead and right-click all shelves"
+
+			wait 2 seconds
+
+			play sound "music_disc.mellohi" with pitch 1.5
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&6&lLIBRARIAN: &7You never know what information you could find!"
+
+			set {CakeCollectionTimer-M::%UUID of player%} to 3
+			loop 3 times:
+				set {CakeCollectionTimer-S::%UUID of player%} to 60
+				remove 1 from {CakeCollectionTimer-M::%UUID of player%}
+				loop 60 times:
+					if {TheCasinoHeist-Status::%UUID of player%} is "Started-part5":
+						delete line 14 of player's scoreboard
+						delete line 13 of player's scoreboard
+						delete line 12 of player's scoreboard
+						stop
+
+					remove 1 from {CakeCollectionTimer-S::%UUID of player%}
+					set line 14 of player's scoreboard to "&f"
+					if {CasinoSetup-FoundInfo::%UUID of player%} = 3:
+						set line 13 of player's scoreboard to "&bGO TO LIBRARIAN:"
+					else:
+						set line 13 of player's scoreboard to "&bFIND CASINO INFO:"
+					if {CakeCollectionTimer-S::%UUID of player%} is less than 10:
+						set line 12 of player's scoreboard to "&fRemaining: &60%{CakeCollectionTimer-M::%UUID of player%}%:0%{CakeCollectionTimer-S::%UUID of player%}%"
+					else:
+						set line 12 of player's scoreboard to "&fRemaining: &60%{CakeCollectionTimer-M::%UUID of player%}%:%{CakeCollectionTimer-S::%UUID of player%}%"
+					wait 15 ticks
+
+			send player title "&7" with subtitle "&cSetup failed!"
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part2"
+			delete line 14 of player's scoreboard
+			delete line 13 of player's scoreboard
+			delete line 12 of player's scoreboard
+			stop
+
+
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part4":
+			if {CasinoSetup-FoundInfo::%UUID of player%} = 3:
+				set {TheCasinoHeist-Status::%UUID of player%} to "Started-part5"
+				stop playing sound "music_disc.mellohi" to player
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&6&lLIBRARIAN: &7You want to check out these books??"
+
+				wait 2 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&6&lLIBRARIAN: &7I don't know why you're so obssessed with the casino... but whatever"
+
+				wait 2 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&6&lLIBRARIAN: &7Here you go.. they're all yours!"
+
+				wait 1 seconds
+
+				play sound "entity.experience_orb.pickup" with pitch 1
+				play sound "block.note_block.banjo" with pitch 0.1
+				play sound "item.trident.thunder" with pitch 2
+				send player title "&6SETUP COMPLETED!" with subtitle "&7Speak to &2Tom &7whenever you can" for 3 seconds
+				stop
+
+
+
+
+
+on right click on bookshelf:
+	if {TheCasinoHeist-Status::%UUID of player%} is "Started-part4":
+	
+		loop 3 times:
+			if event-block is {CasinoSetup-Shelves::%loop-number%}:
+				if {CasinoSetup-FoundBookshelf-%loop-number%::%UUID of player%} is false:
+					set {CasinoSetup-FoundBookshelf-%loop-number%::%UUID of player%} to true
+					add 1 to {CasinoSetup-FoundInfo::%UUID of player%}
+
+					play sound "entity.ender_dragon.flap" with pitch 2 to player
+					send "<##b4ab71>&lHEIST: &b+1 Casino Book &c[&e%{CasinoSetup-FoundInfo::%UUID of player%}%/3&c]"
+
+					if {CasinoSetup-FoundInfo::%UUID of player%} = 3:
+						send "<##b4ab71>&l- &7&oYou've found all books, speak to the librarian!"
+					stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist Setup: CASINO INFO:
+#
+#
+#==========================================================
+
+
+
+
+
+on right click on sign:
+	if line 2 of clicked block is "&lCasino Scout":
+		if {TheCasinoHeist-Status::%UUID of player%} is not set:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&cYou must be invited to the heist to start set ups!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part5":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part6"
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "<##b4ab71>&lHEIST: &dGo to the casino!"
+			send "<##b4ab71>[Heist Setup: ""Casino Scout""]"
+			teleport player to {location-outsideshadytom}
+
+			loop 60 times:
+				wait 5 ticks
+				if distance between player and {CasinoSetup-BeHere1::1} is less than 5:
+					set {TheCasinoHeist-Status::%UUID of player%} to "Started-part7"
+					play sound "block.note_block.bit" with pitch 0.1
+					play sound "block.note_block.pling" with pitch 0.1
+					send ""
+					send "<##b4ab71>&lHEIST: &dGo behind the casino and hack into the camera system!"
+					stop
+				loop {CasinoSetup-BeHere1::*}:
+					draw 1 firework at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0.02 for player
+					draw 1 happy_villager at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0 for player
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part6":
+				set {TheCasinoHeist-Status::%UUID of player%} to "Started-part5"
+				send player title "&7" with subtitle "&cSetup failed!"
+				send ""
+				send "<##b4ab71>&lHEIST: &cTook too long, re-start setup!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part6":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "<##b4ab71>&lHEIST: &dGo to the casino!"
+			stop
+
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "<##b4ab71>&lHEIST: &7You must complete setup's in order!"
+
+
+
+
+
+on rightclick on player wall-mounted head:
+	if event-block is {CasinoKeyPad}:
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part7":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part8"
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send "&2&lTOM: &dI'll be able to get you a look inside... give me one moment"
+
+			wait 4 seconds
+
+			teleport player to {CasinoCamera_PlayerView::1}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dAlright here it is... The vault we'll be raiding.."
+
+			wait 4 seconds
+
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dHave a good look around... Everything you see is worth a lot of money"
+
+			wait 4 seconds
+
+			teleport player to {CasinoCamera_PlayerView::2}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dDown here are small piles of cash..."
+
+			wait 4 seconds
+
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dI would say it's worth &a$25,000,000 &da pile"
+
+			wait 4 seconds
+
+			teleport player to {CasinoCamera_PlayerView::3}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dThis room in front of you alone holds nearly $1bil"
+
+			wait 4 seconds
+
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dThose big green crates you see are worth &a$100,000,000 &deach!"
+
+			wait 4 seconds
+
+			teleport player to {CasinoCamera_PlayerView::4}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dThis here is the REAL cash grab..."
+
+			wait 4 seconds
+
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dThis painting is worth &a$1,000,000,000 (1bil)"
+
+			wait 4 seconds
+
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dThis could make us some SERIOUS money.."
+
+			wait 4 seconds
+
+			teleport player to {CasinoKeyPadView}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "&2&lTOM: &dThat's all for now, come back to me when you're ready to continue!"
+
+			wait 4 second
+
+			play sound "entity.experience_orb.pickup" with pitch 1
+			play sound "block.note_block.banjo" with pitch 0.1
+			play sound "item.trident.thunder" with pitch 2
+			send player title "&6SETUP COMPLETED!" with subtitle "&7Speak to &2Tom &7whenever you can" for 3 seconds
+			stop
+
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist Setup: GET OUTFIT:
+#
+#
+#==========================================================
+
+
+
+
+
+on right click on sign:
+	if line 2 of clicked block is "&lRobbery Suit":
+		if {TheCasinoHeist-Status::%UUID of player%} is not set:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&cYou must be invited to the heist to start set ups!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part8":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part9"
+			teleport player to {location-outsideshadytom}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "<##b4ab71>&lHEIST: &dGo up to the Clouds Drip and purchase the &2Robbery Suit"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part9":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "<##b4ab71>&lHEIST: &dGo up to the Clouds Drip and purchase the &2Robbery Suit"
+			stop
+
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "<##b4ab71>&lHEIST: &7You must complete setup's in order!"
+
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist Setup: FIND THE DRILL:
+#
+#
+#==========================================================
+
+
+
+
+
+on right click on sign:
+	if line 2 of clicked block is "&lFind The Drill":
+		if {TheCasinoHeist-Status::%UUID of player%} is not set:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&cYou must be invited to the heist to start set ups!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part11":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part12"
+			teleport player to {location-outsideshadytom}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "<##b4ab71>&lHEIST: &dMake your way to behind the iglo besides &bFisherman Tom"
+
+
+			loop 90 times:
+				wait 5 ticks
+				if distance between player and {CasinoSetup-BeHere2::1} is less than 5:
+					set {TheCasinoHeist-Status::%UUID of player%} to "Started-part13"
+					play sound "block.note_block.bit" with pitch 0.1
+					play sound "block.note_block.pling" with pitch 0.1
+					send ""
+					send "<##b4ab71>&lHEIST: &dSpeak to &9The Parkourist &dfor information on the drill..."
+					stop
+				loop {CasinoSetup-BeHere2::*}:
+					draw 1 firework at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0.02 for player
+					draw 1 happy_villager at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0 for player
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part12":
+				set {TheCasinoHeist-Status::%UUID of player%} to "Started-part11"
+				send player title "&7" with subtitle "&cSetup failed!"
+				send ""
+				send "<##b4ab71>&lHEIST: &cTook too long, re-start setup!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part12":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "<##b4ab71>&lHEIST: &dMake your way to behind the iglo besides &bFisherman Tom"
+			stop
+
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "<##b4ab71>&lHEIST: &7You must complete setup's in order!"
+
+
+
+
+
+on npc right click:
+	if npc is 64:
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part13":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part14"
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&9&lPARKOURIST: &dYou're looking for a drill?"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&9&lPARKOURIST: &dI'm sure there is one somewhere in this cave..."
+
+			wait 2 seconds
+
+			set player's flight mode to false
+			teleport player to {InsideParkourCave}
+			play sound "block.note_block.bit" with pitch 0.1 to player
+			play sound "block.note_block.pling" with pitch 0.1 to player
+			send ""
+			send "<##b4ab71>&lHEIST: &dSpeak to &9The Parkourist &dfor information on the drill..."
+
+
+			loop 240 times:
+				if player's flight mode is true:
+					teleport player to {OutsideParkourCave}
+					play sound "entity.player.burp" to player
+					set {TheCasinoHeist-Status::%UUID of player%} to "Started-part11"
+					send player title "&7" with subtitle "&cSetup failed!"
+					send ""
+					send "<##b4ab71>&lHEIST: &cYou can't fly!"
+					stop
+
+				if player's tool is a hoe:
+					teleport player to {OutsideParkourCave}
+					play sound "entity.player.burp" to player
+					set {TheCasinoHeist-Status::%UUID of player%} to "Started-part11"
+					send player title "&7" with subtitle "&cSetup failed!"
+					send ""
+					send "<##b4ab71>&lHEIST: &cYou can't hold a hoe!"
+					stop
+
+				wait 10 ticks
+				if distance between player and {CasinoSetup-BeHere3::1} is less than 3:
+					teleport player to {OutsideParkourCave}
+					wait 1 tick
+					set {TheCasinoHeist-Status::%UUID of player%} to "Started-part15"
+					play sound "block.note_block.bit" with pitch 0.1 to player
+					play sound "block.note_block.pling" with pitch 0.1 to player
+					send ""
+					send "<##b4ab71>&lHEIST: &d+1 Casino Drill!"
+
+					wait 1 second
+
+					play sound "entity.experience_orb.pickup" with pitch 1
+					play sound "block.note_block.banjo" with pitch 0.1
+					play sound "item.trident.thunder" with pitch 2
+					send player title "&6SETUP COMPLETED!" with subtitle "&7Speak to &2Tom &7whenever you can" for 3 seconds
+					stop
+
+				loop {CasinoSetup-BeHere3::*}:
+					draw 1 firework at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0.02 for player
+					draw 1 happy_villager at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0 for player
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part14":
+				teleport player to {OutsideParkourCave}
+				set {TheCasinoHeist-Status::%UUID of player%} to "Started-part11"
+				send player title "&7" with subtitle "&cSetup failed!"
+				send ""
+				send "<##b4ab71>&lHEIST: &cTook too long, re-start setup!"
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist Setup: FIND THE DRILL:
+#
+#
+#==========================================================
+
+
+
+
+
+on right click on sign:
+	if line 2 of clicked block is "&lFind A Hacker":
+		if {TheCasinoHeist-Status::%UUID of player%} is not set:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&cYou must be invited to the heist to start set ups!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part15":
+			set {TheCasinoHeist-Status::%UUID of player%} to "Started-part16"
+			teleport player to {location-outsideshadytom}
+			play sound "block.note_block.bit" with pitch 0.1
+			play sound "block.note_block.pling" with pitch 0.1
+			send ""
+			send "<##b4ab71>&lHEIST: &dMake your way to the prison!"
+
+
+			loop 120 times:
+				wait 10 ticks
+				if distance between player and {CasinoSetup-BeHere4::1} is less than 3:
+					set {TheCasinoHeist-Status::%UUID of player%} to "Started-part17"
+					teleport player to {insideprison}
+					wait 1 tick
+					play sound "block.note_block.bit" with pitch 0.1
+					play sound "block.note_block.pling" with pitch 0.1
+					send ""
+					send "<##b4ab71>&lHEIST: &dSpeak to &2The Hacker"
+
+					loop 30 times:
+						wait 10 ticks
+						if distance between player and {CasinoSetup-BeHere5::1} is less than 3:
+							set {TheCasinoHeist-Status::%UUID of player%} to "Started-part17"
+
+							play sound "block.note_block.bit" with pitch 0.1
+							play sound "block.note_block.pling" with pitch 0.1
+							send ""
+							send "&2&lHACKER: &dHey there man... I'm stuck in this cell.."
+
+							wait 3 seconds
+
+							play sound "block.note_block.bit" with pitch 0.1
+							play sound "block.note_block.pling" with pitch 0.1
+							send ""
+							send "&2&lHACKER: &dYou've got to insert a code into the door to open it..."
+
+							wait 3 seconds
+
+							play sound "block.note_block.bit" with pitch 0.1
+							play sound "block.note_block.pling" with pitch 0.1
+							send ""
+							send "&2&lHACKER: &dIf you can do that for me, i'll get anything you need done!"
+
+							wait 3 second
+
+							play sound "block.note_block.bit" with pitch 0.1
+							play sound "block.note_block.pling" with pitch 0.1
+							send ""
+							send "<##b4ab71>&lHEIST: &dFind the code to unlock the door"
+							stop
+						loop {CasinoSetup-BeHere5::*}:
+							draw 1 firework at location of loop-value-3 with offset vector(0, 0.5, 0) with extra 0.02 for player
+							draw 1 happy_villager at location of loop-value-3 with offset vector(0, 0.5, 0) with extra 0 for player
+
+					if {TheCasinoHeist-Status::%UUID of player%} is "Started-part17":
+						teleport player to {outsideprison}
+						wait 1 tick
+						set {TheCasinoHeist-Status::%UUID of player%} to "Started-part15"
+						send player title "&7" with subtitle "&cSetup failed!"
+						send ""
+						send "<##b4ab71>&lHEIST: &cTook too long, re-start setup!"
+					stop
+				loop {CasinoSetup-BeHere4::*}:
+					draw 1 firework at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0.02 for player
+					draw 1 happy_villager at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0 for player
+
+			if {TheCasinoHeist-Status::%UUID of player%} is "Started-part16":
+				set {TheCasinoHeist-Status::%UUID of player%} to "Started-part15"
+				send player title "&7" with subtitle "&cSetup failed!"
+				send ""
+				send "<##b4ab71>&lHEIST: &cTook too long, re-start setup!"
+			stop
+
+		if {TheCasinoHeist-Status::%UUID of player%} is "Started-part16":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "<##b4ab71>&lHEIST: &dMake your way to the prison!"
+			stop
+
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "<##b4ab71>&lHEIST: &7You must complete setup's in order!"
+
+
+
+
+
+on rightclick on sign:
+	if line 1 of clicked block is "&l[Key Pad]":
+		if line 2 of clicked block is "<Insert Code>":
+			if line 4 of clicked block is "&cDOOR LOCKED":
+				if {TheCasinoHeist-Status::%UUID of player%} is "Started-part17":
+					prisonkeypadgui(player)
+					stop
+
+
+
+
+
+function prisonkeypadgui(p:player):
+	if {CasinoHeistKPN_1::%UUID of {_p}%} is 2:
+		if {CasinoHeistKPN_2::%UUID of {_p}%} is 5:
+			if {CasinoHeistKPN_3::%UUID of {_p}%} is 8:
+				if {CasinoHeistKPN_4::%UUID of {_p}%} is 9:
+					teleport {_p} to {outsideprison}
+					wait 1 tick
+					set {TheCasinoHeist-Status::%UUID of {_p}%} to "Started-part18"
+					play sound "block.note_block.bit" with pitch 0.1 to {_p}
+					play sound "block.note_block.pling" with pitch 0.1 to {_p}
+					send "" to {_p}
+					send "<##b4ab71>&lHEIST: &dHacker is now on your side!" to {_p}
+
+					wait 1 second
+
+					play sound "entity.experience_orb.pickup" with pitch 1 to {_p}
+					play sound "block.note_block.banjo" with pitch 0.1 to {_p}
+					play sound "item.trident.thunder" with pitch 2 to {_p}
+					send {_p} title "&6SETUP COMPLETED!" with subtitle "&7Speak to &2Tom &7to start heist!" for 3 seconds
+					stop
+
+	if {CasinoHeistKPN_1::%UUID of {_p}%} is not "x":
+		if {CasinoHeistKPN_2::%UUID of {_p}%} is not "x":
+			if {CasinoHeistKPN_3::%UUID of {_p}%} is not "x":
+				if {CasinoHeistKPN_4::%UUID of {_p}%} is not "x":
+					set {CasinoHeistKPN_1::%UUID of {_p}%} to "x"
+					set {CasinoHeistKPN_2::%UUID of {_p}%} to "x"
+					set {CasinoHeistKPN_3::%UUID of {_p}%} to "x"
+					set {CasinoHeistKPN_4::%UUID of {_p}%} to "x"
+
+	play sound "ui.button.click" with pitch 2 to {_p}
+	set metadata tag "PrisonKeyPad" of {_p} to chest inventory with 1 row named "Code: &8[%{CasinoHeistKPN_1::%UUID of {_p}%}%] [%{CasinoHeistKPN_2::%UUID of {_p}%}%] [%{CasinoHeistKPN_3::%UUID of {_p}%}%] [%{CasinoHeistKPN_4::%UUID of {_p}%}%]"
+
+	set slot 0 of metadata "PrisonKeyPad" of {_p} to 1 arrow named "&a> 1 <"
+	set slot 1 of metadata "PrisonKeyPad" of {_p} to 2 arrow named "&a> 2 <"
+	set slot 2 of metadata "PrisonKeyPad" of {_p} to 3 arrow named "&a> 3 <"
+	set slot 3 of metadata "PrisonKeyPad" of {_p} to 4 arrow named "&a> 4 <"
+	set slot 4 of metadata "PrisonKeyPad" of {_p} to 5 arrow named "&a> 5 <"
+	set slot 5 of metadata "PrisonKeyPad" of {_p} to 6 arrow named "&a> 6 <"
+	set slot 6 of metadata "PrisonKeyPad" of {_p} to 7 arrow named "&a> 7 <"
+	set slot 7 of metadata "PrisonKeyPad" of {_p} to 8 arrow named "&a> 8 <"
+	set slot 8 of metadata "PrisonKeyPad" of {_p} to 9 arrow named "&a> 9 <"
+
+	open (metadata tag "PrisonKeyPad" of {_p}) to {_p}
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "PrisonKeyPad" of player):
+		cancel event
+
+		if index of event-slot is 0:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 1
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 1:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 2
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 2:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 3
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 3:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 4
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 4:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 5
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 5:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 6
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 6:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 7
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 7:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 8
+					prisonkeypadgui(player)
+					stop
+
+		if index of event-slot is 8:
+			loop 4 times:
+				if {CasinoHeistKPN_%loop-number%::%UUID of player%} is "x":
+					set {CasinoHeistKPN_%loop-number%::%UUID of player%} to 9
+					prisonkeypadgui(player)
+					stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Clouds: Heist - START HEIST:
+#
+#
+#==========================================================
+
+
+
+
+
+function startheist(p:player):
+	loop {CasinoBreakInBlocks::*}:
+		set block at loop-value to cracked deepslate tiles
+	loop {CasinoCashCrate::*}:
+		set block at loop-value to dried kelp block
+
+	loop {CasinoClosedDoors::*}:
+		set block at loop-value to iron door
+	loop {CasinoOpenedDoors::*}:
+		set block at loop-value to open iron door
+
+	if {_p}'s tool is air:
+		set {_p}'s flight mode to false
+		delete {FoundHeistPainting::%UUID of {_p}%}
+		set {TheCasinoHeist-Status::%UUID of {_p}%} to "StartHeist-part1"
+		loop 13 times:
+			delete {FoundHeistSkull::%loop-number%::%UUID of {_p}%}
+
+		set {_p}'s tool to netherite pickaxe named "&5&lCasino Drill" with lore "&7Use this to break into" and "&7the casino vaults!" with nbt "{HideFlags:127}"
+		play sound "block.note_block.bit" with pitch 0.1 to {_p}
+		play sound "block.note_block.pling" with pitch 0.1 to {_p}
+		send "" to {_p}
+		send "<##b4ab71>&lHEIST: &dHEIST STARTED, Read Chat for help on the heist" to {_p}
+
+		wait 3 seconds
+
+		heisttimer({_p})
+		teleport {_p} to {tombasement}
+		play sound "block.note_block.bit" with pitch 0.1 to {_p}
+		play sound "block.note_block.pling" with pitch 0.1 to {_p}
+		send "" to {_p}
+		send "&2&lTOM: &aAlright, we only have a limited amount of time for this heist..." to {_p}
+
+		wait 3 seconds
+
+		play sound "block.note_block.bit" with pitch 0.1 to {_p}
+		play sound "block.note_block.pling" with pitch 0.1 to {_p}
+		send "" to {_p}
+		send "&2&lTOM: &aIf we take too long, we'll get caught and it'll all be for nothing..." to {_p}
+
+		wait 3 seconds
+
+		play sound "block.note_block.bit" with pitch 0.1 to {_p}
+		play sound "block.note_block.pling" with pitch 0.1 to {_p}
+		send "" to {_p}
+		send "&2&lTOM: &aUse the casino drill to break into the sewers..." to {_p}
+
+		wait 3 seconds
+
+		play sound "block.note_block.bit" with pitch 0.1 to {_p}
+		play sound "block.note_block.pling" with pitch 0.1 to {_p}
+		send "" to {_p}
+		send "<##b4ab71>&lHEIST: &bTime Started, You have &63:00 &bto complete heist!" to {_p}
+
+		loop 120 times:
+			if {TheCasinoHeist-Status::%UUID of {_p}%} is "Started-part18":
+				stop
+			wait 10 ticks
+			if distance between {_p} and {CasinoSetup-BeHere6::1} is less than 3:
+				set {TheCasinoHeist-Status::%UUID of {_p}%} to "StartHeist-part2"
+				play sound "block.note_block.bit" with pitch 0.1 to {_p}
+				play sound "block.note_block.pling" with pitch 0.1 to {_p}
+				send "" to {_p}
+				send "<##b4ab71>&lHEIST: &bDrill into the casino storage room and make your way to the vaults!" to {_p}
+
+				heisttowardsvault({_p})
+				stop
+
+			loop {CasinoSetup-BeHere6::*}:
+				draw 1 firework at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0.02 for {_p}
+				draw 1 happy_villager at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0 for {_p}
+
+		play sound "entity.player.burp" to {_p}
+		send {_p} title "&7" with subtitle "&cHeist Failed!"
+		send "&c&lHEIST FAILED: &dYou took too long to go to the storage room!" to {_p}
+
+		execute {_p} command "/spawn"
+		remove all netherite pickaxe named "&5&lCasino Drill" from {_p}'s inventory
+		delete {TheCasinoHeist-Status::%UUID of {_p}%}
+		delete line 15 of {_p}'s scoreboard
+		delete line 14 of {_p}'s scoreboard
+		delete line 13 of {_p}'s scoreboard
+		delete line 12 of {_p}'s scoreboard
+		stop
+	else:
+		play sound "block.note_block.bass" with pitch 2 to {_p}
+		send "<##b4ab71>&lHEIST: &dYou must hold nothing to start the heist!" to {_p}
+		stop
+
+
+
+
+
+function heisttowardsvault(p:player):
+	loop 120 times:
+		wait 10 ticks
+		if distance between {_p} and {CasinoSetup-BeHere7::1} is less than 3:
+			set {TheCasinoHeist-Status::%UUID of {_p}%} to "StartHeist-part3"
+			play sound "block.note_block.bit" with pitch 0.1 to {_p}
+			play sound "block.note_block.pling" with pitch 0.1 to {_p}
+			send "" to {_p}
+			send "<##b4ab71>&lHEIST: &bThe door to the vault room is shut..." to {_p}
+			
+			wait 3 seconds
+
+			play sound "block.note_block.bit" with pitch 0.1 to {_p}
+			play sound "block.note_block.pling" with pitch 0.1 to {_p}
+			send "" to {_p}
+			send "<##b4ab71>&lHEIST: &bFind another way inside!" to {_p}
+			stop
+		loop {CasinoSetup-BeHere7::*}:
+			draw 1 firework at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0.02 for {_p}
+			draw 1 happy_villager at location of loop-value-2 with offset vector(0, 0.5, 0) with extra 0 for {_p}
+
+	play sound "entity.player.burp" to {_p}
+	send {_p} title "&7" with subtitle "&cHeist Failed!"
+	send "&c&lHEIST FAILED: &dYou took too long to go to the vault!" to {_p}
+
+	execute {_p} command "/spawn"
+	remove all netherite pickaxe named "&5&lCasino Drill" from {_p}'s inventory
+	delete {TheCasinoHeist-Status::%UUID of {_p}%}
+	delete line 15 of {_p}'s scoreboard
+	delete line 14 of {_p}'s scoreboard
+	delete line 13 of {_p}'s scoreboard
+	delete line 12 of {_p}'s scoreboard
+	stop
+
+
+
+
+
+function heisttimer(p:player):
+	set {CasinoHeistTake::%UUID of {_p}%} to 0
+	set {CasinoHeistTimer-M::%UUID of {_p}%} to 2
+	set {CasinoHeistTimer-S::%UUID of {_p}%} to 0
+
+	loop 3 times:
+		set {CasinoHeistTimer-S::%UUID of {_p}%} to 60
+		loop 60 times:
+			if {_p}'s flight mode is true:
+				play sound "entity.player.burp" to {_p}
+				send {_p} title "&7" with subtitle "&cHeist Failed!"
+				send "&c&lHEIST FAILED: &dYou can't fly during heists!" to {_p}
+				execute {_p} command "/spawn"
+				delete {TheCasinoHeist-Status::%UUID of {_p}%}
+
+			if {_p}'s tool is not air or netherite pickaxe:
+				play sound "entity.player.burp" to {_p}
+				send {_p} title "&7" with subtitle "&cHeist Failed!"
+				send "&c&lHEIST FAILED: &dYou can only hold a pickaxe" to {_p}
+				execute {_p} command "/spawn"
+				delete {TheCasinoHeist-Status::%UUID of {_p}%}
+
+			if {TheCasinoHeist-Status::%UUID of {_p}%} is not set:
+				set {TheCasinoHeist-Status::%UUID of {_p}%} to "Started-part18"
+				remove all netherite pickaxe named "&5&lCasino Drill" from {_p}'s inventory
+				delete line 15 of {_p}'s scoreboard
+				delete line 14 of {_p}'s scoreboard
+				delete line 13 of {_p}'s scoreboard
+				delete line 12 of {_p}'s scoreboard
+
+				loop {CasinoBreakInBlocks::*}:
+					set block at loop-value-3 to cracked deepslate tiles
+				loop {CasinoCashCrate::*}:
+					set block at loop-value-3 to dried kelp block
+
+				loop {CasinoClosedDoors::*}:
+					set block at loop-value-3 to iron door
+				loop {CasinoOpenedDoors::*}:
+					set block at loop-value-3 to open iron door
+				stop
+
+			remove 1 from {CasinoHeistTimer-S::%UUID of {_p}%}
+			set line 15 of {_p}'s scoreboard to "&f"
+			set line 14 of {_p}'s scoreboard to "&bCASINO HEIST:"
+			if {CasinoHeistTimer-S::%UUID of {_p}%} is less than 10:
+				set line 13 of {_p}'s scoreboard to "&fYour Time: &60%{CasinoHeistTimer-M::%UUID of {_p}%}%:0%{CasinoHeistTimer-S::%UUID of {_p}%}%"
+			else:
+				set line 13 of {_p}'s scoreboard to "&fYour Time: &60%{CasinoHeistTimer-M::%UUID of {_p}%}%:%{CasinoHeistTimer-S::%UUID of {_p}%}%"
+			set line 12 of {_p}'s scoreboard to "&fTake: &a$%regex({CasinoHeistTake::%UUID of {_p}%})%"
+
+			if distance between {_p} and {CasinoSetup-BeHere8::1} is less than 2:
+				remove all netherite pickaxe named "&5&lCasino Drill" from {_p}'s inventory
+				delete line 15 of {_p}'s scoreboard
+				delete line 14 of {_p}'s scoreboard
+				delete line 13 of {_p}'s scoreboard
+				delete line 12 of {_p}'s scoreboard
+
+				teleport {_p} to {casinoescape}
+				set {TheCasinoHeist-Status::%UUID of {_p}%} to "Completed"
+				add {CasinoHeistTake::%UUID of {_p}%} to {ShadyBankerBalance::%UUID of {_p}%}
+				wait a tick
+				play sound "entity.enderman.teleport" with pitch 1 to {_p}
+
+				wait 1 second
+
+				play sound "ui.toast.challenge_complete" with pitch 1 to {_p}
+				send {_p} title "&bHEIST COMPLETED!" with subtitle "&a+$%regex({CasinoHeistTake::%UUID of {_p}%})%" for 5 seconds
+				send "" to {_p}
+				send "<##b4ab71>[Heist Status: ""Completed Heist""]" to {_p}
+				send "&7[&a+$%regex({CasinoHeistTake::%UUID of {_p}%})%&7]" to {_p}
+
+				loop {CasinoBreakInBlocks::*}:
+					set block at loop-value-3 to cracked deepslate tiles
+				loop {CasinoCashCrate::*}:
+					set block at loop-value-3 to dried kelp block
+
+				loop {CasinoClosedDoors::*}:
+					set block at loop-value-3 to iron door
+				loop {CasinoOpenedDoors::*}:
+					set block at loop-value-3 to open iron door
+				stop
+			else:
+				draw 3 firework at location of {CasinoSetup-BeHere8::1} with offset vector(0, 0.5, 0) with extra 0.02 for {_p}
+				draw 2 happy_villager at location of {CasinoSetup-BeHere8::1} with offset vector(0, 0.5, 0) with extra 0.2 for {_p}
+
+			wait 20 ticks
+		remove 1 from {CasinoHeistTimer-M::%UUID of {_p}%}
+
+	play sound "entity.player.burp" to {_p}
+	send {_p} title "&7" with subtitle "&cHeist Failed!"
+	send "&c&lHEIST FAILED: &dYou took too long!" to {_p}
+
+	execute {_p} command "/spawn"
+	remove all netherite pickaxe named "&5&lCasino Drill" from {_p}'s inventory
+	set {TheCasinoHeist-Status::%UUID of {_p}%} to "Started-part18"
+	delete line 15 of {_p}'s scoreboard
+	delete line 14 of {_p}'s scoreboard
+	delete line 13 of {_p}'s scoreboard
+	delete line 12 of {_p}'s scoreboard
+
+	loop {CasinoBreakInBlocks::*}:
+		set block at loop-value to cracked deepslate tiles
+	loop {CasinoCashCrate::*}:
+		set block at loop-value to dried kelp block
+
+	loop {CasinoClosedDoors::*}:
+		set block at loop-value to iron door
+	loop {CasinoOpenedDoors::*}:
+		set block at loop-value to open iron door
+	stop
+
+
+
+
+
+on break:
+	if {TheCasinoHeist-Status::%UUID of player%} is "StartHeist-part1" or "StartHeist-part2":
+		if event-block is cracked deepslate tiles:
+			if player's x-coord is between -126 and -115:
+				if player's z-coord is between -88 and -108:
+					play sound "entity.experience_orb.pickup" with pitch 2 to player
+					clear drops
+					stop
+
+	if event-block is cracked deepslate tiles:
+		if player's x-coord is between -138 and 91:
+			if player's z-coord is between 91 and -138:
+				cancel event
+
+
+
+
+
+on rightclick on player head:
+	if {TheCasinoHeist-Status::%UUID of player%} is "StartHeist-part4":
+		loop 13 times:
+			if event-block is {HeistSkulls::%loop-number%}:
+				if {FoundHeistSkull::%loop-number%::%UUID of player%} is not set:
+					set {FoundHeistSkull::%loop-number%::%UUID of player%} to true
+
+					play sound "entity.player.levelup" with pitch 1.8 to player
+					add 25000000 to {CasinoHeistTake::%UUID of player%}
+					send "&a&lCASH PILE: &a+$25,000,000" to player
+
+
+
+
+
+on rightclick on painting:
+	if {TheCasinoHeist-Status::%UUID of player%} is "StartHeist-part4":
+		if {FoundHeistPainting::%UUID of player%} is not set:
+			set {FoundHeistPainting::%UUID of player%} to true
+
+			play sound "entity.player.levelup" with pitch 1.8 to player
+			add 1000000000 to {CasinoHeistTake::%UUID of player%}
+			send "&d&lFOUND PAINDING: &a+$1,000,000,000" to player
+
+
+
+
+
+on break:
+	if {TheCasinoHeist-Status::%UUID of player%} is "StartHeist-part4":
+		if event-block is dried kelp block:
+			if player's x-coord is between -120 and -90:
+				if player's z-coord is between -117 and -143:
+					play sound "entity.player.levelup" with pitch 1.8 to player
+					add 100000000 to {CasinoHeistTake::%UUID of player%}
+					send "&2&lCASH CRATE: &a+$100,000,000" to player
+					clear drops
+					stop
+
+	if event-block is dried kelp block:
+		if player's x-coord is between -138 and 91:
+			if player's z-coord is between 91 and -138:
+				cancel event
+
+
+
+
+
+on break:
+	if {TheCasinoHeist-Status::%UUID of player%} is "StartHeist-part4":
+		if event-block is iron door:
+			if player's x-coord is between -120 and -90:
+				if player's z-coord is between -117 and -143:
+					clear drops
+					stop
+
+	if event-block is iron door:
+		if player's x-coord is between -138 and 91:
+			if player's z-coord is between 91 and -138:
+				cancel event
+
+
+
+
+
+
+on right click on sign:
+	if {TheCasinoHeist-Status::%UUID of player%} is "StartHeist-part3":
+		if line 2 of clicked block is "&lVAULT LOCKED":
+			if line 3 of clicked block is "&a[CLICK]":
+				set {TheCasinoHeist-Status::%UUID of player%} to "StartHeist-part4"
+				teleport player to {InsideCasinoVault}
+				play sound "entity.enderman.teleport" with pitch 1 to player

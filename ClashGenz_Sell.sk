@@ -1,0 +1,627 @@
+#==========================================================
+#
+#
+#		ClashGenz Sell: /sell cmd
+#
+#
+#==========================================================
+
+
+
+
+
+command /sell:
+	trigger:
+		set {_Sell-MoneyMade::%UUID of player%} to 0
+		set {_Sell-TotalSoldItems::%UUID of player%} to 0
+
+
+# GENERATOR SELLS:
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of wheat named "<##ffec10>&lWheat &a&n(/sell for money)" in player's inventory
+		remove all wheat named "<##ffec10>&lWheat &a&n(/sell for money)" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 10 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of melon slice named "<##79dc6e>&lMelon Slice &a&n(/sell for money)" in player's inventory
+		remove all melon slice named "<##79dc6e>&lMelon Slice &a&n(/sell for money)" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 20 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of coal named "<##3c3b38>&lCoal" in player's inventory
+		remove all coal named "<##3c3b38>&lCoal" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 25 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {CoalBlockSkull} named "<##3c3b38>&lCoal Block" in player's inventory
+		remove all {CoalBlockSkull} named "<##3c3b38>&lCoal Block" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 50 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of iron ingot named "<##bab8ab>&lIron Ingot" in player's inventory
+		remove all iron ingot named "<##bab8ab>&lIron Ingot" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 75 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {IronBlockSkull} named "<##bab8ab>&lIron Block" in player's inventory
+		remove all {IronBlockSkull} named "<##bab8ab>&lIron Block" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 100 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of golden ingot named "<##dcb940>&lGolden Ingot" in player's inventory
+		remove all golden ingot named "<##dcb940>&lGolden Ingot" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 150 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {GoldBlockSkull} named "<##dcb940>&lGold Block" in player's inventory
+		remove all {GoldBlockSkull} named "<##dcb940>&lGold Block" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 200 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of redstone named "<##da3131>&lRedstone" in player's inventory
+		remove all redstone named "<##da3131>&lRedstone" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 300 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {RedstoneBlockSkull} named "<##da3131>&lRedstone Block" in player's inventory
+		remove all {RedstoneBlockSkull} named "<##da3131>&lRedstone Block" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 400 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of lapis lazuli named "<##3b52c9>&lLapis" in player's inventory
+		remove all lapis lazuli named "<##3b52c9>&lLapis" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {LapisBlockSkull} named "<##3b52c9>&lLapis Block" in player's inventory
+		remove all {LapisBlockSkull} named "<##3b52c9>&lLapis Block" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 600 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of diamond named "<##27bfd6>&lDiamond" in player's inventory
+		remove all diamond named "<##27bfd6>&lDiamond" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 700 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {DiamondBlockSkull} named "<##27bfd6>&lDiamond Block" in player's inventory
+		remove all {DiamondBlockSkull} named "<##27bfd6>&lDiamond Block" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 800 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of emerald named "<##49bc57>&lEmerald" in player's inventory
+		remove all emerald named "<##49bc57>&lEmerald" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 900 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {EmeraldBlockSkull} named "<##49bc57>&lEmerald Block" in player's inventory
+		remove all {EmeraldBlockSkull} named "<##49bc57>&lEmerald Block" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 1000 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {NetherrackBlockSkull} named "<##9d0c0c>&lNetherrack" in player's inventory
+		remove all {NetherrackBlockSkull} named "<##9d0c0c>&lNetherrack" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 2000 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of nether quartz named "<##ca8f8f>&lQuartz" in player's inventory
+		remove all nether quartz named "<##ca8f8f>&lQuartz" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 2500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of golden nugget named "<##9c8622>&lNether Gold" in player's inventory
+		remove all golden nugget named "<##9c8622>&lNether Gold" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 3000 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of nether brick items named "<##6f0909>&lNether Brick" in player's inventory
+		remove all nether brick items named "<##6f0909>&lNether Brick" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 3500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of nether wart named "<##e52727>&lNether Wart" in player's inventory
+		remove all nether wart named "<##e52727>&lNether Wart" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 4000 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {ObsidianSkull} named "<##461f8d>&lObsidian" in player's inventory
+		remove all {ObsidianSkull} named "<##461f8d>&lObsidian" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 4500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of {CryingObsidianSkull} named "<##632cc6>&lCrying Obsidian" in player's inventory
+		remove all {CryingObsidianSkull} named "<##632cc6>&lCrying Obsidian" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 5000 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of wither rose named "<##7648fb>&lObsidian Rose" in player's inventory
+		remove all wither rose named "<##7648fb>&lObsidian Rose" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 5500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of netherite scrap named "<##674f4f>&lBudget Netherite" in player's inventory
+		remove all netherite scrap named "<##674f4f>&lBudget Netherite" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 7500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of netherite ingot named "<##674f4f>&lNetherite Ingot" in player's inventory
+		remove all netherite ingot named "<##674f4f>&lNetherite Ingot" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 9500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of honeycomb named "&6&lHoney Comb" in player's inventory
+		remove all honeycomb named "&6&lHoney Comb" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 3000 to {_Sell-MoneyMade::%UUID of player%}
+
+
+# FARM SELLS:
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of wheat named "<##f2ff86>&lWHEAT" in player's inventory
+		remove all wheat named "<##f2ff86>&lWHEAT" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 25 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of glowing hay bale named "<##f2ff86>&lHAY BALE" in player's inventory
+		remove all hay bale named "<##f2ff86>&lHAY BALE" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 10000 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of wheat named "<##feb8ff>&lSUPER WHEAT" in player's inventory
+		remove all wheat named "<##feb8ff>&lSUPER WHEAT" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 2500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of potato named "<##ca8326>&lPOTATO" in player's inventory
+		remove all potato named "<##ca8326>&lPOTATO" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 50 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of poisonous potato named "<##84a537>&lPOISONOUS POTATO" in player's inventory
+		remove all poisonous potato named "<##84a537>&lPOISONOUS POTATO" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 3500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of carrot named "<##e86525>&lCARROT" in player's inventory
+		remove all carrot named "<##e86525>&lCARROT" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 75 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of golden carrot named "<##f4d34f>&lGOLDEN CARROT" in player's inventory
+		remove all golden carrot named "<##f4d34f>&lGOLDEN CARROT" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 4500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of beetroot named "<##f30f5a>&lBEETROOT" in player's inventory
+		remove all beetroot named "<##f30f5a>&lBEETROOT" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of chicken named "<##d4c972>Raw Chicken" in player's inventory
+		remove all chicken named "<##d4c972>Raw Chicken" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of feather named "&fFeather" in player's inventory
+		remove all feather named "&fFeather" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 1000 to {_Sell-MoneyMade::%UUID of player%}
+
+
+# FISH SELLS:
+
+
+		loop player's inventory:
+			if loop-slot is cod named "&aCod":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+			if loop-slot is raw salmon named "&eSalmon":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+			if loop-slot is tropical fish named "&cTropical Fish":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+			if loop-slot is pufferfish named "&6Pufferfish":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+			if loop-slot is iron horse armour named "<##ededed>Iron Fish Sculpture":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+			if loop-slot is gold horse armour named "<##d3c247>Gold Fish Sculpture":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+			if loop-slot is diamond horse armour named "<##32ccca>Diamond Fish Sculpture":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+			if loop-slot is paper named "&6Lottery Ticket":
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of loop-slot parsed as "%text%%number%"
+				add {_Sell-ItemAmount::%UUID of player%::2} to {_Sell-MoneyMade::%UUID of player%}
+				add 1 to {_Sell-TotalSoldItems::%UUID of player%}
+				remove loop-slot from player's inventory
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of turtle egg named "&3Turtle Egg" in player's inventory
+		remove all turtle egg named "&3Turtle Egg" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 2500 to {_Sell-MoneyMade::%UUID of player%}
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of turtle helmet named "&2Turtle Shell" in player's inventory
+		remove all turtle helmet named "&2Turtle Shell" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 7500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+
+# CAVE SELLS:
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of light gray dye named "&7Cave Dust" in player's inventory
+		remove all light gray dye named "&7Cave Dust" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 50 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of brown dye named "<##7d5227>Cave Dirt" in player's inventory
+		remove all brown dye named "<##7d5227>Cave Dirt" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 50 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of glowstone dust named "&6Magic Cave Dust" in player's inventory
+		remove all glowstone dust named "&6Magic Cave Dust" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+		set {_Sell-ItemAmount::%UUID of player%} to amount of poppy named "&cLost Golem Poppy" in player's inventory
+		remove all poppy named "&cLost Golem Poppy" from player's inventory
+		if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+			add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+			add {_Sell-ItemAmount::%UUID of player%} * 2500 to {_Sell-MoneyMade::%UUID of player%}
+
+
+
+		if {_Sell-MoneyMade::%UUID of player%} = 0:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&c&lNO ITEMS TO SELL: &7You have nothing of value!"
+			stop
+
+		play sound "entity.player.levelup" with pitch 2 to player
+		send "&a&lSELL REPORT: &7Sold &e%{_Sell-TotalSoldItems::%UUID of player%}% &7items for &a$%regex({_Sell-MoneyMade::%UUID of player%})%"
+		add {_Sell-MoneyMade::%UUID of player%} to {balance::%UUID of player%}
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Sell: Sell Wands - Right Click Chests:
+#
+#
+#==========================================================
+
+
+
+
+on rightclick on chest:
+	if name of player's tool is "<##ffd013>Sell Wand &6&l(x1.0)", "<##ffd013>Sell Wand &6&l(x1.25)", "<##ffd013>Sell Wand &6&l(x1.5)", "<##ffd013>Sell Wand &6&l(x2.0)" or "<##ffd013>Sell Wand &6&l(x2.5)" or "<##ffd013>Sell Wand &6&l(x3.0)":
+		cancel event
+
+		loop {PlacedGenerators::%UUID of player%::*}:
+			set {_SellWandSellCheck-gen} to location((x-coord of loop-value's location), 70, (z-coord of loop-value's location), player's world)
+			set {_SellWandSellCheck-player} to location((x-coord of player's location), 70, (z-coord of player's location), player's world)
+			if distance between {_SellWandSellCheck-gen} and {_SellWandSellCheck-player} is less than 30:
+				set {_Sell-MoneyMade::%UUID of player%} to 0
+				set {_Sell-TotalSoldItems::%UUID of player%} to 0
+
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of wheat named "<##ffec10>&lWheat &a&n(/sell for money)" in event-block's inventory
+				remove all wheat named "<##ffec10>&lWheat &a&n(/sell for money)" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 10 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of melon slice named "<##79dc6e>&lMelon Slice &a&n(/sell for money)" in event-block's inventory
+				remove all melon slice named "<##79dc6e>&lMelon Slice &a&n(/sell for money)" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 20 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of coal named "<##3c3b38>&lCoal" in event-block's inventory
+				remove all coal named "<##3c3b38>&lCoal" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 25 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {CoalBlockSkull} named "<##3c3b38>&lCoal Block" in event-block's inventory
+				remove all {CoalBlockSkull} named "<##3c3b38>&lCoal Block" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 50 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of iron ingot named "<##bab8ab>&lIron Ingot" in event-block's inventory
+				remove all iron ingot named "<##bab8ab>&lIron Ingot" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 75 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {IronBlockSkull} named "<##bab8ab>&lIron Block" in event-block's inventory
+				remove all {IronBlockSkull} named "<##bab8ab>&lIron Block" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 100 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of golden ingot named "<##dcb940>&lGolden Ingot" in event-block's inventory
+				remove all golden ingot named "<##dcb940>&lGolden Ingot" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 150 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {GoldBlockSkull} named "<##dcb940>&lGold Block" in event-block's inventory
+				remove all {GoldBlockSkull} named "<##dcb940>&lGold Block" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 200 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of redstone named "<##da3131>&lRedstone" in event-block's inventory
+				remove all redstone named "<##da3131>&lRedstone" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 300 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {RedstoneBlockSkull} named "<##da3131>&lRedstone Block" in event-block's inventory
+				remove all {RedstoneBlockSkull} named "<##da3131>&lRedstone Block" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 400 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of lapis lazuli named "<##3b52c9>&lLapis" in event-block's inventory
+				remove all lapis lazuli named "<##3b52c9>&lLapis" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 500 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {LapisBlockSkull} named "<##3b52c9>&lLapis Block" in event-block's inventory
+				remove all {LapisBlockSkull} named "<##3b52c9>&lLapis Block" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 600 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of diamond named "<##27bfd6>&lDiamond" in event-block's inventory
+				remove all diamond named "<##27bfd6>&lDiamond" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 700 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {DiamondBlockSkull} named "<##27bfd6>&lDiamond Block" in event-block's inventory
+				remove all {DiamondBlockSkull} named "<##27bfd6>&lDiamond Block" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 800 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of emerald named "<##49bc57>&lEmerald" in event-block's inventory
+				remove all emerald named "<##49bc57>&lEmerald" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 900 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {EmeraldBlockSkull} named "<##49bc57>&lEmerald Block" in event-block's inventory
+				remove all {EmeraldBlockSkull} named "<##49bc57>&lEmerald Block" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 1000 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {NetherrackBlockSkull} named "<##9d0c0c>&lNetherrack" in event-block's inventory
+				remove all {NetherrackBlockSkull} named "<##9d0c0c>&lNetherrack" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 2000 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of nether quartz named "<##ca8f8f>&lQuartz" in event-block's inventory
+				remove all nether quartz named "<##ca8f8f>&lQuartz" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 2500 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of golden nugget named "<##9c8622>&lNether Gold" in event-block's inventory
+				remove all golden nugget named "<##9c8622>&lNether Gold" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 2800 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of nether brick items named "<##6f0909>&lNether Brick" in event-block's inventory
+				remove all nether brick items named "<##6f0909>&lNether Brick" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 2900 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of nether wart named "<##e52727>&lNether Wart" in event-block's inventory
+				remove all nether wart named "<##e52727>&lNether Wart" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 3500 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {ObsidianSkull} named "<##461f8d>&lObsidian" in event-block's inventory
+				remove all {ObsidianSkull} named "<##461f8d>&lObsidian" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 4000 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of {CryingObsidianSkull} named "<##632cc6>&lCrying Obsidian" in event-block's inventory
+				remove all {CryingObsidianSkull} named "<##632cc6>&lCrying Obsidian" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 4500 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of wither rose named "<##7648fb>&lObsidian Rose" in event-block's inventory
+				remove all wither rose named "<##7648fb>&lObsidian Rose" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 5000 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of netherite scrap named "<##674f4f>&lBudget Netherite" in event-block's inventory
+				remove all netherite scrap named "<##674f4f>&lBudget Netherite" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 7000 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of netherite ingot named "<##674f4f>&lNetherite Ingot" in event-block's inventory
+				remove all netherite ingot named "<##674f4f>&lNetherite Ingot" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 9000 to {_Sell-MoneyMade::%UUID of player%}
+
+				set {_Sell-ItemAmount::%UUID of player%} to amount of honeycomb named "&6&lHoney Comb" in event-block's inventory
+				remove all honeycomb named "&6&lHoney Comb" from event-block's inventory
+				if {_Sell-ItemAmount::%UUID of player%} is greater than 0:
+					add {_Sell-ItemAmount::%UUID of player%} to {_Sell-TotalSoldItems::%UUID of player%}
+					add {_Sell-ItemAmount::%UUID of player%} * 3000 to {_Sell-MoneyMade::%UUID of player%}
+
+
+
+				if {_Sell-MoneyMade::%UUID of player%} = 0:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&c&lNO ITEMS TO SELL: &7You have nothing of value!"
+					stop
+
+				if player's tool is blaze rod named "<##ffd013>Sell Wand &6&l(x1.25)":
+					set {_Sell-MoneyMade::%UUID of player%} to {_Sell-MoneyMade::%UUID of player%} * 1.25
+				if player's tool is blaze rod named "<##ffd013>Sell Wand &6&l(x1.5)":
+					set {_Sell-MoneyMade::%UUID of player%} to {_Sell-MoneyMade::%UUID of player%} * 1.5
+				if player's tool is blaze rod named "<##ffd013>Sell Wand &6&l(x2.0)":
+					set {_Sell-MoneyMade::%UUID of player%} to {_Sell-MoneyMade::%UUID of player%} * 2.0
+				if player's tool is blaze rod named "<##ffd013>Sell Wand &6&l(x2.5)":
+					set {_Sell-MoneyMade::%UUID of player%} to {_Sell-MoneyMade::%UUID of player%} * 2.5
+				if player's tool is blaze rod named "<##ffd013>Sell Wand &6&l(x3.0)":
+					set {_Sell-MoneyMade::%UUID of player%} to {_Sell-MoneyMade::%UUID of player%} * 3.5
+
+				play sound "entity.player.levelup" with pitch 2 to player
+				send "&a&lSELLWAND REPORT: &7Sold &e%{_Sell-TotalSoldItems::%UUID of player%}% &7items for &a$%regex({_Sell-MoneyMade::%UUID of player%})%"
+				add {_Sell-MoneyMade::%UUID of player%} to {balance::%UUID of player%}
+				stop
+
+		play sound "block.note_block.bass" with pitch 1 to player
+		send "&6&lSELLWAND: &7You can only sell chests located NEAR your generators!"
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Sell: Pay:
+#
+#
+#==========================================================
+
+
+
+
+
+command /pay [<player>] [<number>]:
+	trigger:
+		send "&c/pay Disabled!"
+		stop
+		if arg-1 or arg-2 is not set:
+			play sound "block.note_block.bass" with pitch 1 to player
+			send "&a&l/PAY &7<player> <amount>"
+			stop
+
+		if arg-1 is player:
+			play sound "block.note_block.bass" with pitch 1 to player
+			send "&a&lPAY: &7You cannot pay yourself!"
+			stop
+
+		if arg-2 is greater than {balance::%UUID of player%}:
+			play sound "block.note_block.bass" with pitch 1 to player
+			send "&a&lPAY: &7You cannot afford to pay this amount!"
+			stop
+
+		if arg-2 is less than 1000:
+			play sound "block.note_block.bass" with pitch 1 to player
+			send "&a&lPAY: &7You must send at least &a$1,000"
+			stop
+
+		remove arg-2 from {balance::%UUID of player%}
+		add arg-2 to {balance::%UUID of arg-1%}
+
+		play sound "entity.player.levelup" with pitch 2 to player
+		send "&a&lPAY: &7You paid &b%arg-1% &a$%regex(arg-2)%" to player
+		send "&a&lGOT PAID: &7You received &a$%regex(arg-2)% &7from &b%player%" to arg-1
+		stop
+

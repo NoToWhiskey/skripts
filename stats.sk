@@ -1,0 +1,3 @@
+every 1 minute:
+    log "%size of {joinedplayers::*}%" to "joinedplayers"
+    log "%number of online players%" to "onlineplayers"

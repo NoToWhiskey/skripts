@@ -1,0 +1,1089 @@
+#==========================================================
+#
+#
+#		ClashGenz Other: Signs
+#
+#
+#==========================================================
+
+
+
+
+
+on sign change:
+	if player has permission "rank.admin":
+		replace all "&" with "§" in line 1 of event-block
+		replace all "&" with "§" in line 2 of event-block	
+		replace all "&" with "§" in line 3 of event-block
+		replace all "&" with "§" in line 4 of event-block
+
+
+
+command /stream [<text>]:
+	trigger:
+		if player is "MasterClashers" or "Arthonium":
+			loop all players:
+				send "" to loop-player
+				send "     &c&lARTHONIUM Is LIVE NOW:" to loop-player
+				send "  &a%arg-1%" to loop-player
+				send "   <link:https://www.twitch.tv/arthonium>&e&nhttps://www.twitch.tv/arthonium<reset>" to loop-player
+				send "" to loop-player
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Protect: Normal Protection:
+#
+#
+#==========================================================
+
+
+
+
+
+on place of hopper:
+	if {HoppersAtChunk::%chunk at event-block%} >= 10:
+		send "&c&lHOPPER LIMIT: &7You may only place 10 hoppers per chunk!"
+		cancel event
+		stop
+	else:
+		add 1 to {HoppersAtChunk::%chunk at event-block%}
+		send "&a&lHOPPERS: &7Currently in chunk &e(%{HoppersAtChunk::%chunk at event-block%}%/10)"
+
+on break of hopper:
+	if {HoppersAtChunk::%chunk at event-block%} is greater than 0:
+		remove 1 from {HoppersAtChunk::%chunk at event-block%}
+	if {HoppersAtChunk::%chunk at event-block%} = 0:
+		delete {HoppersAtChunk::%chunk at event-block%}
+
+
+
+
+
+on hunger meter change:
+	cancel event
+
+
+
+on inventory click:
+	"%inventory action%" matches "(?:swap) .+"
+	cancel event
+	stop
+
+on inventory click:
+	if inventory action is hotbar move and readd:
+		cancel event
+
+on swap hand items:
+	cancel event
+
+
+
+on damage:
+	if victim is a chicken:
+		stop
+	if attacker's gamemode is creative:
+		stop
+
+	cancel event
+	stop
+
+
+
+on rightclick on anvil:
+	cancel event
+
+on place:
+	if event-block is anvil:
+		if player's gamemode is creative:
+			stop
+		cancel event
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Protect: Against Server Crashes:
+#
+#
+#==========================================================
+
+
+
+
+
+every 10 seconds:
+	execute console command "kill @e[type=!item,type=!minecraft:armor_stand,type=!minecraft:item_frame,type=!minecraft:fishing_bobber,type=!minecraft:firework_rocket,type=!minecraft:villager,type=!minecraft:player,type=!minecraft:chicken,type=!minecraft:spectral_arrow,type=!minecraft:creeper,type=!minecraft:wolf,type=!minecraft:painting]"
+
+every 180 seconds:
+	broadcast "&c&lDROP CLEAR: &7All drops will be cleared in 10 seconds!"
+	set {canceldrops} to true
+	wait 10 seconds
+	execute console command "kill @e[type=item]"
+	set {canceldrops} to false
+
+on drop:
+	if {canceldrops} is true:
+		cancel event
+		send "&c&lDROP CLEAR: &7You can't drop items as dropped items are cleared soon!"
+		stop
+
+
+
+
+
+on rightclick on armor stand:
+	if player's gamemode is creative:
+		stop
+	cancel event
+
+on rightclick on item frame:
+	if player's gamemode is creative:
+		stop
+	cancel event
+
+
+
+
+
+on spawn:
+	if event-spawnreason is default:
+		cancel event
+		stop
+
+	if event-entity is a painting:
+		cancel event
+		stop
+
+
+
+
+on place:
+	if event-block is redstone wire, redstone torch, redstone wall torch, redstone repeater, redstone comparator, lectern, dropper, dispenser, observer, jukebox, enchanting table, note block, piston, sticky piston, beacon, furnace, barrel, smoker or campfire:
+		if player's gamemode is not creative:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&c&lREDSTONE: &7You cannot use redstone!"
+			cancel event
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Protect: Plot Cmds:
+#
+#
+#==========================================================
+
+
+
+
+
+on command "/p merge all":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/plot merge all":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/p m all":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/plot m all":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+
+on command "/p merge auto":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/plot merge auto":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/p m auto":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/plot m auto":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+
+on command "/p merge a":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/plot merge a":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/p m a":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/plot m a":
+	send "&cThis plot command has been blocked!" to player
+	cancel event
+	stop
+
+
+on command "/2":
+	send "&cPlease use the normal /plot command!" to player
+	cancel event
+	stop
+
+on command "/p2":
+	send "&cPlease use the normal /plot command!" to player
+	cancel event
+	stop
+
+on command "/plots":
+	send "&cPlease use the normal /plot command!" to player
+	cancel event
+	stop
+
+on command "/plotme":
+	send "&cPlease use the normal /plot command!" to player
+	cancel event
+	stop
+
+on command "/plotsquared":
+	send "&cPlease use the normal /plot command!" to player
+	cancel event
+	stop
+
+on command "/mv":
+	send "&cYou can't use multiverse commands!" to player
+	cancel event
+	stop
+
+
+on command "/p v":
+	teleport player to {location-spawn}
+
+on command "/plot v":
+	teleport player to {location-spawn}
+
+
+on command "/pl":
+	send "&cThis command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/plugins":
+	send "&cThis command has been blocked!" to player
+	cancel event
+	stop
+
+
+on command "/say":
+	send "&cThis command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/me":
+	send "&cThis command has been blocked!" to player
+	cancel event
+	stop
+
+on command "/teammsg":
+	send "&cThis command has been blocked!" to player
+	cancel event
+	stop
+
+
+on command:
+	if sender is console:
+		stop
+	if command contains ":":
+		send "&cCommands including : are not permitted!"
+		cancel event
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Mod Menu - Staff Chat + Joins:
+#
+#
+#==========================================================
+
+
+
+
+
+command /staff [<text>]:
+	aliases: /sc
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&b[STAFF] &cYou do not have permission to use this command!"
+			stop
+
+		if arg-1 is not set:
+			send "&b[STAFF]: &7Correct Usage: &b/staff &7<message>"
+			stop
+
+		if player is "MasterClashers":
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] <##ff0000>&lO<##ff1515>&lW<##ff2e2e>&lN<##ff4646>&lE<##ff5757>&lR <##ff6868>MasterClashers&f: %arg-1%" to loop-player
+			stop
+
+		if player has permission "rank.admin":
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] <##ff0000>&lA<##ff1515>&lD<##ff2e2e>&lM<##ff4646>&lI<##ff5757>&lN <##ff6868>%player%&f: %arg-1%" to loop-player
+			stop
+
+		if player has permission "rank.mod":
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] <##29d925>&lM<##38e534>&lO<##48f243>&lD <##59ff55>%player%&f: %arg-1%" to loop-player
+			stop
+
+
+
+
+
+on join:
+	if player is "MasterClashers":
+		set {ClockedStatus::%UUID of player%} to "Out"
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] <##ff0000>&lO<##ff1515>&lW<##ff2e2e>&lN<##ff4646>&lE<##ff5757>&lR <##ff6868>MasterClashers &eJoined!" to loop-player
+		stop
+
+	if player has permission "rank.admin":
+		set {ClockedStatus::%UUID of player%} to "Out"
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] <##ff0000>&lA<##ff1515>&lD<##ff2e2e>&lM<##ff4646>&lI<##ff5757>&lN <##ff6868>%player% &eJoined!" to loop-player
+		stop
+
+	if player has permission "rank.mod":
+		set {ClockedStatus::%UUID of player%} to "Out"
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] <##29d925>&lM<##38e534>&lO<##48f243>&lD <##59ff55>%player% &eJoined!" to loop-player
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Mod Menu - Clock in / out:
+#
+#
+#==========================================================
+on chat:
+	if {ClockedStatus::%UUID of player%} is "In":
+		set {ClockInChatCheck::%UUID of player%} to 0
+
+
+
+
+
+command /clockin:
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&b[STAFF] &cYou do not have permission to use this command!"
+			stop
+
+		if {ClockedStatus::%UUID of player%} is "In":
+			send "&b[STAFF] &aYou're already clocked in!"
+			stop
+
+		if difference between {ClockCooldown::%UUID of player%} and now is less than 2 minutes:
+			send "&b[STAFF] &cCooldown on clocking in/out (2m)"
+			stop
+		set {ClockCooldown::%UUID of player%} to now
+
+
+		set {ClockedStatus::%UUID of player%} to "In"
+		set {CurrentClockedTime::%UUID of player%} to 0
+		set {ClockInChatCheck::%UUID of player%} to 0
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] <##29d925>&lM<##38e534>&lO<##48f243>&lD <##59ff55>%player% &aClocked In!" to loop-player
+
+		while {ClockedStatus::%UUID of player%} is "In":
+			send "&b[STAFF] &aREMINDER - You're Clocked In &7&o(Respond to chat)"
+			wait 1 minute
+			if {ClockedStatus::%UUID of player%} is "In":
+				add 1 to {ClockInChatCheck::%UUID of player%}
+				if {ClockInChatCheck::%UUID of player%} = 5:
+					send "&b[STAFF] &cWARNING - You haven't interacted in chat in a while (LOGGED)"
+					execute player command "/clockout"
+					stop
+
+				add 1 to {ClockedTime::%UUID of player%}
+				add 1 to {CurrentClockedTime::%UUID of player%}
+				add {ClockRate} / 60 to {ClockedMoneyMade::%UUID of player%}
+
+
+
+
+
+command /clockout:
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&b[STAFF] &cYou do not have permission to use this command!"
+			stop
+
+		if {ClockedStatus::%UUID of player%} is "Out":
+			send "&b[STAFF] &cYou're already clocked out!"
+			stop
+
+		set {ClockedStatus::%UUID of player%} to "Out"
+		set {ClockCooldown::%UUID of player%} to now
+		set {CurrentClockedTime::%UUID of player%} to 0
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] <##29d925>&lM<##38e534>&lO<##48f243>&lD <##59ff55>%player% &cClocked Out!" to loop-player
+
+
+
+
+
+command /clockinfo [<offline player>]:
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&b[STAFF] &cYou do not have permission to use this command!"
+			stop
+
+		if arg-1 is not set:
+			send "&b[STAFF] &7You've been clocked in for &e%{CurrentClockedTime::%UUID of player%}%/%{ClockedTime::%UUID of player%}%m &7(&a$%{ClockedMoneyMade::%UUID of player%}%&7)"
+		if arg-1 is set:
+			send "&b[STAFF] &7&b%arg-1% &7has been clocked for: &e%{CurrentClockedTime::%UUID of arg-1%}%/%{ClockedTime::%UUID of arg-1%}%m &7(&a$%{ClockedMoneyMade::%UUID of arg-1%}%&7)"
+
+		loop all players:
+			if {ClockedStatus::%UUID of loop-player%} is "In":
+				send "&b- &b%loop-player% &7Is Clocked In &e(%{CurrentClockedTime::%UUID of loop-player%}%m)"
+
+
+
+
+
+command /clockrate:
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&b[STAFF] &cYou do not have permission to use this command!"
+			stop
+
+		send "&b[STAFF] &7Current Clock Rate: &a$%{ClockRate}% per/h"
+			
+
+
+
+
+on quit:
+	if {ClockedStatus::%UUID of player%} is "In":
+		set {ClockedStatus::%UUID of player%} to "Out"
+		set {ClockCooldown::%UUID of player%} to now
+		set {CurrentClockedTime::%UUID of player%} to 0
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] <##29d925>&lM<##38e534>&lO<##48f243>&lD <##59ff55>%player% &cLeft & Clocked Out!" to loop-player
+
+
+
+
+
+command /clockreset:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&b[STAFF] &cYou do not have permission to use this command!"
+			stop
+
+		delete {ClockedTime::%UUID of player%}
+		delete {CurrentClockedTime::%UUID of player%}
+		delete {ClockCooldown::%UUID of player%}
+		delete {ClockedStatus::%UUID of player%}
+		delete {ClockedMoneyMade::%UUID of player%}
+		
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Mod Menu - Punishment GUI:
+#
+#
+#==========================================================
+		
+
+
+
+
+command /punish [<offline player>] [<text>]:
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&c&lPUNISH: &7You do not have permission to use this!"
+			stop
+		
+		if arg-1 or arg-2 is not set:
+			send "&c&lPUNISH: &7Correct Usage: &6/punish &7<player> <reason>"
+			stop
+
+		set {PunishedPlayer::%UUID of player%} to arg-1
+		set {MuteReason::%UUID of arg-1%} to arg-2
+		set {BanReason::%UUID of arg-1%} to arg-2
+		if {PreviousBans::%UUID of arg-1%} is not set:
+			set {PreviousBans::%UUID of arg-1%} to 0
+			set {PreviousMutes::%UUID of arg-1%} to 0
+
+
+		set metadata tag "PunishGUI" of player to chest inventory with 6 rows named "&8Punishing %arg-1%"
+		set slot 4 of metadata tag "PunishGUI" of player to (skull of "%arg-1%" parsed as offline player) named "&6Punishing: %arg-1%" with lore "&fPrevious Mutes: &e%{PreviousMutes::%UUID of arg-1%}%" and "&fPrevious Bans: &e%{PreviousBans::%UUID of arg-1%}%"
+
+		set slot 10 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offences" with lore "&7Chat Flood, Spamming, Swearing, Racism & Advertising"
+		set slot 19 of metadata tag "PunishGUI" of player to 1 green dye named "&a&lSeverity I" with lore "&fPrevious Mutes: &e%{PreviousMutes::%UUID of arg-1%}%" and "&fMute Length: &c1 Hour" and "" and "&7Chat Flood:" and "  &fSending the same message multiple times" and "  &fSending long messages with weird letters" and "" and "&7Light Advertising:" and "  &f'Do you want to play hypixel?'" and "  &f'Check out my YT channel'" and "  &fDon't punish videos that relate to clashgenz" and "" and "&7Rude Language" and "  &f'Shut up, you're such an idiot'" and "" and "&2Give Verbal Warning before taking action!" and "&2For players with 3 or more offences, Upgrade mute to &6Severity II"
+		set slot 28 of metadata tag "PunishGUI" of player to 1 orange dye named "&6&lSeverity II" with lore "&fPrevious Mutes: &e%{PreviousMutes::%UUID of arg-1%}%" and "&fMute Length: &c1 Day" and "" and "&7Continious Rude Language:" and "  &f'Oh fuck off you sack of shit'" and "  &f'You dumb ass retard, learn to play'" and "" and "&7Severe Chat Flood" and "  &fSending the same message 5+ times"
+		set slot 37 of metadata tag "PunishGUI" of player to 1 red dye named "&c&lSeverity III" with lore "&fPrevious Mutes: &e%{PreviousMutes::%UUID of arg-1%}%" and "&fMute Length: &c5 Days" and "" and "&7Racial Language:" and "  &fUsage of the word Ni**** or related" and "" and "&7Homophobic Language:" and "  &f'You're a gay ass fa****'" and "" and "&7Severe Advertising:" and "  &f'Join shitty.crappo.com'" and "" and "&2Ban player for repeated cases/spam bots"
+
+
+		set slot 12 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbusing Server" with lore "&7Duping, Abusing Bugs & Related"
+		set slot 21 of metadata tag "PunishGUI" of player to 1 green dye named "&a&lSeverity I" with lore "&fPrevious Bans: &e%{PreviousBans::%UUID of arg-1%}%" and "&fBan Length: &c1 Day" and "" and "&7Light Abuse:" and "  &fAbusing glitches that teleports the player" and "  &fGlitching into weird areas" and "" and "&2Warn player before banning for Light Abuse"
+		set slot 30 of metadata tag "PunishGUI" of player to 1 orange dye named "&6&lSeverity II" with lore "&fPrevious Bans: &e%{PreviousBans::%UUID of arg-1%}%" and "&fBan Length: &cFULL SEASON" and "" and "&7Duping:" and "  &fDuping generators or special items" and "" and "&7Bot:" and "  &fSpamming the chat with any message" and "  &fMultiple alts in spawn or at a plot"
+
+
+		set slot 14 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lHacking & Related" with lore "&7Flying, Auto-Fishing, Bot Usage etc.."
+		set slot 23 of metadata tag "PunishGUI" of player to 1 green dye named "&a&lSeverity I" with lore "&fPrevious Bans: &e%{PreviousBans::%UUID of arg-1%}%" and "&fBan Length: &c2 Days" and "" and "&7Auto Fishing" and "  &fIf a player is fishing while not playing" and "" and "&7Auto Farming" and "  &fIf a player's head snaps while farming" and "" and "&7Light Hacks" and "  &fHacks that don't effect game experience"
+		set slot 32 of metadata tag "PunishGUI" of player to 1 orange dye named "&6&lSeverity II" with lore "&fPrevious Bans: &e%{PreviousBans::%UUID of arg-1%}%" and "&fBan Length: &c5 Days" and "" and "&7Fly Hacking:" and "  &fFlying accross the server" and "" and "&2Bird pets allow flight (even for defaults)!"
+
+		set slot 7, 8, 16, 17, 25, 26, 34, 35, 43, 44, 52 and 53 of metadata tag "PunishGUI" of player to 1 black stained glass pane named "&7Punishment History Slot"
+
+		if {PunishHistory-Type-1::%UUID of arg-1%} is "Mute":
+			set slot 7 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##1" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-1::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-1::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-1::%UUID of arg-1%}%"
+		if {PunishHistory-Type-1::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 7 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##1" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-1::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-1::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-1::%UUID of arg-1%}%"
+		if {PunishHistory-Type-1::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 7 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##1" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-1::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-1::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-1::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-2::%UUID of arg-1%} is "Mute":
+			set slot 8 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##2" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-2::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-2::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-2::%UUID of arg-1%}%"
+		if {PunishHistory-Type-2::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 8 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##2" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-2::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-2::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-2::%UUID of arg-1%}%"
+		if {PunishHistory-Type-2::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 8 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##2" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-2::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-2::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-2::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-3::%UUID of arg-1%} is "Mute":
+			set slot 16 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##3" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-3::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-3::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-3::%UUID of arg-1%}%"
+		if {PunishHistory-Type-3::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 16 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##3" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-3::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-3::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-3::%UUID of arg-1%}%"
+		if {PunishHistory-Type-3::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 16 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##3" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-3::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-3::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-3::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-4::%UUID of arg-1%} is "Mute":
+			set slot 17 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##4" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-4::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-4::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-4::%UUID of arg-1%}%"
+		if {PunishHistory-Type-4::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 17 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##4" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-4::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-4::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-4::%UUID of arg-1%}%"
+		if {PunishHistory-Type-4::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 17 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##4" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-4::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-4::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-4::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-5::%UUID of arg-1%} is "Mute":
+			set slot 25 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##5" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-5::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-5::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-5::%UUID of arg-1%}%"
+		if {PunishHistory-Type-5::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 25 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##5" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-5::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-5::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-5::%UUID of arg-1%}%"
+		if {PunishHistory-Type-5::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 25 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##5" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-5::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-5::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-5::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-6::%UUID of arg-1%} is "Mute":
+			set slot 26 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##6" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-6::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-6::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-6::%UUID of arg-1%}%"
+		if {PunishHistory-Type-6::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 26 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##6" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-6::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-6::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-6::%UUID of arg-1%}%"
+		if {PunishHistory-Type-6::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 26 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##6" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-6::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-6::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-6::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-7::%UUID of arg-1%} is "Mute":
+			set slot 34 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##7" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-7::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-7::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-7::%UUID of arg-1%}%"
+		if {PunishHistory-Type-7::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 34 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##7" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-7::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-7::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-7::%UUID of arg-1%}%"
+		if {PunishHistory-Type-7::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 34 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##7" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-7::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-7::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-7::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-8::%UUID of arg-1%} is "Mute":
+			set slot 35 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##8" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-8::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-8::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-8::%UUID of arg-1%}%"
+		if {PunishHistory-Type-8::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 35 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##8" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-8::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-8::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-8::%UUID of arg-1%}%"
+		if {PunishHistory-Type-8::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 35 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##8" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-8::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-8::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-8::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-9::%UUID of arg-1%} is "Mute":
+			set slot 43 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##9" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-9::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-9::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-9::%UUID of arg-1%}%"
+		if {PunishHistory-Type-9::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 43 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##9" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-9::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-9::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-9::%UUID of arg-1%}%"
+		if {PunishHistory-Type-9::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 43 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##9" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-9::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-9::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-9::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-10::%UUID of arg-1%} is "Mute":
+			set slot 44 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##10" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-10::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-10::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-10::%UUID of arg-1%}%"
+		if {PunishHistory-Type-10::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 44 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##10" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-10::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-10::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-10::%UUID of arg-1%}%"
+		if {PunishHistory-Type-10::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 44 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##10" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-10::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-10::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-10::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-11::%UUID of arg-1%} is "Mute":
+			set slot 52 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##11" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-11::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-11::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-11::%UUID of arg-1%}%"
+		if {PunishHistory-Type-11::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 52 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##11" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-11::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-11::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-11::%UUID of arg-1%}%"
+		if {PunishHistory-Type-11::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 52 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##11" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-11::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-11::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-11::%UUID of arg-1%}%"
+
+		if {PunishHistory-Type-12::%UUID of arg-1%} is "Mute":
+			set slot 53 of metadata tag "PunishGUI" of player to 1 book and quill named "&a&lChat Offense ##12" with lore "&ePunishment Type: &fChat Offense" and "&eMute Length: &f%{PunishHistory-Length-12::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-12::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-12::%UUID of arg-1%}%"
+		if {PunishHistory-Type-12::%UUID of arg-1%} is "Abuse-Ban":
+			set slot 53 of metadata tag "PunishGUI" of player to 1 tnt named "&a&lAbuse Offense ##12" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-12::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-12::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-12::%UUID of arg-1%}%"
+		if {PunishHistory-Type-12::%UUID of arg-1%} is "Cheat-Ban":
+			set slot 53 of metadata tag "PunishGUI" of player to 1 iron sword named "&a&lCheating Offense ##12" with lore "&ePunishment Type: &fAbuse Offense" and "&eBan Length: &f%{PunishHistory-Length-12::%UUID of arg-1%}%" and "" and "&eReason: &f%{PunishHistory-Reason-12::%UUID of arg-1%}%" and "" and "&eStaff: &f%{PunishHistory-Staff-12::%UUID of arg-1%}%"
+
+
+		open (metadata tag "PunishGUI" of player) to player
+
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "PunishGUI" of player):
+		cancel event
+
+		if index of event-slot is 19:
+			close player's inventory
+			play sound "ui.loom.select_pattern" with pitch 1.5
+			play sound "block.note_block.bit" with pitch 0.1 to player
+
+			set {Muted::%UUID of {PunishedPlayer::%UUID of player%}%} to true
+
+			set {MutedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} to now
+			set {MuteLength::%UUID of {PunishedPlayer::%UUID of player%}%} to 1 hour
+
+			add 1 to {PreviousMutes::%UUID of {PunishedPlayer::%UUID of player%}%}
+			add 1 to {PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}
+			set {PunishHistory-Type-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "Mute"
+			set {PunishHistory-Length-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "1 Hour"
+			set {PunishHistory-Reason-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%{MuteReason::%UUID of {PunishedPlayer::%UUID of player%}%}%"
+			set {PunishHistory-Staff-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%player%"
+
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] &c%player% muted %{PunishedPlayer::%UUID of player%}% for %{MuteReason::%UUID of {PunishedPlayer::%UUID of player%}%}% &a[1h]" to loop-player
+			stop
+
+
+		if index of event-slot is 28:
+			if {Muted::%UUID of {PunishedPlayer::%UUID of player%}%} is true:
+				send "&6&lPUNISH: &cThis player is already muted!"
+				stop
+			close player's inventory
+			play sound "ui.loom.select_pattern" with pitch 1.5
+			play sound "block.note_block.bit" with pitch 0.1 to player
+
+			set {Muted::%UUID of {PunishedPlayer::%UUID of player%}%} to true
+
+			set {MutedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} to now
+			set {MuteLength::%UUID of {PunishedPlayer::%UUID of player%}%} to 1 day
+
+			add 1 to {PreviousMutes::%UUID of {PunishedPlayer::%UUID of player%}%}
+			add 1 to {PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}
+			set {PunishHistory-Type-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "Mute"
+			set {PunishHistory-Length-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "1 Day"
+			set {PunishHistory-Reason-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%{MuteReason::%UUID of {PunishedPlayer::%UUID of player%}%}%"
+			set {PunishHistory-Staff-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%player%"
+
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] &c%player% muted %{PunishedPlayer::%UUID of player%}% for %{MuteReason::%UUID of {PunishedPlayer::%UUID of player%}%}% &e[1d]" to loop-player
+			stop
+
+
+		if index of event-slot is 37:
+			if {Muted::%UUID of {PunishedPlayer::%UUID of player%}%} is true:
+				send "&6&lPUNISH: &cThis player is already muted!"
+				stop
+			close player's inventory
+			play sound "ui.loom.select_pattern" with pitch 1.5
+			play sound "block.note_block.bit" with pitch 0.1 to player
+
+			set {Muted::%UUID of {PunishedPlayer::%UUID of player%}%} to true
+
+			set {MutedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} to now
+			set {MuteLength::%UUID of {PunishedPlayer::%UUID of player%}%} to 5 days
+
+			add 1 to {PreviousMutes::%UUID of {PunishedPlayer::%UUID of player%}%}
+			add 1 to {PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}
+			set {PunishHistory-Type-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "Mute"
+			set {PunishHistory-Length-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "5 Days"
+			set {PunishHistory-Reason-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%{MuteReason::%UUID of {PunishedPlayer::%UUID of player%}%}%"
+			set {PunishHistory-Staff-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%player%"
+
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] &c%player% muted %{PunishedPlayer::%UUID of player%}% for %{MuteReason::%UUID of {PunishedPlayer::%UUID of player%}%}% [5d]" to loop-player
+			stop
+
+
+
+		if index of event-slot is 21:
+			if {Muted::%UUID of {PunishedPlayer::%UUID of player%}%} is true:
+				send "&6&lPUNISH: &cThis player is already muted!"
+				stop
+			close player's inventory
+			play sound "ui.loom.select_pattern" with pitch 1.5
+			play sound "block.note_block.bit" with pitch 0.1 to player
+
+			set {Banned::%UUID of {PunishedPlayer::%UUID of player%}%} to true
+
+			set {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} to now
+			set {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} to 1 day
+
+			add 1 to {PreviousBans::%UUID of {PunishedPlayer::%UUID of player%}%}
+			add 1 to {PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}
+			set {PunishHistory-Type-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "Abuse-Ban"
+			set {PunishHistory-Length-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "1 Day"
+			set {PunishHistory-Reason-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}%"
+			set {PunishHistory-Staff-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%player%"
+
+			set {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%} to difference between {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} and now
+			kick {PunishedPlayer::%UUID of player%} due to "&cYou've been banned for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cBan Expires In: &c%difference between {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} and {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cMore Info Here: &9discord.gg/aWXNJTGTaX"
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] &c%player% banned %{PunishedPlayer::%UUID of player%}% for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% &a[1d]" to loop-player
+			stop
+
+
+		if index of event-slot is 30:
+			if {Banned::%UUID of {PunishedPlayer::%UUID of player%}%} is true:
+				send "&6&lPUNISH: &cThis player is already banned!"
+				stop
+			close player's inventory
+			play sound "ui.loom.select_pattern" with pitch 1.5
+			play sound "block.note_block.bit" with pitch 0.1 to player
+
+			set {Banned::%UUID of {PunishedPlayer::%UUID of player%}%} to true
+
+			set {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} to now
+			set {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} to 21 days
+
+			add 1 to {PreviousBans::%UUID of {PunishedPlayer::%UUID of player%}%}
+			add 1 to {PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}
+			set {PunishHistory-Type-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "Abuse-Ban"
+			set {PunishHistory-Length-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "SEASON BAN"
+			set {PunishHistory-Reason-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}%"
+			set {PunishHistory-Staff-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%player%"
+
+			set {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%} to difference between {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} and now
+			kick {PunishedPlayer::%UUID of player%} due to "&cYou've been banned for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cBan Expires In: &c%difference between {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} and {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cMore Info Here: &9discord.gg/aWXNJTGTaX"
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] &c%player% banned %{PunishedPlayer::%UUID of player%}% for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% &6[SEASON]" to loop-player
+			stop
+
+
+
+		if index of event-slot is 23:
+			if {Banned::%UUID of {PunishedPlayer::%UUID of player%}%} is true:
+				send "&6&lPUNISH: &cThis player is already banned!"
+				stop
+			close player's inventory
+			play sound "ui.loom.select_pattern" with pitch 1.5
+			play sound "block.note_block.bit" with pitch 0.1 to player
+
+			set {Banned::%UUID of {PunishedPlayer::%UUID of player%}%} to true
+
+			set {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} to now
+			set {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} to 2 days
+
+			add 1 to {PreviousBans::%UUID of {PunishedPlayer::%UUID of player%}%}
+			add 1 to {PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}
+			set {PunishHistory-Type-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "Cheat-Ban"
+			set {PunishHistory-Length-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "2 Days"
+			set {PunishHistory-Reason-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}%"
+			set {PunishHistory-Staff-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%player%"
+
+			set {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%} to difference between {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} and now
+			kick {PunishedPlayer::%UUID of player%} due to "&cYou've been banned for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cBan Expires In: &c%difference between {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} and {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cMore Info Here: &9discord.gg/aWXNJTGTaX"
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] &c%player% banned %{PunishedPlayer::%UUID of player%}% for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% &a[2d]" to loop-player
+			stop
+
+
+		if index of event-slot is 32:
+			if {Banned::%UUID of {PunishedPlayer::%UUID of player%}%} is true:
+				send "&6&lPUNISH: &cThis player is already banned!"
+				stop
+			close player's inventory
+			play sound "ui.loom.select_pattern" with pitch 1.5
+			play sound "block.note_block.bit" with pitch 0.1 to player
+
+			set {Banned::%UUID of {PunishedPlayer::%UUID of player%}%} to true
+
+			set {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} to now
+			set {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} to 5 days
+
+			add 1 to {PreviousBans::%UUID of {PunishedPlayer::%UUID of player%}%}
+			add 1 to {PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}
+			set {PunishHistory-Type-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "Cheat-Ban"
+			set {PunishHistory-Length-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "5 Days"
+			set {PunishHistory-Reason-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}%"
+			set {PunishHistory-Staff-%{PreviousPunishments::%UUID of {PunishedPlayer::%UUID of player%}%}%::%UUID of {PunishedPlayer::%UUID of player%}%} to "%player%"
+
+			set {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%} to difference between {BannedWhen::%UUID of {PunishedPlayer::%UUID of player%}%} and now
+			kick {PunishedPlayer::%UUID of player%} due to "&cYou've been banned for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cBan Expires In: &c%difference between {BanLength::%UUID of {PunishedPlayer::%UUID of player%}%} and {BannedDifference::%UUID of {PunishedPlayer::%UUID of player%}%}% %nl%&cMore Info Here: &9discord.gg/aWXNJTGTaX"
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&b[STAFF] &c%player% banned %{PunishedPlayer::%UUID of player%}% for %{BanReason::%UUID of {PunishedPlayer::%UUID of player%}%}% &6[5d]" to loop-player
+			stop
+
+
+
+
+
+command /unban [<offline player>] [<text>]:
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&c&lUNBAN: &7You do not have permission to use this!"
+			stop
+
+		if arg-1 or arg-2 is not set:
+			send "&c&lUNBAN: &7Correct Usage: &6/unban &7<player> <clear/fair>"
+			send "&c&l- &fClear &7= Clears punishment on players history"
+			send "&c&l- &fFair &7= Doesn't clear punishment on history"
+			stop
+
+		if arg-2 is not "clear" or "fair":
+			send "&c&lUNBAN: &7Correct Usage: &6/unban &7<player> <clear/fair>"
+			send "&c&l- &fClear &7= Clears punishment on players history"
+			send "&c&l- &fFair &7= Doesn't clear punishment on history"
+			stop
+
+		if {Banned::%UUID of arg-1%} is not set:
+			send "&c&lUNBAN: &7This player isn't banned!"
+			stop
+
+
+		if arg-2 is "clear":
+			delete {PunishHistory-Type-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			delete {PunishHistory-Length-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			delete {PunishHistory-Reason-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			delete {PunishHistory-Staff-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			remove 1 from {PreviousBans::%UUID of arg-1%}
+			remove 1 from {PreviousPunishments::%UUID of arg-1%}
+
+		delete {Banned::%UUID of arg-1%}
+		delete {BannedWhen::%UUID of arg-1%}
+		delete {BanLength::%UUID of arg-1%}
+		delete {BanReason::%UUID of arg-1%}
+		delete {BannedDifference::%UUID of arg-1%}
+
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] &c%player% unbanned %arg-1% &f(%arg-2%)" to loop-player
+		stop
+
+
+
+
+
+command /unmute [<offline player>] [<text>]:
+	trigger:
+		if player does not have permission "rank.mod":
+			send "&c&lUNMUTE: &7You do not have permission to use this!"
+			stop
+
+		if arg-1 or arg-2 is not set:
+			send "&c&lUNMUTE: &7Correct Usage: &6/unmute &7<player> <clear/fair>"
+			send "&c&l- &fClear &7= Clears punishment on players history"
+			send "&c&l- &fFair &7= Doesn't clear punishment on history"
+			stop
+
+		if arg-2 is not "clear" or "fair":
+			send "&c&lUNMUTE: &7Correct Usage: &6/unmute &7<player> <clear/fair>"
+			send "&c&l- &fClear &7= Clears punishment on players history"
+			send "&c&l- &fFair &7= Doesn't clear punishment on history"
+			stop
+
+		if {Muted::%UUID of arg-1%} is not set:
+			send "&c&lUNMUTE: &7This player isn't muted!"
+			stop
+
+
+		if arg-2 is "clear":
+			delete {PunishHistory-Type-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			delete {PunishHistory-Length-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			delete {PunishHistory-Reason-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			delete {PunishHistory-Staff-%{PreviousPunishments::%UUID of arg-1%}%::%UUID of arg-1%}
+			remove 1 from {PreviousMutes::%UUID of arg-1%}
+			remove 1 from {PreviousPunishments::%UUID of arg-1%}
+
+		delete {Muted::%UUID of arg-1%}
+		delete {MutedWhen::%UUID of arg-1%}
+		delete {MuteLength::%UUID of arg-1%}
+		delete {MuteReason::%UUID of arg-1%}
+		delete {MutedDifference::%UUID of arg-1%}
+
+		loop all players:
+			if loop-player has permission "rank.mod":
+				send "&b[STAFF] &c%player% unmuted %arg-1% &f(%arg-2%)" to loop-player
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Mod Menu - Ban Kick:
+#
+#
+#==========================================================
+
+
+
+
+
+on connect:
+	if {Banned::%UUID of player%} is true:
+		if difference between {BannedWhen::%UUID of player%} and now is greater than {BanLength::%UUID of player%}:
+			delete {Banned::%UUID of player%}
+			delete {BannedWhen::%UUID of player%}
+			delete {BanLength::%UUID of player%}
+			delete {BanReason::%UUID of player%}
+			delete {BannedDifference::%UUID of player%}
+
+		if {Banned::%UUID of player%} is true:
+			set {BannedDifference::%UUID of player%} to difference between {BannedWhen::%UUID of player%} and now
+			kick player due to "&cYou've been banned for %{MuteReason::%UUID of player%}% %nl%&cBan Expires In: &c%difference between {BanLength::%UUID of player%} and {BannedDifference::%UUID of player%}% %nl%&cMore Info Here: &9discord.gg/aWXNJTGTaX"
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Mod Menu - Other:
+#
+#
+#==========================================================
+
+
+
+
+
+command /rules:
+	trigger:
+		send "&c&lSERVER RULES: &7Please read them all:"
+		send "&c[1]: &7Any sort of hacking is forbidden"
+		send "&c[2]: &7No macroing of any kind (includes auto-fishing)"
+		send "&c[3]: &7Teams of 2 ONLY (2 players per plot)"
+		send "&c[4]: &7Do NOT try to glitch into areas, report bugs on discord"
+		send "&c[5]: &7Do not threaten to ddos or dox other players"
+		send "&c[6]: &7Please be respectful to everyone at all times"
+		send "&c&l- &7&oView FULL list of rules on &9&o/discord"
+		stop
+
+
+
+
+
+command /discord:
+	trigger:
+		send "&9&lDISCORD: &7Join our community at - <link:https://discord.com/invite/aWXNJTGTaX>&ediscord.gg/aWXNJTGTaX<reset>"
+
+
+
+
+
+command /runadmintp:
+	trigger:
+		if player does not have permission "rank.admin":
+			stop
+		
+		set {_admintpcheck} to 0
+		loop all players:
+			if distance between loop-player and {location-spawn} is greater than 200:
+				add 5 to {_admintpcheck}
+				teleport loop-player to location {_admintpcheck} meters in front of {admintpstart}
+				loop all players:
+					if loop-player-2 has permission "rank.admin":
+						send "&a%loop-player-1% &6%tps%" to loop-player-2
+
+				wait 6 ticks
+
+
+
+
+
+command /admindata [<text>]:
+	trigger:
+		if player does not have permission "rank.mod":
+			stop
+		send ""
+		send "&c%regex({ClickedMenu})% &6Star Menu &ehas been used since &d11/08/22 13:30 BST"
+		send "&c%regex({StoreCommand})% &6Store Command &ehas been used since &d11/08/22 13:30 BST"
+		send "&c%regex({QuestBook})% &6Quest Book &ehas been used since &d11/08/22 13:30 BST"
+		send "&c%regex({RacesStarted})% &cRaces &ehas been started since &d11/08/22 13:35 BST"
+		send "&c%regex({SpawnCommand})% &aSpawn Commands &ehas been used since &d11/08/22 13:40 BST"
+		send "&c%regex({SpawnCommandGUI})% &bSpawn Commands (FROM GUI) &ehas been used since &d11/08/22 13:40 BST"
+		send "&c%regex({PlotCommandGUI})% &bPlot Commands (FROM GUI) &ehas been used since &d11/08/22 13:40 BST"
+		send "&c%regex({FarmCommandGUI})% &bFarm Commands (FROM GUI) &ehas been used since &d11/08/22 13:40 BST"
+		send "&c%regex({VillageCommandGUI})% &bVillage Commands (FROM GUI) &ehas been used since &d11/08/22 13:40 BST"
+		send "&c%regex({StartedQuests})% &6Quests &estarted since &d11/08/22 13:55 BST"
+		send "&c%regex({StartedBonusQuests_JeanPaul})% &eJean Paul Quests &estarted since &d11/08/22 18:15 BST"
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Other: Mod Menu - Other:
+#
+#
+#==========================================================
+
+
+
+on combust:
+	cancel event

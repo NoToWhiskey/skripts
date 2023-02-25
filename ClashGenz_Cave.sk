@@ -1,0 +1,719 @@
+#==========================================================
+#
+#
+#		ClashGenz Cave: Leave Caves:
+#
+#
+#==========================================================
+
+
+
+
+
+on rightclick on sign:
+	if line 1 of event-block is "&a[RIGHT CLICK]":
+		if line 2 of event-block is "To leave the":
+			if line 3 of event-block is "Caves!":
+				send "&c&lBERNARD: &7You have been teleported outside the caves!"
+				teleport player to location 5 meters west of event-block
+				play sound "entity.enderman.teleport" with pitch 2 to player
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Cave: Janitor:
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 43:
+		if {Level::%UUID of player%} is less than 50:
+			stop
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part1" or "Started-part2":
+			stop
+
+
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part3":
+			set {QuestStatus-CaveExplorer::%UUID of player%} to "Started-part4"
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lCAVE JANITOR: &7I love pets... I own a dog of my own!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lCAVE JANITOR: &7You're trying to get a &aVillager Pet, &7right?"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lCAVE JANITOR: &7Yes. hmmm.. I see, You'll need a &cLost Golem Poppy &7and &6Magic Dust"
+
+			wait 3 seconds
+
+			give player 1 of unbreakable wooden shovel named "<##744e18>Wooden Mop" with lore "&8Cave Item" and "" and "&7Better Finds: &30%%" and "&7Right - Click brown carpet" and "" and "&8&oUse at /warp cave" with nbt "{HideFlags:63}"
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lCAVE JANITOR: &7Take this mop and clean up the caves to see what you can get!"
+			send "&7[Quest Book Updated]"
+			stop
+
+		if player does not have 1 of unbreakable wooden shovel named "<##744e18>Wooden Mop":
+			if difference between {PurchaseMopCooldown::%UUID of player%} and now is less than 1 minute:
+				stop
+			set {PurchaseMopCooldown::%UUID of player%} to now
+
+			play sound "entity.item.pickup" with pitch 1 to player
+			send "&5&lCAVE JANITOR: &7+1 <##744e18>Wooden Mop"
+			give player 1 of unbreakable wooden shovel named "<##744e18>Wooden Mop" with lore "&8Cave Item" and "" and "&7Better Finds: &30%%" and "&7Right - Click brown carpet" and "" and "&8&oUse at /warp cave" with nbt "{HideFlags:63}"
+		else:
+			stop
+
+
+
+
+
+every 30 seconds:
+	loop {CaveDirtLocations::*}:
+		set block at loop-value to brown carpet
+		wait 1 seconds
+
+
+
+
+
+on rightclick on brown carpet:
+	if player's tool is 1 of unbreakable wooden shovel named "<##744e18>Wooden Mop":
+		if {CaveDirtLocations::*} contains event-block:
+			set event-block to air
+
+			play sound "entity.ender_dragon.flap" with pitch 2
+			play sound "block.grass.break" with pitch 1.5
+
+			set {_CaveDirtItemFound::%UUID of player%} to a random integer between 1 and 100
+
+			if {_CaveDirtItemFound::%UUID of player%} is between 1 and 80:
+				set {_CaveDirtItemFound::%UUID of player%} to a random integer between 1 and 2
+
+				if {_CaveDirtItemFound::%UUID of player%} = 1:
+					send "<##744e18>&lDIRT: &7You found &7Cave Dust" to player
+					give player 3 light gray dye named "&7Cave Dust" with lore "&8Cave Item" and "" and "&7Sell Value: &a$50"
+
+				if {_CaveDirtItemFound::%UUID of player%} = 2:
+					send "<##744e18>&lDIRT: &7You found <##7d5227>Cave Dirt" to player
+					give player 3 brown dye named "<##7d5227>Cave Dirt" with lore "&8Cave Item" and "" and "&7Sell Value: &a$50"
+
+
+			if {_CaveDirtItemFound::%UUID of player%} is between 81 and 95:
+				send "<##744e18>&lDIRT: &7You found &6Magic Cave Dust" to player
+				give player 1 glowstone dust named "&6Magic Cave Dust" with lore "&8Cave Item" and "" and "&7Sell Value: &a$500"
+
+			if {_CaveDirtItemFound::%UUID of player%} is between 96 and 100:
+				send "<##744e18>&lDIRT: &7You found &cLost Golem Poppy" to player
+				give player 1 poppy named "&cLost Golem Poppy" with lore "&8Cave Item" and "" and "&7Sell Value: &a$2,500"
+
+			if player's Boots is leather Boots named "&4Cave Boots":
+				if player's Leggings is leather Leggings named "&4Cave Leggings":
+					if player's Chestplate is leather Chestplate named "&4Cave Chestplate":
+						if {ActiveEvent} is "cave - xp boost":
+							remove 3750 from {RequiredXP::%UUID of player%}
+							set player's action bar to "&b&n+3,750 XP Gained"
+							set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+							stop
+						remove 150 from {RequiredXP::%UUID of player%}
+						set player's action bar to "&b&n+150 XP Gained"
+						set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+						stop
+
+			remove 10 from {RequiredXP::%UUID of player%}
+			if {ActiveEvent} is "cave - xp boost":
+				remove 250 from {RequiredXP::%UUID of player%}
+				set player's action bar to "&b&n+250 XP Gained"
+				set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+				stop
+
+			set player's action bar to "&b&n+10 XP Gained"
+			set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Cave: Pets - Pet Specialist:
+#
+#
+#==========================================================
+
+
+
+
+
+command /clashgenzpets-setup:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		set {ChickenPet} to {ChickenSkull} named "&aChicken Pet &lCOMMON" with lore "&8Farming Pet" and "" and "&7Receive &bTRIPLE XP &7for" and "&7each chicken that you kill!" and "" and "&e&oRight - Click to spawn!"
+		set {CowPet} to {CowSkull} named "&eCow Pet &lRARE" with lore "&8Farming Pet" and "" and "&7Receive &bDOUBLE XP &7while" and "&7farming wheat, carrots & potatoes" and "" and "&e&oRight - Click to spawn!"
+		set {TigerPet} to {TigerSkull} named "&6Tiger Pet &lLEGENDARY" with lore "&8Farming Pet" and "" and "&7Receive &bTRIPLE XP &7for" and "&7farming & killing chickens!" and "" and "&e&oRight - Click to spawn!"
+
+		set {TurtlePet} to {TurtleSkull} named "&aTurtle Pet &lCOMMON" with lore "&8Fishing Pet" and "" and "&7This pet adds 2 new" and "&7catches while fishing:" and "&7- &36%% Turtle Egg" and "&7- &23%% Turtle Shell" and "" and "&e&oRight - Click to spawn!"
+		set {GuardianPet} to {GuardianSkull} named "&eGuardian Pet &lRARE" with lore "&8Fishing Pet" and "" and "&7Receive &bDOUBLE XP &7while fishing." and "&7This works with rods/events" and "" and "&e&oRight - Click to spawn!"
+		set {SharkPet} to {SharkSkull} named "&6Shark Pet &lLEGENDARY" with lore "&8Fishing Pet" and "" and "&7This pet will automatically" and "&7fish for you with &bTRIPLE XP" and "" and "&e&oRight - Click to spawn!"
+
+		set {VillagerPet} to {VillagerSkull} named "&aVillager Pet &lCOMMON" with lore "&8Multiuse Pet" and "" and "&7This pet grants you" and "&7access to village tasks" and "&7from the clashgenz village" and "" and "&e&oRight - Click to spawn!"
+		set {BirdPet} to {BirdSkull} named "&eBird Pet &lRARE" with lore "&8Multiuse Pet" and "" and "&7Enables your flight even if" and "&7you do not have a rank!" and "&7If you have &8&lCOAL &7rank then" and "&7your flight speed will increase to x2" and "" and "&e&oRight - Click to spawn!"
+		set {EndermanPet} to {EndermanSkull} named "&6Enderman Pet &lLEGENDARY" with lore "&8Multiuse Pet" and "" and "&7Right - Click any hoe to get" and "&7teleported forwards &e8 blocks&7." and "" and "&e&oRight - Click to spawn!"
+
+		set {TimePet} to {GoldClockSkull} named "<##f39de8>Time Pet &lLIMITED" with lore "&8Multiuse Pet" and "" and "&7Time speeds up, your generators" and "&7will now work &f10%% &7faster!" and "" and "&e&oRight - Click to spawn!"
+
+
+
+
+
+on npc right click:
+	if npc is 40:
+		if {Level::%UUID of player%} is less than 50:
+			stop
+
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part2":
+			set {QuestStatus-CaveExplorer::%UUID of player%} to "Started-part3"
+		
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&9&lPET SPECIALIST: &7I love pets... I own a dog of my own!"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&9&lPET SPECIALIST: &7That's enough about me though.. I see &cBernard &7sent you here..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&9&lPET SPECIALIST: &7If you want a villager pet, you'll need to get me some items..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&9&lPET SPECIALIST: &7Speak to the &5Cave Janitor &7for more information on this!"
+			send "&7[Quest Book Updated]"
+			stop
+
+
+
+		play sound "ui.button.click" with pitch 2 to player
+
+		set metadata tag "ClashGenzPetMenu" of player to chest inventory with 6 rows named "&8Pet Specialist"
+		set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ClashGenzPetMenu" of player to black stained glass pane named "&7"
+
+		set slot 20 of metadata tag "ClashGenzPetMenu" of player to {ChickenSkull} named "&aChicken Pet &lCOMMON" with lore "&8Farming Pet" and "" and "&7Receive &bTRIPLE XP &7for" and "&7each chicken that you kill!" and "" and "&aPurchase For:" and "&7- &a$250,000" and "&7- <##d4c972>x64 Chickens" and "&7- &fx64 Feathers" and "" and "&a> Click To Purchase <"
+		set slot 21 of metadata tag "ClashGenzPetMenu" of player to {TurtleSkull} named "&aTurtle Pet &lCOMMON" with lore "&8Fishing Pet" and "" and "&7This pet adds 2 new" and "&7catches while fishing:" and "&7- &36%% Turtle Egg" and "&7- &23%% Turtle Shell" and "" and "&aPurchase For:" and "&7- &a$250,000" and "&7- &f1 Iron Fish Sculpture" and "&7- &bLevel 5 Fishing Rod" and "" and "&a> Click To Purchase <"
+		set slot 22 of metadata tag "ClashGenzPetMenu" of player to {VillagerSkull} named "&aVillager Pet &lCOMMON" with lore "&8Multiuse Pet" and "" and "&7This pet grants you" and "&7access to village tasks" and "&7from the clashgenz village" and "" and "&aPurchase For:" and "&7- &a$250,000" and "&7- &cx1 Lost Golem Poppy" and "&7- &6x10 Magic Dust" and "" and "&a> Click To Purchase <"
+
+
+		set slot 24 of metadata tag "ClashGenzPetMenu" of player to 1 emerald named "&aPet Store"
+
+		set slot 49 of metadata tag "ClashGenzPetMenu" of player to barrier named "&cExit Menu"
+		open (metadata tag "ClashGenzPetMenu" of player) to player
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzPetMenu" of player):
+		cancel event
+
+
+		if index of event-slot is 20:
+			if {balance::%UUID of player%} >= 250000:
+				if player has 64 chicken named "<##d4c972>Raw Chicken":
+					if player has 64 feathers named "&fFeather":
+						remove 250000 from {balance::%UUID of player%}
+						remove 64 chicken named "<##d4c972>Raw Chicken" from player's inventory
+						remove 64 feathers named "&fFeather" from player's inventory
+						give player {ChickenPet}
+
+						play sound "entity.player.levelup" with pitch 2 to player
+						send "&9&lPET SPECIALIST: &7You have purchased &aChicken Pet"
+						stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&9&lPET SPECIALIST: &7You cannot afford to purchase this!"
+			stop
+
+
+		if index of event-slot is 21:
+			if {balance::%UUID of player%} >= 250000:
+				if player has 1 iron horse armour named "<##ededed>Iron Fish Sculpture":
+					if player has a fishing rod named "&bFishing Rod &6(V)":
+						remove 250000 from {balance::%UUID of player%}
+						remove 1 iron horse armour named "<##ededed>Iron Fish Sculpture" from player's inventory
+						remove fishing rod named "&bFishing Rod &6(V)" from player's inventory
+						give player {TurtlePet}
+
+						play sound "entity.player.levelup" with pitch 2 to player
+						send "&9&lPET SPECIALIST: &7You have purchased &aVillager Pet"
+
+						if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part4":
+							set {QuestStatus-CaveExplorer::%UUID of player%} to "Started-part5"
+							send "&7[Quest Book Updated]"
+						stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&9&lPET SPECIALIST: &7You cannot afford to purchase this!"
+			stop
+
+
+		if index of event-slot is 22:
+			if {balance::%UUID of player%} >= 250000:
+				if player has 1 poppy named "&cLost Golem Poppy":
+					if player has 10 glowstone dust named "&6Magic Cave Dust":
+						remove 250000 from {balance::%UUID of player%}
+						remove 1 poppy named "&cLost Golem Poppy" from player's inventory
+						remove 10 glowstone dust named "&6Magic Cave Dust" from player's inventory
+						give player {VillagerPet}
+
+						play sound "entity.player.levelup" with pitch 2 to player
+						send "&9&lPET SPECIALIST: &7You have purchased &aVillager Pet"
+
+						if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part4":
+							set {QuestStatus-CaveExplorer::%UUID of player%} to "Started-part5"
+							send "&7[Quest Book Updated]"
+						stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&9&lPET SPECIALIST: &7You cannot afford to purchase this!"
+			stop
+
+
+		if index of event-slot is 24:
+			clashgenzirlstore_pets(player)
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Cave: Pets - Spawn of the pets:
+#
+#
+#==========================================================
+
+
+
+
+
+on rightclick:
+	if player's tool is {ChickenPet}, {CowPet} or {TigerPet} or {TurtlePet} or {GuardianPet} or {SharkPet} or {VillagerPet} or {BirdPet} or {EndermanPet} or {TimePet}:
+		if difference between {PetSpawnCooldown::%UUID of player%} and now is less than 3 seconds:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&9&lPETS: &7There is a &e3 seconds &7cooldown on using pets!"
+			stop
+		set {PetSpawnCooldown::%UUID of player%} to now
+
+
+		if {SpawnedPet::%UUID of player%} is not set:
+			
+			if player's x-coord is between -136 and 89:
+				if player's z-coord is between -136 and 89:
+					play sound "entity.chicken.egg" with pitch 1 to player
+					play sound "entity.ender_dragon.flap" with pitch 2 to player
+					play sound "entity.experience_orb.pickup" with pitch 2 to player
+
+					if player's tool is {ChickenPet}:
+						send "&9&lPETS: &7You have spawned your &aChicken &7pet!" to player
+						spawnpet(player, "Chicken")
+					if player's tool is {CowPet}:
+						send "&9&lPETS: &7You have spawned your &eCow &7pet!" to player
+						spawnpet(player, "Cow")
+					if player's tool is {TigerPet}:
+						send "&9&lPETS: &7You have spawned your &6Tiger &7pet!" to player
+						spawnpet(player, "Tiger")
+
+					if player's tool is {TurtlePet}:
+						send "&9&lPETS: &7You have spawned your &aTurtle &7pet!" to player
+						spawnpet(player, "Turtle")
+					if player's tool is {GuardianPet}:
+						send "&9&lPETS: &7You have spawned your &eGuardian &7pet!" to player
+						spawnpet(player, "Guardian")
+					if player's tool is {SharkPet}:
+						send "&9&lPETS: &7You have spawned your &6Shark &7pet!" to player
+						spawnpet(player, "Shark")
+
+					if player's tool is {VillagerPet}:
+						send "&9&lPETS: &7You have spawned your &aVillager &7pet!" to player
+						spawnpet(player, "Villager")
+					if player's tool is {BirdPet}:
+						send "&9&lPETS: &7You have spawned your &eBird &7pet!" to player
+						send "&9&l- &7Flight mode has been enabled!" to player
+						spawnpet(player, "Bird")
+						set player's flight mode to true
+						if player has permission "rank.coal":
+							set player's flight speed to 0.3
+							send "&9&l- &7Flight mode has been set to &fx2&7!" to player
+					if player's tool is {EndermanPet}:
+						send "&9&lPETS: &7You have spawned your &6Enderman &7pet!" to player
+						spawnpet(player, "Enderman")
+
+					if player's tool is {TimePet}:
+						send "&9&lPETS: &7You have spawned your <##f39de8>Time &7pet!" to player
+						spawnpet(player, "Time")
+					stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&9&lPETS: &7You can only spawn pets in the /spawn region!"
+			stop
+
+		if {SpawnedPet::%UUID of player%} is alive:
+			if display name of {SpawnedPet::%UUID of player%} contains "Bird":
+				set player's flight mode to false
+				set player's flight speed to 0.2
+			play sound "entity.item.pickup" with pitch 1 to player
+			play sound "entity.ender_dragon.flap" with pitch 2 to player
+			draw 25 poof at location 2.25 meters above {SpawnedPet::%UUID of player%} with offset vector(0, 0, 0) with extra 0.2
+			kill {SpawnedPet::%UUID of player%}
+			delete {SpawnedPet::%UUID of player%}
+			send "&9&lPETS: &7You have de-spawned your pet!" to player
+			stop
+
+
+
+
+
+function spawnpet(p:player, t:text):
+	wait 1 tick
+	set {_uuidp} to UUID of {_p}
+
+	if {_t} is "Chicken" or "Cow" or "Tiger" or "Turtle" or "Guardian" or "Shark" or "Villager" or "Bird" or "Enderman" or "Time":
+		spawn 1 armor stand at location 1 meters in front of {_p} with nbt "{NoGravity:1b,Invulnerable:1,Invisible:1}"
+
+		if {_t} is "Chicken":
+			set helmet of last spawned armor stand to {ChickenSkull}
+			set display name of last spawned armor stand to "&a%{_p}% Chicken Pet"
+		if {_t} is "Cow":
+			set helmet of last spawned armor stand to {CowSkull}
+			set display name of last spawned armor stand to "&e%{_p}% Cow Pet"
+		if {_t} is "Tiger":
+			set helmet of last spawned armor stand to {TigerSkull}
+			set display name of last spawned armor stand to "&6%{_p}% Tiger Pet"
+
+		if {_t} is "Turtle":
+			set helmet of last spawned armor stand to {TurtleSkull}
+			set display name of last spawned armor stand to "&a%{_p}% Turtle Pet"
+		if {_t} is "Guardian":
+			set helmet of last spawned armor stand to {GuardianSkull}
+			set display name of last spawned armor stand to "&e%{_p}% Guardian Pet"
+		if {_t} is "Shark":
+			set helmet of last spawned armor stand to {SharkSkull}
+			set display name of last spawned armor stand to "&6%{_p}% Shark Pet"
+
+		if {_t} is "Villager":
+			set helmet of last spawned armor stand to {VillagerSkull}
+			set display name of last spawned armor stand to "&a%{_p}% Villager Pet"
+		if {_t} is "Bird":
+			set helmet of last spawned armor stand to {BirdSkull}
+			set display name of last spawned armor stand to "&e%{_p}% Bird Pet"
+		if {_t} is "Enderman":
+			set helmet of last spawned armor stand to {EndermanSkull}
+			set display name of last spawned armor stand to "&6%{_p}% Enderman Pet"
+
+		if {_t} is "Time":
+			set helmet of last spawned armor stand to {GoldClockSkull}
+			set display name of last spawned armor stand to "<##f39de8>%{_p}% Golden Clock"
+
+		set {SpawnedPet::%{_uuidp}%} to last spawned armor stand
+		teleport {SpawnedPet::%{_uuidp}%} to location 1 meters below {SpawnedPet::%{_uuidp}%}
+
+		while {SpawnedPet::%{_uuidp}%} is alive:
+
+			if distance between {SpawnedPet::%{_uuidp}%} and {_p} is less than 5:
+				teleport {SpawnedPet::%{_uuidp}%} to location 0.05 meter below {SpawnedPet::%{_uuidp}%}
+				if {_t} is "Time":
+					draw 2 flame at location 1.5 meter above {SpawnedPet::%{_uuidp}%} with offset vector(0, 0, 0) with extra 0.1
+				wait 3 ticks
+				teleport {SpawnedPet::%{_uuidp}%} to location 0.1 meter below {SpawnedPet::%{_uuidp}%}
+				if {_t} is "Time":
+					draw 2 flame at location 1.5 meter above {SpawnedPet::%{_uuidp}%} with offset vector(0, 0, 0) with extra 0.1
+				wait 3 ticks
+				teleport {SpawnedPet::%{_uuidp}%} to location 0.15 meter below {SpawnedPet::%{_uuidp}%}
+				if {_t} is "Time":
+					draw 2 flame at location 1.5 meter above {SpawnedPet::%{_uuidp}%} with offset vector(0, 0, 0) with extra 0.1
+				wait 3 ticks
+				teleport {SpawnedPet::%{_uuidp}%} to location 0.15 meter above {SpawnedPet::%{_uuidp}%}
+				if {_t} is "Time":
+					draw 2 flame at location 1.5 meter above {SpawnedPet::%{_uuidp}%} with offset vector(0, 0, 0) with extra 0.1
+				wait 3 ticks
+				teleport {SpawnedPet::%{_uuidp}%} to location 0.1 meter above {SpawnedPet::%{_uuidp}%}
+				if {_t} is "Time":
+					draw 2 flame at location 1.5 meter above {SpawnedPet::%{_uuidp}%} with offset vector(0, 0, 0) with extra 0.1
+				wait 3 ticks
+				teleport {SpawnedPet::%{_uuidp}%} to location 0.05 meter above {SpawnedPet::%{_uuidp}%}
+				if {_t} is "Time":
+					draw 2 flame at location 1.5 meter above {SpawnedPet::%{_uuidp}%} with offset vector(0, 0, 0) with extra 0.1
+				wait 3 ticks
+
+				if {_t} is "Shark":
+					chance of 5%:
+						if {_p}'s z-coord is between -138 and 91:
+							if {_p}'s x-coord is between -138 and 91:
+								fullinventorycheck({_p})
+								set {_CatchValue::%UUID of {_p}%} to a random integer between 1 and 100
+								set {_FishingPlaySound::%UUID of {_p}%} to a random number between 1.6 and 2
+								play sound "entity.experience_orb.pickup" with pitch {_FishingPlaySound::%UUID of {_p}%} to {_p}
+
+								if {_CatchValue::%UUID of {_p}%} is between 1 and 70:
+									set {_CatchValue::%UUID of {_p}%} to a random integer between 10 and 100
+									send "&b&lSHARK PET: &7caught a &a&lCOMMON &7fish worth &a$%regex({_CatchValue::%UUID of {_p}%})%" to {_p}
+									give {_p} 1 cod named "&aCod" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of {_p}%}%" and "" and "&a&lCOMMON CATCH"
+
+									remove 400 from {RequiredXP::%UUID of {_p}%}
+									set {_p}'s action bar to "&b&n+400 XP Gained"
+									set {_CatchValue::%UUID of {_p}%} to 0
+
+								if {_CatchValue::%UUID of {_p}%} is between 71 and 85:
+									set {_CatchValue::%UUID of {_p}%} to a random integer between 100 and 1000
+									send "&b&lSHARK PET: &7caught a &e&lRARE &7fish worth &a$%regex({_CatchValue::%UUID of {_p}%})%" to {_p}
+									give {_p} 1 raw salmon named "&eSalmon" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of {_p}%}%" and "" and "&e&lRARE CATCH"
+
+									remove 800 from {RequiredXP::%UUID of {_p}%}
+									set {_p}'s action bar to "&b&n+800 XP Gained"
+									set {_CatchValue::%UUID of {_p}%} to 0
+
+								if {_CatchValue::%UUID of {_p}%} is between 86 and 95:
+									set {_CatchValue::%UUID of {_p}%} to a random integer between 1000 and 10000
+									send "&b&lSHARK PET: &7caught a &c&lEPIC &7fish worth &a$%regex({_CatchValue::%UUID of {_p}%})%" to {_p}
+									give {_p} 1 tropical fish named "&cTropical Fish" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of {_p}%}%" and "" and "&c&lEPIC CATCH"
+
+									remove 1200 from {RequiredXP::%UUID of {_p}%}
+									set {_p}'s action bar to "&b&n+1,200 XP Gained"
+									set {_CatchValue::%UUID of {_p}%} to 0
+
+								if {_CatchValue::%UUID of {_p}%} is between 96 and 100:
+									set {_CatchValue::%UUID of {_p}%} to a random integer between 10000 and 100000
+									send "&b&lSHARK PET: &7caught a &6&lLEGENDARY &7fish worth &a$%regex({_CatchValue::%UUID of {_p}%})%" to {_p}
+									give {_p} 1 pufferfish named "&6Pufferfish" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of {_p}%}%" and "" and "&6&lLEGENDARY CATCH"
+
+									remove 1600 from {RequiredXP::%UUID of {_p}%}
+									set {_p}'s action bar to "&b&n+1,600 XP Gained"
+
+								set line 3 of {_p}'s scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of {_p}%})%"
+
+			else if distance between {SpawnedPet::%{_uuidp}%} and {_p} is greater than 30:
+				teleport {SpawnedPet::%{_uuidp}%} to location 1 meter in front of {_p}
+
+			else:
+
+				set {_Pet_FindPlayer::%{_uuidp}%} to vector from {SpawnedPet::%{_uuidp}%} to {_p}
+				set {_Pet_GoToPlayer::%{_uuidp}%} to location of {SpawnedPet::%{_uuidp}%}
+				set yaw of {_Pet_GoToPlayer::%{_uuidp}%} to yaw of {_Pet_FindPlayer::%{_uuidp}%}
+				set pitch of {_Pet_GoToPlayer::%{_uuidp}%} to pitch of {_Pet_FindPlayer::%{_uuidp}%}
+				teleport {SpawnedPet::%{_uuidp}%} to {_Pet_GoToPlayer::%{_uuidp}%}
+				
+				teleport {SpawnedPet::%{_uuidp}%} to location 0.5 meters in front of {SpawnedPet::%{_uuidp}%}
+				
+				wait 2 ticks
+
+
+
+
+
+on quit:
+	loop all armor stands:
+		if display name of loop-value contains "Pet":
+			if display name of loop-value contains "%player%":
+				delete loop-value
+	delete {SpawnedPet::%UUID of player%}
+
+
+
+
+
+command /despawnallpets:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		delete {SpawnedPet::*}
+		send "&9&lPETS: &7You have de-spawned all living/bugged pets!"
+		loop all armor stands:
+			if display name of loop-value contains "Pet":
+				delete loop-value
+
+
+
+
+
+on drop:
+	if name of event-item contains "Pet":
+		if {SpawnedPet::%UUID of player%} is set:
+			play sound "entity.chicken.egg" to player
+			send "&9&lPETS: &7You cannot drop pets while you have one spawned in!"
+			cancel event
+			stop
+
+on inventory click:
+	if name of event-item contains "Pet":
+		if {SpawnedPet::%UUID of player%} is set:
+			if player's x-coord is between -136 and 89:
+				if player's z-coord is between -136 and 89:
+					stop
+			play sound "entity.chicken.egg" to player
+			send "&9&lPETS: &7You can't move around your pet outside of spawn while it's spawned in"
+			cancel event
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Cave: Pets - Pet AI:
+#
+#
+#==========================================================
+
+
+
+
+
+on rightclick:
+	if player's tool is a hoe:
+		if display name of {SpawnedPet::%UUID of player%} contains "Enderman":
+			
+			if distance between {DarkAuctionHouse} and player is less than 10:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&9&lPET: &7Teleporting is disabled in this area!"
+				stop
+			if distance between {CasinoCenter} and player is less than 12:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&9&lPET: &7Teleporting is disabled in this area!"
+				stop
+
+			if difference between {EndermanPetTPCD::%UUID of player%} and now is less than 5 ticks:
+				stop
+			set {EndermanPetTPCD::%UUID of player%} to now
+
+			loop 8 times:
+				set {_EndermanPetTeleport::%UUID of player%} to location loop-value meter in front of player
+				set {_EndermanPetTeleport::%UUID of player%} to location 1 meter above {_EndermanPetTeleport::%UUID of player%}
+				if block at {_EndermanPetTeleport::%UUID of player%} is not air:
+					play sound "block.note_block.bass" with pitch 2 to player
+					send "&9&lPET: &7You cannot teleport here!"
+					stop
+
+			loop 9 times:
+				if block below {_EndermanPetTeleport::%UUID of player%} is air:
+					set {_EndermanPetTeleport::%UUID of player%} to location 1 meter below {_EndermanPetTeleport::%UUID of player%}
+
+			teleport player to {_EndermanPetTeleport::%UUID of player%}
+			play sound "entity.enderman.teleport" with pitch 2 to player
+
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Cave: Hoe Expert:
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 41:
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Completed":
+			play sound "ui.button.click" with pitch 2 to player
+
+			set metadata tag "HoeExpertMenu" of player to chest inventory with 6 rows named "&8Hoe Expert"
+			set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "HoeExpertMenu" of player to black stained glass pane named "&7"
+
+			set slot 22 of metadata tag "HoeExpertMenu" of player to 1 netherite hoe named "<##4c4e5d>Netherite Super Hoe" with lore "&8Farming Item" and "" and "&7XP Multiplier: &bx3" and "&7&lTriple Drop Chance: &e&l100%%" and "&7Speed: &fx2.5" and "&7Special Buff Chance: &d3%%" and "&7Special Drop Chance: &610%%" and "" and "&aPurchase For:" and "&7- &a$10,000,000" and "&7- <##28b5ca>Diamond Hoe &8(&6III&8)" and "&7- <##feb8ff>x48 Super Wheat" and "&7- <##84a537>x48 Poisonous Potatoes" and "&7- &cx10 Lost Golem Poppys" and "&7- &6x64 Magic Dust" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+			set slot 49 of metadata tag "HoeExpertMenu" of player to barrier named "&cExit Menu"
+			open (metadata tag "HoeExpertMenu" of player) to player
+			stop
+		
+		else:
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&4&lHOE EXPERT: &7Complete &f""Cave Explorer"" &7Quest to unlock a netherite hoe!"
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "HoeExpertMenu" of player):
+		cancel event
+
+		if index of event-slot is 22:
+			if {balance::%UUID of player%} >= 10000000:
+				if player has {FarmingHoe-DiamondHoe_Level.3}:
+					if player has 48 of glowing wheat named "<##feb8ff>&lSUPER WHEAT":
+						if player has 48 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO":
+							if player has 10 poppy named "&cLost Golem Poppy":
+								if player has 64 glowstone dust named "&6Magic Cave Dust":
+
+									remove 10000000 from {balance::%UUID of player%}
+									remove {FarmingHoe-DiamondHoe_Level.3} from player's inventory
+									remove 48 of glowing wheat named "<##feb8ff>&lSUPER WHEAT" from player's inventory
+									remove 48 of glowing poisonous potato named "<##84a537>&lPOISONOUS POTATO" from player's inventory
+									remove 10 poppy named "&cLost Golem Poppy" from player's inventory
+									remove 64 glowstone dust named "&6Magic Cave Dust" from player's inventory
+
+									give player {FarmingHoe-NetheriteHoe}
+									play sound "entity.player.levelup" with pitch 2 to player
+									send "&4&lHOE EXPERT: &aSuccessfully upgraded hoe to <##4c4e5d>Netherite Super Hoe!"
+									stop
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&4&lHOE EXPERT: &7You cannot afford <##4c4e5d>Netherite Super Hoe!"
+			stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

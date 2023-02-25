@@ -1,0 +1,790 @@
+#==========================================================
+#
+#
+#		ClashGenz Store: Store Purchasing
+#
+#
+#==========================================================
+
+
+
+
+
+on chat:
+	if difference between {AllowGG} and now is less than 8 seconds:
+		if message contains "GG":
+			if {GGCooldown::%UUID of player%} is true:
+				stop
+			set {GGCooldown::%UUID of player%} to true
+			wait 1 tick
+			send "&6&lGG: &b+1,000 XP" to player
+			remove 1000 from {RequiredXP::%UUID of player%}
+
+			play sound "block.note_block.pling" with pitch 1.5
+			play sound "block.note_block.hat" with pitch 0.5
+			wait 2 ticks
+			play sound "block.note_block.pling" with pitch 2
+			play sound "block.note_block.hat" with pitch 1
+			stop
+
+
+
+
+
+command /purchasedstoreitem [<player>] [<text>]:
+	trigger:
+		if sender is not console:
+			if player does not have permission "rank.admin":
+				send "&cYou do not have permission to use this command!"
+				stop
+
+		if arg-1 or arg-2 is not set:
+			send "&cCorrect Usage: &a/purchasedstoreitem &7<player> <item>"
+			stop
+
+		delete {GGCooldown::*}
+		set {AllowGG} to now
+
+		loop 2 times:
+			play sound "block.note_block.pling" with pitch 0.5 to all players
+			play sound "block.note_block.bass" with pitch 0.1 to all players
+			wait 2 ticks
+		wait 1 ticks
+		play sound "block.note_block.pling" with pitch 2 to all players
+		play sound "block.note_block.bit" with pitch 1.5 to all players
+
+
+
+		if arg-2 is "Coal Rank":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased <##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL <##717171>Rank!"
+			broadcast " &a&l- &7They received a bonus &d5 Mystery Crates"
+			broadcast ""
+			execute console command "/lp user %arg-1% parent add coal"
+			add 5 to {MysteryCrates::%UUID of arg-1%}
+			if {ClaimCoalGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimCoalGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+
+		if arg-2 is "Iron Rank":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased <##b9b9b9>&lI<##c7c7c7>&lR<##d4d4d4>&lO<##d4d4d4>&lN <##ededed>Rank!"
+			broadcast " &a&l- &7They received a bonus &d10 Mystery Crates"
+			broadcast ""
+			execute console command "/lp user %arg-1% parent add iron"
+			add 10 to {MysteryCrates::%UUID of arg-1%}
+			if {ClaimCoalGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimCoalGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+			if {ClaimIronGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimIronGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+
+		if arg-2 is "Gold Rank":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased <##e7aa34>&lG<##ebaf3c>&lO<##f5bb4a>&lL<##ffc85e>&lD <##fdcd6f>Rank!"
+			broadcast " &a&l- &7They received a bonus &d15 Mystery Crates"
+			broadcast ""
+			execute console command "/lp user %arg-1% parent add gold"
+			add 15 to {MysteryCrates::%UUID of arg-1%}
+			if {ClaimCoalGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimCoalGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+			if {ClaimIronGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimIronGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+			if {ClaimGoldGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimGoldGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+
+		if arg-2 is "Diamond Rank":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased <##1eccc2>&lD<##26d6cc>&lI<##32ded4>&lA<##41e8de>&lM<##53f5eb>&lO<##68f5ed>&lN<##78fff7>&lD <##84fff8>Rank!"
+			broadcast " &a&l- &7They received a bonus &d20 Mystery Crates"
+			broadcast ""
+			execute console command "/lp user %arg-1% parent add diamond"
+			add 20 to {MysteryCrates::%UUID of arg-1%}
+			if {ClaimCoalGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimCoalGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+			if {ClaimIronGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimIronGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+			if {ClaimGoldGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimGoldGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+			if {ClaimDiamondGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimDiamondGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+
+
+
+		if arg-2 is "x1.5 SellWand":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased <##ffd013>Sell Wand &6&l(x1.5)"
+			broadcast " &a&l- &7Sell all chest items for &6x1.5 &7value"
+			broadcast ""
+			give arg-1 1 blaze rod named "<##ffd013>Sell Wand &6&l(x1.5)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax1.5 &7normal value!" and "" and "&8&oUse at /warp plot"
+
+		if arg-2 is "x2.0 SellWand":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased <##ffd013>Sell Wand &6&l(x2.0)"
+			broadcast " &a&l- &7Sell all chest items for &6x2.0 &7value"
+			broadcast ""
+			give arg-1 1 blaze rod named "<##ffd013>Sell Wand &6&l(x2.0)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax2.0 &7normal value!" and "" and "&8&oUse at /warp plot"
+
+		if arg-2 is "x2.5 SellWand":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased <##ffd013>Sell Wand &6&l(x2.5)"
+			broadcast " &a&l- &7Sell all chest items for &6x2.5 &7value"
+			broadcast ""
+			give arg-1 1 blaze rod named "<##ffd013>Sell Wand &6&l(x2.5)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax2.5 &7normal value!" and "" and "&8&oUse at /warp plot"
+
+
+
+		if arg-2 is "x3 Mystery Crates":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &dx3 Mystery Crates"
+			broadcast ""
+			add 3 to {MysteryCrates::%UUID of arg-1%}
+
+		if arg-2 is "x10 Mystery Crates":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &dx10 Mystery Crates"
+			broadcast ""
+			add 10 to {MysteryCrates::%UUID of arg-1%}
+
+		if arg-2 is "x25 Mystery Crates":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &dx25 Mystery Crates"
+			broadcast ""
+			add 25 to {MysteryCrates::%UUID of arg-1%}
+
+
+
+		if arg-2 is "Tiger Pet":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &6Tiger Pet &lLEGENDARY"
+			broadcast " &a&l- &7Once spawned, pet will auto-farm for you."
+			broadcast ""
+			give arg-1 {TigerPet}
+
+		if arg-2 is "Shark Pet":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &6Shark Pet &lLEGENDARY"
+			broadcast " &a&l- &7Once spawned, pet will auto-fish for you."
+			broadcast ""
+			give arg-1 {SharkPet}
+
+		if arg-2 is "Enderman Pet":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &6Enderman Pet &lLEGENDARY"
+			broadcast " &a&l- &7Once spawned, use hoe to teleport 8 blocks forwards."
+			broadcast ""
+			give arg-1 {EndermanPet}
+
+
+
+		if arg-2 is "Starter Bundle":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &aStarter Bundle"
+			broadcast " &a&l- &d+25 Mystery Crates&7, &6x2.0 Sell Wand &7& <##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL <##717171>Rank!"
+			broadcast ""
+			add 25 to {MysteryCrates::%UUID of arg-1%}
+			give arg-1 1 blaze rod named "<##ffd013>Sell Wand &6&l(x2.0)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax2.0 &7normal value!" and "" and "&8&oUse at /warp plot"
+			execute console command "/lp user %arg-1% parent add coal"
+
+
+		if arg-2 is "Clash Bundle":
+			broadcast ""
+			broadcast " &a&l/BUY: &b%arg-1% &7Purchased &d&lClash Bundle"
+			broadcast " &a&l- &d+50 Mystery Crates&7, &6x3.0 Sell Wand &7, <##b9b9b9>&lI<##c7c7c7>&lR<##d4d4d4>&lO<##d4d4d4>&lN <##ededed>Rank &7& &bCasino Heist"
+			broadcast ""
+			set {CasinoHeistEnabled::%UUID of arg-1%} to true
+			add 50 to {MysteryCrates::%UUID of arg-1%}
+			give arg-1 1 blaze rod named "<##ffd013>Sell Wand &6&l(x3.0)" with lore "&8Generator Item" and "" and "&7Right - Click on your chest" and "&7to sell all the contents" and "&7inside for &ax3.0 &7normal value!" and "" and "&8&oUse at /warp plot"
+
+			execute console command "/lp user %arg-1% parent add iron"
+			add 10 to {MysteryCrates::%UUID of arg-1%}
+			if {ClaimCoalGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimCoalGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+			if {ClaimIronGenSlots::%UUID of arg-1%} is not set:
+				set {ClaimIronGenSlots::%UUID of arg-1%} to true
+				add 10 to {GeneratorLimit::%UUID of arg-1%}
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Store: In game buy cmd:
+#
+#
+#==========================================================
+
+
+
+
+
+on citizen right click:
+	if npc is 36:
+		execute player command "/buy"
+
+
+
+
+
+command /buy:
+	trigger:
+		add 1 to {StoreCommand}
+		clashgenzirlstore_ranks(player)
+
+command /store:
+	trigger:
+		add 1 to {StoreCommand}
+		clashgenzirlstore_ranks(player)
+
+
+
+
+
+function clashgenzirlstore_ranks(p:player):
+	play sound "ui.button.click" with pitch 2 to {_p}
+
+	set metadata tag "ClashGenzIRLStore_Ranks" of {_p} to chest inventory with 6 rows named "&8Server Store (Ranks)"
+
+	set slot 0, 1, 7, 8, 9, 10, 16, 17, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to black stained glass pane named "&7"
+
+	set slot 11 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to 1 of glowing lime stained glass pane named "&aSelected"
+	set slot 12, 13, 14 and 15 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to red stained glass pane named "&cNot Selected"
+
+	set slot 2 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to 1 of glowing name tag named "&aServer Ranks" with lore "&7Ranks are PERMENENT, This means you" and "&7will keep them FOREVER. With ranks" and "&7you can get a load of in-game perks." and "&7Each rank will have better perks that" and "&7will help you out more on your adventure!" and "" and "&e>> Selected! <<"
+	set slot 3 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to ender chest named "&aMystery Crates" with lore "&7Purchase Mystery Crates for" and "&7loads of rare items" and "" and "&dInside 1 Crate:" and "&a70%%: $25,000 - $250,000" and "&69%%: 2,500,000 JACKPOT" and "&69%%: Budget Netherite Gen" and "&c3%%: &c+1 Generator Slot" and "&c3%%: Netherite Gen" and "" and "&e>> OPEN CRATE STORE <<"
+	set slot 4 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to blaze rod named "&aSell Wands" with lore "&7Use sellwands to right-click" and "&7on chests to automatically" and "&7sell EVERYTHING inside" and "&7with a multiplier &6(x1.5 - x2.5)" and "" and "&e>> OPEN SELLWAND STORE <<"
+	set slot 5 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to lead named "&aPets" with lore "&7Pets have a load of uses" and "&7in game that can significantly" and "&7improve your game experience" and "&7They're also nice just to have..." and "" and "&e>> OPEN PET STORE <<"
+	set slot 6 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to chest named "&aSpecial Bundles" with lore "&7Don't want to spend too much money?" and "&7Want to get good value?" and "&7Purchase a bundle for multiple" and "&7items for a big discount" and "" and "&e>> OPEN BUNDLE STORE <<"
+
+	set slot 29 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to coal named "<##717171>Coal Rank &d&lBEST VALUE" with lore "&7COAL Provides the basic perks" and "&7which will improve your experience!" and "" and "&a✔ &7Chat Prefix: <##717171>&lCOAL" and "&a✔ &7White Text" and "&a✔ &7NO Chat Cooldown" and "&a✔ <##717171>+5 &7Mystery Crates" and "&a✔ <##717171>+10 &7Generator Slots" and "&a✔ <##717171>2 &7Total Plot Slots" and "&a✔ &7/fly command" and "&a✔ &7Pet Bird PERK (Double flight speed)" and "&a✔ &7Access to Fishing Totems" and "" and "&d&oView full list of perks on store!" and "" and "&7Costs: &a$2.99" and "&e&lClick To Open Store"
+	set slot 31 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to iron ingot named "<##ededed>Iron Rank" with lore "&7IRON Provides all COAL rank perks" and "&7plus all these perks below:" and "" and "&a✔ &7Chat Prefix: <##ededed>&lIRON" and "&a✔ &7White Text" and "&a✔ &7NO Chat Cooldown" and "&a✔ <##ededed>+10 &7Mystery Crates" and "&a✔ <##ededed>+20 &7Generator Slots" and "&a✔ <##ededed>3 &7Total Plot Slots" and "&a✔ &7/fly command" and "&a✔ &7Pet Bird PERK (Double flight speed)" and "&a✔ &7Access to Fishing Totems" and "&a✔ <##ededed>/autosell command" and "" and "&d&oView full list of perks on store!" and "" and "&7Costs: &a$6.99" and "&e&lClick To Open Store"
+	set slot 32 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to gold ingot named "<##fdcd6f>Gold Rank" with lore "&7GOLD Provides all PREVIOUS rank perks" and "&7plus all these perks below:" and "" and "&a✔ &7Chat Prefix: <##fdcd6f>&lGOLD" and "&a✔ &7White Text" and "&a✔ &7NO Chat Cooldown" and "&a✔ <##fdcd6f>+15 &7Mystery Crates" and "&a✔ <##fdcd6f>+30 &7Generator Slots" and "&a✔ <##fdcd6f>4 &7Total Plot Slots" and "&a✔ &7/fly command" and "&a✔ &7Pet Bird PERK (Double flight speed)" and "&a✔ &7Access to Fishing Totems" and "&a✔ &7/autosell command" and "" and "&d&oView full list of perks on store!" and "" and "&7Costs: &a$14.99" and "&e&lClick To Open Store"
+	set slot 33 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to diamond named "<##84fff8>Diamond Rank" with lore "&7DIAMOND Provides all PREVIOUS rank perks" and "&7plus all these perks below:" and "" and "&a✔ &7Chat Prefix: <##84fff8>&lDIAMOND" and "&a✔ &7White Text" and "&a✔ &7NO Chat Cooldown" and "&a✔ <##84fff8>+20 &7Mystery Crates" and "&a✔ <##84fff8>+40 &7Generator Slots" and "&a✔ <##84fff8>5 &7Total Plot Slots" and "&a✔ &7/fly command" and "&a✔ &7Pet Bird PERK (Double flight speed)" and "&a✔ &7Access to Fishing Totems" and "&a✔ &7/autosell command" and "&a✔ <##84fff8>10%% Cashback on gen upgrades!" and "" and "&d&oView full list of perks on store!" and "" and "&7Costs: &a$29.99" and "&e&lClick To Open Store"
+
+	set slot 49 of metadata tag "ClashGenzIRLStore_Ranks" of {_p} to 1 barrier named "&cClose This Menu!" with lore "&7Click Me"
+	open (metadata tag "ClashGenzIRLStore_Ranks" of {_p}) to {_p}
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzIRLStore_Ranks" of player):
+		cancel event
+
+		if index of event-slot is 2 or 11:
+			clashgenzirlstore_ranks(player)
+		if index of event-slot is 3 or 12:
+			clashgenzirlstore_mysterycrates(player)
+		if index of event-slot is 4 or 13:
+			clashgenzirlstore_sellwands(player)
+		if index of event-slot is 5 or 14:
+			clashgenzirlstore_pets(player)
+		if index of event-slot is 6 or 15:
+			clashgenzirlstore_bundles(player)
+
+
+		if index of event-slot is 29, 31, 32 or 33:
+			play sound "entity.chicken.egg" with pitch 1 to player
+			close player's inventory
+
+		if index of event-slot is 29:
+			send "&a&lSERVER STORE: &7Link for <##717171>&lCOAL RANK:"
+			send "<link:https://clashgenz.buycraft.net/package/4778957>&e&nhttps://clashgenz.buycraft.net/package/4778957<reset>"
+
+		if index of event-slot is 31:
+			send "&a&lSERVER STORE: &7Link for <##ededed>&lIRON RANK:"
+			send "<link:https://clashgenz.buycraft.net/package/5067151>&e&nhttps://clashgenz.buycraft.net/package/5067151<reset>"
+
+		if index of event-slot is 32:
+			send "&a&lSERVER STORE: &7Link for <##fdcd6f>&lGOLD RANK:"
+			send "<link:https://clashgenz.buycraft.net/package/5067149>&e&nhttps://clashgenz.buycraft.net/package/5067149<reset>"
+
+		if index of event-slot is 33:
+			send "&a&lSERVER STORE: &7Link for <##84fff8>&lDIAMOND RANK:"
+			send "<link:https://clashgenz.buycraft.net/package/5067152>&e&nhttps://clashgenz.buycraft.net/package/5067152<reset>"
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+function clashgenzirlstore_mysterycrates(p:player):
+	play sound "ui.button.click" with pitch 2 to {_p}
+	set metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to chest inventory with 6 rows named "&8Server Store (Mystery Crates)"
+
+	set slot 0, 1, 7, 8, 9, 10, 16, 17, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to black stained glass pane named "&7"
+
+	set slot 12 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to 1 of glowing lime stained glass pane named "&aSelected"
+	set slot 11, 13, 14 and 15 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to red stained glass pane named "&cNot Selected"
+
+	set slot 2 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to name tag named "&aServer Ranks" with lore "&7Ranks are PERMENENT, This means you" and "&7will keep them FOREVER. With ranks" and "&7you can get a load of in-game perks." and "&7Each rank will have better perks that" and "&7will help you out more on your adventure!" and "" and "&e>> OPEN RANK STORE <<"
+	set slot 3 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to 1 of glowing ender chest named "&aMystery Crates" with lore "&7Purchase Mystery Crates for" and "&7loads of rare items" and "" and "&dInside 1 Crate:" and "&a70%%: $25,000 - $250,000" and "&69%%: 2,500,000 JACKPOT" and "&69%%: Budget Netherite Gen" and "&c3%%: &c+1 Generator Slot" and "&c3%%: Netherite Gen" and "" and "&e>> Selected! <<"
+	set slot 4 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to blaze rod named "&aSell Wands" with lore "&7Use sellwands to right-click" and "&7on chests to automatically" and "&7sell EVERYTHING inside" and "&7with a multiplier &6(x1.5 - x2.5)" and "" and "&e>> OPEN SELLWAND STORE <<"
+	set slot 5 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to lead named "&aPets" with lore "&7Pets have a load of uses" and "&7in game that can significantly" and "&7improve your game experience" and "&7They're also nice just to have..." and "" and "&e>> OPEN PET STORE <<"
+	set slot 6 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to chest named "&aSpecial Bundles" with lore "&7Don't want to spend too much money?" and "&7Want to get good value?" and "&7Purchase a bundle for multiple" and "&7items for a big discount" and "" and "&e>> OPEN BUNDLE STORE <<"
+
+	set slot 29 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to 3 ender chests named "&dx3 Mystery Crates" with lore "&7Mystery Crates give a various" and "&7amount of rare item:" and "" and "&dInside 1 Crate:" and "&a50%%: $25,000 - $250,000" and "&615%%: 2,500,000 JACKPOT" and "&615%%: Budget Netherite Gen" and "&c10%%: &c+1 Generator Slot" and "&c10%%: Netherite Gen" and "" and "&7Costs: &a$0.99" and "&e&lClick To Open Store"
+	set slot 32 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to 10 ender chests named "&dx10 Mystery Crates" with lore "&7Mystery Crates give a various" and "&7amount of rare item:" and "" and "&dInside 1 Crate:" and "&a50%%: $25,000 - $250,000" and "&615%%: 2,500,000 JACKPOT" and "&615%%: Budget Netherite Gen" and "&c10%%: &c+1 Generator Slot" and "&c10%%: Netherite Gen" and "" and "&7Costs: &a$2.99" and "&e&lClick To Open Store"
+	set slot 33 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to 25 ender chests named "&dx25 Mystery Crates" with lore "&7Mystery Crates give a various" and "&7amount of rare item:" and "" and "&dInside 1 Crate:" and "&a50%%: $25,000 - $250,000" and "&615%%: 2,500,000 JACKPOT" and "&615%%: Budget Netherite Gen" and "&c10%%: &c+1 Generator Slot" and "&c10%%: Netherite Gen" and "" and "&7Costs: &a$5.99 &o(saves $1.50)" and "&e&lClick To Open Store"
+
+	set slot 49 of metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p} to 1 barrier named "&cClose This Menu!" with lore "&7Click Me"
+	open (metadata tag "ClashGenzIRLStore_MysteryCrates" of {_p}) to {_p}
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzIRLStore_MysteryCrates" of player):
+		cancel event
+
+		if index of event-slot is 2 or 11:
+			clashgenzirlstore_ranks(player)
+		if index of event-slot is 3 or 12:
+			clashgenzirlstore_mysterycrates(player)
+		if index of event-slot is 4 or 13:
+			clashgenzirlstore_sellwands(player)
+		if index of event-slot is 5 or 14:
+			clashgenzirlstore_pets(player)
+		if index of event-slot is 6 or 15:
+			clashgenzirlstore_bundles(player)
+
+
+		if index of event-slot is 29, 32 or 33:
+			play sound "entity.chicken.egg" with pitch 1 to player
+			close player's inventory
+
+		if index of event-slot is 29:
+			send "&a&lSERVER STORE: &7Link for &d&lx3 Mystery Crates:"
+			send "<link:https://clashgenz.buycraft.net/package/5179062>&e&nhttps://clashgenz.buycraft.net/package/5179062<reset>"
+
+		if index of event-slot is 32:
+			send "&a&lSERVER STORE: &7Link for &d&lx10 Mystery Crates:"
+			send "<link:https://clashgenz.buycraft.net/package/4778968>&e&nhttps://clashgenz.buycraft.net/package/4778968<reset>"
+
+		if index of event-slot is 33:
+			send "&a&lSERVER STORE: &7Link for &d&lx25 Mystery Crates:"
+			send "<link:https://clashgenz.buycraft.net/package/4778972>&e&nhttps://clashgenz.buycraft.net/package/4778972<reset>"
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+function clashgenzirlstore_sellwands(p:player):
+	play sound "ui.button.click" with pitch 2 to {_p}
+	set metadata tag "ClashGenzIRLStore_SellWands" of {_p} to chest inventory with 6 rows named "&8Server Store (Sell Wands)"
+
+	set slot 0, 1, 7, 8, 9, 10, 16, 17, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to black stained glass pane named "&7"
+
+	set slot 13 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to 1 of glowing lime stained glass pane named "&aSelected"
+	set slot 11, 12, 14 and 15 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to red stained glass pane named "&cNot Selected"
+
+	set slot 2 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to name tag named "&aServer Ranks" with lore "&7Ranks are PERMENENT, This means you" and "&7will keep them FOREVER. With ranks" and "&7you can get a load of in-game perks." and "&7Each rank will have better perks that" and "&7will help you out more on your adventure!" and "" and "&e>> OPEN RANK STORE <<"
+	set slot 3 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to ender chest named "&aMystery Crates" with lore "&7Purchase Mystery Crates for" and "&7loads of rare items" and "" and "&dInside 1 Crate:" and "&a70%%: $25,000 - $250,000" and "&69%%: 2,500,000 JACKPOT" and "&69%%: Budget Netherite Gen" and "&c3%%: &c+1 Generator Slot" and "&c3%%: Netherite Gen" and "" and "&e>> OPEN CRATE STORE <<"
+	set slot 4 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to 1 of glowing blaze rod named "&aSell Wands" with lore "&7Use sellwands to right-click" and "&7on chests to automatically" and "&7sell EVERYTHING inside" and "&7with a multiplier &6(x1.5 - x2.5)" and "" and "&e>> Selected! <<"
+	set slot 5 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to lead named "&aPets" with lore "&7Pets have a load of uses" and "&7in game that can significantly" and "&7improve your game experience" and "&7They're also nice just to have..." and "" and "&e>> OPEN PET STORE <<"
+	set slot 6 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to chest named "&aSpecial Bundles" with lore "&7Don't want to spend too much money?" and "&7Want to get good value?" and "&7Purchase a bundle for multiple" and "&7items for a big discount" and "" and "&e>> OPEN BUNDLE STORE <<"
+
+	set slot 30 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to 1 blaze rod named "&6x1.5 Sell Wand" with lore "&7Use a sellwand to sell ALL items" and "&7inside chests for &6x1.5 Value!" and "" and "&7Costs: &a$1.99" and "&e&lClick To Open Store"
+	set slot 31 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to 1 blaze rod named "&6x2.0 Sell Wand" with lore "&7Use a sellwand to sell ALL items" and "&7inside chests for &6x2.0 Value!" and "" and "&7Costs: &a$4.99" and "&e&lClick To Open Store"
+	set slot 32 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to 1 blaze rod named "&6x2.5 Sell Wand" with lore "&7Use a sellwand to sell ALL items" and "&7inside chests for &6x2.5 Value!" and "" and "&7Costs: &a$9.99" and "&e&lClick To Open Store"
+
+	set slot 49 of metadata tag "ClashGenzIRLStore_SellWands" of {_p} to 1 barrier named "&cClose This Menu!" with lore "&7Click Me"
+	open (metadata tag "ClashGenzIRLStore_SellWands" of {_p}) to {_p}
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzIRLStore_SellWands" of player):
+		cancel event
+
+		if index of event-slot is 2 or 11:
+			clashgenzirlstore_ranks(player)
+		if index of event-slot is 3 or 12:
+			clashgenzirlstore_mysterycrates(player)
+		if index of event-slot is 4 or 13:
+			clashgenzirlstore_sellwands(player)
+		if index of event-slot is 5 or 14:
+			clashgenzirlstore_pets(player)
+		if index of event-slot is 6 or 15:
+			clashgenzirlstore_bundles(player)
+
+
+		if index of event-slot is 30, 31 or 32:
+			play sound "entity.chicken.egg" with pitch 1 to player
+			close player's inventory
+
+		if index of event-slot is 30:
+			send "&a&lSERVER STORE: &7Link for &6&lx1.5 Sell Wand:"
+			send "<link:https://clashgenz.buycraft.net/package/4779238>&e&nhttps://clashgenz.buycraft.net/package/4779238<reset>"
+
+		if index of event-slot is 31:
+			send "&a&lSERVER STORE: &7Link for &6&lx2.0 Sell Wand:"
+			send "<link:https://clashgenz.buycraft.net/package/5063442>&e&nhttps://clashgenz.buycraft.net/package/5063442<reset>"
+
+		if index of event-slot is 32:
+			send "&a&lSERVER STORE: &7Link for &6&lx2.5 Sell Wand:"
+			send "<link:https://clashgenz.buycraft.net/package/5063443>&e&nhttps://clashgenz.buycraft.net/package/5063443<reset>"
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+function clashgenzirlstore_pets(p:player):
+	play sound "ui.button.click" with pitch 2 to {_p}
+	set metadata tag "ClashGenzIRLStore_Pets" of {_p} to chest inventory with 6 rows named "&8Server Store (Pets)"
+
+	set slot 0, 1, 7, 8, 9, 10, 16, 17, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to black stained glass pane named "&7"
+
+	set slot 14 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to 1 of glowing lime stained glass pane named "&aSelected"
+	set slot 11, 12, 13 and 15 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to red stained glass pane named "&cNot Selected"
+
+	set slot 2 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to name tag named "&aServer Ranks" with lore "&7Ranks are PERMENENT, This means you" and "&7will keep them FOREVER. With ranks" and "&7you can get a load of in-game perks." and "&7Each rank will have better perks that" and "&7will help you out more on your adventure!" and "" and "&e>> OPEN RANK STORE <<"
+	set slot 3 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to ender chest named "&aMystery Crates" with lore "&7Purchase Mystery Crates for" and "&7loads of rare items" and "" and "&dInside 1 Crate:" and "&a70%%: $25,000 - $250,000" and "&69%%: 2,500,000 JACKPOT" and "&69%%: Budget Netherite Gen" and "&c3%%: &c+1 Generator Slot" and "&c3%%: Netherite Gen" and "" and "&e>> OPEN CRATE STORE <<"
+	set slot 4 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to 1 blaze rod named "&aSell Wands" with lore "&7Use sellwands to right-click" and "&7on chests to automatically" and "&7sell EVERYTHING inside" and "&7with a multiplier &6(x1.5 - x2.5)" and "" and "&e>> OPEN SELLWAND STORE <<"
+	set slot 5 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to 1 of glowing lead named "&aPets" with lore "&7Pets have a load of uses" and "&7in game that can significantly" and "&7improve your game experience" and "&7They're also nice just to have..." and "" and "&e>> Selected! <<"
+	set slot 6 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to chest named "&aSpecial Bundles" with lore "&7Don't want to spend too much money?" and "&7Want to get good value?" and "&7Purchase a bundle for multiple" and "&7items for a big discount" and "" and "&e>> OPEN BUNDLE STORE <<"
+
+	set slot 29 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to {TigerSkull} named "&6Tiger Pet &lLEGENDARY" with lore "&8Farming Pet" and "" and "&7Receive &bTRIPLE XP &7for farming" and "&7and for killing chickens!" and "" and "&7Costs: &a$7.89" and "&e&lClick To Open Store"
+	set slot 31 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to {SharkSkull} named "&6Shark Pet &lLEGENDARY" with lore "&8Fishing Pet" and "" and "&7This pet will automatically" and "&7fish for you with &bTRIPLE XP" and "&7and you'll get ALL catches!" and "" and "&7Costs: &a$7.89" and "&e&lClick To Open Store"
+	set slot 33 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to {EndermanSkull} named "&6Enderman Pet &lLEGENDARY" with lore "&8Multiuse Pet" and "" and "&7If you rightclick any hoe you'll" and "&7teleport &f8 blocks &7forwards!" and "" and "&7Costs: &a$7.89" and "&e&lClick To Open Store"
+
+	set slot 49 of metadata tag "ClashGenzIRLStore_Pets" of {_p} to 1 barrier named "&cClose This Menu!" with lore "&7Click Me"
+	open (metadata tag "ClashGenzIRLStore_Pets" of {_p}) to {_p}
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzIRLStore_Pets" of player):
+		cancel event
+
+		if index of event-slot is 2 or 11:
+			clashgenzirlstore_ranks(player)
+		if index of event-slot is 3 or 12:
+			clashgenzirlstore_mysterycrates(player)
+		if index of event-slot is 4 or 13:
+			clashgenzirlstore_sellwands(player)
+		if index of event-slot is 5 or 14:
+			clashgenzirlstore_pets(player)
+		if index of event-slot is 6 or 15:
+			clashgenzirlstore_bundles(player)
+
+
+		if index of event-slot is 29, 31 or 33:
+			play sound "entity.chicken.egg" with pitch 1 to player
+			close player's inventory
+
+		if index of event-slot is 29:
+			send "&a&lSERVER STORE: &7Link for &6Tiger Pet &lLEGENDARY:"
+			send "<link:https://clashgenz.buycraft.net/package/5222696>&e&nhttps://clashgenz.buycraft.net/package/5222696<reset>"
+
+		if index of event-slot is 31:
+			send "&a&lSERVER STORE: &7Link for &6Shark Pet &lLEGENDARY:"
+			send "<link:https://clashgenz.buycraft.net/package/5222708>&e&nhttps://clashgenz.buycraft.net/package/5222708<reset>"
+
+		if index of event-slot is 33:
+			send "&a&lSERVER STORE: &7Link for &6Enderman Pet &lLEGENDARY:"
+			send "<link:https://clashgenz.buycraft.net/package/5222711>&e&nhttps://clashgenz.buycraft.net/package/5222711<reset>"
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+function clashgenzirlstore_bundles(p:player):
+	play sound "ui.button.click" with pitch 2 to {_p}
+	set metadata tag "ClashGenzIRLStore_Bundles" of {_p} to chest inventory with 6 rows named "&8Server Store (Pets)"
+
+	set slot 0, 1, 7, 8, 9, 10, 16, 17, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to black stained glass pane named "&7"
+
+	set slot 15 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to 1 of glowing lime stained glass pane named "&aSelected"
+	set slot 11, 12, 13 and 14 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to red stained glass pane named "&cNot Selected"
+
+	set slot 2 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to name tag named "&aServer Ranks" with lore "&7Ranks are PERMENENT, This means you" and "&7will keep them FOREVER. With ranks" and "&7you can get a load of in-game perks." and "&7Each rank will have better perks that" and "&7will help you out more on your adventure!" and "" and "&e>> OPEN RANK STORE <<"
+	set slot 3 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to ender chest named "&aMystery Crates" with lore "&7Purchase Mystery Crates for" and "&7loads of rare items" and "" and "&dInside 1 Crate:" and "&a70%%: $25,000 - $250,000" and "&69%%: 2,500,000 JACKPOT" and "&69%%: Budget Netherite Gen" and "&c3%%: &c+1 Generator Slot" and "&c3%%: Netherite Gen" and "" and "&e>> OPEN CRATE STORE <<"
+	set slot 4 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to 1 blaze rod named "&aSell Wands" with lore "&7Use sellwands to right-click" and "&7on chests to automatically" and "&7sell EVERYTHING inside" and "&7with a multiplier &6(x1.5 - x2.5)" and "" and "&e>> OPEN SELLWAND STORE <<"
+	set slot 5 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to 1 lead named "&aPets" with lore "&7Pets have a load of uses" and "&7in game that can significantly" and "&7improve your game experience" and "&7They're also nice just to have..." and "" and "&e>> OPEN PET STORE <<"
+	set slot 6 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to 1 of glowing chest named "&aSpecial Bundles" with lore "&7Don't want to spend too much money?" and "&7Want to get good value?" and "&7Purchase a bundle for multiple" and "&7items for a big discount" and "" and "&e>> Selected! <"
+
+	set slot 30 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to 1 minecart with chest named "&aStarter Bundle" with lore "&8Includes a bunch of store items" and "" and "&7Bundle Includes:" and "  &dx25 Mystery Crates" and "  &6x2.0 Sell Wand" and "  <##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL <##717171>Rank" and "" and "&7Worth: &2$13.97" and "&7Costs: &a$5.79" and "&e&lClick To Open Store"
+
+	set slot 32 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to 1 minecart with tnt named "&aClash Bundle &d&lBEST VALUE" with lore "&8Includes a bunch of store items" and "" and "&7Bundle Includes:" and "  &dx50 Mystery Crates" and "  &6x3.0 Sell Wand (BEST)" and "  <##b9b9b9>&lI<##c7c7c7>&lR<##d4d4d4>&lO<##d4d4d4>&lN <##ededed>Rank" and "  &bUnlock Casino Heist DLC" and "" and "&7Worth: &2$43.95" and "&7Costs: &a$11.79" and "&e&lClick To Open Store"
+
+	set slot 49 of metadata tag "ClashGenzIRLStore_Bundles" of {_p} to 1 barrier named "&cClose This Menu!" with lore "&7Click Me"
+	open (metadata tag "ClashGenzIRLStore_Bundles" of {_p}) to {_p}
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ClashGenzIRLStore_Bundles" of player):
+		cancel event
+
+		if index of event-slot is 2 or 11:
+			clashgenzirlstore_ranks(player)
+		if index of event-slot is 3 or 12:
+			clashgenzirlstore_mysterycrates(player)
+		if index of event-slot is 4 or 13:
+			clashgenzirlstore_sellwands(player)
+		if index of event-slot is 5 or 14:
+			clashgenzirlstore_pets(player)
+		if index of event-slot is 6 or 15:
+			clashgenzirlstore_bundles(player)
+
+
+		if index of event-slot is 30 or 32:
+			play sound "entity.chicken.egg" with pitch 1 to player
+			close player's inventory
+
+		if index of event-slot is 30:
+			send "&a&lSERVER STORE: &7Link for &aStarter Bundle:"
+			send "<link:https://clashgenz.buycraft.net/package/5072097>&e&nhttps://clashgenz.buycraft.net/package/5072097<reset>"
+
+		if index of event-slot is 32:
+			send "&a&lSERVER STORE: &7Link for &aClash Bundle &d&lBEST VALUE:"
+			send "<link:https://clashgenz.buycraft.net/package/5244879>&e&nhttps://clashgenz.buycraft.net/package/5244879<reset>"
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Store: Mystery Crates
+#
+#
+#==========================================================
+
+
+
+
+
+on rightclick on ender chest:
+	cancel event
+
+	if {MysteryCrates::%UUID of player%} is less than 1:
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "&d&lMYSTERY CRATES: &7You have &d0 &7Crates, Get some from &b/buy&7!"
+		send "&d&l- &7You can also get crates in game from quests, skull hunting & levelling up!"
+		stop
+
+	if {MysteryCrateInUse} is true:
+		stop
+
+	set {MysteryCrateInUse} to true
+	remove 1 from {MysteryCrates::%UUID of player%}
+
+
+
+	play sound "block.note_block.bit" with pitch 0.5 to player
+	play sound "block.note_block.didgeridoo" with pitch 0.5 to player
+	play sound "block.note_block.basedrum" with pitch 0.5 to player
+
+	execute console command "/holograms setline MysteryCrates 1 &a&l---****---"
+	execute console command "/holograms setline MysteryCrates 2 {empty}"
+	execute console command "/holograms setline MysteryCrates 3 {empty}"
+	execute console command "/holograms setline MysteryCrates 4 {empty}"
+
+	wait 3 ticks
+	
+	play sound "block.note_block.bit" with pitch 1 to player
+	play sound "block.note_block.didgeridoo" with pitch 1 to player
+	play sound "block.note_block.basedrum" with pitch 1 to player
+
+	execute console command "/holograms setline MysteryCrates 2 &6&l--***--"
+
+	wait 3 ticks
+
+	play sound "block.note_block.bit" with pitch 1.5 to player
+	play sound "block.note_block.didgeridoo" with pitch 1.5 to player
+	play sound "block.note_block.basedrum" with pitch 1.5 to player
+
+	execute console command "/holograms setline MysteryCrates 3 &c&l-**-"
+
+	wait 3 ticks
+
+	play sound "block.note_block.bit" with pitch 2 to player
+	play sound "block.note_block.didgeridoo" with pitch 2 to player
+	play sound "block.note_block.basedrum" with pitch 2 to player
+
+	wait 5 ticks
+
+
+	play open animation on event-block
+	add 1 to {MysteryCrates_RewardsCycle::%UUID of player%}
+
+	if {MysteryCrates_RewardsCycle::%UUID of player%} = 2, 4, 6, 7, 8 or 10:
+		spawn firework at event-block with nbt "{LifeTime:1,FireworksItem:{id:firework_rocket,Count:1,tag:{Fireworks:{Flight:0,Explosions:[{Type:4,Flicker:1b,Colors:[I;4128571]}]}}}}"
+		set {_MysteryCrateReward::%UUID of player%} to a random integer between 25000 and 250000
+		add {_MysteryCrateReward::%UUID of player%} to {balance::%UUID of player%}
+
+		execute console command "/holograms setline MysteryCrates 4 &a&l+$%regex({_MysteryCrateReward::%UUID of player%})%"
+
+		send ""
+		send "&d&lMYSTERY CRATE: &7You found &a$%regex({_MysteryCrateReward::%UUID of player%})%"
+		send "&d&l- &7You have &d%{MysteryCrates::%UUID of player%}% &7crates left!"
+		send ""
+
+
+	if {MysteryCrates_RewardsCycle::%UUID of player%} = 1 or 5:
+		spawn firework at event-block with nbt "{LifeTime:1,FireworksItem:{id:firework_rocket,Count:1,tag:{Fireworks:{Flight:0,Explosions:[{Type:4,Flicker:1b,Colors:[I;16746752]}]}}}}"
+		set {_MysteryCrateReward::%UUID of player%} to a random integer between 1 and 2
+
+		if {_MysteryCrateReward::%UUID of player%} = 1:
+			add 2500000 to {balance::%UUID of player%}
+			execute console command "/holograms setline MysteryCrates 4 &6&l+$2,500,000 JACKPOT"
+
+			send ""
+			send "&d&lMYSTERY CRATE: &7You found &6+$2,500,000"
+			send "&d&l- &7You have &d%{MysteryCrates::%UUID of player%}% &7crates left!"
+			send ""
+
+		if {_MysteryCrateReward::%UUID of player%} = 2:
+			give player {BudgetNetheriteGenerator}
+			execute console command "/holograms setline MysteryCrates 4 &6&lBudget Netherite Generator"
+
+			send ""
+			send "&d&lMYSTERY CRATE: &7You found &6Budget Netherite Generator (GOOD)"
+			send "&d&l- &7You have &d%{MysteryCrates::%UUID of player%}% &7crates left!"
+			send ""
+
+
+	if {MysteryCrates_RewardsCycle::%UUID of player%} = 3 or 9:
+		spawn firework at event-block with nbt "{LifeTime:1,FireworksItem:{id:firework_rocket,Count:1,tag:{Fireworks:{Flight:0,Explosions:[{Type:4,Flicker:1b,Colors:[I;16711680]}]}}}}"
+		set {_MysteryCrateReward::%UUID of player%} to a random integer between 1 and 2
+
+		if {_MysteryCrateReward::%UUID of player%} = 1:
+			add 1 to {GeneratorLimit::%UUID of player%}
+			execute console command "/holograms setline MysteryCrates 4 &c&l+1 Generator Slot"
+
+			send ""
+			send "&d&lMYSTERY CRATE: &7You found &c+1 Generator Slot (SUPER GOOD)"
+			send "&d&l- &7You have &d%{MysteryCrates::%UUID of player%}% &7crates left!"
+			send ""
+
+		if {_MysteryCrateReward::%UUID of player%} = 2:
+			give player {NetheriteGenerator}
+			execute console command "/holograms setline MysteryCrates 4 &c&lNetherite Generator"
+
+			send ""
+			send "&d&lMYSTERY CRATE: &7You found &cNetherite Generator (SUPER GOOD)"
+			send "&d&l- &7You have &d%{MysteryCrates::%UUID of player%}% &7crates left!"
+			send ""
+
+
+	if {MysteryCrates_RewardsCycle::%UUID of player%} = 10:
+		set {MysteryCrates_RewardsCycle::%UUID of player%} to 0
+
+
+
+	wait 2 seconds
+
+
+
+	play close animation on event-block
+
+	execute console command "/holograms setline MysteryCrates 1 &d&lMYSTERY CRATE &7&l- &b&l/buy to obtain!"
+	execute console command "/holograms setline MysteryCrates 2 {empty}"
+	execute console command "/holograms setline MysteryCrates 3 &e&l(RIGHT - CLICK)"
+	execute console command "/holograms setline MysteryCrates 4 {empty}"
+	set {MysteryCrateInUse} to false
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Store: Rank Commands:
+#
+#
+#==========================================================
+
+
+
+
+
+command /fly:
+	trigger:
+		if player does not have permission "rank.coal":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&c&lERROR: &7You MUST have <##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL <##717171>Rank &7to use this command &a(/buy)"
+			stop
+
+		if player's flight mode is false:
+			send "&aFlight Enabled"
+			set player's flight mode to true
+			stop
+
+		if player's flight mode is true:
+			send "&cFlight Disabled"
+			set player's flight mode to false
+			stop
+
+
+
+
+
+command /autosell:
+	trigger:
+		if player does not have permission "rank.iron":
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&b&lFISHERMAN LUKE: &7You MUST have <##b9b9b9>&lI<##c7c7c7>&lR<##d4d4d4>&lO<##d4d4d4>&lN <##ededed>Rank &7to use this command &a(/buy)"
+			stop
+
+		if {AutoSell::%UUID of player%} is not set:
+			send "<##b9b9b9>&lAUTO SELL: &7Has been &aenabled&7, items will auto-sell on inventory full"
+			set {AutoSell::%UUID of player%} to true
+			stop
+
+		if {AutoSell::%UUID of player%} is true:
+			send "<##b9b9b9>&lAUTO SELL: &7Has been &cdisabled&7, items will no long auto-sell"
+			delete {AutoSell::%UUID of player%}
+			stop

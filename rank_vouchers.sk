@@ -1,0 +1,44 @@
+options:
+    prefix: &5&lAbyss &8¬&7
+    messageborders: &8&m                                                  &r
+
+command /givevoucher [<player>] [<string>]:
+    permission: *
+    trigger:
+        set {_item} to shiny paper with nbt "{Rank:""%arg-2%""}" named "&dRank Voucher &7(Right-Click)"
+        set lore of {_item} to "||&dRank: &5%arg-2%||&dGiver: &5%sender%"
+        give arg-1 {_item}
+
+command /givegenvoucher [<player>] [<integer>]:
+    permission: *
+    trigger:
+        set {_item} to shiny paper with nbt "{Slots:""%arg-2%""}" named "&dGen Slots Voucher &7(Right-Click)"
+        set lore of {_item} to "||&dSlots: &5%arg-2%||&dGiver: &5%sender%"
+        give arg-1 {_item}
+
+command /givemultivoucher [<player>] [<integer>]:
+    permission: *
+    trigger:
+        set {_item} to shiny paper with nbt "{Multiplier:""%arg-2%""}" named "&dMultiplier Voucher &7(Right-Click)"
+        set lore of {_item} to "||&dMultiplier: &5%arg-2%||&dGiver: &5%sender%"
+        give arg-1 {_item}
+
+on right click with paper:
+    set {_tag} to tag "Rank" of nbt of held item of player
+    {_tag} is set
+    execute console command "/lp user %player% parent add %{_tag}%"
+    remove 1 of event-item from inventory of player
+
+on right click with paper:
+    set {_tag} to tag "Slots" of nbt of held item of player
+    {_tag} is set
+    set {_gens} to {_tag} parsed as an integer
+    add {_gens} to {gens::user_data::%uuid of player%::gen_slots}
+    remove 1 of event-item from inventory of player
+
+on right click with paper:
+    set {_tag} to tag "Multiplier" of nbt of held item of player
+    {_tag} is set
+    set {_multi} to {_tag} parsed as an integer
+    execute console command "/multiplier %player% %{_tag}%"
+    remove 1 of event-item from inventory of player

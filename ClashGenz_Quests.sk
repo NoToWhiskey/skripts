@@ -1,0 +1,1620 @@
+
+
+
+
+
+command /clashgenzgens-scareswords:
+	trigger:
+		if player does not have permission "rank.admin":
+			send "&cYou do not have permission to use this!"
+			stop
+
+		set {ScareSwords-Sword_Level.1} to 1 of unbreakable golden sword named "&cScare Sword &8(&6I&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤" and "&7XP Multiplier: &bx1.0" and "&7Double Drop Chance: &e0%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {ScareSwords-Sword_Level.2} to 1 of unbreakable golden sword named "&cScare Sword &8(&6II&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤❤" and "&7XP Multiplier: &bx1.5" and "&7Double Drop Chance: &e25%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {ScareSwords-Sword_Level.3} to 1 of unbreakable golden sword named "&cScare Sword &8(&6III&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤❤❤" and "&7XP Multiplier: &bx2.0" and "&7Double Drop Chance: &e50%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {ScareSwords-Sword_Level.4} to 1 of unbreakable golden sword named "&cScare Sword &8(&6IV&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤❤❤❤" and "&7XP Multiplier: &bx2.5" and "&7Double Drop Chance: &e75%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {ScareSwords-Sword_Level.5} to 1 of unbreakable golden sword named "&cScare Sword &8(&6V&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤❤❤❤❤" and "&7XP Multiplier: &bx3.0" and "&7Double Drop Chance: &e100%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+		set {ScareSwords-Sword_Level.6} to 1 of unbreakable golden sword named "&cScare Sword &8(&6VI&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤❤❤❤❤" and "&7XP Multiplier: &bx9.0" and "&7Triple Drop Chance: &e100%%" and "" and "&8&oUse at /warp farm" with nbt "{HideFlags:63}"
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Quests: Quest Book
+#
+#
+#==========================================================
+
+command /e:
+	trigger:
+		set player's tool to enchanted book named "&dSpawn Progress &7&o(Right Click)"
+		set {_QuestBook::%UUID of player%} to a written book
+
+		set {_QuestBook-Text::%UUID of player%} to text component of "%nl%  Spawn Progress:%nl%     &4[&7||||||||||||||||||||||||||||||&4]%nl%          &0&l[0%%]&0%nl%%nl%Quests: [0/6] %nl%Bonus Quests: [0/2] %nl%Spawn Races: [0/3] %nl%Pumpkins: [0/30] %nl%Puzzles Done [0/3] %nl%Unlocked Areas: [0/4] %nl%%nl%&0&oTurn to page 2 for more quest help!"
+		set page 1 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+		set book author of {_QuestBook::%UUID of player%} to "%player%"
+		set book title of {_QuestBook::%UUID of player%} to "Quest Book"
+		open book {_QuestBook::%UUID of player%} to player
+
+
+command /p:
+	trigger:
+		spawn 1 armor stand at player's location with nbt "{NoGravity:1b,Invulnerable:1,Invisible:1}"
+		set helmet of last spawned armor stand to player's tool
+		set {NewQuest_Wandererss} to last spawned armor stand
+		while {NewQuest_Wandererss} is alive:
+			draw 1 firework at location 1.25 meter above {NewQuest_Wandererss} with offset vector(0, 0, 0) with extra 0.1
+			set display name of {NewQuest_Wandererss} to "&d&lNEW QUEST!"
+			loop 8 times:
+				add 25 to {_NewQuestYaw_Wanderers}
+				if {_NewQuestYaw_Wanderers} >= 360:
+					set {_NewQuestYaw_Wanderers} to 0
+				set {_NewQuestLoc_Wanderers} to location 0.05 meter below {NewQuest_Wandererss}
+				set yaw of {_NewQuestLoc_Wanderers} to {_NewQuestYaw_Wanderers}
+				teleport {NewQuest_Wandererss} to {_NewQuestLoc_Wanderers}
+				wait 2 ticks
+
+			draw 1 firework at location 1.25 meter above {NewQuest_Wandererss} with offset vector(0, 0, 0) with extra 0.1
+			set display name of {NewQuest_Wandererss} to "&5&lNEW QUEST!"
+			loop 8 times:
+				add 25 to {_NewQuestYaw_Wanderers}
+				if {_NewQuestYaw_Wanderers} >= 360:
+					set {_NewQuestYaw_Wanderers} to 0
+				set {_NewQuestLoc_Wanderers} to location 0.05 meter above {NewQuest_Wandererss}
+				set yaw of {_NewQuestLoc_Wanderers} to {_NewQuestYaw_Wanderers}
+				teleport {NewQuest_Wandererss} to {_NewQuestLoc_Wanderers}
+				wait 2 ticks
+
+
+
+
+on rightclick:
+	if player's tool is enchanted book named "&bQuest Book &7&o(Right Click)" with lore "&6Use this book to find all available" and "&6quests and how to start them!":
+		play sound "entity.ender_dragon.flap" with pitch 2 to player
+
+		set {_QuestBook::%UUID of player%} to a written book
+		add 1 to {QuestBook}
+
+
+
+		if {ActiveQuest::%UUID of player%} is "NONE":
+			if {NextQuest::%UUID of player%} is "The Wanderers":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7||||||||||||||||||||||||||||||&4]%nl%          &0&l[0%%]%nl%%nl%&0&l0 Active Quests%nl%%nl%&0&lNext Quest:%nl%&0- %{NextQuest::%UUID of player%}% &7(p.2)"
+			if {NextQuest::%UUID of player%} is "Farm Hunt":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k|||||&7|||||||||||||||||||||||||&4]%nl%          &0&l[16%%]%nl%%nl%&0&l0 Active Quests%nl%%nl%&0&lNext Quest:%nl%&0- %{NextQuest::%UUID of player%}% &7(p.3)"
+			if {NextQuest::%UUID of player%} is "Wet & Cold":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k||||||||||&7||||||||||||||||||||&4]%nl%          &0&l[32%%]%nl%%nl%&0&l0 Active Quests%nl%%nl%&0&lNext Quest:%nl%&0- %{NextQuest::%UUID of player%}% &7(p.4)"
+			if {NextQuest::%UUID of player%} is "Cave Explorer":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k|||||||||||||||&7|||||||||||||||&4]%nl%          &0&l[48%%]%nl%%nl%&0&l0 Active Quests%nl%%nl%&0&lNext Quest:%nl%&0- %{NextQuest::%UUID of player%}% &7(p.5)"
+			if {NextQuest::%UUID of player%} is "Casino Rush":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k||||||||||||||||||||&7||||||||||&4]%nl%          &0&l[64%%]%nl%%nl%&0&l0 Active Quests%nl%%nl%&0&lNext Quest:%nl%&0- %{NextQuest::%UUID of player%}% &7(p.6)"
+			if {NextQuest::%UUID of player%} is "The Clouds":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k|||||||||||||||||||||||||&7|||||&4]%nl%          &0&l[80%%]%nl%%nl%&0&l0 Active Quests%nl%%nl%&0&lNext Quest:%nl%&0- Quests Completed"
+			if {NextQuest::%UUID of player%} is "NONE":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k||||||||||||||||||||||||||||||&4]%nl%          &0&l[100%%]%nl%%nl%&0&l0 Active Quests%nl%%nl%&0&lNext Quest:%nl%&0- Quests Completed"
+
+		else:
+			if {ActiveQuest::%UUID of player%} is "The Wanderers":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7||||||||||||||||||||||||||||||&4]%nl%          &0&l[0%%]%nl%%nl%&0&lActive Quest:%nl%&0- %{ActiveQuest::%UUID of player%}%%nl%%nl%&0For more information on this quest please turn to &nPage 2!"
+			if {ActiveQuest::%UUID of player%} is "Farm Hunt":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k|||||&7|||||||||||||||||||||||||&4]%nl%          &0&l[16%%]%nl%%nl%&0&lActive Quest:%nl%&0- %{ActiveQuest::%UUID of player%}%%nl%%nl%&0For more information on this quest please turn to &nPage 3!"
+			if {ActiveQuest::%UUID of player%} is "Wet & Cold":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k||||||||||&7||||||||||||||||||||&4]%nl%          &0&l[32%%]%nl%%nl%&0&lActive Quest:%nl%&0- %{ActiveQuest::%UUID of player%}%%nl%%nl%&0For more information on this quest please turn to &nPage 4!"
+			if {ActiveQuest::%UUID of player%} is "Cave Explorer":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k|||||||||||||||&7|||||||||||||||&4]%nl%          &0&l[48%%]%nl%%nl%&0&lActive Quest:%nl%&0- %{ActiveQuest::%UUID of player%}%%nl%%nl%&0For more information on this quest please turn to &nPage 5!"
+			if {ActiveQuest::%UUID of player%} is "Casino Rush":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k||||||||||||||||||||&7||||||||||&4]%nl%          &0&l[64%%]%nl%%nl%&0&lActive Quest:%nl%&0- %{ActiveQuest::%UUID of player%}%%nl%%nl%&0For more information on this quest please turn to &nPage 6!"
+			if {ActiveQuest::%UUID of player%} is "The Clouds":
+				set {_QuestBook-Text::%UUID of player%} to text component of "%nl%Total Quest Progress:%nl%     &4[&7&k|||||||||||||||||||||||||&7|||||&4]%nl%          &0&l[80%%]%nl%%nl%&0&lActive Quest:%nl%&0- %{ActiveQuest::%UUID of player%}%%nl%%nl%&0For more information on this quest please turn to &nPage 7!"
+
+		set page 1 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+
+		if {QuestStatus-TheWanderers::%UUID of player%} is "Not Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Wanderers%nl%%nl%&0Level Req: &6&l0%nl%&0Status: &cNot Started %nl%%nl%&0Speak to the Wandering Villager, Stephan, located at %nl%[-38, 65, -56]"
+		if {QuestStatus-TheWanderers::%UUID of player%} is "Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Wanderers%nl%%nl%&0Level Req: &6&l0%nl%&0Status: &aStarted %nl%%nl%&0Speak to all the wandering villagers located at the clashgenz /spawn region."
+		if {QuestStatus-TheWanderers::%UUID of player%} is "Completed":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Wanderers%nl%%nl%&0Level Req: &6&l0%nl%&0Status: &6Completed %nl%%nl%&0Your Rewards: %nl%&a+$100,000 %nl%&b+10,000 XP %nl%&9+1 Lapis Generator"
+		set page 2 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Not Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lFarm Hunt%nl%%nl%&0Level Req: &6&l10%nl%&0Status: &cNot Started %nl%%nl%&0Speak to Farmer Steve at his barn located at %nl%[-72, 68, 67]"
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part1":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lFarm Hunt%nl%%nl%&0Level Req: &6&l10%nl%&0Status: &aStarted %nl%%nl%&0Speak to The Scarecrow at the fields %nl%[-63, 64, 36]"
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part2":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lFarm Hunt%nl%%nl%&0Level Req: &6&l10%nl%&0Status: &aStarted %nl%%nl%&0Kill &c%{Quest-FarmHunt-ChickensKilled::%UUID of player%}% &0chickens and then bring x8 Feathers back to the scarecrow!"
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part3":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lFarm Hunt%nl%%nl%&0Level Req: &6&l10%nl%&0Status: &aStarted %nl%%nl%&0Bring back the &dMagic Milk &0to farmer steve and complete his finals tasks to finish off the quest!"
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part4":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lFarm Hunt%nl%%nl%&0Level Req: &6&l10%nl%&0Status: &aStarted %nl%%nl%&0Bring Farmer Steve x16 Hay Bales and x1 Chest, Only accepts haybales from the farming table!"
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part5":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lFarm Hunt%nl%%nl%&0Level Req: &6&l10%nl%&0Status: &aStarted %nl%%nl%&0Bring the chest of items to Jake, He can be found at %nl%[32, 144, -26]"
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Completed":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lFarm Hunt%nl%%nl%&0Level Req: &6&l10%nl%&0Status: &6Completed %nl%%nl%&0Your Rewards: %nl%&a+$500,000 %nl%&b+30,000 XP %nl%&d+1 Mystery Crate %nl%&6+1 Gen Slot %nl%&c+Scarecrow Shop"
+		set page 3 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+		if {QuestStatus-Wet&Cold::%UUID of player%} is "Not Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lWet & Cold%nl%%nl%&0Level Req: &6&l30%nl%&0Status: &cNot Started %nl%%nl%&0Speak to Fisherman Tom at his iglo located at %nl%[-32, 65, -95]"
+		if {QuestStatus-Wet&Cold::%UUID of player%} is "Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lWet & Cold%nl%%nl%&0Level Req: &6&l30%nl%&0Status: &aStarted %nl%%nl%&0Catch %{Quest-Wet&Cold-FishesToCatch::%UUID of player%}% Fish.%nl%&0Bring back x1 fish sculpture of any kind.%nl%&0Bring a pufferfish worth $150,000 or more."
+		if {QuestStatus-Wet&Cold::%UUID of player%} is "Completed":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lWet & Cold%nl%%nl%&0Level Req: &6&l30%nl%&0Status: &6Completed %nl%%nl%&0Your Rewards: %nl%&a+$1,000,000 %nl%&b+50,000 XP %nl%&d+2 Mystery Crates %nl%&6+2 Gen Slots"
+		set page 4 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Not Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &cNot Started %nl%%nl%&0Speak to Bernard the Guard near the cave enterance at %nl%[18, 86, 8]"
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part1":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &aStarted %nl%%nl%&0Find a &cCave Key &0hidden somewhere around the /spawn region"
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part2":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &aStarted %nl%%nl%&0Speak to the &9Pet Specialist &0located at the Cave Village at %nl%&0[65, 76, -32]"
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part3":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &aStarted %nl%%nl%&0Speak to the &5Cave Janitor &0to get the required items to purchase the Villager Pet, He's located at: %nl%[44, 76, -44]"
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part4":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &aStarted %nl%%nl%&0Use your mop to get the required items to then buy a &aVillager Pet. %nl%&0TIP: Right Click brown carpets!"
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part5":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &aStarted %nl%%nl%&0Bring the villager pet to &cBernard &0and see what he wants completed next!"
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part6":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &aStarted %nl%%nl%&0Speak to &3Brandon &0at the village and start his task. Bring the &6Targeters Bow &0to &cBernard &0to complete your quest!"
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Completed":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCave Explorer%nl%%nl%&0Level Req: &6&l50%nl%&0Status: &6Completed %nl%%nl%&0Your Rewards: %nl%&a+$5,000,000 %nl%&b+75,000 XP %nl%&d+3 Mystery Crates %nl%&6+3 Gen Slots %nl%&c+Unlocked Cave %nl%&3+Unlocked New Tasks"
+		set page 5 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+		if {QuestStatus-CasinoRush::%UUID of player%} is "Not Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCasino Rush%nl%%nl%&0Level Req: &6&l75%nl%&0Status: &cNot Started %nl%%nl%&0Speak to the Casino Bouncer at the village casino located at %nl%[-113, 63, -121]"
+		if {QuestStatus-CasinoRush::%UUID of player%} is "Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCasino Rush%nl%%nl%&0Level Req: &6&l75%nl%&0Status: &aStarted %nl%%nl%&0Receive a PERFECT score of 30 in Wack A Creeper. %nl%Reach the top block in Block Clutching. %nl%Hit 3 basket arrow shots in a row."
+		if {QuestStatus-CasinoRush::%UUID of player%} is "Completed":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lCasino Rush%nl%%nl%&0Level Req: &6&l75%nl%&0Status: &6Completed %nl%%nl%&0Your Rewards: %nl%&a+$7,500,000 %nl%&b+100,000 XP %nl%&d+4 Mystery Crates %nl%&6+4 Gen Slots"
+		set page 6 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Not Started":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &cNot Started %nl%%nl%&0Speak to the Balloon Expert near his hot air balloon at %nl%[-38, 65, -56]"
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part1":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &aStarted %nl%%nl%&0Bring the &6Box Of Farming Items &0to the &cHotel Manager &0at the Cloud Hotel %nl%[0, 215, -43]"
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part2":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &aStarted %nl%%nl%&0Purchase and equip the &cHotel Worksuit &0from the Clothes Store at %nl%[2, 214, -74]"
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part3" or "Monalogue":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &aStarted %nl%%nl%&0You have everything needed to start the mission, Speak to &cHotel Manager &0when you're ready! %nl%[0, 215, -43]"
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part4" or "Started-part5":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &aStarted %nl%%nl%&0Find all 8 &6Farming Packages &0in the time given to you then bring them back to the &cHotel Manager"
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part6":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &aStarted %nl%%nl%&0Speak to &2Sirius &0at Cloud Bank, located at:%nl%[-11, 214, -77]"
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part7":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &aStarted %nl%%nl%&0Find all the items &2Sirius &0wants and bring them back to him for the final quest payout!"
+		if {QuestStatus-TheClouds::%UUID of player%} is "Completed":
+			set {_QuestBook-Text::%UUID of player%} to text component of "%nl%&lThe Clouds%nl%%nl%&0Level Req: &6&l100%nl%&0Status: &6Completed %nl%%nl%&0Your Rewards %nl%&a+$25,000,000%nl%&b+250,000 XP%nl%&d+5 Mystery Crates%nl%&6+5 Gen Slots"
+		set page 7 of book {_QuestBook::%UUID of player%} to {_QuestBook-Text::%UUID of player%}
+
+
+		set book author of {_QuestBook::%UUID of player%} to "%player%"
+		set book title of {_QuestBook::%UUID of player%} to "Quest Book"
+
+		open book {_QuestBook::%UUID of player%} to player
+
+
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Quests: Quest #1 (The Wanderers)
+#
+#
+#==========================================================
+
+
+
+
+
+on citizen right click:
+	if npc is 15:
+		if {QuestStatus-TheWanderers::%UUID of player%} is "Not Started":
+			set {QuestStatus-TheWanderers::%UUID of player%} to "Started"
+			set {ActiveQuest::%UUID of player%} to "The Wanderers"
+			add 1 to {StartedQuests}
+			
+			delete line 14 of player's scoreboard
+			delete line 13 of player's scoreboard
+			delete line 12 of player's scoreboard
+			
+			set {Quest-TheWanderers-FoundWanderer_Jerry::%UUID of player%} to false
+			set {Quest-TheWanderers-FoundWanderer_Sally::%UUID of player%} to false
+			set {Quest-TheWanderers-FoundWanderer_James::%UUID of player%} to false
+			set {Quest-TheWanderers-FoundWanderer_Boff::%UUID of player%} to false
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER STEPHAN: &7Welcome to the ClashGenz Spawn!"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER STEPHAN: &7Speak to all wandering villagers in order for a prize..."
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER STEPHAN: &7Talk to me again to view your progress."
+			send "&7[Quest Book Updated: Started ""The Wanderers""]"
+			
+			stop
+
+
+		if {QuestStatus-TheWanderers::%UUID of player%} is "Started":
+			if {Quest-TheWanderers-FoundWanderer_Jerry::%UUID of player%}, {Quest-TheWanderers-FoundWanderer_Sally::%UUID of player%}, {Quest-TheWanderers-FoundWanderer_James::%UUID of player%} and {Quest-TheWanderers-FoundWanderer_Boff::%UUID of player%} is true:
+				set {QuestStatus-TheWanderers::%UUID of player%} to "Completed"
+				set {ActiveQuest::%UUID of player%} to "NONE"
+				set {NextQuest::%UUID of player%} to "Farm Hunt"
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER STEPHAN: &7You've spoken to everyone? That's amazing!"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&3&lVILLAGER STEPHAN: &7Hopefully you've learnt a thing or 2 about clashgenz"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				play sound "ui.toast.challenge_complete" with pitch 1 to player
+				send "&3&lVILLAGER STEPHAN: &7Anyways, as promised, here is your prize!"
+
+				send "&7[Quest Book Updated: Completed ""The Wanderers""]"
+				send "&7[&a+$100,000&7]"
+				send "&7[&b+10,000 XP&7]"
+				send "&7[&9+1 Lapis Block Generator&7]"
+
+				add 100000 to {balance::%UUID of player%}
+				remove 10000 from {RequiredXP::%UUID of player%}
+				give player {LapisGenerator}
+				stop
+
+
+			set metadata tag "Quest_TheWanderers" of player to chest inventory with 1 row named "&8Stephan: Quest Progress"
+
+			set slot 2 of metadata tag "Quest_TheWanderers" of player to {VillagerSkull} named "&aSpeak To Stephan" with lore "&8Speak to this villager" and "" and "&7Stephan can be found just" and "&7ahead of the /spawn zone" and "" and "&aCompleted"
+
+			if {Quest-TheWanderers-FoundWanderer_Jerry::%UUID of player%} is false:
+				set slot 3 of metadata tag "Quest_TheWanderers" of player to 1 gray dye named "&cSpeak To Jerry" with lore "&8Speak to this villager" and "" and "&7Jerry can be found at" and "&7the clashgenz village" and "" and "&cIncompleted"
+			if {Quest-TheWanderers-FoundWanderer_Jerry::%UUID of player%} is true:
+				set slot 3 of metadata tag "Quest_TheWanderers" of player to {VillagerSkull} named "&aSpeak To Jerry" with lore "&8Speak to this villager" and "" and "&7Jerry can be found at" and "&7the clashgenz village" and "" and "&aCompleted"
+
+			if {Quest-TheWanderers-FoundWanderer_Sally::%UUID of player%} is false:
+				set slot 4 of metadata tag "Quest_TheWanderers" of player to 1 gray dye named "&cSpeak To Sally" with lore "&8Speak to this villager" and "" and "&7Sally can be found at" and "&7the clashgenz farm" and "" and "&cIncompleted"
+			if {Quest-TheWanderers-FoundWanderer_Sally::%UUID of player%} is true:
+				set slot 4 of metadata tag "Quest_TheWanderers" of player to {VillagerSkull} named "&aSpeak To Sally" with lore "&8Speak to this villager" and "" and "&7Sally can be found at" and "&7the clashgenz farm" and "" and "&aCompleted"
+
+			if {Quest-TheWanderers-FoundWanderer_James::%UUID of player%} is false:
+				set slot 5 of metadata tag "Quest_TheWanderers" of player to 1 gray dye named "&cSpeak To James" with lore "&8Speak to this villager" and "" and "&7James can be found at" and "&7the clashgenz cave" and "" and "&cIncompleted"
+			if {Quest-TheWanderers-FoundWanderer_James::%UUID of player%} is true:
+				set slot 5 of metadata tag "Quest_TheWanderers" of player to {VillagerSkull} named "&aSpeak To James" with lore "&8Speak to this villager" and "" and "&7James can be found at" and "&7the clashgenz cave" and "" and "&aCompleted"
+
+			if {Quest-TheWanderers-FoundWanderer_Boff::%UUID of player%} is false:
+				set slot 6 of metadata tag "Quest_TheWanderers" of player to 1 gray dye named "&cSpeak To Boff" with lore "&8Speak to this villager" and "" and "&7Boff can be found up in the" and "&7skies at his air balloon" and "" and "&cIncompleted"
+			if {Quest-TheWanderers-FoundWanderer_Boff::%UUID of player%} is true:
+				set slot 6 of metadata tag "Quest_TheWanderers" of player to {VillagerSkull} named "&aSpeak To Boff" with lore "&8Speak to this villager" and "" and "&7Boff can be found up in the" and "&7skies at his air balloon" and "" and "&aCompleted"
+
+			open (metadata tag "Quest_TheWanderers" of player) to player
+
+
+	if npc is 34:
+		if {Quest-TheWanderers-FoundWanderer_Jerry::%UUID of player%} is false:
+			set {Quest-TheWanderers-FoundWanderer_Jerry::%UUID of player%} to true
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER JERRY: &7Welcome to the ClashGenz Village!"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER JERRY: &7Everything goes down here, you can speak to fellow villagers..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER JERRY: &7You can also visit shops & the casino to get items or money!"
+			send "&7[Quest Update: Spoken to ""Jerry"" Completed!]"
+
+
+	if npc is 39:
+		if {Quest-TheWanderers-FoundWanderer_Sally::%UUID of player%} is false:
+			set {Quest-TheWanderers-FoundWanderer_Sally::%UUID of player%} to true
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER SALLY: &7Heyyyyyy, This is &6Bobs Farm&7... A great place to make money"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER SALLY: &7If you haven't yet spoken to &6bob&7, you should..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER SALLY: &7He'll get you started with a hoe so you can start making moneyyyy!"
+			send "&7[Quest Update: Spoken to ""Sally"" Completed!]"
+
+
+	if npc is 33:
+		if {Quest-TheWanderers-FoundWanderer_James::%UUID of player%} is false:
+			set {Quest-TheWanderers-FoundWanderer_James::%UUID of player%} to true
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER JAMES: &7Whats up man. To my right are the caves!"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER JAMES: &7I heard all the clashgenz experts live down there..."
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER JAMES: &7Sadly &cBernard &7won't let people go down there currently..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER JAMES: &7Oh well, I'm sure one day he'll let us go!"
+			send "&7[Quest Update: Spoken to ""James"" Completed!]"
+
+
+	if npc is 44:
+		if {Quest-TheWanderers-FoundWanderer_Boff::%UUID of player%} is false:
+			set {Quest-TheWanderers-FoundWanderer_Boff::%UUID of player%} to true
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER BOFF: &7Woahhh brooo, We're so high up right now..."
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER BOFF: &fJake &7over there lovesss to take people above the clouds..."
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER BOFF: &7The multi millionaires are always going up there."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&3&lVILLAGER BOFF: &7One day bro i'll also be worth millions!"
+			send "&7[Quest Update: Spoken to ""Boff"" Completed!]"
+
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "Quest_TheWanderers" of player):
+		cancel event
+
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Quests: Quest #2 (Farm Hunt)
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 28:
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Not Started":
+			if {Level::%UUID of player%} is less than 10:
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				set {_FarmerSteveDialogue::*} to "Who are you?", "Psst.. You must be level 10 to start my quest!", "I live in a windmill!" and "Bob doesn't have the technology to sell netherite hoes..."
+				send "&e&lFARMER STEVE: &7%random element out of {_FarmerSteveDialogue::*}%"
+				stop
+
+			if {QuestStatus-TheWanderers::%UUID of player%} is not "Completed":
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				set {_FarmerSteveDialogue::*} to "You haven't spoken to Stephan yet?", "Psst.. You must complete all previous quests to start this one!", "Stephan lives next to /spawn" and "You can learn more about clashgenz by speaking to Stephan."
+				send "&e&lFARMER STEVE: &7%random element out of {_FarmerSteveDialogue::*}%"
+				stop
+
+			set {QuestStatus-FarmHunt::%UUID of player%} to "Started-part1"
+			set {ActiveQuest::%UUID of player%} to "Farm Hunt"
+			add 1 to {StartedQuests}
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&e&lFARMER STEVE: &7Welcome to &6Bob's Farm"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&e&lFARMER STEVE: &7I'm trying to get some food in order to sell to my friend &fJake"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&e&lFARMER STEVE: &7He takes all the products grown down here to the clouds!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&e&lFARMER STEVE: &7Firstly, I need some magic milk, Please speak to &c&lSCARECROW &7as he can help out!"
+			send "&7[Quest Book Updated: Started ""Farm Hunt"""
+
+
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part3":
+			if player has 1 milk bucket named "&dMagic Milk" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring back to Farmer Steve":
+				remove 1 milk bucket named "&dMagic Milk" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring back to Farmer Steve" from player's inventory
+
+				set {QuestStatus-FarmHunt::%UUID of player%} to "Started-part4"
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&e&lFARMER STEVE: &7Yes, The magic milk.. &fJake &7will be happy to have this..."
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&e&lFARMER STEVE: &7All I need now is &ex16 Hay Bales &7and &ex1 Wooden Chest!"
+				send "&7[Quest Book Updated]"
+				stop
+
+			play sound "entity.villager.no" with pitch 1 to player
+			send "&e&lFARMER STEVE: &7Speak to the &cscarecrow &7and complete his task!"	
+			stop
+
+
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part4":
+			if player has 1 chest:
+				if player has 16 of glowing hay bale named "<##f2ff86>&lHAY BALE":
+					remove 16 of glowing hay bale named "<##f2ff86>&lHAY BALE" from player's inventory
+					remove 1 chest from player's inventory
+
+					set {QuestStatus-FarmHunt::%UUID of player%} to "Started-part5" 
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&e&lFARMER STEVE: &7Amazing, Now I have everything to complete my delivery to &fJake"
+
+					wait 3 seconds
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&e&lFARMER STEVE: &7Although... I don't have anyone to deliver these items.."
+
+					wait 3 seconds
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&e&lFARMER STEVE: &7Would you please help me out and bring this chest of food to him..."
+					send "&7[Quest Book Updated&7]"
+					
+					give player 1 chest named "&6Box Of Farming Items" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &f&oJake &8&oup at his air balloon"
+					stop
+
+			play sound "entity.villager.no" with pitch 1 to player
+			send "&e&lFARMER STEVE: &7I still need &ex16 Hay Bales &7and &ex1 Wooden Chest&7."	
+			stop
+
+
+
+	if npc is 32:
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part1":
+			set {QuestStatus-FarmHunt::%UUID of player%} to "Started-part2"
+			set {Quest-FarmHunt-ChickensKilled::%UUID of player%} to 30
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lSCARECROW: &7I'm the scarecrow of the farm... The blimmin chickens are always eating crops..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lSCARECROW: &7I HATE them SOO MUCH..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lSCARECROW: &7If we kill them before they have a chance to escape... my crops will be safe!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lSCARECROW: &7If you help me out, I'll give you &dx1 Magic Milk&7."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lSCARECROW: &7Kill &c30 &7chickens then bring me back x8 feathers as proof!"
+			send "&7[Quest Book Updated]"
+			give player {ScareSwords-Sword_Level.1}
+			stop
+
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part2":
+			if {Quest-FarmHunt-ChickensKilled::%UUID of player%} is greater than 0:
+				play sound "entity.villager.no" with pitch 1 to player
+				send "&c&lSCARECROW: &7Kill &c%{Quest-FarmHunt-ChickensKilled::%UUID of player%}% &7chickens then bring me back x8 feathers as proof!"
+				stop
+			
+			if {Quest-FarmHunt-ChickensKilled::%UUID of player%} = 0:
+				if player doesn't have enough space for 1 barrier:
+					play sound "entity.villager.no" with pitch 1 to player
+					send "&c&lSCARECROW: &7Your inventory is too full to collect a bucket of milk!"
+					stop
+				if player has 8 feathers named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000":
+					set {QuestStatus-FarmHunt::%UUID of player%} to "Started-part3"
+					remove 8 feathers named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000" from player's inventory
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&c&lSCARECROW: &7Oh.. you did it... hahaha"
+
+					wait 3 seconds
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&c&lSCARECROW: &7Those chickens will now think twice before eating my crops..."
+
+					wait 3 seconds
+
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&c&lSCARECROW: &7Anyways, as promised here is &dx1 Magic Milk&7!"
+
+					give player 1 milk bucket named "&dMagic Milk" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring back to Farmer Steve"
+
+					send "&7[Quest Book Updated]"
+					send "&7[&d+1 Magic Milk&7]"
+					stop
+
+				else:
+					play sound "entity.villager.no" with pitch 1 to player
+					send "&c&lSCARECROW: &7I still require 8 feathers for proof!"
+					stop
+
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Not Started":
+			play sound "entity.villager.no" with pitch 1 to player
+			play sound "item.armor.equip_chain" with pitch 1 to player
+			play sound "entity.ender_dragon.flap" with pitch 2 to player
+			set {_ScarecrowDialogue::*} to "I hate chickens so much...", "Speak to farmer steve to access my shop!", "I'll only speak to people who speak to farmer steve" and "chickens... oh how i hate them..."
+			send "&c&lSCARECROW: &7%random element out of {_ScarecrowDialogue::*}%"
+			stop
+
+		
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Completed":
+			play sound "ui.button.click" with pitch 2 to player
+
+			set metadata tag "ScarecrowsShop" of player to chest inventory with 6 rows named "&8Scarecrow's Shop"
+			set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "ScarecrowsShop" of player to black stained glass pane named "&7"
+
+			if {balance::%UUID of player%} is less than 5000:
+				set slot 20 of metadata tag "ScarecrowsShop" of player to 1 golden sword named "&cScare Sword &8(&6I&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤" and "&7XP Multiplier: &bx1.0" and "&7Double Drop Chance: &e0%%" and "" and "&a&nPurchase For: $5,000" and "" and "&c> Cannot Afford <" with nbt "{HideFlags:63}"
+			else:
+				set slot 20 of metadata tag "ScarecrowsShop" of player to 1 golden sword named "&cScare Sword &8(&6I&8)" with lore "&8Farming Item" and "" and "&7Damage To Chickens: &c❤" and "&7XP Multiplier: &bx1.0" and "&7Double Drop Chance: &e0%%" and "" and "&a&nPurchase For: $5,000" and "" and "&a> Click To Purchase <" with nbt "{HideFlags:63}"
+
+			if {balance::%UUID of player%} is less than 100000:
+				set slot 29 of metadata tag "ScarecrowsShop" of player to 1 honeycomb block named "&6Honey Generator" with lore "&8Farming Generator" and "" and "&7Spawns x1 Honey Comb" and "&7Sells For: &a$3,000" and "" and "&aPurchase For:" and "&7- &a$100,000" and "&7- <##d4c972>x64 Chickens" and "&7- &fx32 Feathers" and "" and "&c> Cannot Afford <"
+			else:
+				set slot 29 of metadata tag "ScarecrowsShop" of player to 1 honeycomb block named "&6Honey Generator" with lore "&8Farming Generator" and "" and "&7Spawns x1 Honey Comb" and "&7Sells For: &a$3,000" and "" and "&aPurchase For:" and "&7- &a$100,000" and "&7- <##d4c972>x64 Chickens" and "&7- &fx32 Feathers" and "" and "&a> Click To Purchase <"
+
+			set slot 23 of metadata tag "ScarecrowsShop" of player to 1 emerald named "&a/Sell Inventory" with lore "&8runs command  /sell" and "" and "&7Sell all items in your inventory" and "&7to make money from your loot!" and "" and "&a> Click To Sell <"
+
+			set slot 49 of metadata tag "ScarecrowsShop" of player to barrier named "&cExit Menu"
+			open (metadata tag "ScarecrowsShop" of player) to player
+			stop
+
+
+
+	if npc is 45:
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part5":
+			if player has chest named "&6Box Of Farming Items" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &f&oJake &8&oup at his air balloon":
+				remove 1 chest named "&6Box Of Farming Items" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &f&oJake &8&oup at his air balloon" from player's inventory
+
+				set {QuestStatus-FarmHunt::%UUID of player%} to "Completed"
+				set {ActiveQuest::%UUID of player%} to "NONE"
+				set {NextQuest::%UUID of player%} to "Wet & Cold"
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&f&lJAKE: &7Oh goody, My delivery..."
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				play sound "ui.toast.challenge_complete" with pitch 1 to player
+				send "&f&lJAKE: &7The people up above the clouds will appreciate this.."
+
+				send "&7[Quest Book Updated: Completed ""Farm Hunt""]"
+				send "&7[&a+$500,000&7]"
+				send "&7[&b+30,000 XP&7]"
+				send "&7[&d+1 Mystery Crate &7| &6+1 Gen Slot&7]"
+				send "&7[&cUnlocked Scarecrow Shop&7]"
+
+				add 500000 to {balance::%UUID of player%}
+				remove 30000 from {RequiredXP::%UUID of player%}
+				add 1 to {MysteryCrates::%UUID of player%}
+				add 1 to {GeneratorLimit::%UUID of player%}
+				stop
+
+				
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "ScarecrowsShop" of player):
+		cancel event
+
+
+		if index of event-slot is 20:
+			if {balance::%UUID of player%} is less than 5000:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&c&lSCARECROW: &7You cannot afford this sword!"
+				stop
+
+			play sound "entity.player.levelup" with pitch 2 to player
+			send "&c&lSCARECROW: &7You Purchased: &cScare Sword"
+			send "&c&l- &7You can upgrade this at the farm anvils!"
+			remove 5000 from {balance::%UUID of player%}
+			give player {ScareSwords-Sword_Level.1}
+			close player's inventory
+			stop
+
+
+		if index of event-slot is 29:
+			if {balance::%UUID of player%} is less than 100000:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&c&lSCARECROW: &7You cannot afford this generator!"
+				stop
+			if player does not have 64 chicken named "<##d4c972>Raw Chicken":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&c&lSCARECROW: &7You cannot afford this generator!"
+				stop
+			if player does not have 32 feathers named "&fFeather":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&c&lSCARECROW: &7You cannot afford this generator!"
+				stop
+
+			play sound "entity.player.levelup" with pitch 2 to player
+			send "&c&lSCARECROW: &7You Purchased: &6&lHoney Generator."
+			remove 100000 from {balance::%UUID of player%}
+			remove 32 feathers named "&fFeather" from player's inventory
+			remove 64 chicken named "<##d4c972>Raw Chicken" from player's inventory
+			give player {HoneyGenerator}
+			close player's inventory
+			stop
+
+
+		if index of event-slot is 23:
+			execute player command "/sell"
+			stop
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+
+every 30 seconds:
+	loop {ChickenSpawnLocations::*}:
+		if size of chickens is less than 10:
+			wait 1 second
+			spawn 1 chicken at loop-value
+			set display name of last spawned chicken to "&6Chicken &7(&c❤❤❤❤❤&7)"
+
+
+
+
+
+on rightclick:
+	if player's tool is a fishing rod:
+		if player's x-coord is between -137 and -84:
+			if player's z-coord is between 89 and 59:
+				cancel event
+				stop
+
+		if distance between player and {casinocenter} is less than 15:
+			cancel event
+			stop
+
+		if distance between player and {DarkAuctionHouse} is less than 15:
+			cancel event
+			stop
+
+
+
+on damage:
+	if victim is a chicken:
+		if display name of victim does not contain "Chicken":
+			stop
+
+		set damage to 0
+
+		if display name of victim is "&6Chicken &7(&c❤❤❤❤❤&7)":
+			if attacker's tool is {ScareSwords-Sword_Level.1}:
+				set display name of victim to "&6Chicken &7(&c❤❤❤❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.2}:
+				set display name of victim to "&6Chicken &7(&c❤❤❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.3}:
+				set display name of victim to "&6Chicken &7(&c❤❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.4}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.5}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+
+			if attacker's tool is not {ScareSwords-Sword_Level.1}, {ScareSwords-Sword_Level.2}, {ScareSwords-Sword_Level.3}, {ScareSwords-Sword_Level.4}, {ScareSwords-Sword_Level.5} or {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤❤❤❤&7)"
+				stop
+
+		if display name of victim is "&6Chicken &7(&c❤❤❤❤&7)":
+			if attacker's tool is {ScareSwords-Sword_Level.1}:
+				set display name of victim to "&6Chicken &7(&c❤❤❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.2}:
+				set display name of victim to "&6Chicken &7(&c❤❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.3}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.4}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.5}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+
+			if attacker's tool is not {ScareSwords-Sword_Level.1}, {ScareaSwords-Sword_Level.2}, {ScareSwords-Sword_Level.3}, {ScareSwords-Sword_Level.4}, {ScareSwords-Sword_Level.5} or {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤❤❤&7)"
+				stop
+
+		if display name of victim is "&6Chicken &7(&c❤❤❤&7)":
+			if attacker's tool is {ScareSwords-Sword_Level.1}:
+				set display name of victim to "&6Chicken &7(&c❤❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.2}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.3}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.4}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.5}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+
+			if attacker's tool is not {ScareSwords-Sword_Level.1}, {ScareaSwords-Sword_Level.2}, {ScareSwords-Sword_Level.3}, {ScareSwords-Sword_Level.4}, {ScareSwords-Sword_Level.5} or {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤❤&7)"
+				stop
+
+		if display name of victim is "&6Chicken &7(&c❤❤&7)":
+			if attacker's tool is {ScareSwords-Sword_Level.1}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+				stop
+			if attacker's tool is {ScareSwords-Sword_Level.2}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.3}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.4}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.5}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+			if attacker's tool is {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+
+			if attacker's tool is not {ScareSwords-Sword_Level.1}, {ScareaSwords-Sword_Level.2}, {ScareSwords-Sword_Level.3}, {ScareSwords-Sword_Level.4}, {ScareSwords-Sword_Level.5} or {ScareSwords-Sword_Level.6}:
+				set display name of victim to "&6Chicken &7(&c❤&7)"
+				stop
+
+
+		if display name of victim is "&6Chicken &7(&c❤&7)":
+			if {QuestStatus-FarmHunt::%UUID of attacker%} is "Started-part2":
+				if {Quest-FarmHunt-ChickensKilled::%UUID of attacker%} is greater than 0:
+					remove 1 from {Quest-FarmHunt-ChickensKilled::%UUID of attacker%}
+
+			set {_FarmingPlaySound::%UUID of attacker%} to a random number between 1.6 and 2
+			play sound "entity.experience_orb.pickup" with pitch {_FarmingPlaySound::%UUID of attacker%} to attacker
+			play sound "entity.chicken.death" with pitch 1 to attacker
+
+
+
+			set {_ChickenXPGained::%UUID of attacker%} to 10
+			if attacker's tool is {ScareSwords-Sword_Level.2}:
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 1.5
+			if attacker's tool is {ScareSwords-Sword_Level.3}:
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 2.0
+			if attacker's tool is {ScareSwords-Sword_Level.4}:
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 2.5
+			if attacker's tool is {ScareSwords-Sword_Level.5}:
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 3.0
+			if attacker's tool is {ScareSwords-Sword_Level.6}:
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 9.0
+
+			if {ActiveEvent} is "farm - chicken rush":
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 20
+
+			if display name of {SpawnedPet::%UUID of attacker%} contains "Chicken Pet":
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 3
+			if display name of {SpawnedPet::%UUID of attacker%} contains "Tiger":
+				set {_ChickenXPGained::%UUID of attacker%} to {_ChickenXPGained::%UUID of attacker%} * 3
+
+			give attacker 1 chicken named "<##d4c972>Raw Chicken" with lore "&8Farming Item" and "" and "&7Sell Value: &a$500"
+			chance of 50%:
+				give attacker 1 feather named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000"
+			if attacker's tool is {ScareSwords-Sword_Level.2}:
+				chance of 25%:
+					give attacker 1 chicken named "<##d4c972>Raw Chicken" with lore "&8Farming Item" and "" and "&7Sell Value: &a$500"
+					chance of 50%:
+						give attacker 1 feather named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000"
+			if attacker's tool is {ScareSwords-Sword_Level.3}:
+				chance of 70%:
+					give attacker 1 chicken named "<##d4c972>Raw Chicken" with lore "&8Farming Item" and "" and "&7Sell Value: &a$500"
+					chance of 50%:
+						give attacker 1 feather named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000"
+			if attacker's tool is {ScareSwords-Sword_Level.4}:
+				chance of 75%:
+					give attacker 1 chicken named "<##d4c972>Raw Chicken" with lore "&8Farming Item" and "" and "&7Sell Value: &a$500"
+					chance of 50%:
+						give attacker 1 feather named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000"
+			if attacker's tool is {ScareSwords-Sword_Level.5}:
+				give attacker 1 chicken named "<##d4c972>Raw Chicken" with lore "&8Farming Item" and "" and "&7Sell Value: &a$500"
+				chance of 50%:
+					give attacker 1 feather named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000"
+			if attacker's tool is {ScareSwords-Sword_Level.6}:
+				give attacker 3 chicken named "<##d4c972>Raw Chicken" with lore "&8Farming Item" and "" and "&7Sell Value: &a$500"
+				give attacker 3 feather named "&fFeather" with lore "&8Farming Item" and "" and "&7Sell Value: &a$1,000"
+
+
+			remove {_ChickenXPGained::%UUID of attacker%} from {RequiredXP::%UUID of attacker%}
+
+			set attacker's action bar to "&b&n+%{_ChickenXPGained::%UUID of attacker%}% XP Gained"
+			set line 3 of attacker's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of attacker%})%"
+
+			set display name of victim to "&6[&b+%{_ChickenXPGained::%UUID of attacker%}% XP&6]"
+			kill victim
+			stop
+
+
+
+
+
+on drop:
+	if event-item is milk bucket named "&dMagic Milk" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring back to Farmer Steve":
+		play sound "entity.chicken.egg" to player
+		send "&d&lQUEST ITEM: &7Do NOT lose quest items!"
+		cancel event
+		stop
+
+	if name of event-item is "&6Box Of Farming Items":
+		play sound "entity.chicken.egg" to player
+		send "&d&lQUEST ITEM: &7Do NOT lose quest items!"
+		cancel event
+		stop
+
+	if event-item is 1 of unbreakable bow named "&6Targeters Bow" with lore "&8Villager Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &c&oBernard &8at /warp cave":
+		play sound "entity.chicken.egg" to player
+		send "&d&lQUEST ITEM: &7Do NOT lose quest items!"
+		cancel event
+		stop
+
+	if event-item is creeper head named "&2Creeper Skull":
+		play sound "entity.chicken.egg" to player
+		send "&d&lQUEST ITEM: &7Do NOT lose quest items!"
+		cancel event
+		stop
+
+
+
+on consume:
+	if event-item is milk bucket named "&dMagic Milk" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring back to Farmer Steve":
+		play sound "entity.chicken.egg" to player
+		send "&d&lQUEST ITEM: &7Do NOT drink/eat quest items!"
+		cancel event
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Quests: Quest #3 (Wet & Cold)
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 46:
+		if {QuestStatus-Wet&Cold::%UUID of player%} is "Not Started":
+			if {Level::%UUID of player%} is less than 30:
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				set {_FishermanTomDialogue::*} to "I live in an iglo!", "Psst.. You must be level 30 to start my quest!", "Luke stinks of fish.." and "The shark pet fishes for you!"
+				send "&b&lFISHERMAN TOM: &7%random element out of {_FishermanTomDialogue::*}%"
+				stop
+
+			if {QuestStatus-FarmHunt::%UUID of player%} is not "Completed":
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				set {_FishermanTomDialogue::*} to "Do you know who farmer steve is?", "Psst.. You must complete all previous quests to start this one!", "Farmer steve lives in bobs farm" and "Steve will teach you more about clashgenz farming!"
+				send "&b&lFISHERMAN TOM: &7%random element out of {_FishermanTomDialogue::*}%"
+				stop
+
+			set {QuestStatus-Wet&Cold::%UUID of player%} to "Started"
+			set {ActiveQuest::%UUID of player%} to "Wet & Cold"
+			add 1 to {StartedQuests}
+
+			set {Quest-Wet&Cold-FishesToCatch::%UUID of player%} to 100
+			set {Quest-Wet&Cold-BringBackSculpture::%UUID of player%} to false
+			set {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%} to false
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lFISHERMAN TOM: &7Welcome to my iglo!"
+
+			wait 2 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lFISHERMAN TOM: &7It is very cold here... but that's fine.. I like it!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lFISHERMAN TOM: &7Anyways, enough about me.. I need some things..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lFISHERMAN TOM: &7Catch &e100 &7fish, bring me 1 &3fish sculpture &7and 1 &6pufferfish &7worth > $150k for a reward!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lFISHERMAN TOM: &eRight - Click &7on me again for quest progress!"
+			send "&7[Quest Book Updated: Started ""Wet & Cold""]"
+			stop
+
+
+		if {QuestStatus-Wet&Cold::%UUID of player%} is "Started":
+			if player's tool is pufferfish named "&6Pufferfish":
+
+				set {_Sell-ItemAmount::%UUID of player%::*} to line 3 of the lore of player's tool parsed as "%text%%number%"
+				if {_Sell-ItemAmount::%UUID of player%::2} >= 150000:
+					if {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%} is false:
+						set {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%} to true
+						remove player's tool from player's inventory
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&b&lFISHERMAN TOM: &7Thank you for the pufferfish!"
+						stop
+
+			if name of player's tool contains "Fish Sculpture":
+				if {Quest-Wet&Cold-BringBackSculpture::%UUID of player%} is false:
+					set {Quest-Wet&Cold-BringBackSculpture::%UUID of player%} to true
+					remove player's tool from player's inventory
+					play sound "entity.villager.yes" with pitch 1 to player
+					send "&b&lFISHERMAN TOM: &7Thank you for the fish sculpture!"
+					stop
+
+
+			if {Quest-Wet&Cold-BringBackSculpture::%UUID of player%} is true:
+				if {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%} is true:
+					if {Quest-Wet&Cold-FishesToCatch::%UUID of player%} = 0:
+
+						delete {Quest-Wet&Cold-BringBackSculpture::%UUID of player%}
+						delete {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%}
+						delete {Quest-Wet&Cold-FishesToCatch::%UUID of player%}
+
+						set {QuestStatus-Wet&Cold::%UUID of player%} to "Completed"
+						set {ActiveQuest::%UUID of player%} to "NONE"
+						set {NextQuest::%UUID of player%} to "Cave Explorer"
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&b&lFISHERMAN TOM: &7Oh wow... You did everything.."
+
+						wait 3 seconds
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&b&lFISHERMAN TOM: &7I honestly didn't expect you to manage that!"
+
+						wait 3 seconds
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						play sound "ui.toast.challenge_complete" with pitch 1 to player
+						send "&b&lFISHERMAN TOM: &7Anyways, as promised... here is your reward!"
+
+						send "&7[Quest Book Updated: Completed ""Wet & Cold""]"
+						send "&7[&a+$1,000,000&7]"
+						send "&7[&b+50,000 XP&7]"
+						send "&7[&d+2 Mystery Crate &7| &6+2 Gen Slot&7]"
+
+						add 1000000 to {balance::%UUID of player%}
+						remove 50000 from {RequiredXP::%UUID of player%}
+						add 2 to {MysteryCrates::%UUID of player%}
+						add 2 to {GeneratorLimit::%UUID of player%}
+						stop
+
+			play sound "ui.button.click" with pitch 2 to player
+			set metadata tag "Wet&ColdQuestProgress" of player to chest inventory with 1 rows named "&8Wet & Cold Quest progress..."
+			set slot 0, 1, 2, 6, 7 and 8 of metadata tag "Wet&ColdQuestProgress" of player to 1 black stained glass pane named "&7"
+
+			if {Quest-Wet&Cold-FishesToCatch::%UUID of player%} is greater than 0:
+				set slot 3 of metadata tag "Wet&ColdQuestProgress" of player to 1 cod named "&cCatch 100 Fishes" with lore "&8Fish at /warp fishing" and "" and "&7Catches Left: &e%{Quest-Wet&Cold-FishesToCatch::%UUID of player%}%" and "" and "&cIncompleted"
+			if {Quest-Wet&Cold-FishesToCatch::%UUID of player%} = 0:
+				set slot 3 of metadata tag "Wet&ColdQuestProgress" of player to 1 cod named "&aCatch 100 Fishes" with lore "&8Fish at /warp fishing" and "" and "&7Catches Left: &e%{Quest-Wet&Cold-FishesToCatch::%UUID of player%}%" and "" and "&aCompleted"
+
+			if {Quest-Wet&Cold-BringBackSculpture::%UUID of player%} is false:
+				set slot 4 of metadata tag "Wet&ColdQuestProgress" of player to 1 iron horse armor named "&cBring Back Fish Sculpture" with lore "&8Fish at /warp fishing" and "" and "&7Any fish sculpture caught" and "&7while fishing is accepted!" and "" and "&cIncompleted"
+			if {Quest-Wet&Cold-BringBackSculpture::%UUID of player%} is true:
+				set slot 4 of metadata tag "Wet&ColdQuestProgress" of player to 1 iron horse armor named "&aBring Back Fish Sculpture" with lore "&8Fish at /warp fishing" and "" and "&7Any fish sculpture caught" and "&7while fishing is accepted!" and "" and "&aCompleted"
+
+			if {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%} is false:
+				set slot 5 of metadata tag "Wet&ColdQuestProgress" of player to 1 pufferfish named "&cBring Back Expensive Pufferfish" with lore "&8Fish at /warp fishing" and "" and "&7Capture a pufferfish worth" and "&7more than &a$150,000 &7to" and "&7complete this task!" and "&7Capture during event &b""Extra Cash""" and "" and "&cIncompleted"
+			if {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%} is true:
+				set slot 5 of metadata tag "Wet&ColdQuestProgress" of player to 1 pufferfish named "&aBring Back Expensive Pufferfish" with lore "&8Fish at /warp fishing" and "" and "&7Capture a pufferfish worth" and "&7more than &a$150,000 &7to" and "&7complete this task!" and "&7Capture during event &b""Extra Cash""" and "" and "&aCompleted"
+
+			open (metadata tag "Wet&ColdQuestProgress" of player) to player
+			stop
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "Wet&ColdQuestProgress" of player):
+		cancel event
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Quests: Quest #4 (Cave Explorer)
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 19:
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Not Started":
+			if {Level::%UUID of player%} is less than 50:
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				send "&c&lBERNARD: &7Halt! You must be level &6&l50 &7to go here."
+				stop
+
+			if {QuestStatus-Wet&Cold::%UUID of player%} is not "Completed":
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				send "&c&lBERNARD: &7Halt! Complete previous quests before starting this one."
+				stop
+
+
+			set {QuestStatus-CaveExplorer::%UUID of player%} to "Started-part1"
+			set {ActiveQuest::%UUID of player%} to "Cave Explorer"
+			add 1 to {StartedQuests}
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7Howdy! Welcome to the ClashGenz Caves!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7To enter down here you'll need to bring me a &cCave Key&7..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7You can find this hidden around the spawn."
+			send "&7[Quest Book Updated: Started ""Cave Explorer""]"
+			stop
+
+
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part1":
+			if player's tool is tripwire hook named "&cCave Key" with lore "&8Cave Item" and "" and "&7Bring this key to &cBernard" and "&7to enter the clashgenz caves" and "" and "&8&oUse to enter /warp cave":
+				remove 1 tripwire hook named "&cCave Key" with lore "&8Cave Item" and "" and "&7Bring this key to &cBernard" and "&7to enter the clashgenz caves" and "" and "&8&oUse to enter /warp cave" from player's inventory
+				set {QuestStatus-CaveExplorer::%UUID of player%} to "Started-part2"
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lBERNARD: &7Thanks for the Cave Key, You may now enter the cave!"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lBERNARD: &7I need you to get a &aVillager Pet &7to continue this quest..."
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lBERNARD: &7You can get started by speaking to the &9Pet Specialist"
+				send "&7[Quest Book Updated]"
+
+				wait 1 seconds
+
+				teleport player to {location-insidecaves}
+				play sound "entity.enderman.teleport" with pitch 2 to player
+				stop
+
+			play sound "entity.villager.no" with pitch 1 to player
+			play sound "item.armor.equip_chain" with pitch 1 to player
+			play sound "entity.ender_dragon.flap" with pitch 2 to player
+			send "&c&lBERNARD: &7To enter down here you'll need to bring me a &cCave Key&7..."
+			stop
+
+
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part5":
+			set {QuestStatus-CaveExplorer::%UUID of player%} to "Started-part6"
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7You managed to get the &aVillager Pet&7, That's Great!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7I've always wanted a &6Targeters Bow"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7If you can speak to &3Villager Brandon &7at the ClashGenz Village..."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7He'll give you a task to complete in order for the &6Targeters Bow!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lBERNARD: &7Bring me that bow and i'll reward you!"
+			send "&7[Quest Book Updated]"
+			stop
+
+
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part6":
+			if player has 1 of unbreakable bow named "&6Targeters Bow" with lore "&8Villager Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &c&oBernard &8at /warp cave":
+				remove 1 of unbreakable bow named "&6Targeters Bow" with lore "&8Villager Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &c&oBernard &8at /warp cave" from player's inventory
+				set {QuestStatus-CaveExplorer::%UUID of player%} to "Completed"
+				set {ActiveQuest::%UUID of player%} to "NONE"
+				set {NextQuest::%UUID of player%} to "Casino Rush"
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lBERNARD: &7Oh wow... you got the &6Targeters Bow&7, Lemme get that..."
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lBERNARD: &7That's amazing, I'll be using this to guard the caves!"
+
+				wait 3 seconds
+
+				play sound "ui.toast.challenge_complete" with pitch 1 to player
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lBERNARD: &7As promised, Here is your well deserved reward!"
+
+				send "&7[Quest Book Updated: Completed ""Cave Explorer""]"
+				send "&7[&a+$5,000,000&7]"
+				send "&7[&b+75,000 XP&7]"
+				send "&7[&d+3 Mystery Crate &7| &6+3 Gen Slot&7]"
+				send "&7[&cUnlocked Caves&7]"
+				send "&7[&3Unlocked Villager Tasks&7]"
+
+				add 5000000 to {balance::%UUID of player%}
+				remove 75000 from {RequiredXP::%UUID of player%}
+				add 3 to {MysteryCrates::%UUID of player%}
+				add 3 to {GeneratorLimit::%UUID of player%}
+				stop
+
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part2", "Started-part3" or "Started-part4" or "Started-part6" or "Completed":
+			send "&c&lBERNARD: &7You may enter the cave!"
+			teleport player to {location-insidecaves}
+			play sound "entity.enderman.teleport" with pitch 2 to player
+			stop
+
+
+
+
+
+on rightclick on armor stand:
+	if display name of clicked entity is "&cCave Key":
+		if {QuestStatus-CaveExplorer::%UUID of player%} is "Started-part1":
+			if difference between {CaveKeyCooldown::%UUID of player%} and now is less than 3 minutes:
+				stop
+			set {CaveKeyCooldown::%UUID of player%} to now
+
+			play sound "entity.item.pickup"
+			send "&c&lCAVE KEY: &aSuccessfully Found!" to player
+			give player 1 tripwire hook named "&cCave Key" with lore "&8Cave Item" and "" and "&7Bring this key to &cBernard" and "&7to enter the clashgenz caves" and "" and "&8&oUse to enter /warp cave"
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Quests: Quest #5 (Casino Rush)
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 53:
+		if {QuestStatus-CasinoRush::%UUID of player%} is "Not Started":
+			if {Level::%UUID of player%} is less than 75:
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				send "&5&lBOUNCER: &7Welcome to the casino!"
+				stop
+
+			if {QuestStatus-CaveExplorer::%UUID of player%} is not "Completed":
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				send "&5&lBOUNCER: &7Complete your last quest to start my special one!"
+				stop
+
+
+			set {QuestStatus-CasinoRush::%UUID of player%} to "Started"
+			set {ActiveQuest::%UUID of player%} to "Casino Rush"
+			add 1 to {StartedQuests}
+
+			set {Quest-CasinoRush-WackACreeper::%UUID of player%} to false
+			set {Quest-CasinoRush-RockClutching::%UUID of player%} to false
+			set {Quest-CasinoRush-BasketArrow::%UUID of player%} to false
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lBOUNCER: &7People are always trying to steal from the casino... IT GETS ME MAD!!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lBOUNCER: &7But when people hit new high scores in our games, that makes me feel much better."
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lBOUNCER: &7Get a perfect score in &2Wack A Creeper &7+ &eBasket Arrow &7+ &dRock Clutching &7for a reward!"
+			send "&7[Quest Book Updated: Started ""Casino Rush""]"
+			stop
+
+
+		if {QuestStatus-CasinoRush::%UUID of player%} is "Started":
+			
+			if {Quest-CasinoRush-WackACreeper::%UUID of player%} is true:
+				if {Quest-CasinoRush-RockClutching::%UUID of player%} is true:
+					if {Quest-CasinoRush-BasketArrow::%UUID of player%} is true:
+						set {QuestStatus-CasinoRush::%UUID of player%} to "Completed"
+						set {ActiveQuest::%UUID of player%} to "NONE"
+						set {NextQuest::%UUID of player%} to "The Clouds"
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&5&lBOUNCER: &7Woowww. You managed to perfect 3 games??"
+
+						wait 3 seconds
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&5&lBOUNCER: &7I honestly didn't expect you to do that..."
+
+						wait 3 seconds
+
+						play sound "ui.toast.challenge_complete" with pitch 1 to player
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&5&lBOUNCER: &7Anyways, as promised, here is your reward!"
+
+						wait 10 ticks
+
+						send "&7[Quest Book Updated: Completed ""Casino Rush""]"
+						send "&7[&a+$10,000,000&7]"
+						send "&7[&b+100,000 XP&7]"
+						send "&7[&d+4 Mystery Crate &7| &6+4 Gen Slot&7]"
+
+						add 10000000 to {balance::%UUID of player%}
+						remove 100000 from {RequiredXP::%UUID of player%}
+						add 4 to {MysteryCrates::%UUID of player%}
+						add 4 to {GeneratorLimit::%UUID of player%}
+						stop
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&5&lBOUNCER: &7View Current Quest Progress:"
+			if {Quest-CasinoRush-WackACreeper::%UUID of player%} is false:
+				send "&5&l- &cWack A Creeper Perfect Score (INCOMPLETE)"
+			else:
+				send "&5&l- &aWack A Creeper Perfect Score &a(COMPLETE)"
+
+			if {Quest-CasinoRush-RockClutching::%UUID of player%} is false:
+				send "&5&l- &cRock Clutching Perfect Score (INCOMPLETE)"
+			else:
+				send "&5&l- &aRock Clutching Perfect Score &a(COMPLETE)"
+
+			if {Quest-CasinoRush-BasketArrow::%UUID of player%} is false:
+				send "&5&l- &cBasket Arrow Perfect Score (INCOMPLETE)"
+			else:
+				send "&5&l- &aBasket Arrow Perfect Score &a(COMPLETE)"
+			stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Quests: Quest #6 (The Clouds)
+#
+#
+#==========================================================
+
+
+
+
+
+on npc right click:
+	if npc is 45:
+		if {QuestStatus-FarmHunt::%UUID of player%} is "Started-part5":
+			stop
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Not Started":
+			if {Level::%UUID of player%} is less than 100:
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				send "&f&lJAKE: &7You must be level &6&l100 &7to enter the clouds!"
+				stop
+
+			if {QuestStatus-CasinoRush::%UUID of player%} is not "Completed":
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				send "&f&lJAKE: &7Complete all previous quests before reaching the sky!"
+				stop
+
+			if player doesn't have enough space for 1 barrier:
+				play sound "entity.villager.no" with pitch 1 to player
+				play sound "item.armor.equip_chain" with pitch 1 to player
+				play sound "entity.ender_dragon.flap" with pitch 2 to player
+				send "&f&lJAKE: &7You must have inventory space to start this quest!"
+				stop
+
+			set {NPC_Cooldown::%UUID of player%} to now
+			set {QuestStatus-TheClouds::%UUID of player%} to "Started-part1"
+			set {ActiveQuest::%UUID of player%} to "The Clouds"
+			add 1 to {StartedQuests}
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&f&lJAKE: &7oooo. You've finally reached level &6&l100&7!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&f&lJAKE: &7I need you to run a quick errand for me"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&f&lJAKE: &7I have this &6Box Of Farming Items &7that I need to give to the &cHotel Manager"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&f&lJAKE: &7I'll give you a free ride to the clouds if you do that for me..."
+			send "&7[Quest Book Updated: Started ""The Clouds""]"
+
+			set {QuestStatus-TheClouds::%UUID of player%} to "Started-part1"
+			give player 1 chest named "&6Box Of Farming Items" with lore "&8Farming Item" and "" and "&7Unsellable Item" and "" and "&8&oBring to &c&oHotel Manager!"
+			teleport player to {location-theclouds}
+			wait 1 tick
+			play sound "entity.enderman.teleport" with pitch 2 to player
+			stop
+
+		if difference between {NPC_Cooldown::%UUID of player%} and now is less than 10 seconds:
+			stop
+		delete {NPC_Cooldown::%UUID of player%}
+		teleport player to {location-theclouds}
+		wait 1 tick
+		send "&f&lTHE CLOUDS: &aTeleported!"
+		play sound "entity.enderman.teleport" with pitch 2 to player
+		stop
+
+
+	if npc is 55:
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part1":
+			if player's tool is chest named "&6Box Of Farming Items":
+				set {QuestStatus-TheClouds::%UUID of player%} to "Started-part2"
+				remove chest named "&6Box Of Farming Items" from player's inventory
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lMANAGER: &7Oh goody, My delivery from &fJake &7has arrived!"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lMANAGER: &7I've had this issue where thieves have been taking my deliveries"
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lMANAGER: &7You seem to be a trustworthy person..."
+
+				wait 3 seconds
+
+				play sound "entity.villager.yes" with pitch 1 to player
+				send "&c&lMANAGER: &7I have a mission for you, but first I need you to buy the &cHotel Suit!"
+				send "&7[Quest Book Updated]"
+				stop
+
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part2":
+			if player's chestplate is leather Chestplate named "&cHotel Chestplate":
+				if player's leggings is leather Leggings named "&cHotel Leggings":
+					if player's boots is leather Boots named "&cHotel Boots":
+						set {QuestStatus-TheClouds::%UUID of player%} to "Monalogue"
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&c&lMANAGER: &7ooo, Amazing... You have the work suit.."
+
+						wait 2 seconds
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&c&lMANAGER: &7Now, these thieves have been taking my packages for ages now.."
+
+						wait 3 seconds
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&c&lMANAGER: &7It gets really expensive paying &fJake &7to send items up here..."
+
+						wait 3 seconds
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&c&lMANAGER: &7If you can find all &e8 &6Farming Packages &7I'll give you a reward!"
+
+						wait 3 seconds
+
+						play sound "entity.villager.yes" with pitch 1 to player
+						send "&c&lMANAGER: &7Speak to me again when you want to start the mission!"
+						send "&7[Quest Book Updated]"
+						
+						set {QuestStatus-TheClouds::%UUID of player%} to "Started-part3"
+						stop
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lMANAGER: &7Purchase the &cHotel Suit &7from the Clothes Store!"
+			stop
+
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part3":
+			if player's chestplate is leather Chestplate named "&cHotel Chestplate":
+				if player's leggings is leather Leggings named "&cHotel Leggings":
+					if player's boots is leather Boots named "&cHotel Boots":
+						send player title "&dMISSION STARTED" with subtitle "&6Find &b8 &6Farming Packages" for 2 seconds
+						set {QuestStatus-TheClouds::%UUID of player%} to "Started-part4"
+						loop 8 times:
+							delete {ClaimedHiddenCloudPackage::%loop-number%::%UUID of player%}
+
+						set {PackageCollectionTimer-S::%UUID of player%} to 50
+						loop 50 times:
+							play sound "block.note_block.hat" with pitch 1.5
+							remove 1 from {PackageCollectionTimer-S::%UUID of player%}
+							if player's flight mode is true:
+								cancelcloudpackagemission(player, "TIP - You cannot fly during this")
+								stop
+							if player is not online:
+								cancelcloudpackagemission(player, "Left Server!")
+								stop
+							if player's tool is a hoe:
+								cancelcloudpackagemission(player, "TIP - You cannot use speed buffs during this")
+								stop
+
+							if {PackageCollectionTimer-S::%UUID of player%} = -6:
+								set {PackageCollectionTimer-S::%UUID of player%} to 16
+								loop 16 times:
+									play sound "block.note_block.hat" with pitch 1.5
+									play sound "block.note_block.cow_bell" with pitch 1.5 to player
+									remove 1 from {PackageCollectionTimer-S::%UUID of player%}
+									if player's flight mode is true:
+										cancelcloudpackagemission(player, "TIP - You cannot fly during this")
+										stop
+									if player is not online:
+										cancelcloudpackagemission(player, "Left Server!")
+										stop
+									if player's tool is a hoe:
+										cancelcloudpackagemission(player, "TIP - You cannot use speed buffs during this")
+										stop
+									if {QuestStatus-TheClouds::%UUID of player%} is "Started-part6":
+										stop
+
+									if {PackageCollectionTimer-S::%UUID of player%} is less than 10:
+										set line 14 of player's scoreboard to "&f"
+										set line 13 of player's scoreboard to "&cRETURN PACKAGES:"
+										set line 12 of player's scoreboard to "&fRemaining: &600:0%{PackageCollectionTimer-S::%UUID of player%}%"
+									else:
+										set line 14 of player's scoreboard to "&f"
+										set line 13 of player's scoreboard to "&cRETURN PACKAGES:"
+										set line 12 of player's scoreboard to "&fRemaining: &600:%{PackageCollectionTimer-S::%UUID of player%}%"
+									wait 20 ticks
+
+								cancelcloudpackagemission(player, "TIP - Memorise all package locations")
+								stop
+
+							if {PackageCollectionTimer-S::%UUID of player%} is less than 10:
+								play sound "entity.experience_orb.pickup" with pitch 2 to player
+								set line 14 of player's scoreboard to "&f"
+								set line 13 of player's scoreboard to "&cFIND LOST PACKAGES:"
+								set line 12 of player's scoreboard to "&fRemaining: &600:0%{PackageCollectionTimer-S::%UUID of player%}%"
+							else:
+								set line 14 of player's scoreboard to "&f"
+								set line 13 of player's scoreboard to "&cTHIEFS PACKAGES:"
+								set line 12 of player's scoreboard to "&fRemaining: &600:%{PackageCollectionTimer-S::%UUID of player%}%"
+							wait 20 ticks
+
+						cancelcloudpackagemission(player, "TIP - Memorise all package locations")
+						stop
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lMANAGER: &7Equip the &cHotel Suit &7to start this mission!"
+			stop
+
+
+		if {QuestStatus-TheClouds::%UUID of player%} is "Started-part5":
+			set {QuestStatus-TheClouds::%UUID of player%} to "Started-part6"
+			play sound "entity.player.levelup" to player
+			delete line 14 of player's scoreboard
+			delete line 13 of player's scoreboard
+			delete line 12 of player's scoreboard
+			remove all chest named "&6Box Of Farming Items" from player's inventory
+			loop 8 times:
+				delete {ClaimedHiddenCloudPackage::%loop-number%::%UUID of player%}
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lMANAGER: &7Oh wow, You managed to get all &e8 &7packages!"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lMANAGER: &7I've got a reward for you, but first you'll need to by-pass taxes"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lMANAGER: &7This isn't totally lets say... legal?"
+
+			wait 3 seconds
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&c&lMANAGER: &7Speak to &2Sirius &7at Cloud Bank, and say you know me!"
+			send "&7[Quest Book Updated]"
+
+

@@ -1,0 +1,95 @@
+options:
+    prefix: &5&lAbyss &8¬&7
+    messageborders: &8&m                                                  &r
+
+command /reaction [<string>] [<string>]:
+    permission: op
+    trigger:
+        if arg-1 = "start":
+            if {reaction::isgoing} is not set:
+                set {reaction::isgoing} to false
+                stop
+            if {reaction::isgoing} = false:
+                set {reaction::isgoing} to true
+                set {reaction::money} to a random integer between 5000 and 7500
+                set {reaction::word} to a random element of {reaction::words::*}
+                set {reaction::timer} to 60
+                broadcast "&dSay the word &5%{reaction::word}% &dfirst to get &5$%{reaction::money}%"
+                stop
+            if {reaction::isgoing} = true:
+                send "{@prefix} There is already a reaction ongoing" to player
+                stop
+        if arg-1 = "list":
+            send "{@prefix} &5Words List: &d%{reaction::words::*}%" to player
+        if arg-1 = "add":
+            if arg-2 is set:
+                if {reaction::words::*} contains arg-2:
+                    send "{@prefix} The word is already in the words database" to player
+                    stop
+                else:
+                    add arg-2 to {reaction::words::*}
+                    send "{@prefix} You added &5%arg-2% &dto the words database" to player
+                    stop
+            else:
+                send "{@prefix} not enough args retard" to player
+                stop
+        if arg-1 = "remove":
+            if arg-2 is set:
+                if {reaction::words::*} contains arg-2:
+                    remove arg-2 from {reaction::words::*}
+                    send "{@prefix} You removed &5%arg-2% &dfrom the words database" to player
+                    stop
+                else:
+                    add arg-2 to {reaction::words::*}
+                    send "{@prefix} The word is not in the words database" to player
+                    stop
+            else:
+                send "{@prefix} not enough args retard" to player
+                stop
+        if arg-1 = "stop":
+            if {reaction::isgoing} is not set:
+                stop
+            if {reaction::isgoing} = false:
+                stop
+            if {reaction::isgoing} = true:
+                set {reaction::isgoing} to false
+                delete {reaction::timer}
+                send "{@prefix} Stopped the reaction" to player
+                broadcast "&5%player% &dstopped the reaction event"
+                stop
+        if arg-1 = "help":
+            send "&r" to player
+            send "{@messageborders}" to player
+            send "&5&lREACTION HELP" to player
+            send "&r" to player
+            send "&5/reaction start &7- &dstarts a reaction" to player
+            send "&5/reaction stop &7- &dstops a reaction" to player
+            send "&5/reaction add word &7- &dadds a word" to player
+            send "&5/reaction remove word &7- &dremoves a word" to player
+            send "&5/reaction list &7- &dsends the database" to player
+            send "{@messageborders}" to player
+
+on chat:
+    if {reaction::isgoing} is true:
+        if message = {reaction::word}:
+            add {reaction::money} to balance of event-player
+            broadcast "&5%event-player% &dgot the word &5%{reaction::word}% &dand recieved &5$%{reaction::money}%"
+            wait 1 tick
+            set {reaction::isgoing} to false
+            delete {reaction::timer}
+
+every 180 seconds:
+    execute console command "reaction start"
+
+every 1 second:
+    if {reaction::timer} is set:
+        remove 1 from {reaction::timer}
+        if {reaction::timer} < 0:
+            set {reaction::isgoing} to false
+            delete {reaction::timer}
+            broadcast "&7"
+            broadcast "{@messageborders}"
+            broadcast "&5&lREACTION"
+            broadcast "&r"
+            broadcast "&dNo one got the word &5%{reaction::word}% &don time :("
+            broadcast "{@messageborders}"

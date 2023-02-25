@@ -1,0 +1,436 @@
+options:
+
+	# The prefix option allows you to change the prefix of all messages.
+	prefix: &5&lAbyss &8»&7
+
+	# Configure message colors.
+	color-1: &7
+	color-2: &d
+	color-3: &5
+	error-color: &c
+
+	# The permission message is the message that shows when a player does not have
+	# permission for a command.
+	permission-message: &c&lError! &7You do not have permission to use this command!
+
+	# Edit the gui glass panes. Just type the item name.
+	pane-1: gray stained glass pane
+	pane-2: gray stained glass pane
+
+	# The minimum and maximum bid amount.
+	max-bid: 10000000
+	min-bid: 1000
+
+	# The maximum amount of hours for an auction.
+	max-hours: 12
+
+	# The version of auction house you have.
+	version: 1.0.0
+
+	# This is the storage prefix for the entire script. DO NOT ever change this unless
+	# the variables conflict with another script!
+	storage: auction
+
+# WARNING!
+# After this point, please do not edit anything. The rest is code to register the
+# configuration in the rest of the script!
+
+# Load/Unload
+
+on unload:
+	if {{@storage}::reloader} is set:
+		send "{@prefix} {@color-1}Unloading..." to {{@storage}::reloader}
+	set {{@storage}.loadtime} to now
+
+on load:
+	if {{@storage}.loadtime} is not set:
+		set {{@storage}.loadtime} to now
+	wait 1 tick
+	set {_loadtime} to difference between {{@storage}.loadtime} and now
+	if {{@storage}::reloader} is set:
+		send "{@prefix} {@color-1}Loaded {@color-2}Auction House v{@version}{@color-1} by {@color-2}Baezor{@color-1}. &8(&f%{_loadtime}%&8)" to {{@storage}::reloader}
+	delete {{@storage}::reloader}
+
+command /ah [<text>] [<integer>] [<integer>]:
+	aliases: auctionhouse, auction
+	permission: auction.use
+	permission message: {@permission-message}
+	executable by: player
+	usage: {@prefix} {@error-color}Invalid arguments! Try /ah help for help!
+	trigger:
+		if arg-1 is not set:
+			send "{@prefix} {@color-1}You opened the auction house." to player
+			auction_openMainMenu(player, 1)
+		else if arg-1 is "reload":
+			if player has the permission "auction.admin":
+				set {{@storage}::reloader} to player
+				execute console command "/sk reload %script%"
+			else:
+				send "{@permission-message}" to player
+		else if arg-1 is "help":
+			send "&8&m                                         " to player
+			send "  {@color-2}&lAuction House {@color-1}&o{@storage}-{@version}" to player
+			send "&8&m                                         " to player
+			send "&8• {@color-2}/(ah|auction|auctionhouse)" to player
+			send "&8• {@color-2}/ah sell (price) (hours)" to player
+			send "&8• {@color-2}/ah help" to player
+			if player has the permission "auction.admin":
+				send "&8• {@color-3}/ah clear" to player
+			send "&8&m                                         " to player
+		else if arg-1 is "clear":
+			if player has the permission "auction.admin":
+				loop {{@storage}::idList::*}:
+					auction_deleteAuction(loop-value)
+				send "{@prefix} {@color-1}You cleared the auction house!" to player
+			else:
+				send "{@permission-message}" to player
+
+		else if arg-1 is "sell":
+			if arg-3 is set:
+				if arg-3 is greater than {@max-hours}:
+					send "{@prefix} {@error-color}Your auction time must be either equal to or less than {@max-hours} hours!" to player
+					exit
+				if arg-2 is less than {@min-bid}:
+					send "{@prefix} {@error-color}You must have a higher starting bid!" to player
+					exit
+				if arg-2 is greater than {@max-bid}:
+					send "{@prefix} {@error-color}You must have a lower starting bid!" to player
+					exit
+				set {_item} to the player's held item
+				set {_time} to arg-3
+				set {_time} to {_time}*60*60
+				auction_createAuction(player, {_item}, arg-2, {_time})
+			else:
+				send "{@prefix} {@error-color}Invalid arguments! You must set a third argument!" to player
+
+		else:
+			send "{@prefix} {@error-color}Invalid arguments! Try /ah help for help!" to player
+
+function auction_openMainMenu(player: player, page: number):
+	auction_soundButtonClick({_player})
+	set {_page} to round {_page}
+	if {_page} is less than 1:
+		set {_page} to 1
+	create a gui with virtual chest named "Auction House (Page %{_page}%)" with 5 rows:
+		make gui slot (integers between 0 and 44) to {@pane-1} named "&7"
+		make gui slot (integers between 10 and 16) to air
+		make gui slot (integers between 19 and 25) to air
+		make gui slot (integers between 28 and 34) to air
+		make gui slot 0,2,4,6,8,18,26,36,38,40,42 and 44 to {@pane-2} named "&7"
+		if {_page} is not 1:
+			make gui slot 36 to nametag named "{@color-2}Previous Page" with lore "{@color-1}Click to change pages!":
+				auction_openMainMenu({_player}, ({_page}-1))
+		else:
+			make gui slot 36 to redstone named "{@error-color}No More Pages!" with lore "{@color-1}You cannot go back any further!":
+				auction_soundBass({_player})
+		make gui slot 44 to nametag named "{@color-2}Next Page" with lore "{@color-1}Click to change pages!":
+			auction_openMainMenu({_player}, ({_page}+1))
+
+		make gui slot 39 to chest named "{@color-2}Claim Items" with lore "{@color-1}Click to view your claimable items!":
+			auction_openClaimItems({_player})
+
+		make gui slot 40 to ender chest named "{@color-2}Your Auctions" with lore "{@color-1}View your current auctions!":
+			auction_openPlayerAuctions({_player})
+
+		make gui slot 41 to green shulker box named "{@color-2}Expired Items" with lore "{@color-1}Click to view your expired items.":
+			auction_openExpiredItems({_player})
+
+
+		set {_minLoop} to ({_page}*21)-20
+		set {_loops} to 0
+		set {_slot} to 10
+		loop {{@storage}::idList::*}:
+			set {_id} to loop-value
+			add 1 to {_loops}
+			if {_loops} is greater than or equal to {_minLoop}:
+				if {_slot} is 17 or 26:
+					add 2 to {_slot}
+				set {_item} to {{@storage}::auctions::%{_id}%::item}
+				set {_newitem} to {_item}
+				if {{@storage}::auctions::%{_id}%::bidder} is set:
+					set lore of {_newitem} to "%lore of {_item}%||&8&m                               ||{@color-1}Seller: &f%{{@storage}::auctions::%{_id}%::poster}%||{@color-1}Bids: &f%{{@storage}::auctions::%{_id}%::bids}%||&7||{@color-1}Top Bid: {@color-2}$%{{@storage}::auctions::%{_id}%::bid}%||{@color-1}Bidder: {@color-3}%{{@storage}::auctions::%{_id}%::bidder}%||&7||{@color-1}Time Left: &f%auction_convertSeconds({{@storage}::auctions::%{_id}%::time})%||&7||&eClick to View!"
+				else:
+					set lore of {_newitem} to "%lore of {_item}%||&8&m                               ||{@color-1}Seller: &f%{{@storage}::auctions::%{_id}%::poster}%||{@color-1}Bids: &f%{{@storage}::auctions::%{_id}%::bids}%||&7||{@color-1}Starting Bid: {@color-2}$%{{@storage}::auctions::%{_id}%::bid}%||&7||{@color-1}Time Left: &f%auction_convertSeconds({{@storage}::auctions::%{_id}%::time})%||&7||&eClick to View!"
+				make gui slot {_slot} to {_newitem}:
+					auction_openBidMenu({_player}, {_id})
+				add 1 to {_slot}
+				if {_slot} is 35:
+					exit loop
+
+	open last gui to {_player}
+
+function auction_openBidMenu(player: player, id: text):
+
+	set {_price} to {{@storage}::auctions::%{_id}%::bid}
+	if {{@storage}::auctions::%{_id}%::bids} is 0:
+		set {_newPrice} to {_price}
+	else:
+		set {_newPrice} to auction_getNewPrice({_price})
+
+	auction_soundButtonClick({_player})
+	create a gui with virtual chest named "Auction House (Bid)" with 4 rows:	
+		make gui slot (integers between 0 and 35) to {@pane-1} named "&7"
+		make gui slot 31 to arrow named "{@color-2}Go Back!" with lore "{@color-1}Click to go back!":
+			auction_openMainMenu({_player}, 1)
+
+		if {_player}'s balance is greater than {_newPrice}:
+			make gui slot 11 to gold nugget named "{@color-3}Click to place a bid!" with lore "&7", "{@color-1}New Bid: {@color-2}$%{_newPrice}%", "&7" and "{@color-1}Click to place bid!":
+				if {{@storage}::auctions::%{_id}%::bid} is greater than {_price}:
+					auction_soundBass({_player})
+					send "{@prefix} {@error-color}An error occured when trying to bid for this auction! (5-%{_id}%{@error-color})" to {_player}
+				else:
+					auction_soundHarp({_player})
+					auction_bidOnAuction({_player}, {_id})
+					auction_openMainMenu({_player}, 1)
+					send "{@prefix} {@color-1}You placed a bid on an auction!" to {_player}
+
+		else:
+			make gui slot 11 to poisonous potato named "{@error-color}You can't place a bid!" with lore "&7", "{@color-1}New Bid: {@color-2}$%{_newPrice}%", "&7" and "{@color-1}You cannot place a bid.":
+				auction_soundBass({_player})
+		if {{@storage}::auctions::%{_id}%::bidder} is {_player}:
+			make gui slot 11 to poisonous potato named "{@error-color}You can't place a bid!" with lore "{@color-1}You are the current bidder!":
+				auction_soundBass({_player})
+
+		if {{@storage}::auctions::%{_id}%::poster} is {_player}:
+			make gui slot 11 to poisonous potato named "{@error-color}You can't place a bid!" with lore "{@color-1}You are the poster!":
+				auction_soundBass({_player})
+
+		if {{@storage}::auctions::%{_id}%::bids} is 0:
+			make gui slot 15 to map named "{@color-3}Latest Bid" with lore "&7" and "{@color-1}Bid: &fNone"
+		else:
+			make gui slot 15 to paper named "{@color-3}Latest Bid" with lore "&7" and "{@color-1}Bid: {@color-2}%{{@storage}::auctions::%{_id}%::bid}%"
+
+
+		set {_item} to {{@storage}::auctions::%{_id}%::item}
+		set {_newitem} to {_item}
+		if {{@storage}::auctions::%{_id}%::bidder} is set:
+			set lore of {_newitem} to "%lore of {_item}%||&8&m                               ||{@color-1}Seller: &f%{{@storage}::auctions::%{_id}%::poster}%||{@color-1}Bids: &f%{{@storage}::auctions::%{_id}%::bids}%||&7||{@color-1}Top Bid: {@color-2}$%{{@storage}::auctions::%{_id}%::bid}%||{@color-1}Bidder: {@color-3}%{{@storage}::auctions::%{_id}%::bidder}%||&7||{@color-1}Time Left: &f%auction_convertSeconds({{@storage}::auctions::%{_id}%::time})%"
+		else:
+			set lore of {_newitem} to "%lore of {_item}%||&8&m                               ||{@color-1}Seller: &f%{{@storage}::auctions::%{_id}%::poster}%||{@color-1}Bids: &f%{{@storage}::auctions::%{_id}%::bids}%||&7||{@color-1}Starting Bid: {@color-2}$%{{@storage}::auctions::%{_id}%::bid}%||&7||{@color-1}Time Left: &f%auction_convertSeconds({{@storage}::auctions::%{_id}%::time})%"
+		make gui slot 13 to {_newitem}
+
+	open last gui to {_player}
+
+function auction_openPlayerAuctions(player: player):
+	auction_soundButtonClick({_player})
+	create a gui with virtual chest named "Auction House (Your Auctions)" with 4 rows:
+		make gui slot (integers between 0 and 35) to {@pane-1} named "&7"
+		make gui slot (integers between 10 and 16) to air
+		make gui slot (integers between 19 and 25) to air
+		make gui slot 27 to arrow named "{@color-2}Go Back!" with lore "{@color-1}Click to go back!":
+			auction_openMainMenu({_player}, 1)
+		set {_slot} to 10
+		set {_loops} to 0
+		loop {{@storage}::playerAuctionList::%{_player}%::*}:
+			set {_id} to loop-value
+			add 1 to {_loops}
+			if {_loops} is greater than 14:
+				exit loop
+			if {_slot} is 17 or 26:
+				add 2 to {_slot}
+			set {_item} to {{@storage}::auctions::%{_id}%::item}
+			set {_newitem} to {_item}
+			if {{@storage}::auctions::%{_id}%::bidder} is set:
+				set lore of {_newitem} to "%lore of {_item}%||&8&m                               ||{@color-1}Bids: &f%{{@storage}::auctions::%{_id}%::bids}%||&7||{@color-1}Top Bid: {@color-2}$%{{@storage}::auctions::%{_id}%::bid}%||{@color-1}Bidder: {@color-3}%{{@storage}::auctions::%{_id}%::bidder}%||&7||{@color-1}Time Left: &f%auction_convertSeconds({{@storage}::auctions::%{_id}%::time})%||&7||&cClick to Force End Auction!"
+			else:
+				set lore of {_newitem} to "%lore of {_item}%||&8&m                               ||{@color-1}Bids: &f%{{@storage}::auctions::%{_id}%::bids}%||&7||{@color-1}Starting Bid: {@color-2}$%{{@storage}::auctions::%{_id}%::bid}%||&7||{@color-1}Time Left: &f%auction_convertSeconds({{@storage}::auctions::%{_id}%::time})%||&7||&cClick to Delete Auction!"
+			make gui slot {_slot} to {_newitem}:
+				auction_deleteAuction({_id})
+				auction_openPlayerAuctions({_player})
+			add 1 to {_slot}
+	open last gui to {_player}
+
+
+function auction_openClaimItems(player: player):
+	auction_soundButtonClick({_player})
+	create a gui with virtual chest named "Auction House (Claim Items)" with 4 rows:
+		make gui slot (integers between 0 and 35) to {@pane-1} named "&7"
+		make gui slot 31 to arrow named "{@color-2}Go Back!" with lore "{@color-1}Click to go back!":
+			auction_openMainMenu({_player}, 1)
+
+
+		make gui slot 13 to gold nugget named "{@color-2}Claim Items" with lore "{@color-1}You have &f&n%auction_getNumClaimItems({_player})%&r {@color-1}items to claim!", "&7" and "{@color-1}Click to claim items!":
+			if auction_getNumClaimItems({_player}) is greater than 0:
+				auction_claimClaimItems({_player})
+				auction_openClaimItems({_player})
+				auction_soundHarp({_player})
+			else:
+				auction_soundBass({_player})
+
+	open last gui to {_player}
+
+
+function auction_openExpiredItems(player: player):
+	auction_soundButtonClick({_player})
+	create a gui with virtual chest named "Auction House (Expired Items)" with 4 rows:
+		make gui slot (integers between 0 and 35) to {@pane-1} named "&7"
+		make gui slot 31 to arrow named "{@color-2}Go Back!" with lore "{@color-1}Click to go back!":
+			auction_openMainMenu({_player}, 1)
+
+
+		make gui slot 13 to red dye named "{@color-3}Expired Items" with lore "{@color-1}You have &f&n%auction_getNumExpiredItems({_player})%&r {@color-1}expired auctions!", "&7" and "{@color-1}Click to claim items!":
+			if auction_getNumExpiredItems({_player}) is greater than 0:
+				auction_claimExpiredItems({_player})
+				auction_openExpiredItems({_player})
+				auction_soundHarp({_player})
+			else:
+				auction_soundBass({_player})
+
+
+	open last gui to {_player}
+
+
+function auction_soundButtonClick(player: player):
+	play sound "UI_BUTTON_CLICK" with volume 0.5 with pitch 1 at {_player}'s location for {_player}
+
+function auction_soundBass(player: player):
+	play sound "block.note_block.bass" with volume 0.5 with pitch 1 at {_player}'s location for {_player}
+
+function auction_soundHarp(player: player):
+	play sound "block.note_block.harp" with volume 0.5 with pitch 1 at {_player}'s location for {_player}
+
+function auction_createAuction(player: player, item: item, price: number, time: number):
+	set {_loops} to 0
+	loop {{@storage}::playerAuctionList::%{_player}%::*}:
+		add 1 to {_loops}
+	if {_loops} is greater than or equal to 14:
+		send "{@prefix} {@error-color}You cannot have more than 14 auctions!" to {_player}
+		exit
+	remove {_item} from {_player}'s inventory
+	if {{@storage}::idNum} is not set:
+		set {{@storage}::idNum} to 0
+	add 1 to {{@storage}::idNum}
+	set {_id} to "auction-%{{@storage}::idNum}%"
+	add {_id} to {{@storage}::idList::*}
+	add {_id} to {{@storage}::playerAuctionList::%{_player}%::*}
+	set {{@storage}::auctions::%{_id}%::item} to {_item}
+	set {{@storage}::auctions::%{_id}%::bid} to {_price}
+	set {{@storage}::auctions::%{_id}%::poster} to {_player}
+	set {{@storage}::auctions::%{_id}%::time} to {_time}
+	set {{@storage}::auctions::%{_id}%::bids} to 0
+	send "{@prefix} {@color-1}You created an auction." to {_player}
+
+function auction_deleteAuction(id: text):
+	if {{@storage}::auctions::%{_id}%::bidder} is set:
+		auction_addClaimItem({{@storage}::auctions::%{_id}%::bidder}, {{@storage}::auctions::%{_id}%::item})
+		add {{@storage}::auctions::%{_id}%::bid} to {{@storage}::auctions::%{_id}%::poster}'s balance
+		if {{@storage}::auctions::%{_id}%::poster} is online:
+			send "{@prefix} {@color-1}One of your auctions has finished. You have received {@color-2}$%{{@storage}::auctions::%{_id}%::bid}%{@color-1} from it." to {{@storage}::auctions::%{_id}%::poster}
+		if {{@storage}::auctions::%{_id}%::bidder} is online:
+			send "{@prefix} {@color-1}You won an auction, you can claim it in the auction house!" to {{@storage}::auctions::%{_id}%::bidder}
+	else:
+		auction_addExpiredItem({{@storage}::auctions::%{_id}%::poster},{{@storage}::auctions::%{_id}%::item})
+		if {{@storage}::auctions::%{_id}%::poster} is online:
+			send "{@prefix} {@color-1}One of your auctions expired! You can claim in in the auction house!" to {{@storage}::auctions::%{_id}%::poster}
+	
+
+	remove {_id} from {{@storage}::playerAuctionList::%{{@storage}::auctions::%{_id}%::poster}%::*}
+	delete {{@storage}::auctions::%{_id}%::item}
+	delete {{@storage}::auctions::%{_id}%::poster}
+	delete {{@storage}::auctions::%{_id}%::bid}
+	delete {{@storage}::auctions::%{_id}%::bidder}
+	delete {{@storage}::auctions::%{_id}%::time}
+	delete {{@storage}::auctions::%{_id}%::bids}
+	remove {_id} from {{@storage}::idList::*}
+
+
+function auction_bidOnAuction(player: player, id: text):
+	if {{@storage}::auctions::%{_id}%::bidder} is {_player}:
+		send "{@prefix} {@error-color}An error occured when trying to bid for this auction! (3-%{_id}%{@error-color})" to {_player}
+		exit
+	if {{@storage}::auctions::%{_id}%::poster} is {_player}:
+		send "{@prefix} {@error-color}An error occured when trying to bid for this auction! (4-%{_id}%{@error-color})" to {_player}
+		exit
+	if {{@storage}::auctions::%{_id}%::bids} is greater than 0:
+		set {_newBid} to auction_getNewPrice({{@storage}::auctions::%{_id}%::bid})
+		if {_newBid} is equal to {{@storage}::auctions::%{_id}%::bid}:
+			send "{@prefix} {@error-color}An error occured when trying to bid for this auction! (1-%{_id}%{@error-color})" to {_player}
+			exit 
+	else:
+		set {_newBid} to {{@storage}::auctions::%{_id}%::bid}
+	if {_player}'s balance is greater than or equal to {_newBid}:
+		if {{@storage}::auctions::%{_id}%::bidder} is set:
+			add {{@storage}::auctions::%{_id}%::bid} to {{@storage}::auctions::%{_id}%::bidder}'s balance
+		remove {_newBid} from {_player}'s balance
+		set {{@storage}::auctions::%{_id}%::bid} to {_newBid}
+		set {{@storage}::auctions::%{_id}%::bidder} to {_player}
+		add 1 to {{@storage}::auctions::%{_id}%::bids}
+	else:
+		send "{@prefix} {@error-color}An error occured when trying to bid for this auction! (2-%{_id}%{@error-color})" to {_player}
+		exit 
+
+
+function auction_addClaimItem(player: player, item: item):
+	add {_item} to {{@storage}::claimItems::%{_player}%::*}
+
+function auction_addExpiredItem(player: player, item: item):
+	add {_item} to {{@storage}::expireItems::%{_player}%::*}
+
+function auction_getNumClaimItems(player: player) :: number:
+	set {_return} to 0
+	loop {{@storage}::claimItems::%{_player}%::*}:
+		add 1 to {_return}
+	return {_return}
+
+function auction_getNumExpiredItems(player: player) :: number:
+	set {_return} to 0
+	loop {{@storage}::expireItems::%{_player}%::*}:
+		add 1 to {_return}
+	return {_return}
+
+function auction_claimClaimItems(player: player):
+	set {_itemsClaimed} to 0
+	set {_itemsNoFit} to 0
+	loop {{@storage}::claimItems::%{_player}%::*}:
+		if {_player}'s inventory can hold loop-value:
+			give {_player} loop-value
+			remove loop-value from {{@storage}::claimItems::%{_player}%::*}
+			add 1 to {_itemsClaimed}
+		else:
+			add 1 to {_itemsNoFit}
+	send "{@prefix} {@color-1}You claimed &f&n%{_itemsClaimed}%&r {@color-1}items." to {_player}
+	if {_itemsNoFit} is greater than 0:
+		send "{@prefix} {@error-color}%{_itemsNoFit}%{@error-color} items could not fit in your inventory!" to {_player}
+
+function auction_claimExpiredItems(player: player):
+	set {_itemsClaimed} to 0
+	set {_itemsNoFit} to 0
+	loop {{@storage}::expireItems::%{_player}%::*}:
+		if {_player}'s inventory can hold loop-value:
+			give {_player} loop-value
+			remove loop-value from {{@storage}::expireItems::%{_player}%::*}
+			add 1 to {_itemsClaimed}
+		else:
+			add 1 to {_itemsNoFit}
+	send "{@prefix} {@color-1}You claimed &f&n%{_itemsClaimed}%&r {@color-1}items." to {_player}
+	if {_itemsNoFit} is greater than 0:
+		send "{@prefix} {@error-color}%{_itemsNoFit}%{@error-color} items could not fit in your inventory!" to {_player}
+
+function auction_getNewPrice(number: number) :: number:
+	set {_number} to {_number}*1.2
+	if {_number} is greater than {@max-bid}:
+		set {_number} to {@max-bid}
+	return {_number}
+
+function auction_convertSeconds(seconds: number) :: text:
+	set {_time} to "%{_seconds}% seconds" parsed as a timespan
+	set {_time} to "%{_time}%"
+	set {_l::*} to split {_time} at " "
+	loop {_l::*}:
+		delete {_i}
+		set {_i} to loop-value parsed as a number
+		{_i} is set
+		set {_i} to floor({_i})
+		replace every "%loop-value%" in {_time} with "%{_i}%"
+	replace all " seconds" or " second" in {_time} with "s"
+	replace all " minutes" or " minute" in {_time} with "m"
+	replace all " hours" or " hour" in {_time} with "h"
+	replace all " days" or " day" in {_time} with "d"
+	return {_time}
+
+
+every second:
+	loop {{@storage}::idList::*}:
+		subtract 1 from {{@storage}::auctions::%loop-value%::time}
+		if {{@storage}::auctions::%loop-value%::time} is 0:
+			auction_deleteAuction(loop-value)

@@ -1,0 +1,801 @@
+#==========================================================
+#
+#
+#		ClashGenz Fishing: Fisherman Luke:
+#
+#
+#==========================================================
+
+
+
+
+
+#command /clashgenzfish-fishingrods:
+#	trigger:
+#		set {FishingRod_Level.1} to fishing rod named "&bFishing Rod &6(I)" with lore "&8Fishing Item (lvl.1)" and "" and "&7XP Multiplier: &bx1.0" and "" and "&7&oCatches Till Upgrade: &3&o1" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.2} to fishing rod named "&bFishing Rod &6(II)" with lore "&8Fishing Item (lvl.2)" and "" and "&7XP Multiplier: &bx1.1" and "" and "&7&oCatches Till Upgrade: &3&o2" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.3} to fishing rod named "&bFishing Rod &6(III)" with lore "&8Fishing Item (lvl.3)" and "" and "&7XP Multiplier: &bx1.2" and "" and "&7&oCatches Till Upgrade: &3&o3" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.4} to fishing rod named "&bFishing Rod &6(IV)" with lore "&8Fishing Item (lvl.4)" and "" and "&7XP Multiplier: &bx1.3" and "" and "&7&oCatches Till Upgrade: &3&o5" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+
+#		set {FishingRod_Level.5} to fishing rod of lure 1 named "&bFishing Rod &6(V)" with lore "&8Fishing Item (lvl.5)" and "" and "&7XP Multiplier: &bx1.4" and "&7Double Value Chance: &a5%%" and "&9Lure I &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o7" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.6} to fishing rod of lure 1 named "&bFishing Rod &6(VI)" with lore "&8Fishing Item (lvl.6)" and "" and "&7XP Multiplier: &bx1.5" and "&7Double Value Chance: &a10%%" and "&9Lure I &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o10" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.7} to fishing rod of lure 1 named "&bFishing Rod &6(VII)" with lore "&8Fishing Item (lvl.7)" and "" and "&7XP Multiplier: &bx1.6" and "&7Double Value Chance: &a15%%" and "&9Lure I &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o13" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.8} to fishing rod of lure 1 named "&bFishing Rod &6(VIII)" with lore "&8Fishing Item (lvl.8)" and "" and "&7XP Multiplier: &bx1.7" and "&7Double Value Chance: &a20%%" and "&9Lure I &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o15" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.9} to fishing rod of lure 1 named "&bFishing Rod &6(IX)" with lore "&8Fishing Item (lvl.9)" and "" and "&7XP Multiplier: &bx1.8" and "&7Double Value Chance: &a25%%" and "&9Lure I &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o18" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+
+#		set {FishingRod_Level.10} to fishing rod of lure 2 named "&bFishing Rod &6(X)" with lore "&8Fishing Item (lvl.10)" and "" and "&7XP Multiplier: &bx1.9" and "&7Double Value Chance: &a30%%" and "&7Better Catches: &d7%%" and "&9Lure II &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o21" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.11} to fishing rod of lure 2 named "&bFishing Rod &6(XI)" with lore "&8Fishing Item (lvl.11)" and "" and "&7XP Multiplier: &bx2.0" and "&7Double Value Chance: &a35%%" and "&7Better Catches: &d9%%" and "&9Lure II &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o25" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.12} to fishing rod of lure 2 named "&bFishing Rod &6(XII)" with lore "&8Fishing Item (lvl.12)" and "" and "&7XP Multiplier: &bx2.1" and "&7Double Value Chance: &a40%%" and "&7Better Catches: &d11%%" and "&9Lure II &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o30" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.13} to fishing rod of lure 2 named "&bFishing Rod &6(XIII)" with lore "&8Fishing Item (lvl.13)" and "" and "&7XP Multiplier: &bx2.2" and "&7Double Value Chance: &a45%%" and "&7Better Catches: &d13%%" and "&9Lure II &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o35" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.14} to fishing rod of lure 2 named "&bFishing Rod &6(XIV)" with lore "&8Fishing Item (lvl.14)" and "" and "&7XP Multiplier: &bx2.3" and "&7Double Value Chance: &a50%%" and "&7Better Catches: &d15%%" and "&9Lure II &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o40" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+
+#		set {FishingRod_Level.15} to fishing rod of lure 3 named "&bFishing Rod &6(XV)" with lore "&8Fishing Item (lvl.15)" and "" and "&7XP Multiplier: &bx2.4" and "&7Double Value Chance: &a55%%" and "&7Better Catches: &d17%%" and "&7Lottery Chance &60.5%%" and "&9Lure III &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o50" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.16} to fishing rod of lure 3 named "&bFishing Rod &6(XVI)" with lore "&8Fishing Item (lvl.16)" and "" and "&7XP Multiplier: &bx2.5" and "&7Double Value Chance: &a60%%" and "&7Better Catches: &d19%%" and "&7Lottery Chance &61%%" and "&9Lure III &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o55" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.17} to fishing rod of lure 3 named "&bFishing Rod &6(XVII)" with lore "&8Fishing Item (lvl.17)" and "" and "&7XP Multiplier: &bx2.6" and "&7Double Value Chance: &a65%%" and "&7Better Catches: &d21%%" and "&7Lottery Chance &61.5%%" and "&9Lure III &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o60" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.18} to fishing rod of lure 3 named "&bFishing Rod &6(XVIII)" with lore "&8Fishing Item (lvl.18)" and "" and "&7XP Multiplier: &bx2.7" and "&7Double Value Chance: &a70%%" and "&7Better Catches: &d23%%" and "&7Lottery Chance &62%%" and "&9Lure III &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o65" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.19} to fishing rod of lure 3 named "&bFishing Rod &6(XIX)" with lore "&8Fishing Item (lvl.19)" and "" and "&7XP Multiplier: &bx2.8" and "&7Double Value Chance: &a75%%" and "&7Better Catches: &d25%%" and "&7Lottery Chance &62.5%%" and "&9Lure III &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o70" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+
+#		set {FishingRod_Level.20} to fishing rod of lure 4 named "&bFishing Rod &6(XX)" with lore "&8Fishing Item (lvl.20)" and "" and "&7XP Multiplier: &bx2.9" and "&7Double Value Chance: &a80%%" and "&7Better Catches: &d27%%" and "&7Lottery Chance &63%%" and "&9Lure IV &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o75" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.21} to fishing rod of lure 4 named "&bFishing Rod &6(XXI)" with lore "&8Fishing Item (lvl.21)" and "" and "&7XP Multiplier: &bx3.0" and "&7Double Value Chance: &a85%%" and "&7Better Catches: &d29%%" and "&7Lottery Chance &63.5%%" and "&9Lure IV &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o100" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.22} to fishing rod of lure 4 named "&bFishing Rod &6(XXII)" with lore "&8Fishing Item (lvl.22)" and "" and "&7XP Multiplier: &bx3.1" and "&7Double Value Chance: &a90%%" and "&7Better Catches: &d31%%" and "&7Lottery Chance &64%%" and "&9Lure IV &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o150" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.23} to fishing rod of lure 4 named "&bFishing Rod &6(XXIII)" with lore "&8Fishing Item (lvl.23)" and "" and "&7XP Multiplier: &bx3.2" and "&7Double Value Chance: &a95%%" and "&7Better Catches: &d33%%" and "&7Lottery Chance &64.5%%" and "&9Lure IV &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o200" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.24} to fishing rod of lure 4 named "&bFishing Rod &6(XXIV)" with lore "&8Fishing Item (lvl.24)" and "" and "&7XP Multiplier: &bx3.3" and "&7Double Value Chance: &a99%%" and "&7Better Catches: &d35%%" and "&7Lottery Chance &65%%" and "&9Lure IV &o(Quicker Catches)" and "" and "&7&oCatches Till Upgrade: &3&o250" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+
+#		set {FishingRod_Level.25} to fishing rod of lure 5 named "&bFishing Rod &6(XXV)" with lore "&8Fishing Item (lvl.25)" and "" and "&7XP Multiplier: &bx3.4" and "&7Double Value Chance: &a100%%" and "&7Better Catches: &d40%%" and "&7Lottery Chance &65.5%%" and "&9Lure V &o(Quicker Catches)" and "" and "&7&oTotal Catches: &3&o1" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+#		set {FishingRod_Level.26} to fishing rod of lure 5 named "&bFishing Rod &6(XXVI)" with lore "&8Fishing Item (lvl.26)" and "" and "&7XP Multiplier: &bx3.8" and "&7Double Value Chance: &a100%%" and "&7Better Catches: &d50%%" and "&7Lottery Chance &66.5%%" and "&9Lure V &o(Quicker Catches)" and "" and "&7&oTotal Catches: &3&o1" and "&8&oUse at /warp fishing" with nbt "{Unbreakable:1,HideFlags:63}"
+
+
+
+
+
+on citizen right click:
+	if npc is 37:
+		if {Fishing_SpokenToLuke::%UUID of player%} is not set:
+			set {Fishing_SpokenToLuke::%UUID of player%} to true
+
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lLUKE: &7Welcome to the fishing pond!"
+			wait 2 seconds
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lLUKE: &7You can fish at any pond in spawn for big rewards"
+			wait 3 seconds
+			play sound "entity.villager.yes" with pitch 1 to player
+			send "&b&lLUKE: &7Purchase a fishing rod from me!"
+			send "&7[&a+$500&7]"
+
+			add 500 to {balance::%UUID of player%}
+			stop
+
+
+
+		if {Fishing_SpokenToLuke::%UUID of player%} is true:
+			play sound "ui.button.click" with pitch 2 to player
+			set metadata tag "FishermanLukesShop" of player to chest inventory with 6 rows named "&8Fisherman Luke"
+			set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "FishermanLukesShop" of player to black stained glass pane named "&7"
+
+			set slot 20 of metadata tag "FishermanLukesShop" of player to 1 fishing rod named "&bFishing Rod &6(I)" with lore "&8Fishing Item (lvl.1)" and "" and "&7XP Multiplier: &bx1.0" and "" and "&a&nPurchase For: $500" and "" and "&a> Click To Purchase <"
+
+			set slot 21 of metadata tag "FishermanLukesShop" of player to 1 brewing stand named "&3Fishing Totem &8&l(Requires COAL)" with lore "&8Fishing Item" and "" and "&7Once placed, This totem will last" and "&7for &e10 minutes &7and anyone in" and "&7a radius of 10 will receive &bx4 XP" and "" and "&a&nPurchase For: $50,000" and "" and "&a> Click To Purchase <"
+
+			set slot 24 of metadata tag "FishermanLukesShop" of player to 1 emerald named "&a/Sell Inventory" with lore "&8runs command  /sell" and "" and "&7Sell all items in your inventory" and "&7to make money from your fish!" and "" and "&a> Click To Sell <"
+
+			set slot 49 of metadata tag "FishermanLukesShop" of player to barrier named "&cExit Menu"
+			set slot 50 of metadata tag "FishermanLukesShop" of player to 1 paper named "&bFish Information:" with lore "&8&oinformation for the common 4 catches" and "" and "&a&lCOMMON FISH:" and " &7Worth &a$10 - $100" and " &7XP Received: &b100" and "" and "&e&lRARE FISH:" and " &7Worth &a$100 - $1,000" and " &7XP Received: &b200" and "" and "&c&lEPIC FISH:" and " &7Worth &a$1,000 - $10,000" and " &7XP Received: &b300" and "" and "&6&lLEGENDARY FISH:" and " &7Worth &a$10,000 - $100,000" and "&7 XP Received: &b400"
+			open (metadata tag "FishermanLukesShop" of player) to player
+
+
+
+
+
+on inventory click:
+	if event-inventory = (metadata tag "FishermanLukesShop" of player):
+		cancel event
+
+		if index of event-slot is 20:
+			if {balance::%UUID of player%} is less than 500:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&b&lFISHERMAN LUKE: &7You cannot afford this Fishing Rod!"
+				stop
+
+			remove 500 from {balance::%UUID of player%}
+			give player {FishingRod_Level.1}
+
+			play sound "entity.player.levelup" with pitch 2 to player
+			send "&b&lFISHERMAN LUKE: &7You have purchased &bFishing Rod &6(I)"
+			stop
+
+
+		if index of event-slot is 21:
+			if player does not have permission "rank.coal":
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&b&lFISHERMAN LUKE: &7You MUST have <##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL <##717171>Rank &7to buy this &a(/buy)"
+				stop
+
+			if {balance::%UUID of player%} is less than 50000:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&b&lFISHERMAN LUKE: &7You cannot afford this Fishing Totem!"
+				stop
+
+			remove 50000 from {balance::%UUID of player%}
+			give player 1 brewing stand named "&3Fishing Totem" with lore "&8Fishing Item" and "" and "&7Once placed, This totem will last" and "&7for &e10 minutes &7and anyone in" and "&7a radius of 10 will receive &bx4 XP" and "" and "&9Place down near water" and "&8&oUse at /warp fishing"
+
+			play sound "entity.player.levelup" with pitch 2 to player
+			send "&b&lFISHERMAN LUKE: &7You have purchased &3Fishing Totem"
+			stop
+
+
+		if index of event-slot is 24:
+			execute player command "/sell"
+			stop
+
+
+		if index of event-slot is 49:
+			play sound "entity.player.burp" with pitch 2 to player
+			close player's inventory
+			stop
+
+
+
+
+
+command /rod [<number>]:
+	trigger:
+		if player is not "MasterClashers":
+			stop
+
+		send "&b&lFISHING ROD: &7You received rod level &6%arg-1%"
+
+		give player {FishingRod_Level.%arg-1%}
+		play sound "entity.experience_orb.pickup" with pitch 0.5 to player
+		play sound "block.note_block.guitar" with pitch 0.7 to player
+		wait 3 ticks
+		play sound "entity.experience_orb.pickup" with pitch 0.75 to player
+		play sound "block.note_block.guitar" with pitch 0.8 to player
+		wait 3 ticks
+		play sound "entity.experience_orb.pickup" with pitch 1.0 to player
+		play sound "block.note_block.guitar" with pitch 0.9 to player
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Fishing: Fishing System:
+#
+#
+#==========================================================
+
+
+
+
+
+on fish:
+	if player's z-coord is between -138 and 91:
+		if player's x-coord is between -138 and 91:
+			if fish event state = caught fish:
+				set {_FishingPlaySound::%UUID of player%} to a random number between 1.6 and 2
+				play sound "entity.experience_orb.pickup" with pitch {_FishingPlaySound::%UUID of player%} to player
+
+
+				fullinventorycheck(player)
+
+
+				set {_FishingCatch::%UUID of player%} to a random integer between 1 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.10)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 7 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.11)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 9 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.12)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 11 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.13)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 13 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.14)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 15 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.15)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 17 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.16)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 19 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.17)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 21 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.18)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 23 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.19)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 25 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.20)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 27 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.21)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 29 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.22)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 31 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.23)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 33 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.24)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 35 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.25)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 40 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.26)":
+					set {_FishingCatch::%UUID of player%} to a random integer between 50 and 100
+
+
+
+				if player's boots is leather Boots named "&bFishing Boots":
+					if player's leggings is leather Leggings named "&bFishing Leggings":
+						if player's chestplate is leather Chestplate named "&bFishing Chestplate":
+							set {_FishingCatch::%UUID of player%} to a random integer between 75 and 100
+
+
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.15)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 200
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.16)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 100
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.17)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 66
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.18)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 50
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.19)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 40
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.20)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 33
+
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.21)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 29
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.22)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 25
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.23)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 22
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.24)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 20
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.25)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 18
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.26)":
+					set {_LotteryCatchChance::%UUID of player%} to a random integer between 1 and 14
+
+				if {_LotteryCatchChance::%UUID of player%} = 1:
+					set {_FishingCatch::%UUID of player%} to 0
+					set {_FishingXPGained::%UUID of player%} to 500
+
+					set {_CatchValue::%UUID of player%} to a random integer between 100000 and 1000000
+
+					send "&6&lLOTTERY CATCH: &7You have found a &a$%regex({_CatchValue::%UUID of player%})% &7lottery ticket"
+					set item of caught entity to paper named "&6Lottery Ticket" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of player%}%" and "" and "&6&lLOTTERY CATCH"
+
+
+				if {SpawnedPet::%UUID of player%} is alive:
+					if display name of {SpawnedPet::%UUID of player%} contains "Turtle":
+						chance of 6%:
+							set {_FishingCatch::%UUID of player%} to 0
+							set item of caught entity to turtle egg named "&3Turtle Egg" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$2,500" and "" and "&3&lTURTLE CATCH"
+							send "&b&lCATCH: &7You caught a &3Turtle Egg &7worth &a$2,500" to player
+
+						if {_FishingCatch::%UUID of player%} is not 0:
+							chance of 3%:
+								set {_FishingCatch::%UUID of player%} to 0
+								set item of caught entity to turtle helmet named "&2Turtle Shell" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$7,500" and "" and "&3&lTURTLE CATCH" with nbt "{HideFlags:63}"
+								send "&b&lCATCH: &7You caught a &2Turtle Shell &7worth &a$7,500" to player
+
+
+				if {_FishingCatch::%UUID of player%} is between 1 and 70:
+					set {_FishingXPGained::%UUID of player%} to 100
+					set {_CatchValue::%UUID of player%} to a random integer between 10 and 100
+					if {ActiveEvent} is "fish - extra cash":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 10
+
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.5)":
+						chance of 5%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.6)":
+						chance of 10%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.7)":
+						chance of 15%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.8)":
+						chance of 20%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.9)":
+						chance of 25%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.10)":
+						chance of 30%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.11)":
+						chance of 35%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.12)":
+						chance of 40%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.13)":
+						chance of 45%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.14)":
+						chance of 50%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.15)":
+						chance of 55%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.16)":
+						chance of 60%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.17)":
+						chance of 65%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.18)":
+						chance of 70%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.19)":
+						chance of 75%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.20)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.21)":
+						chance of 85%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.22)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.23)":
+						chance of 95%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.24)":
+						chance of 99%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.25)" or "&8Fishing Item (lvl.26)":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+
+					send "&b&lCATCH: &7You caught a &a&lCOMMON &7fish worth &a$%regex({_CatchValue::%UUID of player%})%"
+					set item of caught entity to 1 cod named "&aCod" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of player%}%" and "" and "&a&lCOMMON CATCH"
+
+				if {_FishingCatch::%UUID of player%} is between 71 and 85:
+					set {_FishingXPGained::%UUID of player%} to 200
+					set {_CatchValue::%UUID of player%} to a random integer between 100 and 1000
+					if {ActiveEvent} is "fish - extra cash":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 10
+
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.5)":
+						chance of 5%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.6)":
+						chance of 10%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.7)":
+						chance of 15%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.8)":
+						chance of 20%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.9)":
+						chance of 25%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.10)":
+						chance of 30%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.11)":
+						chance of 35%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.12)":
+						chance of 40%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.13)":
+						chance of 45%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.14)":
+						chance of 50%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.15)":
+						chance of 55%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.16)":
+						chance of 60%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.17)":
+						chance of 65%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.18)":
+						chance of 70%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.19)":
+						chance of 75%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.20)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.21)":
+						chance of 85%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.22)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.23)":
+						chance of 95%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.24)":
+						chance of 99%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.25)" or "&8Fishing Item (lvl.26)":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+
+					send "&b&lCATCH: &7You caught a &e&lRARE &7fish worth &a$%regex({_CatchValue::%UUID of player%})%"
+					set item of caught entity to raw salmon named "&eSalmon" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of player%}%" and "" and "&e&lRARE CATCH"
+
+				if {_FishingCatch::%UUID of player%} is between 86 and 95:
+					set {_FishingXPGained::%UUID of player%} to 300
+					set {_CatchValue::%UUID of player%} to a random integer between 1000 and 10000
+					if {ActiveEvent} is "fish - extra cash":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 10
+
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.5)":
+						chance of 5%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.6)":
+						chance of 10%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.7)":
+						chance of 15%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.8)":
+						chance of 20%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.9)":
+						chance of 25%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.10)":
+						chance of 30%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.11)":
+						chance of 35%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.12)":
+						chance of 40%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.13)":
+						chance of 45%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.14)":
+						chance of 50%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.15)":
+						chance of 55%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.16)":
+						chance of 60%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.17)":
+						chance of 65%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.18)":
+						chance of 70%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.19)":
+						chance of 75%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.20)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.21)":
+						chance of 85%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.22)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.23)":
+						chance of 95%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.24)":
+						chance of 99%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.25)" or "&8Fishing Item (lvl.26)":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+
+					send "&b&lCATCH: &7You caught a &c&lEPIC &7fish worth &a$%regex({_CatchValue::%UUID of player%})%"
+					set item of caught entity to tropical fish named "&cTropical Fish" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of player%}%" and "" and "&c&lEPIC CATCH"
+
+				if {_FishingCatch::%UUID of player%} is between 96 and 99:
+					set {_FishingXPGained::%UUID of player%} to 400
+					set {_CatchValue::%UUID of player%} to a random integer between 10000 and 100000
+					if {ActiveEvent} is "fish - extra cash":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 10
+
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.5)":
+						chance of 5%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.6)":
+						chance of 10%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.7)":
+						chance of 15%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.8)":
+						chance of 20%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.9)":
+						chance of 25%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.10)":
+						chance of 30%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.11)":
+						chance of 35%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.12)":
+						chance of 40%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.13)":
+						chance of 45%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.14)":
+						chance of 50%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.15)":
+						chance of 55%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.16)":
+						chance of 60%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.17)":
+						chance of 65%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.18)":
+						chance of 70%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.19)":
+						chance of 75%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.20)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.21)":
+						chance of 85%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.22)":
+						chance of 80%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.23)":
+						chance of 95%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.24)":
+						chance of 99%:
+							set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+					if line 1 of lore of player's tool is "&8Fishing Item (lvl.25)" or "&8Fishing Item (lvl.26)":
+						set {_CatchValue::%UUID of player%} to {_CatchValue::%UUID of player%} * 2
+
+					send "&b&lCATCH: &7You caught a &6&lLEGENDARY &7fish worth &a$%regex({_CatchValue::%UUID of player%})%"
+					set item of caught entity to pufferfish named "&6Pufferfish" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$%{_CatchValue::%UUID of player%}%" and "" and "&6&lLEGENDARY CATCH"
+
+				if {_FishingCatch::%UUID of player%} is 100:
+					set {_FishingXPGained::%UUID of player%} to 500
+					set {_FishingCatch::%UUID of player%} to a random integer between 1 and 3
+
+					chance of 5%:
+						set {_FishingCatch::%UUID of player%} to 0
+						send "&b&lCATCH: &7You caught an <##cc7332>&lANCIENT FISH SCULPTURE"
+						set item of caught entity to leather horse armour named "<##cc7332>Ancient Fish Sculpture" with lore "&8Fishing Item" and "" and "&7&nCannot /sell this item!" and "" and "&d&lFISH SCULPTURE"
+
+					if {_FishingCatch::%UUID of player%} is 1:
+						send "&b&lCATCH: &7You caught an <##ededed>&lIRON FISH SCULPTURE"
+						set item of caught entity to iron horse armour named "<##ededed>Iron Fish Sculpture" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$250000" and "" and "&d&lFISH SCULPTURE"
+					if {_FishingCatch::%UUID of player%} is 2:
+						send "&b&lCATCH: &7You caught an <##d3c247>&lGOLD FISH SCULPTURE"
+						set item of caught entity to gold horse armour named "<##d3c247>Gold Fish Sculpture" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$500000" and "" and "&d&lFISH SCULPTURE"
+					if {_FishingCatch::%UUID of player%} is 3:
+						send "&b&lCATCH: &7You caught an <##32ccca>&lDIAMOND FISH SCULPTURE"
+						set item of caught entity to diamond horse armour named "<##32ccca>Diamond Fish Sculpture" with lore "&8Fishing Item" and "" and "&7Sell Value: &a$750000" and "" and "&d&lFISH SCULPTURE"
+
+
+
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.2)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.1
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.3)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.2
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.4)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.3
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.5)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.4
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.6)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.5
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.7)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.6
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.8)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.7
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.9)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.8
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.10)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 1.9
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.11)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.0
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.12)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.1
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.13)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.2
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.14)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.3
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.15)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.4
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.16)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.5
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.17)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.6
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.18)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.7
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.19)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.8
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.20)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2.9
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.21)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 3.0
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.22)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 3.1
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.23)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 3.2
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.24)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 3.3
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.25)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 3.4
+				if line 1 of lore of player's tool is "&8Fishing Item (lvl.26)":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 3.8
+
+				loop {FishingTotem::*}:
+					if distance between player and loop-value is less than 10:
+						set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 4
+						exit loop
+
+				if {ActiveEvent} is "fish - double xp":
+					set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2
+
+				if {SpawnedPet::%UUID of player%} is alive:
+					if display name of {SpawnedPet::%UUID of player%} contains "Guardian":
+						set {_FishingXPGained::%UUID of player%} to {_FishingXPGained::%UUID of player%} * 2
+
+
+				remove {_FishingXPGained::%UUID of player%} from {RequiredXP::%UUID of player%}
+				set player's action bar to "&b&n+%{_FishingXPGained::%UUID of player%}% XP Gained"
+				set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+
+
+				if {QuestStatus-Wet&Cold::%UUID of player%} is "Started":
+					if {Quest-Wet&Cold-FishesToCatch::%UUID of player%} is greater than 0:
+						remove 1 from {Quest-Wet&Cold-FishesToCatch::%UUID of player%}
+
+				if lore of player's tool contains "&7&oCatches Till Upgrade: &3&o1":
+					loop 24 times:
+						if line 1 of lore of player's tool is "&8Fishing Item (lvl.%loop-number%)":
+							set player's tool to {FishingRod_Level.%loop-number + 1%}
+
+							play sound "entity.experience_orb.pickup" with pitch 0.5 to player
+							play sound "block.note_block.guitar" with pitch 0.7 to player
+							wait 3 ticks
+							play sound "entity.experience_orb.pickup" with pitch 0.75 to player
+							play sound "block.note_block.guitar" with pitch 0.8 to player
+							wait 3 ticks
+							play sound "entity.experience_orb.pickup" with pitch 1.0 to player
+							play sound "block.note_block.guitar" with pitch 0.9 to player
+
+
+							send "&b&lFISHING ROD: &7Your rod has upgraded to &6Level %loop-number + 1%"
+
+
+							if loop-number = 4:
+								play sound "ui.toast.challenge_complete" with pitch 2 to player
+								send "&b&l- &7Unlocked &9Lure I"
+								send "&b&l- &7Unlocked: &eDouble Catch Chance"
+
+							if loop-number = 9:
+								play sound "ui.toast.challenge_complete" with pitch 2 to player
+								send "&b&l- &7Unlocked &9Lure II"
+								send "&b&l- &7Unlocked: &dBetter Catches"
+
+							if loop-number = 14:
+								play sound "ui.toast.challenge_complete" with pitch 2 to player
+								send "&b&l- &7Unlocked &9Lure III"
+								send "&b&l- &7Unlocked: &6Lottery Chance"
+
+							if loop-number = 19:
+								play sound "ui.toast.challenge_complete" with pitch 2 to player
+								send "&b&l- &7Unlocked &9Lure IV"
+
+							if loop-number = 24:
+								play sound "ui.toast.challenge_complete" with pitch 2 to player
+								send "&b&l- &7Unlocked &9Lure V"
+							stop
+
+
+
+				if name of player's tool is "&bFishing Rod &6(I)", "&bFishing Rod &6(II)", "&bFishing Rod &6(III)" or "&bFishing Rod &6(IV)":
+					set {_CatchesTillUpgrade::*} to line 5 of lore of player's tool parsed as "%text%%number%"
+					set line 5 of lore of player's tool to "&7&oCatches Till Upgrade: &3&o%{_CatchesTillUpgrade::2} - 1%"
+
+				if name of player's tool is "&bFishing Rod &6(V)", "&bFishing Rod &6(VI)", "&bFishing Rod &6(VII)", "&bFishing Rod &6(VIII)" or "&bFishing Rod &6(IX)":
+					set {_CatchesTillUpgrade::*} to line 7 of lore of player's tool parsed as "%text%%number%"
+					set line 7 of lore of player's tool to "&7&oCatches Till Upgrade: &3&o%{_CatchesTillUpgrade::2} - 1%"
+
+				if name of player's tool is "&bFishing Rod &6(X)", "&bFishing Rod &6(XI)", "&bFishing Rod &6(XII)", "&bFishing Rod &6(XIII)" or "&bFishing Rod &6(XIV)":
+					set {_CatchesTillUpgrade::*} to line 8 of lore of player's tool parsed as "%text%%number%"
+					set line 8 of lore of player's tool to "&7&oCatches Till Upgrade: &3&o%{_CatchesTillUpgrade::2} - 1%"
+
+				if name of player's tool is "&bFishing Rod &6(XV)", "&bFishing Rod &6(XVI)", "&bFishing Rod &6(XVII)", "&bFishing Rod &6(XVIII)", "&bFishing Rod &6(XIX)", "&bFishing Rod &6(XX)", "&bFishing Rod &6(XXI)", "&bFishing Rod &6(XXII)", "&bFishing Rod &6(XXIII)" or "&bFishing Rod &6(XXIV)":
+					set {_CatchesTillUpgrade::*} to line 9 of lore of player's tool parsed as "%text%%number%"
+					set line 9 of lore of player's tool to "&7&oCatches Till Upgrade: &3&o%{_CatchesTillUpgrade::2} - 1%"
+
+				if name of player's tool is "&bFishing Rod &6(XXV)":
+					set {_CatchesTillUpgrade::*} to line 9 of lore of player's tool parsed as "%text%%number%"
+					set line 9 of lore of player's tool to "&7&oTotal Catches: &3&o%{_CatchesTillUpgrade::2} + 1%"
+			stop
+
+	cancel event
+	play sound "block.note_block.bass" with pitch 2 to player
+	send "&b&lFISHING: &7You can only fish at the /spawn region"
+	stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Fishing: Fishing Totems:
+#
+#
+#==========================================================
+
+
+
+
+
+on place:
+	if event-block is a brewing stand:
+		cancel event
+		if name of player's tool is "&3Fishing Totem":
+
+			if size of {FishingTotem::*} is greater than 2:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&3&lTOTEM: &7There is a server limit of &e3 Totems &7that can be placed!"
+				cancel event
+				stop
+
+			wait 1 tick
+
+			loop 3 times:
+				if distance between {FishingPondLocation::%Loop-number%} and player is less than 25:
+					add event-block to {FishingTotem::*}
+					remove 1 brewing stand named "&3Fishing Totem" from player's inventory
+
+					play sound "entity.chicken.egg" with pitch 2 to player
+					send "&3&lTOTEM: &7You have placed down a &3Fishing Totem!"
+					send "&3&l- &7Anyone in a radius of &e10 &7gets &bx5 XP"
+
+					spawn 1 armor stand at location 0.25 meters below event-block with nbt "{NoGravity:1, Invisible:1}"
+					set {_FishingTotemArmourStand} to last spawned armor stand
+					set display name of {_FishingTotemArmourStand} to "&3&nTotem Time Left: &e&n60s"
+
+					set block at event-block to brewing stand
+					set block at location 1 meter above event-block to brewing stand
+
+
+					loop 600 times:
+						set display name of {_FishingTotemArmourStand} to "&3&nTotem Time Left: &e&n%601 - loop-number-2%s"
+						draw 15 totem_of_undying at event-block with offset vector(0, 0, 0) with extra 0.2
+						draw 15 totem_of_undying at location 1 meter above event-block with offset vector(0, 0, 0) with extra 0.2
+						wait 1 second
+
+
+					draw 15 poof at event-block with offset vector(0, 0, 0) with extra 0.15
+					draw 15 poof at location 1 meter above event-block with offset vector(0, 0, 0) with extra 0.15
+					set block at event-block to air
+					set block at location 1 meter above event-block to air
+
+					kill {_FishingTotemArmourStand}
+					delete {_FishingTotemArmourStand}
+					remove event-block from {FishingTotem::*}
+					stop
+
+
+			play sound "block.note_block.bass" with pitch 2 to player
+			send "&3&lTOTEM: &7You can only place &3Fishing Totems &7near a fishing pond!"
+			stop
+
+
+
+

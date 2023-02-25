@@ -1,0 +1,1055 @@
+#==========================================================
+#
+#
+#		ClashGenz Join: Joining System:
+#
+#
+#==========================================================
+
+
+
+on quit:
+	set quit message to ""
+
+
+
+on join:
+	if player does not have permission "rank.mod":
+		set join message to "<##7a9972>&o%player% Joined!"
+	else:
+		set join message to ""
+
+	set {CashHuntEvent-TotalGained::%UUID of player%} to 0
+	set player's flight mode to false
+	set player's flight speed to 0.2
+
+	if {QuestStatus-CasinoRush::%UUID of player%} is not set:
+		set {QuestStatus-CasinoRush::%UUID of player%} to "Not Started"
+	if {BonusQuestStatus_LostCakes::%UUID of player%} is not set:
+		set {BonusQuestStatus_LostCakes::%UUID of player%} to "Not Started"
+#	if {BonusQuestStatus_TheRace::%UUID of player%} is not set:
+#		set {BonusQuestStatus_TheRace::%UUID of player%} to "Not Started"
+
+	if {Level::%UUID of player%} is greater than 99:
+		if player has permission "rank.gold":
+			set {CasinoHeistEnabled::%UUID of player%} to true
+
+	if {Started::%UUID of player%} is not set:
+		clear player's inventory
+		teleport player to {location-spawn}
+
+		set {Started::%UUID of player%} to false
+
+		set {ActiveQuest::%UUID of player%} to "NONE"
+		set {NextQuest::%UUID of player%} to "The Wanderers"
+		set {QuestStatus-TheWanderers::%UUID of player%} to "Not Started"
+		set {QuestStatus-FarmHunt::%UUID of player%} to "Not Started"
+		set {QuestStatus-Wet&Cold::%UUID of player%} to "Not Started"
+		set {QuestStatus-CaveExplorer::%UUID of player%} to "Not Started"
+		set {QuestStatus-CasinoRush::%UUID of player%} to "Not Started"
+		set {QuestStatus-TheClouds::%UUID of player%} to "Not Started"
+
+		delete {Quest-TheWanderers-FoundWanderer_Jerry::%UUID of player%}
+		delete {Quest-TheWanderers-FoundWanderer_Sally::%UUID of player%}
+		delete {Quest-TheWanderers-FoundWanderer_James::%UUID of player%}
+		delete {Quest-TheWanderers-FoundWanderer_Boff::%UUID of player%}
+
+		delete {Quest-FarmHunt-ChickensKilled::%UUID of player%}
+
+		delete {Quest-Wet&Cold-BringBackSculpture::%UUID of player%}
+		delete {Quest-Wet&Cold-BringBackPufferfish::%UUID of player%}
+		delete {Quest-Wet&Cold-FishesToCatch::%UUID of player%}
+
+		delete {VillageTaskCooldown-Brandon::%UUID of player%}
+
+		delete {AutoSell::%UUID of player%}
+
+		delete {UnlockedHoeLevel::%UUID of player%}
+
+		delete {Fishing_SpokenToLuke::%UUID of player%}
+
+		set {Balance::%UUID of player%} to 0
+		
+		set {Level::%UUID of player%} to 1
+		set {RequiredXP::%UUID of player%} to 1000
+
+		set {MysteryCrates::%UUID of player%} to 0
+		set {MysteryCrates_RewardsCycle::%UUID of player%} to 0
+		
+		delete {ClaimCoalGenSlots::%UUID of player%}
+		delete {ClaimIronGenSlots::%UUID of player%}
+		delete {ClaimGoldGenSlots::%UUID of player%}
+		delete {ClaimDiamondGenSlots::%UUID of player%}
+		
+		set {EmeraldSkullsFound::%UUID of player%} to 0
+		loop 30 times:
+			delete {EmeraldSkullsFoundSpecific::%loop-number%::%UUID of player%}
+
+		delete {PlacedGenerators::%UUID of player%::*}
+		set {GeneratorLimit::%UUID of player%} to 25
+
+
+	set slot 7 of player to 1 enchanted book named "&bQuest Book &7&o(Right Click)" with lore "&6Use this book to find all available" and "&6quests and how to start them!"
+	set slot 8 of player to 1 nether star named "&bClashGenz Menu &7&o(Right Click)" with lore "&6Use the ClashGenz Menu to have access to" and "&6anything you may need for quality of life!"
+
+
+	if {ClaimCoalGenSlots::%UUID of player%} is not set:
+		if player has permission "rank.coal":
+			set {ClaimCoalGenSlots::%UUID of player%} to true
+			add 10 to {GeneratorLimit::%UUID of player%}
+
+	if {ClaimIronGenSlots::%UUID of player%} is not set:
+		if player has permission "rank.iron":
+			set {ClaimIronGenSlots::%UUID of player%} to true
+			add 10 to {GeneratorLimit::%UUID of player%}
+
+	if {ClaimGoldGenSlots::%UUID of player%} is not set:
+		if player has permission "rank.gold":
+			set {ClaimGoldGenSlots::%UUID of player%} to true
+			add 10 to {GeneratorLimit::%UUID of player%}
+
+	if {ClaimDiamondGenSlots::%UUID of player%} is not set:
+		if player has permission "rank.diamond":
+			set {ClaimDiamondGenSlots::%UUID of player%} to true
+			add 10 to {GeneratorLimit::%UUID of player%}
+
+
+	set {FlightCheckSev::%UUID of player%} to 0
+	while player is online:
+		set title of player's scoreboard to "&6&lCLASH&e&lGENZ"
+
+		set line 11 of player's scoreboard to ""
+		if {ActiveEvent} is "NONE":
+			set line 10 of player's scoreboard to "&7No Active Events"
+			set line 9 of player's scoreboard to "&7&onext event in: %{TimeTillEvent}%m"
+		set line 8 of player's scoreboard to ""
+		set line 7 of player's scoreboard to "&fBalance: &a$%regex({Balance::%UUID of player%})%"
+		set line 6 of player's scoreboard to "&fGenerators: &e%size of {PlacedGenerators::%UUID of player%::*}%/%{GeneratorLimit::%UUID of player%}%"
+		set line 5 of player's scoreboard to ""
+		set line 4 of player's scoreboard to "&fLevel: &6&l%{Level::%UUID of player%}%"
+		set line 3 of player's scoreboard to "&fXP Required: &b%regex({RequiredXP::%UUID of player%})%"
+		set line 2 of player's scoreboard to ""
+		set line 1 of player's scoreboard to "&eclashgenz.minehut.gg"
+
+
+		if {RequiredXP::%UUID of player%} is less than 1:
+			playsound_levelup(player)
+
+			if {Level::%UUID of player%} is greater than 99:
+				add 0.1 to {Level::%UUID of player%}
+				add 25000 to {RequiredXP::%UUID of player%}
+				if {Level::%UUID of player%} is greater than 199:
+					add 25000 to {RequiredXP::%UUID of player%}
+				if {Level::%UUID of player%} is greater than 299:
+					add 25000 to {RequiredXP::%UUID of player%}
+				if {Level::%UUID of player%} is greater than 399:
+					add 25000 to {RequiredXP::%UUID of player%}
+
+				send ""
+				send "&6&lLEVEL UP: &eYou are now &6&lLevel %{Level::%UUID of player%}%&6&l!"
+				if {RequiredXP::%UUID of player%} is less than 0:
+					send "&7&oYou need &f&o0xp &7&oto level up again."
+				else:
+					send "&7&oYou need &f&o%regex({RequiredXP::%UUID of player%})%xp &7&oto level up again."
+				send ""
+
+			if {Level::%UUID of player%} is less than 100:
+				add 1 to {Level::%UUID of player%}
+				add {Level::%UUID of player%} * 1000 to {RequiredXP::%UUID of player%}
+
+				send ""
+				send "&6&lLEVEL UP: &eYou are now &6&lLevel %{Level::%UUID of player%}%&6&l!"
+				if {RequiredXP::%UUID of player%} is less than 0:
+					send "&7&oYou need &f&o0xp &7&oto level up again."
+				else:
+					send "&7&oYou need &f&o%regex({RequiredXP::%UUID of player%})%xp &7&oto level up again."
+				send ""
+
+
+		if player's tool is {FarmingHoe-IronHoe_Level.1}:
+			set player's walking speed to 0.24
+		if player's tool is {FarmingHoe-IronHoe_Level.2}:
+			set player's walking speed to 0.28
+		if player's tool is {FarmingHoe-IronHoe_Level.3}:
+			set player's walking speed to 0.32
+
+		if player's tool is {FarmingHoe-GoldHoe_Level.1}:
+			set player's walking speed to 0.34
+		if player's tool is {FarmingHoe-GoldHoe_Level.2}:
+			set player's walking speed to 0.36
+		if player's tool is {FarmingHoe-GoldHoe_Level.3}:
+			set player's walking speed to 0.38
+
+		if player's tool is {FarmingHoe-DiamondHoe_Level.1}:
+			set player's walking speed to 0.4
+		if player's tool is {FarmingHoe-DiamondHoe_Level.2}:
+			set player's walking speed to 0.42
+		if player's tool is {FarmingHoe-DiamondHoe_Level.3}:
+			set player's walking speed to 0.44
+
+		if player's tool is {FarmingHoe-NetheriteHoe}:
+			set player's walking speed to 0.5
+
+		if player's tool is not {FarmingHoe-IronHoe_Level.1}, {FarmingHoe-IronHoe_Level.2}, {FarmingHoe-IronHoe_Level.3}, {FarmingHoe-GoldHoe_Level.1}, {FarmingHoe-GoldHoe_Level.2}, {FarmingHoe-GoldHoe_Level.3}, {FarmingHoe-DiamondHoe_Level.1}, {FarmingHoe-DiamondHoe_Level.2}, {FarmingHoe-DiamondHoe_Level.3} or {FarmingHoe-NetheriteHoe}:
+			set player's walking speed to 0.2
+
+		set {FlightCheck1::%UUID of player%} to player's location
+		set y-coord of {FlightCheck1::%UUID of player%} to 90
+		wait 1 second
+		set {FlightCheck2::%UUID of player%} to player's location
+		set y-coord of {FlightCheck2::%UUID of player%} to 90
+
+		if player's x-coord is between -138 and 91:
+			if player's z-coord is between 91 and -138:
+				delete {FlightCheck1::%UUID of player%}
+				delete {FlightCheck2::%UUID of player%}
+
+		if {FlightCheck1::%UUID of player%} is set:
+			if {FlightCheck2::%UUID of player%} is set:
+				if distance between {FlightCheck1::%UUID of player%} and {FlightCheck2::%UUID of player%} is greater than 20:
+					if player's flight mode is false:
+						add 1 to {FlightCheckSev::%UUID of player%}
+						if {FlightCheckSev::%UUID of player%} = 2:
+							loop all players:
+								if loop-player has permission "rank.mod":
+									send "&b&ke &d&lCONSOLE > &6%player% &esuspected of &aSpeed&e." to loop-player
+									send "&b&ke &d&lCONSOLE > &7%distance between {FlightCheck1::%UUID of player%} and {FlightCheck2::%UUID of player%}%" to loop-player
+
+						if {FlightCheckSev::%UUID of player%} = 3:
+							loop all players:
+								if loop-player has permission "rank.mod":
+									send "&b&ke &d&lCONSOLE > &6%player% &esuspected of &6Speed&e." to loop-player
+
+						if {FlightCheckSev::%UUID of player%} >= 4:
+							kick player due to "Disconnected: Invalid Movement"
+							loop all players:
+								if loop-player has permission "rank.mod":
+									send "&b&ke &d&lCONSOLE > &6%player% &esuspected of &cSpeed&e." to loop-player
+
+
+
+
+function playsound_levelup(p:player):
+	play sound "block.note_block.snare" with pitch 1 to {_p}
+	play sound "block.note_block.bit" with pitch 1 to {_p}
+
+	wait 2 ticks
+
+	play sound "block.note_block.snare" with pitch 1.25 to {_p}
+	play sound "block.note_block.bit" with pitch 1.25 to {_p}
+
+	wait 2 ticks
+
+	play sound "block.note_block.snare" with pitch 2 to {_p}
+	play sound "block.note_block.pling" with pitch 2 to {_p}
+	play sound "entity.player.levelup" with pitch 2 to {_p}
+	
+	spawn firework at location 2 meter above {_p} with nbt "{LifeTime:1,FireworksItem:{id:firework_rocket,Count:1,tag:{Fireworks:{Flight:0,Explosions:[{Type:2,Flicker:1b,Colors:[I;16025888]}]}}}}"
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: /Start Command:
+#
+#
+#==========================================================
+
+
+
+
+
+on citizen right click:
+	if npc is 14:
+		execute player command "/start"
+
+
+
+
+
+command /start:
+	trigger:
+		if {Started::%UUID of player%} is false:
+			set {Started::%UUID of player%} to true
+
+			loop 3 times:
+				give player {WheatGenerator}
+			add 1000 to {balance::%UUID of player%}
+			
+			send "&e&lWELCOME &7to ClashGenz, You received: &a$1,000 &7+ &ex3 Wheat Gens!"
+
+			wait 10 ticks
+			
+			execute player command "/plot auto"
+			wait 15 ticks
+			send "&e&lTIP: &7Use your &fNether Star &7menu to navigate the server"
+			send "&e&l- &7There is loads of things to do. So go exploring!"
+
+			set line 14 of player's scoreboard to ""
+			set line 13 of player's scoreboard to "&bStart FIRST Quest:"
+			set line 12 of player's scoreboard to "&d/warp stephan"
+			stop
+
+
+
+		play sound "block.note_block.bass" with pitch 2 to player
+		send "&e&l/START: &7You have already executed this command, Do &b/warp plot &7to go to YOUR plot!"
+		stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: Chat System:
+#
+#
+#==========================================================
+
+
+
+
+on command "/w":
+	if {Muted::%UUID of player%} is true:
+		if difference between {MutedWhen::%UUID of player%} and now is greater than {MuteLength::%UUID of player%}:
+			delete {Muted::%UUID of player%}
+			delete {MutedWhen::%UUID of player%}
+			delete {MuteLength::%UUID of player%}
+			delete {MuteReason::%UUID of player%}
+			delete {MutedDifference::%UUID of player%}
+
+		if {Muted::%UUID of player%} is true:
+			set {MutedDifference::%UUID of player%} to difference between {MutedWhen::%UUID of player%} and now
+
+			send "&c&m----------------------------------------"
+			send "&7You're Muted for: &c%{MuteReason::%UUID of player%}%"
+			send "&7Mute Expires In: &c%difference between {MuteLength::%UUID of player%} and {MutedDifference::%UUID of player%}%"
+			send ""
+			send "&7More Information here: <link:https://discord.com/invite/aWXNJTGTaX>&9discord.gg/aWXNJTGTaX<reset>"
+			send "&c&m----------------------------------------"
+
+			cancel event
+			stop
+
+
+
+
+
+on chat:
+	if {Muted::%UUID of player%} is true:
+		if difference between {MutedWhen::%UUID of player%} and now is greater than {MuteLength::%UUID of player%}:
+			delete {Muted::%UUID of player%}
+			delete {MutedWhen::%UUID of player%}
+			delete {MuteLength::%UUID of player%}
+			delete {MuteReason::%UUID of player%}
+			delete {MutedDifference::%UUID of player%}
+
+		if {Muted::%UUID of player%} is true:
+			set {MutedDifference::%UUID of player%} to difference between {MutedWhen::%UUID of player%} and now
+
+			send "&c&m----------------------------------------"
+			send "&7You're Muted for: &c%{MuteReason::%UUID of player%}%"
+			send "&7Mute Expires In: &c%difference between {MuteLength::%UUID of player%} and {MutedDifference::%UUID of player%}%"
+			send ""
+			send "&7More Information here: <link:https://discord.com/invite/aWXNJTGTaX>&9discord.gg/aWXNJTGTaX<reset>"
+			send "&c&m----------------------------------------"
+
+			cancel event
+			stop
+
+	if message does not contain "village":
+		if message contains "lag" or "nigger" or "fag" or "p2w" or "ptw":
+			cancel event
+			loop all players:
+				if loop-player has permission "rank.mod":
+					send "&e[&c☢&e]: &d%player%&f: %message%" to loop-player
+			if player has permission "rank.diamond":
+				send "<##1eccc2>&lD<##26d6cc>&lI<##32ded4>&lA<##41e8de>&lM<##53f5eb>&lO<##68f5ed>&lN<##78fff7>&lD <##84fff8>%player%&f: %message%"
+				stop
+			if player has permission "rank.gold":
+				send "<##e7aa34>&lG<##ebaf3c>&lO<##f5bb4a>&lL<##ffc85e>&lD <##fdcd6f>%player%&f: %message%"
+				stop
+			if player has permission "rank.iron":
+				send "<##b9b9b9>&lI<##c7c7c7>&lR<##d4d4d4>&lO<##d4d4d4>&lN <##ededed>%player%&f: %message%"
+				stop
+			if player has permission "rank.coal":
+				send "<##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL <##717171>%player%&f: %message%"
+				stop
+
+			if difference between {ChatCooldown::%UUID of player%} and now is less than 3 seconds:
+				send "&f&lCHAT: &7There is a 3s cooldown on chat"
+				send "&f&l- &7Bypass with <##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL &a/buy"
+				cancel event
+				stop
+			set {ChatCooldown::%UUID of player%} to now
+
+			send "<##b3bfbe>%player%<##b3bfbe>: %message%"
+			stop
+
+	if player is "MasterClashers":
+		set chat format to "<##ff0000>&lO<##ff1515>&lW<##ff2e2e>&lN<##ff4646>&lE<##ff5757>&lR <##ff6868>%player%&f: %message%"
+		stop
+	if player has permission "rank.admin":
+		set chat format to "<##ff0000>&lA<##ff1515>&lD<##ff2e2e>&lM<##ff4646>&lI<##ff5757>&lN <##ff6868>%player%&f: %message%"
+		stop
+	if player has permission "rank.mod":
+		set chat format to "<##29d925>&lM<##38e534>&lO<##48f243>&lD <##59ff55>%player%&f: %message%"
+		stop
+
+
+	if player has permission "rank.diamond":
+		set chat format to "<##1eccc2>&lD<##26d6cc>&lI<##32ded4>&lA<##41e8de>&lM<##53f5eb>&lO<##68f5ed>&lN<##78fff7>&lD <##84fff8>%player%&f: %message%"
+		stop
+	if player has permission "rank.gold":
+		set chat format to "<##e7aa34>&lG<##ebaf3c>&lO<##f5bb4a>&lL<##ffc85e>&lD <##fdcd6f>%player%&f: %message%"
+		stop
+	if player has permission "rank.iron":
+		set chat format to "<##b9b9b9>&lI<##c7c7c7>&lR<##d4d4d4>&lO<##d4d4d4>&lN <##ededed>%player%&f: %message%"
+		stop
+	if player has permission "rank.coal":
+		set chat format to "<##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL <##717171>%player%&f: %message%"
+		stop
+
+	if difference between {ChatCooldown::%UUID of player%} and now is less than 3 seconds:
+		send "&f&lCHAT: &7There is a 3s cooldown on chat"
+		send "&f&l- &7Bypass with <##494949>&lC<##4f4f4f>&lO<##5b5b5b>&lA<##636363>&lL &a/buy"
+		cancel event
+		stop
+	set {ChatCooldown::%UUID of player%} to now
+
+	set chat format to "<##b3bfbe>%player%<##b3bfbe>: %message%"
+	stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: Baltop // Farmtop
+#
+#
+#==========================================================
+
+
+
+
+
+command /baltop:
+	trigger:
+		send "&a&lBALTOP: &7Top &e10 &7players with the most &a$ &7on the server!"
+		set {_baltop-placement} to 0
+		loop indices of {balance::*} in descending order:
+			set {balance::%loop-value%} to round({balance::%loop-value%})
+
+			set {_playername} to loop-value parsed as offline player
+			stop if {_baltop-placement} >= 10
+			send "&e%{_baltop-placement} + 1%. &b%{_playername}% &7has: &a$%regex({balance::%loop-value%})%"
+
+			add 1 to {_baltop-placement}
+
+
+
+every 1 minute:
+	loop indices of {balance::*} in descending order:
+		set {balance::%loop-value%} to round({balance::%loop-value%})
+
+		set {_playername} to loop-value parsed as offline player
+		exit loop if {_baltop-placement} >= 10
+		execute console command "/holograms setline BALTOP %{_baltop-placement} + 3% &e%{_baltop-placement} + 1%. &b%{_playername}% &7- &a$%regex({balance::%loop-value%})%"
+
+		add 1 to {_baltop-placement}
+
+	wait 2 seconds
+
+	loop indices of {Level::*} in descending order:
+		set {_playername} to loop-value parsed as offline player
+		stop if {_Leveltop-placement} >= 10
+		execute console command "/holograms setline LEVELTOP %{_Leveltop-placement} + 3% &e%{_Leveltop-placement} + 1%. &b%{_playername}% &6&lLevel %{Level::%loop-value%}%"
+
+		add 1 to {_Leveltop-placement}
+
+
+
+command /leveltop:
+	trigger:
+		send "&6&lLEVELTOP: &7Top &e10 &7players with the highest &6level &7on the server!"
+		set {_Leveltop-placement} to 0
+		loop indices of {Level::*} in descending order:
+			set {_playername} to loop-value parsed as offline player
+			stop if {_Leveltop-placement} >= 10
+			send "&e%{_Leveltop-placement} + 1%. &b%{_playername}% &7is &6&lLevel %{Level::%loop-value%}%"
+
+			add 1 to {_Leveltop-placement}
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: Payouts:
+#
+#
+#==========================================================
+
+
+
+
+
+command /payouts:
+	trigger:
+		send ""
+		send "&a&l&b&lPAY&f&lPAL &a&lPAYOUTS: &7Rewards for &aBaltop &71 - 3:"
+		send "<##e4a40b>1st Place: &a$110"
+		send "<##c5c5c3>2nd Place: &a$50"
+		send "<##b3612a>3rd Place: &a$25"
+
+		send "&a&l&b&lPAY&f&lPAL &a&lPAYOUTS: &7Rewards for &6Leveltop &71 - 3:"
+		send "<##e4a40b>1st Place: &a$40"
+		send "<##c5c5c3>2nd Place: &a$20"
+		send "<##b3612a>3rd Place: &a$5"
+
+
+
+command /payout:
+	trigger:
+		send ""
+		send "&a&l&b&lPAY&f&lPAL &a&lPAYOUTS: &7Rewards for &aBaltop &71 - 3:"
+		send "<##e4a40b>1st Place: &a$110"
+		send "<##c5c5c3>2nd Place: &a$50"
+		send "<##b3612a>3rd Place: &a$25"
+
+		send "&a&l&b&lPAY&f&lPAL &a&lPAYOUTS: &7Rewards for &6Leveltop &71 - 3:"
+		send "<##e4a40b>1st Place: &a$40"
+		send "<##c5c5c3>2nd Place: &a$20"
+		send "<##b3612a>3rd Place: &a$5"
+
+
+
+command /payoff:
+	trigger:
+		send ""
+		send "&a&l&b&lPAY&f&lPAL &a&lPAYOUTS: &7Rewards for &aBaltop &71 - 3:"
+		send "<##e4a40b>1st Place: &a$110"
+		send "<##c5c5c3>2nd Place: &a$50"
+		send "<##b3612a>3rd Place: &a$25"
+
+		send "&a&l&b&lPAY&f&lPAL &a&lPAYOUTS: &7Rewards for &6Leveltop &71 - 3:"
+		send "<##e4a40b>1st Place: &a$40"
+		send "<##c5c5c3>2nd Place: &a$20"
+		send "<##b3612a>3rd Place: &a$5"
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: Skull Hunting:
+#
+#
+#==========================================================
+
+
+
+
+
+command /skull:
+	trigger:
+		teleport player to {location-skull}
+		wait 1 ticks
+		play sound "entity.enderman.teleport" with pitch 1 to player
+		send "&a&lEMERALD SKULL: &7Find all skulls for &aMoney &7+ &dMystery Crates &7+ &6Generator Slots&7!"
+		stop
+
+
+
+
+
+on rightclick on player head:
+	loop 30 times:
+		if distance between {EmeraldSkulls::%loop-number%} and player is less than 5:
+			if {EmeraldSkullsFound::%UUID of player%} = 30:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&a&lEMERALD SKULL: &cYou have already found all skulls!"
+				stop
+			if {EmeraldSkullsFoundSpecific::%loop-number%::%UUID of player%} is not set:
+				set {EmeraldSkullsFoundSpecific::%loop-number%::%UUID of player%} to true
+
+				play sound "block.note_block.banjo" with pitch 0.1 to player
+				play sound "block.note_block.basedrum" with pitch 1 to player
+
+				wait 2 ticks
+
+				play sound "block.note_block.banjo" with pitch 2 to player
+				play sound "block.note_block.bit" with pitch 2 to player
+				play sound "block.note_block.basedrum" with pitch 2 to player
+				play sound "entity.chicken.egg" with pitch 1 to player
+				draw 25 sneeze at event-block with offset vector(0, 0, 0) with extra 0.25
+
+				add 1 to {EmeraldSkullsFound::%UUID of player%}
+
+
+
+				if {EmeraldSkullsFound::%UUID of player%} = 10, 20 or 30:
+					send "&a&lEMERALD SKULL: &7You found a skull! &a+$%regex({EmeraldSkullsFound::%UUID of player%} * 10000)%&7, &b+%regex({EmeraldSkullsFound::%UUID of player%} * 100)%XP &e&o(%{EmeraldSkullsFound::%UUID of player%}%/30)"
+					send "&a&l- &7You received &c+1 Generator Slot"
+					if {EmeraldSkullsFound::%UUID of player%} = 30:
+						send "&a&l- &7You received &d+1 Mystery Crates"
+						add 1 to {MysteryCrates::%UUID of player%}
+
+						loop all players:
+							if loop-player is not player:
+								send "&a&lEMERALD SKULL: &b%player% &7Has found &e30 Skulls" to loop-player
+								send "&a&l- &7They Got: &a$4,650,000 &7+ &c3 Generator Slots &7+ &d1 Mystery Crate" to loop-player
+								send "&a&l- &7Find your first emerald skull at /skull!" to loop-player
+
+					add {EmeraldSkullsFound::%UUID of player%} * 10000 to {balance::%UUID of player%}
+					remove {EmeraldSkullsFound::%UUID of player%} * 100 from {RequiredXP::%UUID of player%}
+					add 1 to {GeneratorLimit::%UUID of player%}
+					stop
+
+
+
+				send "&a&lEMERALD SKULL: &7You found a skull! &a+$%regex({EmeraldSkullsFound::%UUID of player%} * 10000)%&7, &b+%regex({EmeraldSkullsFound::%UUID of player%} * 100)%XP &e&o(%{EmeraldSkullsFound::%UUID of player%}%/30)"
+				add {EmeraldSkullsFound::%UUID of player%} * 10000 to {balance::%UUID of player%}
+				remove {EmeraldSkullsFound::%UUID of player%} * 100 from {RequiredXP::%UUID of player%}
+				stop
+
+			else:
+				play sound "block.note_block.bass" with pitch 2 to player
+				send "&a&lEMERALD SKULL: &cYou have already found this skull &e&o(%{EmeraldSkullsFound::%UUID of player%}%/30 left)"
+				stop
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: Events:
+#
+#
+#==========================================================
+
+
+
+
+
+every 1 minute:
+	remove 1 from {TimeTillEvent}
+	if {TimeTillEvent} = 0:
+		add 1 to {EventNumber}
+		
+		if {EventNumber} = 1:
+			execute console command "/startevent farm - rain"
+		if {EventNumber} = 2:
+			execute console command "/startevent farm - storm"
+		if {EventNumber} = 3:
+			execute console command "/startevent fish - extra cash"
+		if {EventNumber} = 4:
+			execute console command "/startevent farm - cash hunt"
+		if {EventNumber} = 5:
+			execute console command "/startevent farm - x5 drops"
+		if {EventNumber} = 6:
+			execute console command "/startevent farm - corrupted"
+		if {EventNumber} = 7:
+			execute console command "/startevent fish - double xp"
+		if {EventNumber} = 8:
+			execute console command "/startevent cave - XP Boost"
+		if {EventNumber} = 9:
+			execute console command "/startevent farm - Chicken Rush"
+			set {EventNumber} to 0
+		if {EventNumber} = 15:
+			execute console command "/startevent village - dark auction"
+			set {EventNumber} to 0
+
+
+
+
+command /startevent [<text>]:
+	trigger:
+		if sender is not console:
+			if player does not have permission "rank.admin":
+				send "&6&lEVENTS: &cYou cannot run this command!"
+				stop
+
+
+
+		if arg-1 is "farm - rain":
+			set {ActiveEvent} to "farm - rain"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&6&lFARM EVENT: &b&lRain &7has just started for &e3 &7mins"
+			broadcast "&6&l- &7Crops re-grow at x3 the normal speed!"
+
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFarm Event: &b&lRain"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&6&lFARM EVENT: &b&lRain &7has just finished!"
+			stop
+
+
+
+		if arg-1 is "farm - storm":
+			set {ActiveEvent} to "farm - storm"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&6&lFARM EVENT: &3&lStorm &7has just started for &e3 &7mins"
+			broadcast "&6&l- &7Receive &bx4 XP &7but crops re-grow slowly"
+
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFarm Event: &3&lStorm"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&6&lFARM EVENT: &3&lStorm &7has just finished!"
+			stop
+
+
+
+		if arg-1 is "farm - cash hunt":
+			set {ActiveEvent} to "farm - cash hunt"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&6&lFARM EVENT: &6&lCash Hunt &7has just started for &e3 &7mins"
+			broadcast "&6&l- &71%% chance: &6$10,000"
+			broadcast "&6&l- &75%% chance: &e$5,000"
+			broadcast "&6&l- &710%% chance: &a$2,500"
+
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFarm Event: &6&lCash Hunt"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&6&lFARM EVENT: &6&lCash Hunt &7has just finished!"
+			loop all players:
+				send "&6&l- &eTotal Money Gained: &a$%regex({CashHuntEvent-TotalGained::%UUID of loop-player%})%" to loop-player
+				set {CashHuntEvent-TotalGained::%UUID of loop-player%} to 0
+			stop
+
+
+
+		if arg-1 is "farm - x5 drops":
+			set {ActiveEvent} to "farm - x5 drops"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&6&lFARM EVENT: &e&lx5 Drops &7has just started for &e3 &7mins"
+			broadcast "&6&l- &7All drops are multiplied by x5"
+
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFarm Event: &e&lx5 Drops"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&6&lFARM EVENT: &e&lx5 Drops &7has just finished!"
+			stop
+
+
+
+		if arg-1 is "farm - corrupted":
+			set {ActiveEvent} to "farm - corrupted"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&6&lFARM EVENT: &5&lCorrupted &7has just started for &e3 &7mins"
+			broadcast "&6&l- &7All crops re-spawn as beetroot"
+			broadcast "&6&l- &7Abilities do not work on these plants"
+
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFarm Event: &5&lCorrupted"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&6&lFARM EVENT: &5&lCorrupted &7has just finished!"
+			stop
+
+
+
+		if arg-1 is "fish - extra cash":
+			set {ActiveEvent} to "fish - extra cash"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&b&lFISH EVENT: &a&lExtra Cash &7has just started for &e3 &7mins"
+			broadcast "&6&l- &7All fish catches are worth &ax10 Value"
+
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFish Event: &a&lExtra Cash"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&b&lFISH EVENT: &a&lExtra Cash &7has just finished!"
+			stop
+
+
+
+		if arg-1 is "fish - double xp":
+			set {ActiveEvent} to "fish - double xp"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&b&lFISH EVENT: &b&lDouble XP &7has just started for &e3 &7mins"
+			broadcast "&b&l- &7All catches will gain you &bx2 XP"
+
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFish Event: &b&lDouble XP"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&b&lFISH EVENT: &b&lDouble XP &7has just finished!"
+			stop
+
+
+
+		if arg-1 is "village - dark auction":
+			set {TimeTillEvent} to 0
+			set {ActiveEvent} to "village - dark auction"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			execute console command "darkauction open"
+
+
+			set {EventCounter1} to 4
+			loop 4 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fEvent: &5&lDark Auction"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+			execute console command "darkauction close"
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			stop
+
+
+
+		if arg-1 is "cave - xp boost":
+			set {TimeTillEvent} to 0
+			set {ActiveEvent} to "cave - xp boost"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&5&lCAVE EVENT: &3&lXP Boost &7has just started for &e3 &7mins"
+			broadcast "&5&l- &7Cave Dirt gives &bx25 XP &7+ &7potatoes give &bx5 XP"
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fCave Event: &3&lXP Boost"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&5&lCAVE EVENT: &3&lXP Boost &7has just finished!"
+			stop
+
+
+
+		if arg-1 is "farm - chicken rush":
+			set {TimeTillEvent} to 0
+			set {ActiveEvent} to "farm - chicken rush"
+			play sound "entity.ender_dragon.ambient" with pitch 2 to all players
+			broadcast "&6&lFARM EVENT: &e&lChicken Rush &7has just started for &e3 &7mins"
+			broadcast "&6&l- &7Kill all the chickens &b&o(x20 xp)"
+
+			set {EventCounter1} to 3
+			loop 3 times:
+				remove 1 from {EventCounter1}
+				set {EventCounter2} to 60
+				loop 60 times:
+					loop 2 times:
+						set {_SpawnChickenLoc} to a random element out of {ChickenRushSpawnlocs::*}
+						spawn 1 chicken at {_SpawnChickenLoc}
+						set display name of last spawned chicken to "&6Chicken &7(&c❤❤❤❤❤&7)"
+					remove 1 from {EventCounter2}
+					loop all players:
+						set line 10 of loop-player's scoreboard to "&fFarm Event: &e&lChicken Rush"
+						if {EventCounter2} is less than 10:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:0%{EventCounter2}%"
+						else:
+							set line 9 of loop-player's scoreboard to "&fTime Left: &a%{EventCounter1}%:%{EventCounter2}%"
+					wait 1 second
+
+			set {ActiveEvent} to "NONE"
+			set {TimeTillEvent} to 15
+			play sound "entity.player.burp" to all players
+			broadcast "&6&lFARM EVENT: &e&lChicken Rush &7has just finished!"
+			
+			wait 10 seconds
+			kill all chickens
+			stop
+
+
+
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: Full Inventory Check:
+#
+#
+#==========================================================
+
+
+
+
+
+function fullinventorycheck(p:player):
+	if {_p} doesn't have enough space for 1 barrier:
+		if {AutoSell::%UUID of {_p}%} is true:
+			execute {_p} command "/sell"
+			stop
+
+		if difference between {InventoryFullCooldown::%UUID of {_p}%} and now is less than 15 seconds:
+			stop
+		set {InventoryFullCooldown::%UUID of {_p}%} to now
+		play sound "block.anvil.land" with pitch 2 to {_p}
+		send {_p} title "&7" with subtitle "&c&lINVENTORY FULL" for 3 seconds
+		send "&c&lINVENTORY WARNING: &eYour inventory is full!" to {_p}
+
+
+
+
+
+#==========================================================
+#
+#
+#		ClashGenz Join: Comma In number
+#
+#
+#==========================================================
+
+
+
+
+
+function regex(n: object) :: text:
+	if "%{_n}%" contains ".":
+		set {_s::*} to split "%{_n}%" at "."
+		set {_n} to "%a({_s::1})%.%last 2 characters of {_s::2}%"
+		return "%{_n}%"
+	else:
+		set {_n} to a("%{_n}%")
+		return "%{_n} ? 0%"
+function a(b: text) :: text:
+	if length of {_b} > 3:
+		return "%a(first length of {_b} - 3 characters of {_b})%,%last 3 characters of {_b}%"
+	return {_b}

@@ -1,0 +1,108 @@
+options:
+    prefix: &5&lAbyss &8¬&7
+
+on join:
+    set {playtime::just_seconds::%uuid of player%} to 0 if {playtime::just_seconds::%uuid of player%} is not set
+    set {playtime::seconds::%uuid of player%} to 0 if {playtime::seconds::%uuid of player%} is not set
+    set {playtime::minutes::%uuid of player%} to 0 if {playtime::minutes::%uuid of player%} is not set
+    set {playtime::hours::%uuid of player%} to 0 if {playtime::hours::%uuid of player%} is not set
+    set {playtime::days::%uuid of player%} to 0 if {playtime::days::%uuid of player%} is not set
+    set {playtime::weeks::%uuid of player%} to 0 if {playtime::weeks::%uuid of player%} is not set
+    while player is online:
+        add 1 to {playtime::just_seconds::%uuid of player%}
+        add 1 to {playtime::seconds::%uuid of player%}
+        if {playtime::seconds::%uuid of player%} >= 60:
+            set {playtime::seconds::%uuid of player%} to 0
+            add 1 to {playtime::minutes::%uuid of player%}
+        if {playtime::minutes::%uuid of player%} >= 60:
+            set {playtime::minutes::%uuid of player%} to 0
+            add 1 to {playtime::hours::%uuid of player%}
+        if {playtime::hours::%uuid of player%} >= 24:
+            set {playtime::hours::%uuid of player%} to 0
+            add 1 to {playtime::days::%uuid of player%}
+        if {playtime::days::%uuid of player%} >= 7:
+            set {playtime::days::%uuid of player%} to 0
+            add 1 to {playtime::weeks::%uuid of player%}
+        wait 1 second
+
+function Playtime_OpenRewardsGUI(plr: player, page: number = 1):
+    set {_page} to 1 if {_page} is not set
+    set {_page} to round {_page}
+    set {_old_page} to {_page} - 1
+    set {_new_page} to {_page} + 1
+    set {_start} to ({_page} * 7) - 7
+    set {_uuid} to uuid of {_plr}
+    open chest inventory with 3 rows named "&5Viewing Playtime Rewards" to {_plr}
+    format gui slot (0, 2, 4, 6, 8, 9, 19, 21, 23, 25, 27) of {_plr} with red stained glass pane
+    format gui slot (1, 3, 5, 7, 17, 18, 20, 22, 24, 26) of {_plr} with gray stained glass pane
+    if {_page} >= 2:
+        format gui slot 21 of {_plr} with arrow named "&5Last Page" with lore " " and "&7Current Page: &d%{_page}%" to run function Playtime_OpenRewardsGUI({_plr}, {_old_page})
+    if (size of {playtime::rewards::*}) - 7 > {_start}:
+        format gui slot 23 of {_plr} with arrow named "&5Next Page" with lore " " and "&7Current Page: &d%{_page}%" to run function Playtime_OpenRewardsGUI({_plr}, {_new_page})
+    set {_loops} to 1
+    set {_slot} to 10
+    loop all indices of {playtime::rewards::*}:
+        add 1 to {_loops}
+        if {_loops} >= {_start}:
+            set {_item} to minecart with chest if {playtime::just_seconds::%{_uuid}%} >= {playtime::rewards::%loop-value%::needed_seconds}
+            set {_item} to minecart if {playtime::just_seconds::%{_uuid}%} < {playtime::rewards::%loop-value%::needed_seconds}
+            set name of {_item} to "&dPlaytime Reward &8| %coloured {playtime::rewards::%loop-value%::reward_name}%"
+            set {_time_needed} to {playtime::rewards::%loop-value%::needed_seconds}
+            set {_command} to {playtime::rewards::%loop-value%::reward}
+            set {_name} to {playtime::rewards::%loop-value%::reward_name}
+            set {_id} to loop-value
+            format gui slot {_slot} of {_plr} with {_item} with lore "&7", "&7This reward is claimable by clicking on me!", "&7You must have played for &d%{playtime::rewards::%loop-value%::needed_seconds} / 60%&dmins." to run:
+                if {playtime::rewards::%{_id}%::player_already_claimed::%uuid of player%} is set:
+                    close inventory of {_plr}
+                    send "{@prefix} &dYou already claimed this reward!" to player
+                    stop
+                if {playtime::just_seconds::%{_uuid}%} < {_time_needed}:
+                    close inventory of {_plr}
+                    send "{@prefix} &dYou need more playtime!" to {_plr}
+                    stop
+                if {playtime::just_seconds::%{_uuid}%} >= {_time_needed}:
+                    set {playtime::rewards::%{_id}%::player_already_claimed::%uuid of player%} to true
+                    replace "(0)" in {_command} with "%name of player%"
+                    send "{@prefix} You claimed reward %coloured {_name}%!"
+                    execute console command "%{_command}%"
+                    stop
+            add 1 to {_slot}
+            if {_slot} >= 16:
+                exit loop
+
+command /playtime [<string>]:
+    trigger:
+        set {_arguments::*} to split arg-1 at " "
+        if {_arguments::1} is not set:
+            open chest inventory with 3 rows named "&5Playtime GUI" to player
+            format gui slot (integers between 0 to 27) of player with green stained glass pane
+            while name of inventory of player contains "Playtime GUI":
+                format gui slot 12 of player with name tag named "&5Your Playtime" with lore " ", "&7Time: &d%{playtime::days::%uuid of player%}%&dd, &d%{playtime::hours::%uuid of player%}%&dh, %{playtime::minutes::%uuid of player%}%&dm, %{playtime::seconds::%uuid of player%}%&ds"
+                format gui slot 14 of player with minecart with chest named "&5Playtime Rewards" with lore " ", "&7Click me to view playtime rewards!" to run function Playtime_OpenRewardsGUI(player)
+                wait 1 second
+        player has permission "playtime.admin"
+        if {_arguments::1} = "add":
+            if {_arguments::2} or {_arguments::3} or {_arguments::4} or {_arguments::5} is not set:
+                send "{@prefix} &dIncorrect Usage! &d/playtime add (id) (timeneeded) (reward) (reward name)" to player
+                stop
+            set {_id} to {_arguments::2}
+            set {_seconds} to ({_arguments::3} parsed as an integer)
+            set {_reward} to {_arguments::4}
+            set {_reward_name} to {_arguments::5}
+            replace "_" in {_reward} with " "
+            replace "_" in {_reward_name} with " "
+            set {playtime::rewards::%{_id}%::needed_seconds} to {_seconds}
+            set {playtime::rewards::%{_id}%::reward} to {_reward} 
+            set {playtime::rewards::%{_id}%::reward_name} to {_reward_name} 
+            stop
+        if {_arguments::1} = "remove":
+            if {_arguments::2} is not set:
+                send "{@prefix} &dIncorrect Usage! &d/playtime remove (id)" to player
+                stop
+            set {_id} to {_arguments::2}
+            delete {playtime::rewards::%{_id}%::*}
+        if {_arguments::1} = "list":
+            send "&5&m        &d&m        &7&m        &d&m        &5&m        " to player
+            loop all indices of {playtime::rewards::*}:
+                send "&5%loop-value% &8| &d%{playtime::rewards::%loop-value%::reward}% &8| &d%{playtime::rewards::%loop-value%::needed_seconds} / 60%&dm" to player
+            send "&5&m        &d&m        &7&m        &d&m        &5&m        " to player

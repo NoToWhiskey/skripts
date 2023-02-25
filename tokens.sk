@@ -1,0 +1,243 @@
+options:
+    prefix: &5&lAbyss &8¬&7
+    messageborders: &8&m                                                  &r
+    goldnugget: &5Token &7(Right-Click to claim)
+
+every 30 seconds:
+    set {tokens::tokenstop::*} to sorted {tokens::players::tcount::*} from highest to lowest with format "@index^@value"
+
+command /tokens [<string>] [<player>] [<integer>]:
+    trigger:
+        if arg-1 = "pay":
+            if arg-2 is set:
+                if arg-3 is set:
+                    if arg-3 > 0:
+                        if {tokens::players::tcount::%uuid of player%} >= arg-3:
+                            remove arg-3 from {tokens::players::tcount::%uuid of player%}
+                            add arg-3 to {tokens::players::tcount::%uuid of arg-2%}
+                            send action bar "{@prefix} &5%name of player% &dhas payed you &5%arg-3% &dtokens" to arg-2
+                            PlaySound(arg-2, "ENTITY_VILLAGER_YES")
+                            send action bar "{@prefix} You sent &5%arg-3% &dto &5%arg-2%'s &dtoken balance!" to player
+                            PlaySound(player, "ENTITY_VILLAGER_NO")
+                        else:
+                            send action bar "{@prefix} You don't have enough tokens to pay this amount to &5%arg-2%..." to player
+                    else:
+                        send action bar "{@prefix} You can't steal tokens from another player..." to player
+                else:
+                    send action bar "{@prefix} Please supply more arguments..." to player
+            else:
+                send action bar "{@prefix} Please supply more arguments..." to player
+        if arg-1 = "shop":
+            open chest inventory with 3 rows named "&5Tokens Shop" to player
+            loop 27 times:
+                format gui slot (loop-number - 1) of player with pink stained glass pane named " "
+            format gui slot 10 of player with shiny paper named "&2Player Booster" with lore "&7Time: &d30m", "&7Multi: &d2x" and "&dPrice: &5500 Tokens" to run:
+                if {tokens::players::tcount::%uuid of player%} >= 500:
+                    remove 500 from {tokens::players::tcount::%uuid of player%}
+                    execute console command "/boosters givelocal %player% 30m 2"
+                    PlaySound(player, "ENTITY_VILLAGER_YES")
+                    send action bar "{@prefix} You bought a player booster!" to player
+                else:
+                    close inventory of player
+                    PlaySound(player, "ENTITY_VILLAGER_NO")
+                    send action bar "{@prefix} You don't have &5500 &dtokens..." to player
+            format gui slot 11 of player with shiny prismarine shard named "&6Burrows &eCrate" with lore " " and "&dPrice: &5250 Tokens" to run:
+                if {tokens::players::tcount::%uuid of player%} >= 250:
+                    remove 250 from {tokens::players::tcount::%uuid of player%}
+                    execute console command "/crate give 8wp %player% 1"
+                    PlaySound(player, "ENTITY_VILLAGER_YES")
+                    send action bar "{@prefix} You bought a burrows crate key!" to player
+                else:
+                    close inventory of player
+                    PlaySound(player, "ENTITY_VILLAGER_NO")
+                    send action bar "{@prefix} You don't have &5250 &dtokens..." to player
+            format gui slot 12 of player with shiny chest named "&5Autosell Chest" with lore " " and "&dPrice: &51250 Tokens" to run:
+                if {tokens::players::tcount::%uuid of player%} >= 1250:
+                    remove 1250 from {tokens::players::tcount::%uuid of player%}
+                    give 1 of chest named "&5Autosell Chest" to player
+                    PlaySound(player, "ENTITY_VILLAGER_YES")
+                    send action bar "{@prefix} You bought a autosell chest!" to player
+                else:
+                    close inventory of player
+                    PlaySound(player, "ENTITY_VILLAGER_NO")
+                    send action bar "{@prefix} You don't have &51250 &dtokens..." to player
+            format gui slot 13 of player with gold ingot named "&5x0.03 Multiplier" with lore " " and "&dPrice: &5350 Tokens" to run:
+                if {tokens::players::tcount::%uuid of player%} >= 350:
+                    remove 350 from {tokens::players::tcount::%uuid of player%}
+                    add 0.03 to {shop::boosters::%uuid of player%}
+                    PlaySound(player, "ENTITY_VILLAGER_YES")
+                    send action bar "{@prefix} You bought a &5x0.03 &daddition to your multiplier." to player
+                else:
+                    close inventory of player
+                    PlaySound(player, "ENTITY_VILLAGER_NO")
+                    send action bar "{@prefix} You don't have &5350 &dtokens..." to player
+            format gui slot 14 of player with shiny orange concrete named "&5Private Ore" with lore " " and "&dPrice: &51150 Tokens" to run:
+                if {tokens::players::tcount::%uuid of player%} >= 1150:
+                    remove 850 from {tokens::players::tcount::%uuid of player%}
+                    give 1 of orange concrete named "&5Private Ore" to player
+                    PlaySound(player, "ENTITY_VILLAGER_YES")
+                    send action bar "{@prefix} You bought a &5Private Ore &dfor 1150 tokens." to player
+                else:
+                    close inventory of player
+                    PlaySound(player, "ENTITY_VILLAGER_NO")
+                    send action bar "{@prefix} You don't have &51150 &dtokens..." to player
+            format gui slot 15 of player with gold block named "&5Gen Slot" with lore "" and "&dPrice: &5500 Tokens" to run:
+                if {tokens::players::tcount::%uuid of player%} >= 500:
+                    remove 500 from {tokens::players::tcount::%uuid of player%}
+                    add 1 to {gens::user_data::%uuid of player%::gen_slots}
+                    PlaySound(player, "ENTITY_VILLAGER_YES")
+                    send action bar "{@prefix} You bought a extra genslot" to player
+                else:
+                    close inventory of player
+                    PlaySound(player, "ENTITY_VILLAGER_NO")
+                    send action bar "{@prefix} You don't have &5500 &dtokens..." to player
+            format gui slot 16 of player with shiny paper named "&2Global Booster" with lore "&7Time: &d30m", "&7Multi: &d2x" and "&dPrice: &51500 Tokens" to run:
+                if {tokens::players::tcount::%uuid of player%} >= 1500:
+                    remove 1500 from {tokens::players::tcount::%uuid of player%}
+                    execute console command "/boosters giveglobal %player% 30m 2"
+                    PlaySound(player, "ENTITY_VILLAGER_YES")
+                    send action bar "{@prefix} You bought a player booster!" to player
+                else:
+                    close inventory of player
+                    PlaySound(player, "ENTITY_VILLAGER_NO")
+                    send action bar "{@prefix} You don't have &51500 &dtokens..." to player
+        if arg-1 = "top":
+            send "&r" to player
+            send "{@messageborders}" to player
+            send "&5&lTOKENS TOP" to player
+            send "&r" to player
+            set {_num} to 0
+            loop {tokens::tokenstop::*}:
+                add 1 to {_num}
+                set {_data::*} to split loop-value by "^"
+                set {_player} to "%{_data::1}%" parsed as offline player
+                set {_tokens} to {_data::2}
+                send "&7##%{_num}% - &5%{_player}% &dwith &5%{_tokens}% &dtokens" to player
+                wait 1 tick
+                if {_num} >= 5:
+                    stop loop
+            send "{@messageborders}" to player
+        if arg-1 is not set:
+            send "&r" to player
+            send "{@messageborders}" to player
+            send "&5&lTOKENS HELP" to player
+            send "&r" to player
+            send "&5/tokens pay playername amount &7- &dWanna pay someone tokens? You can do it using the command." to player
+            send "&5/tokens shop &7- &dSpend your tokens on more gen slots or multipliers!" to player
+            send "&5/tokens top &7- &dTokens Leaderboard"
+            send "{@messageborders}" to player
+
+on place of chest:
+    name of player's held item contains "Autosell Chest"
+    add location of event-block to {autosellchests::%uuid of player%::*}
+
+on break of chest:
+    {autosellchests::%uuid of player%::*} contains location of event-block
+    remove location of event-block from {autosellchests::%uuid of player%::*}
+    cancel drops
+    give 1 of chest named "&5Autosell Chest" to player
+
+every 1 second:
+    loop all players:
+        apply potion of night vision of tier 10 to loop-player for 5 second
+
+function Autosell(player: player):
+    set {_uuid} to uuid of {_player}
+    set {booster::%{_uuid}%} to 0
+    loop {autosellchests::%{_uuid}%::*}:
+        if inventory of block at loop-value contains coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell":
+            set {_coal} to amount of coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell" in inventory of block at loop-value
+            remove {_coal} of coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell" from inventory of block at loop-value
+        if inventory of block at loop-value contains iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell":
+            set {_iron} to amount of iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell" in inventory of block at loop-value
+            remove {_iron} of iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell" from inventory of block at loop-value
+        if inventory of block at loop-value contains gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell":
+            set {_gold} to amount of gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell" in inventory of block at loop-value
+            remove {_gold} of gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell" from inventory of block at loop-value
+        if inventory of block at loop-value contains lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell":
+            set {_lapis} to amount of lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell" in inventory of block at loop-value
+            remove {_lapis} of lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell" from inventory of block at loop-value
+        if inventory of block at loop-value contains redstone named "&cRedstone" with lore "", "&7Sell me by executing &e/sell":
+            set {_redstone} to amount of redstone in inventory of block at loop-value
+            remove {_redstone} of redstone named "&cRedstone" with lore "", "&7Sell me by executing &e/sell" from inventory of block at loop-value
+        if inventory of block at loop-value contains diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell":
+            set {_diamond} to amount of diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell" in inventory of block at loop-value
+            remove {_diamond} of diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell" from inventory of block at loop-value
+        if inventory of block at loop-value contains emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell":
+            set {_emerald} to amount of emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell" in inventory of block at loop-value
+            remove {_emerald} of emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell" from inventory of block at loop-value
+    add ({boosters::localbooster::%{_uuid}%::amount} - 1) to {booster::%{_uuid}%} if {boosters::localbooster::%{_uuid}%::amount} is set
+    add ({boosters::globalbooster::amount} - 1) to {booster::%{_uuid}%} if {boosters::globalbooster::amount} is set
+    set {_tm} to (({_coal} * 10) + ({_iron} * 15) + ({_gold} * 20) + ({_lapis} * 30) + ({_redstone} * 55) + ({_diamond} * 80) + ({_emerald} * 100)) * ({booster::%{_uuid}%} + {shop::boosters::%{_uuid}%})
+    add {_tm} to balance of {_player}
+    wait 1 tick
+    send "{@prefix} Your autosell chests sold for &d$%{_tm}%!" to {_player} if {autosellchests::%{_uuid}%::*} is set
+    delete {_tm}
+    delete {_total}
+    wait 1 tick
+
+every 60 seconds:
+    loop all players:
+        Autosell(loop-player)
+
+on break:
+    "%player's world%" contains "mine":
+        event-block != gold ore:
+            cancel event
+            stop
+        set {_loc} to location of event-block
+        add {_loc} to {tokens::generation::*}
+        give 1 of gold nugget named "{@goldnugget}" to player
+        cancel drops
+        wait 1 tick
+        set block at {_loc} to bedrock
+
+on block trample:
+    event-block is a plant
+    cancel event
+
+on break of orange concrete:
+    if player is not sneaking:
+        give 1 of gold nugget named "{@goldnugget}" to player
+        cancel drops
+        wait 1 tick
+        set block at event-block to bedrock
+        add location of event-block to {tokens::player_generation::%uuid of player%::*}
+    if player is sneaking:
+        remove location of event-block from {tokens::player_generation::%uuid of player%::*}
+        cancel drops
+        give 1 of orange concrete named "&5Private Ore" to player
+
+every minute:
+    loop {tokens::generation::*}:
+        set block at loop-value to gold ore
+        remove loop-value from {tokens::generation::*}
+        wait 1 tick
+    broadcast "&dThe mine has reset! visit it at &5/warp mine"
+
+every 10 seconds:
+    loop all players:
+        loop {tokens::player_generation::%uuid of loop-player%::*}:
+            set block at loop-value-2 to orange concrete
+            remove loop-value-2 from {tokens::player_generation::%uuid of loop-player%::*}
+
+on craft of gold nugget:
+    cancel event
+
+on right click with gold nugget:
+    if player is sneaking:
+        if player has permission "tokens.shiftclaim":
+            set {_a} to amount of gold nugget in inventory of player
+            remove {_a} of gold nugget named "{@goldnugget}" from inventory of player
+            add {_a} to {tokens::players::tcount::%uuid of player%}
+            send action bar "{@prefix} You claimed &5%{_a}% &dtokens!" to player
+            PlaySound(player, "ENTITY_VILLAGER_YES")
+        if player does not have permission "tokens.shiftclaim":
+            PlaySound(player, "ENTITY_VILLAGER_NO")
+            send action bar "{@prefix} You don't have this donator feature... &7/buy" to player
+            stop
+    if player is not sneaking:
+        PlaySound(player, "ENTITY_VILLAGER_YES")
+        remove 1 of gold nugget named "{@goldnugget}" from inventory of player
+        add 1 to {tokens::players::tcount::%uuid of player%}
+        send action bar "{@prefix} You claimed a token." to player

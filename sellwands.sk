@@ -1,0 +1,107 @@
+options:
+    prefix: &5&lAbyss &8¬&7
+    messageborders: &8&m                                                  &r
+    sellwandname1: &5Sellwand &7| &d1.0x
+    sellwandname2: &5Sellwand &7| &d1.25x
+    sellwandname3: &5Sellwand &7| &d1.5x
+    sellwandname4: &5Sellwand &7| &d1.75x
+    sellwandname5: &5Sellwand &7| &d2.0x
+    sellwandname6: &5Sellwand &7| &d2.25x
+    sellwandname7: &5Sellwand &7| &d2.5x
+
+command /sellwands:
+    trigger:
+        open chest inventory with 3 rows named "&5Sellwands &dStore" to player
+        loop 27 times:
+            format gui slot (loop-number - 1) of player with gray stained glass pane named " "
+        format gui slot 12 of player with blaze rod named "{@sellwandname1}" with lore "", "&7&oGet better sellwands", "&7&oby doing /buy!" to run:
+            if balance of player >= 1000000:
+                remove 1000000 from balance of player   
+                give 1 of blaze rod named "{@sellwandname1}" to player
+                PlaySound(player, "ENTITY_VILLAGER_YES")
+                send action bar "{@prefix} You bought a {@sellwandname1} for &5$1,000,000" to player
+            else:
+                PlaySound(player, "ENTITY_VILLAGER_NO")
+                send action bar "{@prefix} This sellwand costs &5$1,000,000" to player
+        format gui slot 14 of player with blaze rod named "{@sellwandname2}" with lore "", "&7&oGet better sellwands", "&7&oby doing /buy!" to run:
+            if balance of player >= 1500000:
+                remove 1500000 from balance of player
+                give 1 of blaze rod named "{@sellwandname2}" to player
+                PlaySound(player, "ENTITY_VILLAGER_YES")
+                send action bar "{@prefix} You bought a {@sellwandname2} for &5$1,500,000" to player
+            else:
+                PlaySound(player, "ENTITY_VILLAGER_NO")
+                send action bar "{@prefix} This sellwand costs &5$1,500,000" to player
+
+command /sellwandsadmin [<player>] [<integer>]:
+    permission: op
+    trigger:
+        if arg-2 = 1:
+            give 1 of blaze rod named "{@sellwandname1}" to arg-1
+        if arg-2 = 2:
+            give 1 of blaze rod named "{@sellwandname2}" to arg-1
+        if arg-2 = 3:
+            give 1 of blaze rod named "{@sellwandname3}" to arg-1
+        if arg-2 = 4:
+            give 1 of blaze rod named "{@sellwandname4}" to arg-1
+        if arg-2 = 5:
+            give 1 of blaze rod named "{@sellwandname5}" to arg-1
+        if arg-2 = 6:
+            give 1 of blaze rod named "{@sellwandname6}" to arg-1
+        if arg-2 = 7:
+            give 1 of blaze rod named "{@sellwandname7}" to arg-1
+
+on right click on chest or hopper:
+    set {booster::%uuid of player%} to 0
+    if player is sneaking:
+        stop
+    if tool of player is blaze rod:
+        cancel event
+        if inventory of event-block contains coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell":
+            set {_ca} to amount of coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell" in inventory of event-block
+            set {_cm} to {_ca} * 10
+            remove {_ca} of coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell" from inventory of event-block
+        if inventory of event-block contains iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell":
+            set {_ia} to amount of iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell" in inventory of event-block
+            set {_im} to {_ia} * 15
+            remove {_ia} of iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell" from inventory of event-block
+        if inventory of event-block contains gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell":
+            set {_ga} to amount of gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell" in inventory of event-block
+            set {_gm} to {_ga} * 20
+            remove {_ga} of gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell" from inventory of event-block
+        if inventory of event-block contains lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell":
+            set {_la} to amount of lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell" in inventory of event-block
+            set {_lm} to {_la} * 30
+            remove {_la} of lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell" from inventory of event-block
+        if inventory of event-block contains redstone named "&cRedstone" with lore "", "&7Sell me by executing &e/sell":
+            set {_ra} to amount of redstone named "&cRedstone" with lore "", "&7Sell me by executing &e/sell" in inventory of event-block
+            set {_rm} to {_ra} * 55
+            remove {_ra} of redstone named "&cRedstone" with lore "", "&7Sell me by executing &e/sell" from inventory of event-block
+        if inventory of event-block contains diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell":
+            set {_da} to amount of diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell" in inventory of event-block
+            set {_dm} to {_da} * 80
+            remove {_da} of diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell" from inventory of event-block
+        if inventory of event-block contains emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell":
+            set {_ea} to amount of emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell" in inventory of event-block
+            set {_em} to {_ea} * 100
+            remove {_ea} of emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell" from inventory of event-block
+        if name of player's tool = "{@sellwandname1}":
+            set ({booster::%uuid of player%}) to 1.0 + ({shop::boosters::%uuid of player%})
+        if name of player's tool = "{@sellwandname2}":
+            set ({booster::%uuid of player%}) to 1.25 + ({shop::boosters::%uuid of player%})
+        if name of player's tool = "{@sellwandname3}":
+            set ({booster::%uuid of player%}) to 1.5 + ({shop::boosters::%uuid of player%})
+        if name of player's tool = "{@sellwandname4}":
+            set ({booster::%uuid of player%}) to 1.75 + ({shop::boosters::%uuid of player%})
+        if name of player's tool = "{@sellwandname5}":
+            set ({booster::%uuid of player%}) to 2.0 + ({shop::boosters::%uuid of player%})
+        if name of player's tool = "{@sellwandname6}":
+            set ({booster::%uuid of player%}) to 2.25 + ({shop::boosters::%uuid of player%})
+        if name of player's tool = "{@sellwandname7}":
+            set ({booster::%uuid of player%}) to 2.5 + ({shop::boosters::%uuid of player%})
+        add ({boosters::localbooster::%uuid of player%::amount} - 1) to {booster::%uuid of player%} if {boosters::localbooster::%uuid of player%::amount} is set
+        add ({boosters::globalbooster::amount} - 1) to {booster::%uuid of player%} if {boosters::globalbooster::amount} is set
+        set {_tm} to (({_cm} + {_im}) + ({_gm} + {_lm}) + ({_rm} + {_dm}) + ({_em} + {_nm})) * ({booster::%uuid of player%})
+        add {_tm} to balance of player
+        PlaySound(player, "ENTITY_VILLAGER_YES")
+        send action bar "{@prefix} You sold all items for &5$%{_tm}%" to player

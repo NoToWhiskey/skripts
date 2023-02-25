@@ -1,0 +1,511 @@
+# ----------------- #
+#   CONFIGURATION   #
+# ----------------- #
+
+options:
+
+    # PREFIX
+    prefix: &5&lAbyss &8¬&7
+    
+    # COLORS
+    color_first: &7
+    color_second: &d
+    color_third: &5
+    color_error: &c
+
+    # MESSAGES | USE (0) FOR ARGUMENTS
+    not_enough_args: &4(!) &cIncorrect Usage! Correct Usage: &a(0)
+    no_console_allowed: &4(!) &cOnly players can execute this command!
+    no_permissions: &4(!) &cI'm sorry, But I can't let you do that! &7&o((0))
+    message_borders: &8&m                                                  &r
+
+    # COOLDOWNS
+    place_gens: 2 ticks
+    break_gens: 4 ticks
+
+    # MYSQL
+    mysql_ip: no 
+    mysql_port: no 
+    mysql_user: no 
+    mysql_pass: no 
+    mysql_prefix: no 
+    mysql_name: no 
+
+# ----------------- #
+#   CONFIGURATION   #
+# ----------------- #
+
+
+
+
+
+
+
+# ------------- #
+#   FUNCTIONS   #
+# ------------- #
+
+function Gens_OnPlaceGen(plr: player, loc: location, type: string):
+    world of {_plr} = "plots-s1"
+    set {_uuid} to uuid of {_plr}
+    if {gens::user_is_loaded::%{_uuid}%} != true:
+        Sound_Error({_plr})
+        send subtitle "{@color_error}Your data isn't loaded yet! Please wait." to {_plr}
+        set {_block} to {_type}
+        replace "_" in {_block} with " "
+        set block at {_loc} to {_block} parsed as an itemtype
+        stop
+    if {gens::user_data::%{_uuid}%::gens_placed} >= {gens::user_data::%{_uuid}%::gen_slots}:
+        Sound_Error({_plr})
+        send subtitle "{@color_error}You can't place more gens! {@color_first}(/buy)" to {_plr}
+        set block at {_loc} to air
+        Gens_GiveGen({_plr}, {_type}, 1)
+        stop
+    set {gens::user_data::%{_uuid}%::cooldown_place} to 3 ticks ago if {gens::user_data::%{_uuid}%::cooldown_place} is not set
+    if (difference between {gens::user_data::%{_uuid}%::cooldown_place} and now) < {@place_gens}:
+        Sound_Error({_plr})
+        send subtitle "{@color_error}Please wait {@place_gens} {@color_error}to do this again!" to {_plr}
+        stop
+    Sound_Success({_plr})
+    add 1 to {gens::user_data::%{_uuid}%::gens_placed}
+    add {_loc} to {gens::user_gens::%{_uuid}%::%{_type}%::*}
+    set {_name::*} to {gens::gen_data::%{_type}%::name} split at " "
+    set {_actual_name} to "%{_name::1}% {@color_first}Gen"
+    send subtitle "{@color_first}You placed 1 of %{_actual_name}% {@color_first}(%{gens::user_data::%{_uuid}%::gens_placed}%/%{gens::user_data::%{_uuid}%::gen_slots}%)" to {_plr}
+
+function Gens_OnBreakGen(plr: player, loc: location, type: string):
+    world of {_plr} = "plots-s1"
+    set {_uuid} to uuid of {_plr}
+    if {gens::user_is_loaded::%{_uuid}%} != true:
+        Sound_Error({_plr})
+        send title "{@color_third}ERROR" with subtitle "{@color_error}Your data isn't loaded yet! Please wait." to {_plr}
+        set {_block} to {_type}
+        replace "_" in {_block} with " "
+        set block at {_loc} to {_block} parsed as an itemtype
+        stop
+    if {gens::user_gens::%{_uuid}%::%{_type}%::*} does not contain {_loc}:
+        Sound_Error({_plr})
+        send title "{@color_third}ERROR" with subtitle "{@color_error}This isn't your generator!" to {_plr}
+        set {_block} to {_type}
+        replace "_" in {_block} with " "
+        set block at {_loc} to {_block} parsed as an itemtype
+        stop
+    set block at {_loc} to air
+    remove {_loc} from {gens::user_gens::%{_uuid}%::%{_type}%::*}
+    remove 1 from {gens::user_data::%{_uuid}%::gens_placed}
+    set {_name::*} to {gens::gen_data::%{_type}%::name} split at " "
+    set {_actual_name} to "%{_name::1}% {@color_first}Gen"
+    send subtitle "{@color_first}You picked up 1 of %{_actual_name}% {@color_first}(%{gens::user_data::%{_uuid}%::gens_placed}%/%{gens::user_data::%{_uuid}%::gen_slots}%)" to {_plr}
+    Sound_Play({_plr}, "ENTITY_EXPERIENCE_ORB_PICKUP", 0)
+    Gens_GiveGen({_plr}, {_type}, 1)
+
+function Gens_UpgradeGen(plr: player, loc: location, type: string):
+    world of {_plr} = "plots-s1"
+    set {_uuid} to uuid of {_plr}
+    set {_gen_upgrade} to {gens::gen_data::%{_type}%::upgrade_gen}
+    if {gens::user_is_loaded::%{_uuid}%} != true:
+        Sound_Error({_plr})
+        send subtitle "{@color_error}Your data isn't loaded yet! Please wait." to {_plr}
+        stop
+    if {_gen_upgrade} = "THIS_IS_MAX_GEN":
+        Sound_Error({_plr})
+        send subtitle "{@color_error}This is already maxed!" to {_plr}
+        stop
+    if {gens::user_gens::%{_uuid}%::%{_type}%::*} does not contain {_loc}:
+        Sound_Error({_plr})
+        send subtitle "{@color_error}This isn't your generator!" to {_plr}
+        stop
+    if balance of {_plr} < {gens::gen_data::%{_type}%::upgrade_price}:
+        Sound_Error({_plr})
+        send subtitle "{@color_error}You don't have enough! {@color_first}($%{gens::gen_data::%{_type}%::upgrade_price} - balance of {_plr}% needed more)" to {_plr}
+        stop
+    Sound_Success({_plr})
+    remove {gens::gen_data::%{_type}%::upgrade_price} from balance of {_plr}
+    remove {_loc} from {gens::user_gens::%{_uuid}%::%{_type}%::*}
+    add {_loc} to {gens::user_gens::%{_uuid}%::%{_gen_upgrade}%::*}
+    set {_block} to {_gen_upgrade}
+    replace "_" in {_block} with " "
+    set block at {_loc} to ({_block} parsed as an itemtype)
+    set {_name::*} to {gens::gen_data::%{_gen_upgrade}%::name} split at " "
+    set {_actual_name} to "%{_name::1}% {@color_first}Gen"
+    send subtitle "{@color_first}You upgraded this gen to %{_actual_name}%{@color_first}!" to {_plr}
+
+function Gens_GiveGen(plr: player, type: string, amount: integer):
+    {gens::gen_data::%{_type}%::*} is set
+    set {_actual_gen} to {_type}
+    replace "_" in {_actual_gen} with " "
+    set {_item} to ({_actual_gen} parsed as an itemtype) named "%{gens::gen_data::%{_type}%::name}%" with lore {gens::gen_data::%{_type}%::lores::*} 
+    give {_amount} of {_item} to {_plr}
+
+function Gens_DeleteOffsiteData(plr: player):
+    set {_uuid} to uuid of {_plr}
+    execute "DELETE FROM {@mysql_prefix}_Gen_Data WHERE uuid=%{_uuid}%" in {gens::sql_database}
+    execute "DELETE FROM {@mysql_prefix}_Slots WHERE uuid=%{_uuid}%" in {gens::sql_database}
+
+function Gens_OffloadPlayerData(plr: player):
+    Gens_DeleteOffsiteData({_plr})
+    wait 1 second
+    set {_uuid} to uuid of {_plr}
+    set {gens::user_is_loaded::%{_uuid}%} to false
+    loop indices of {gens::user_gens::%{_uuid}%::*}:
+        set {_type} to loop-value
+        set {_a} to 0
+        loop {gens::user_gens::%{_uuid}%::%{_type}%::*}:
+            set {_loc} to loop-value-2
+            set {_stringified_loc} to "%x-pos of {_loc}%,%y-pos of {_loc}%,%z-pos of {_loc}%,%world of {_loc}%|%{_type}%"
+            execute "INSERT INTO {@mysql_prefix}_Gen_Data VALUES (%{_uuid}%, %{_stringified_loc}%)" in {gens::sql_database}
+    set {_slots} to {gens::user_data::%{_uuid}%::gen_slots}
+    set {_placed} to {gens::user_data::%{_uuid}%::gens_placed}
+    execute "INSERT INTO {@mysql_prefix}_Slots VALUES (%{_uuid}%, %{_slots}%, %{_placed}%)" in {gens::sql_database}
+    {_plr} is offline
+    delete {gens::user_gens::%{_uuid}%::*}
+    delete {gens::user_data::%{_uuid}%::gen_slots}
+    delete {gens::user_data::%{_uuid}%::gens_placed}
+
+function Gens_LoadPlayerData(plr: player):
+    Sound_Prompt({_plr})
+    wait 3 seconds
+    set {_uuid} to uuid of {_plr}
+    {gens::user_data::%{_uuid}%::mysql_ongoing} != true
+    send title "{@color_third}Loading Gens..." with subtitle "{@color_first}Please wait as your gens are loaded!" to {_plr}
+    set {gens::user_data::%{_uuid}%::mysql_ongoing} to true
+    execute "SELECT * FROM {@mysql_prefix}_Gen_Data WHERE uuid=%{_uuid}%" in {gens::sql_database} and store in {_data::*}
+    set {_start} to ("0") parsed as an integer
+    set {_end} to ("%size of {_data::gen_data::*}%") parsed as an integer
+    set {_timer} to now
+    set {_bar} to Information_ProgressBar({_start}, {_end}, 50)
+    send title "{@color_third}Loading Data..." with subtitle "{@color_first}%{_bar}%" to {_plr} with fadein 0 seconds and fadeout 0 seconds
+    loop {_data::gen_data::*}:
+        set {_bar} to Information_ProgressBar({_start}, {_end}, 50)
+        if (difference between {_timer} and now > 1 second):
+            send title "{@color_third}Loading Data..." with subtitle "{@color_first}%{_bar}%" to {_plr} with fadein 0 seconds and fadeout 0 seconds
+            Sound_Play({_plr}, "BLOCK_NOTE_BLOCK_PLING", 0)
+            set {_timer} to now
+        set {_splitted_data::*} to loop-value split at "|"
+        set {_locs::*} to {_splitted_data::1} split at ","
+        set {_type} to {_splitted_data::2}
+        set {_x} to {_locs::1} parsed as an number
+        set {_y} to {_locs::2} parsed as an number
+        set {_z} to {_locs::3} parsed as an number
+        set {_world} to {_locs::4}
+        set {_loc} to location({_x}, {_y}, {_z}, world({_world}))
+        add {_loc} to {_gens::%{_type}%::*} if {_gens::%{_type}%::*} does not contain {_loc}
+        add 1 to {_start}
+        chance of 1+(20 - tps from the last minute)*2:
+            wait 5 tick
+    Sound_Prompt({_plr})
+    send title "{@color_third}Finishing Up..." with subtitle "{@color_first}Getting your gen slots..." to {_plr}
+    wait 1 second
+    delete {_data::*}
+    execute "SELECT * FROM {@mysql_prefix}_Slots WHERE uuid=%{_uuid}%" in {gens::sql_database} and store in {_data::*}
+    set {gens::user_data::%{_uuid}%::gen_slots} to ("%{_data::genslots::*}%" parsed as an integer) if {_data::genslots::*} is set
+    set {gens::user_data::%{_uuid}%::gens_placed} to ("%{_data::gensplaced::*}%" parsed as an integer) if {_data::gensplaced::*} is set
+    Sound_Success({_plr})
+    send title "{@color_third}Finished!" with subtitle "{@color_first}Enjoy your stay on {@color_third}Abyss!" to {_plr}
+    loop indices of {_gens::*}:
+        set {_type} to loop-value
+        loop {_gens::%loop-value%::*}:
+            add loop-value-2 to {gens::user_gens::%{_uuid}%::%{_type}%::*}
+    set {gens::user_data::%{_uuid}%::gens_placed} to 0 if {gens::user_data::%{_uuid}%::gens_placed} is not set
+    set {gens::user_data::%{_uuid}%::gen_slots} to 40 if {gens::user_data::%{_uuid}%::gen_slots} is not set
+    set {gens::user_is_loaded::%{_uuid}%} to true
+    set {gens::user_data::%{_uuid}%::mysql_ongoing} to false
+
+function Gens_FixGensPlaced(plr: player):
+    set {_uuid} to uuid of {_plr}
+    set {_placed} to 0
+    loop all indices of {gens::user_gens::%{_uuid}%::*}:
+        set {_gen_type} to loop-value
+        set {_block} to {_gen_type}
+        replace "_" in {_block} with " "
+        set {_item} to {_block} parsed as an itemtype
+        {_item} is set
+        loop {gens::user_gens::%{_uuid}%::%{_gen_type}%::*}:
+            if block at loop-value-2 != {_item}:
+                set block at loop-value-2 to air
+                remove loop-value-2 from {gens::user_gens::%{_uuid}%::%{_gen_type}%::*}
+            add 1 to {_placed}
+        wait 1 tick
+    set {gens::user_data::%{_uuid}%::gens_placed} to {_placed}
+
+function Gens_OpenGensList(plr: player, page: number = 1):
+    Sound_Prompt({_plr})
+    set {_page} to 1 if {_page} is not set
+    set {_page} to round {_page}
+    set {_old_page} to {_page} - 1
+    set {_new_page} to {_page} + 1
+    set {_start} to ({_page} * 21) - 20
+    open chest inventory with 5 rows named "{@color_second}Gens List {@color_third}(Page %{_page}%)" to {_plr}
+    format gui slot (0, 2, 4, 6, 8, 9, 26, 27, 44, 37, 39, 41, 43) of {_plr} with orange stained glass pane
+    format gui slot (1, 3, 5, 7, 17, 18, 35, 36, 38, 40, 42, 44) of {_plr} with yellow stained glass pane
+    if {_page} >= 2:
+        format gui slot 38 of {_plr} with arrow named "{@color_second}Last Page" with lore " " and "{@color_third}Current Page: {@color_second}%{_page}%" to run function Crates_OpenCrateRewardsGUI({_plr}, {_crate_id}, {_old_page})
+    if (size of {gens::gen_data::*}) - 21 > {_start}:
+        format gui slot 42 of {_plr} with arrow named "{@color_second}Next Page" with lore " " and "{@color_third}Current Page: {@color_second}%{_page}%" to run function Crates_OpenCrateRewardsGUI({_plr}, {_crate_id}, {_new_page})
+    set {_loops} to 1
+    set {_slot} to 10
+    loop all indices of {gens::gen_data::*}:
+        add {gens::gen_data::%loop-value%::upgrade_price} to {_gens_prices::*}
+        set {_gens_prices::*} to sorted {_gens_prices::*}
+        set {_gens_list::*} to all indices of {gens::gen_data::*}
+    set {_loops_2} to 0
+    loop {_gens_prices::*}:
+        add 1 to {_loops_2}
+        set {_sorted_list::%{_loops_2}%} to first element out of ({_gens_list::*} where [{gens::gen_data::%input%::upgrade_price} = loop-value-1])
+        remove first element out of ({_gens_list::*} where [{gens::gen_data::%input%::upgrade_price} = loop-value-1]) from {_gens_prices::*}
+    loop {_sorted_list::*}:
+        add 1 to {_loops}
+        set {_block} to loop-value
+        replace "_" in {_block} with " "
+        if {_loops} >= {_start}:
+            if {_slot} = 17 or 26:
+                add 2 to {_slot}
+            set {_item} to ({_block} parsed as an itemtype) named "%{gens::gen_data::%loop-value%::name}%" with lore " ", "{@color_first}Upgrade Price: {@color_second}%{gens::gen_data::%loop-value%::upgrade_price}%", "{@color_first}Upgrade Gen: {@color_second}%{gens::gen_data::%{gens::gen_data::%loop-value-1%::upgrade_gen}%::name} ? ""{@color_second}Maxed Generator""%"
+            format gui slot {_slot} of {_plr} with {_item}
+            add 1 to {_slot}
+            if {_slot} = 35:
+                exit loop
+
+# ------------- #
+#   FUNCTIONS   #
+# ------------- #
+
+
+
+
+
+
+
+# ---------- #
+#   EVENTS   #
+# ---------- #
+
+on quit:
+    {gens::user_data::%uuid of player%::*} is set
+    {gens::user_gens::%uuid of player%::*} is set
+    Gens_OffloadPlayerData(player)
+    set {gens::user_is_loaded::%uuid of player%} to false
+
+on join:
+    if {gens::user_gens::%uuid of player%::*} is set:
+        set {gens::user_is_loaded::%uuid of player%} to true if {gens::user_data::%uuid of player%::*} and {gens::user_gens::%uuid of player%::*} is set
+        stop
+    else:
+        wait 10 ticks
+        Gens_LoadPlayerData(player)
+
+every 10 seconds:
+    loop all players:
+        Gens_FixGensPlaced(loop-player)
+        loop all indices of {gens::user_gens::%uuid of loop-player%::*}:
+            set {_gen_type} to loop-value-2
+            loop {gens::user_gens::%uuid of loop-player%::%{_gen_type}%::*}:
+                drop {gens::gen_data::%{_gen_type}%::drop} 1 meter above loop-value-3
+                chance of (20 - tps from the last minute) * 2:
+                    wait 1 tick
+        wait 1 tick
+
+on craft:
+    set {_gen_type} to "%event-item%"
+    replace all "southward ", "northward ", "westward ", "eastward " in {_gen_type} with ""
+    replace all " " in {_gen_type} with "_"
+    {gens::gen_data::%{_gen_type}%::*} is set
+    cancel event
+
+on script load:
+    set {gens::sql_database} to the database "mysql://{@mysql_ip}:{@mysql_port}/{@mysql_name}?user={@mysql_user}&password={@mysql_pass}&useSSL=false" if {gens::sql_database} is not set
+    wait 1 tick
+    execute "CREATE TABLE IF NOT EXISTS {@mysql_prefix}_Slots (`uuid` varchar(255), `genslots` varchar(255), `gensplaced` varchar(255))" in {gens::sql_database}
+    execute "CREATE TABLE IF NOT EXISTS {@mysql_prefix}_Gen_Data (`uuid` varchar(255), `gen_data` varchar(255))" in {gens::sql_database}
+    delete {gens::gen_data::*}
+    set {gens::gen_data::coal_ore::name} to "&8Coal &7[Weak Generator]"
+    set {gens::gen_data::coal_ore::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &8coal&7!"
+    set {gens::gen_data::coal_ore::upgrade_price} to 5000
+    set {gens::gen_data::coal_ore::upgrade_gen} to "iron_ore"
+    set {gens::gen_data::coal_ore::drop} to coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::iron_ore::name} to "&7Iron &7[Weak Generator]"
+    set {gens::gen_data::iron_ore::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &7iron&7!"
+    set {gens::gen_data::iron_ore::upgrade_price} to 15000
+    set {gens::gen_data::iron_ore::upgrade_gen} to "gold_ore"
+    set {gens::gen_data::iron_ore::drop} to iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::gold_ore::name} to "&6Gold &7[Weak Generator]"
+    set {gens::gen_data::gold_ore::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &6gold&7!"
+    set {gens::gen_data::gold_ore::upgrade_price} to 40000
+    set {gens::gen_data::gold_ore::upgrade_gen} to "lapis_lazuli_ore"
+    set {gens::gen_data::gold_ore::drop} to gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::lapis_lazuli_ore::name} to "&3Lapis &7[Weak Generator]"
+    set {gens::gen_data::lapis_lazuli_ore::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &3lapis&7!"
+    set {gens::gen_data::lapis_lazuli_ore::upgrade_price} to 100000
+    set {gens::gen_data::lapis_lazuli_ore::upgrade_gen} to "redstone_ore"
+    set {gens::gen_data::lapis_lazuli_ore::drop} to lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::redstone_ore::name} to "&cRedstone &7[Weak Generator]"
+    set {gens::gen_data::redstone_ore::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &credstone&7!"
+    set {gens::gen_data::redstone_ore::upgrade_price} to 250000
+    set {gens::gen_data::redstone_ore::upgrade_gen} to "diamond_ore"
+    set {gens::gen_data::redstone_ore::drop} to redstone named "&cRedstone" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::diamond_ore::name} to "&bDiamond &7[Weak Generator]"
+    set {gens::gen_data::diamond_ore::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &bdiamond&7!"
+    set {gens::gen_data::diamond_ore::upgrade_price} to 500000
+    set {gens::gen_data::diamond_ore::upgrade_gen} to "emerald_ore"
+    set {gens::gen_data::diamond_ore::drop} to diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::emerald_ore::name} to "&aEmerald &7[Weak Generator]"
+    set {gens::gen_data::emerald_ore::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &aemerald&7!"
+    set {gens::gen_data::emerald_ore::upgrade_price} to 1000000
+    set {gens::gen_data::emerald_ore::upgrade_gen} to "coal_block"
+    set {gens::gen_data::emerald_ore::drop} to emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::coal_block::name} to "&8Coal &7[Strong Generator]"
+    set {gens::gen_data::coal_block::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &8coal&7!"
+    set {gens::gen_data::coal_block::upgrade_price} to 1250000
+    set {gens::gen_data::coal_block::upgrade_gen} to "iron_block"
+    set {gens::gen_data::coal_block::drop} to 2 of coal named "&8Coal" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::iron_block::name} to "&7Iron &7[Strong Generator]"
+    set {gens::gen_data::iron_block::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &7iron&7!"
+    set {gens::gen_data::iron_block::upgrade_price} to 1900000
+    set {gens::gen_data::iron_block::upgrade_gen} to "gold_block"
+    set {gens::gen_data::iron_block::drop} to 2 of iron ingot named "&7Iron" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::gold_block::name} to "&6Gold &7[Strong Generator]"
+    set {gens::gen_data::gold_block::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &6gold&7!"
+    set {gens::gen_data::gold_block::upgrade_price} to 2500000
+    set {gens::gen_data::gold_block::upgrade_gen} to "lapis_lazuli_block"
+    set {gens::gen_data::gold_block::drop} to 2 of gold ingot named "&6Gold" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::lapis_lazuli_block::name} to "&3Lapis &7[Strong Generator]"
+    set {gens::gen_data::lapis_lazuli_block::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &3lapis&7!"
+    set {gens::gen_data::lapis_lazuli_block::upgrade_price} to 3300000
+    set {gens::gen_data::lapis_lazuli_block::upgrade_gen} to "redstone_block"
+    set {gens::gen_data::lapis_lazuli_block::drop} to 2 of lapis lazuli named "&3Lapis" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::redstone_block::name} to "&cRedstone &7[Strong Generator]"
+    set {gens::gen_data::redstone_block::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &credstone&7!"
+    set {gens::gen_data::redstone_block::upgrade_price} to 4000000
+    set {gens::gen_data::redstone_block::upgrade_gen} to "diamond_block"
+    set {gens::gen_data::redstone_block::drop} to 2 of redstone named "&cRedstone" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::diamond_block::name} to "&bDiamond &7[Strong Generator]"
+    set {gens::gen_data::diamond_block::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &bdiamond&7!"
+    set {gens::gen_data::diamond_block::upgrade_price} to 5000000
+    set {gens::gen_data::diamond_block::upgrade_gen} to "emerald_block"
+    set {gens::gen_data::diamond_block::drop} to 2 of diamond named "&bDiamond" with lore "", "&7Sell me by executing &e/sell"
+    set {gens::gen_data::emerald_block::name} to "&aEmerald &7[Strong Generator]"
+    set {gens::gen_data::emerald_block::lores::*} to "", "&7Place this generator on your", "&7plot to start generating &aemerald&7!"
+    set {gens::gen_data::emerald_block::upgrade_price} to 7000000
+    set {gens::gen_data::emerald_block::upgrade_gen} to "THIS_IS_MAX_GEN"
+    set {gens::gen_data::emerald_block::drop} to 2 of emerald named "&aEmerald" with lore "", "&7Sell me by executing &e/sell"
+
+on break:
+    set {_loc} to location of event-block
+    set {_gen_type} to "%event-block%"
+    replace all "southward ", "northward ", "westward ", "eastward " in {_gen_type} with ""
+    replace all " " in {_gen_type} with "_"
+    {gens::gen_data::%{_gen_type}%::*} is set
+    cancel event
+
+on place:
+    set {_loc} to location of event-block
+    set {_gen_type} to "%event-block%"
+    replace all "southward ", "northward ", "westward ", "eastward " in {_gen_type} with ""
+    replace all " " in {_gen_type} with "_"
+    wait 1 tick
+    event is not cancelled
+    if {gens::user_is_loaded::%uuid of player%} is not set:
+        set {gens::user_is_loaded::%uuid of player%} to true
+    if {gens::gen_data::%{_gen_type}%::*} is set:
+        Gens_OnPlaceGen(player, location of event-block, {_gen_type})
+
+on left click:
+    set {_loc} to location of event-block
+    set {_gen_type} to "%event-block%"
+    replace all "southward ", "northward ", "westward ", "eastward " in {_gen_type} with ""
+    replace all " " in {_gen_type} with "_"
+    wait 1 tick
+    event is not cancelled
+    if {gens::user_is_loaded::%uuid of player%} is not set:
+        set {gens::user_is_loaded::%uuid of player%} to true
+    if {gens::gen_data::%{_gen_type}%::*} is set:
+        Gens_OnBreakGen(player, location of event-block, {_gen_type})
+
+on smelt:
+    cancel event
+
+on right click:
+    set {_loc} to location of event-block
+    set {_gen_type} to "%event-block%"
+    replace all "southward ", "northward ", "westward ", "eastward " in {_gen_type} with ""
+    replace all " " in {_gen_type} with "_"
+    player is sneaking
+    {gens::gen_data::%{_gen_type}%::*} is set
+    if held item of player is not air:
+        Sound_Error(player)
+        send title "{@color_third}ERROR" with subtitle "{@color_error}You can't hold anything to upgrade!" to player
+        stop
+    wait 1 tick
+    event is not cancelled
+    if {gens::user_is_loaded::%uuid of player%} is not set:
+        set {gens::user_is_loaded::%uuid of player%} to true
+    Gens_UpgradeGen(player, location of event-block, {_gen_type})
+
+# ---------- #
+#   EVENTS   #
+# ---------- #
+
+
+
+
+
+
+
+# ------------ #
+#   COMMANDS   #
+# ------------ #
+
+command /gens [<string>]:
+    trigger:
+        if sender does not have permission "gens.admin":
+            set {_message} to "{@no_permissions}"
+            replace "(0)" in {_message} with "gens.admin"
+            Sound_Error(sender)
+            send {_message} to sender
+            stop
+        set {_arguments::*} to arg-1 split at " "
+        if {_arguments::1} = "give":
+            set {_player} to {_arguments::2} parsed as an player
+            if {_arguments::2} is not set:
+                Sound_Error(player)
+                send "{@prefix} {@color_error}You must provide a player!" to player
+                stop
+            if {_player} is not set:
+                Sound_Error(player)
+                send "{@prefix} {@color_second}%{_arguments::2}% {@color_error}isn't online!" to player
+                stop
+            if {gens::gen_data::%{_arguments::3}%::*} is not set:
+                Sound_Error(player)
+                send "{@prefix} {@color_error}That isn't a generator!" to player
+                stop
+            set {_amount} to {_arguments::4} parsed as an integer
+            if {_amount} is not set:
+                Sound_Error(player)
+                send "{@prefix} {@color_second}%{_arguments::2}% {@color_error}isn't a integer!" to player
+                stop
+            set {_block} to {_arguments::3}
+            replace "_" in {_block} with " "
+            set {_item} to ({_block} parsed as an itemtype) named "%{gens::gen_data::%{_arguments::3}%::name}%" with lore {gens::gen_data::%{_arguments::3}%::lores::*} 
+            give {_amount} of {_item} to {_player}
+            stop
+
+command /fixgens:
+    trigger:
+        loop all indices of {gens::user_gens::%uuid of player%::*}:
+            set {_gen_type} to loop-value
+            set {_block} to {_gen_type}
+            replace "_" in {_block} with " "
+            loop {gens::user_gens::%uuid of player%::%{_gen_type}%::*}:
+                remove loop-value-2 from {gens::user_gens::%uuid of player%::%{_gen_type}%::*}
+                Gens_GiveGen(player, {_gen_type}, 1)
+                set block at loop-value-2 to air
+                wait 2 ticks
+        set {gens::user_data::%uuid of player%::gens_placed} to 0
+
+command /genslist:
+    trigger:
+        Gens_OpenGensList(player)
+
+# ------------ #
+#   COMMANDS   #
+# ------------ #
